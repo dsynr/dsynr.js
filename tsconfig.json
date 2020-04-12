@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "removeComments": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noEmitOnError": true,
+    "strictNullChecks": true,
+    "diagnostics": true,
+    "composite": true,
+    "incremental": true,
+    "tsBuildInfoFile": "./buildcache/front-end",
+    "forceConsistentCasingInFileNames": true,
+    //    "sourceMap": true,
+    //    "inlineSources": true,
+    //    "allowJs": true,
+    //    "checkJs": true,
+    "rootDir": "src/ts",
+    "outDir": "src/js"
+  },
+  "exclude": [
+    "node_modules",
+    "release",
+    "src/js"
+  ],
+  "compileOnSave": true
+}

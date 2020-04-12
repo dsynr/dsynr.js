@@ -1,0 +1,12 @@
+{
+  "name": "Dsynr",
+  "version": "1.0.0",
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "readable-stream": "^3.6.0"
+  },
+  "devDependencies": {
+    "gulp-concat": "^2.6.1",
+    "gulp-minify": "^3.1.0"
+  }
+}

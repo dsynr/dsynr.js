@@ -1,0 +1,6 @@
+**/.DS_Store
+*.log
+/.idea
+wp/wp-config.php
+# ignore node dependency directories
+node_modules/
