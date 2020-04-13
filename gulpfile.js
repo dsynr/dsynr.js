@@ -1,40 +1,66 @@
+const {series} = require('gulp');
 const gulp = require('gulp');
-var concat = require('gulp-concat');
-var minify = require('gulp-minify');
-var pipeline = require('readable-stream').pipeline;
+const concat = require('gulp-concat');
+const minify = require('gulp-minify');
+// const clean = require('gulp-clean');
+const pipeline = require('readable-stream').pipeline;
 
-const jsPath = 'src/js/';
+const concatFileName = 'dsynr.util';
+const rootPath = 'src/';
+const jsPath = rootPath + 'js/';
+const tsPath = rootPath + 'ts/';
+const releasePath = 'release/';
 
-function getJS(fileName) {
+function getScript(fileName, fType = 'ts') {
 
-    return jsPath + fileName + '.js';
+    return (fType == 'js' ? jsPath : tsPath) + fileName + '.' + fType;
 }
 
-function defaultTask() {
+function concatTS() {
     return pipeline(
         gulp.src([
-            getJS('analytics'),
-            getJS('other'),
-            getJS('math'),
-            getJS('obj'),
-            getJS('graphics'),
-            getJS('css'),
-            getJS('dom'),
-            getJS('animation'),
-            getJS('events'),
-            getJS('viewport'),
-            getJS('modal'),
-            getJS('main'),
+            getScript('analytics'),
+            getScript('other'),
+            getScript('math'),
+            getScript('obj'),
+            getScript('graphics'),
+            getScript('css'),
+            getScript('dom'),
+            getScript('animation'),
+            getScript('events'),
+            getScript('viewport'),
+            getScript('modal'),
+            getScript('main'),
         ]),
-        (concat('dsynr.util.js')),
-        //https://www.npmjs.com/package/gulp-minify
+        (concat(concatFileName + '.ts')),
+        (gulp.dest(releasePath))
+    );
+}
+
+function concatJS() {
+    return pipeline(
+        gulp.src([
+            getScript('analytics', 'js'),
+            getScript('other', 'js'),
+            getScript('math', 'js'),
+            getScript('obj', 'js'),
+            getScript('graphics', 'js'),
+            getScript('css', 'js'),
+            getScript('dom', 'js'),
+            getScript('animation', 'js'),
+            getScript('events', 'js'),
+            getScript('viewport', 'js'),
+            getScript('modal', 'js'),
+            getScript('main', 'js'),
+        ]),
+        (concat(concatFileName + '.js')),
         minify({
             ext: {
-                src: '.js',
                 min: '.min.js'
             }
         }),
-        (gulp.dest('release/')));
+        (gulp.dest(releasePath))
+    );
 }
 
-exports.default = defaultTask
+exports.default = series(concatTS, concatJS);
