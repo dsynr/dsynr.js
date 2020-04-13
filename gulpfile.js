@@ -63,4 +63,4 @@ function concatJS() {
     );
 }
 
-exports.default = series(concatTS, concatJS);
+exports.default = series(concatJS);
