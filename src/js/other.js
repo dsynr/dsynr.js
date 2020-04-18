@@ -7,8 +7,8 @@ function setData(e, attrName, attrVal = '') {
 function l(data) {
     console.log(data);
 }
-function lfn(fnName) {
-    l(' {} ' + fnName);
+function lfn(functionName) {
+    l(' {} ' + functionName);
 }
 function debounce(fn, threshold) {
     let timeout;

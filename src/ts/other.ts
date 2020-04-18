@@ -1,21 +1,36 @@
+/**
+ * Get data attribute value of a DOM element
+ * @param element e DOM element
+ * @param string attrName Name of the data-attribute
+ */
 function getData(e: Element, attrName: string): string | null {
     return e.getAttribute('data-' + attrName);
 }
 
+/**
+ * Set data attribute for a DOM element
+ * @param element e DOM element
+ * @param string attrName Name of the data-attribute
+ * @param string attrVal Value to be set for the attribute, default ''
+ */
 function setData(e: Element, attrName: string, attrVal: string = '') {
     e.setAttribute('data-' + attrName, attrVal);
 }
 
+/**
+ * Log to the console
+ * @param any data
+ */
 function l(data: any): void {
     console.log(data);
 }
 
 /**
  * Log active function name
- * @param fnName
+ * @param string functionName
  */
-function lfn(fnName: string): void {
-    l(' {} ' + fnName);
+function lfn(functionName: string): void {
+    l(' {} ' + functionName);
 }
 
 // debounce so filtering doesn't happen every millisecond
