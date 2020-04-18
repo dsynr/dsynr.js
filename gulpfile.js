@@ -68,7 +68,7 @@ function compileDebugFile() {
         gulp.src([
             getScript('debug', 'js'),
         ]),
-        (concat('debug.js')),
+        (concat('dsynr.debug.js')),
         minify({
             ext: {
                 min: '.min.js'
