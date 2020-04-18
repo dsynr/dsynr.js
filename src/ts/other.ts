@@ -17,22 +17,6 @@ function setData(e: Element, attrName: string, attrVal: string = '') {
     e.setAttribute('data-' + attrName, attrVal);
 }
 
-/**
- * Log to the console
- * @param any data
- */
-function l(data: any): void {
-    console.log(data);
-}
-
-/**
- * Log active function name
- * @param string functionName
- */
-function lfn(functionName: string): void {
-    l(' {} ' + functionName);
-}
-
 // debounce so filtering doesn't happen every millisecond
 function debounce(fn, threshold) {
     let timeout: any;

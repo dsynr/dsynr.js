@@ -4,12 +4,6 @@ function getData(e, attrName) {
 function setData(e, attrName, attrVal = '') {
     e.setAttribute('data-' + attrName, attrVal);
 }
-function l(data) {
-    console.log(data);
-}
-function lfn(functionName) {
-    l(' {} ' + functionName);
-}
 function debounce(fn, threshold) {
     let timeout;
     threshold = threshold || 100;

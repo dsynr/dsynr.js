@@ -63,4 +63,26 @@ function concatJS() {
     );
 }
 
-exports.default = series(concatJS);
+function compileDebugFile() {
+    return pipeline(
+        gulp.src([
+            getScript('debug', 'js'),
+        ]),
+        (concat('debug.js')),
+        minify({
+            ext: {
+                min: '.min.js'
+            }
+        }),
+        (gulp.dest(releasePath))
+    );
+}
+
+/**
+ * @todo
+ */
+function pushToLive() {
+
+}
+
+exports.default = series(concatJS, compileDebugFile);

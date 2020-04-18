@@ -77,6 +77,10 @@
         "version": "0fa85dca6a3dadda34f8617e1870a12cd62fcd9604cfc88930b8620db54c16eb",
         "signature": "23b05ea29f0ba7809fc90fb8f08ff6841ff9e4efebb477694c4e14c3c7a8d749"
       },
+      "../src/ts/debug.ts": {
+        "version": "dda1599c28aeb74ceb3849840ebc66ac94ffd65a187872fadb214e906cf6cf02",
+        "signature": "1dd9c7213c1ce8cb8d9897018d4bc87453871e40517e5174f7691b61dcd6db24"
+      },
       "../src/ts/dom.ts": {
         "version": "d38395686b178d5a8ee0ee25ab7e3b5c3b96a260f4fb6562bbebc62eb929113d",
         "signature": "16515bb119ce3ee366ee0066d02b1ae592e52098b16ba20559017bc1d26eb2a0"
@@ -106,8 +110,8 @@
         "signature": "dbc1edc3384adb365df834602238062facf1ddffe22427c28e827d0608cc1c3a"
       },
       "../src/ts/other.ts": {
-        "version": "10ac25b4038246a343fa33e643c3b6b0a390cf4f72f81dc593003a028c0512d1",
-        "signature": "a0818fd8308e28894ba62cb7b53a7596f51f18120e702ef3443acb47440948ad"
+        "version": "d157123b3f70118b6b2e1a85f4153c99be218173ebd3913af57a394499d6bcb3",
+        "signature": "677c1fc70717b844ed6ce68b2c53558e7c6181e9fa7c68714952e624ad5d1013"
       },
       "../src/ts/viewport.ts": {
         "version": "bb07b63875b9f01ef58d576a5e444cc5ca844b3ca7b1f2210cfdb71145021ec0",
@@ -133,6 +137,19 @@
     "referencedMap": {},
     "exportedModulesMap": {},
     "semanticDiagnosticsPerFile": [
+      "../src/ts/debug.ts",
+      "../src/ts/analytics.ts",
+      "../src/ts/animation.ts",
+      "../src/ts/css.ts",
+      "../src/ts/dom.ts",
+      "../src/ts/events.ts",
+      "../src/ts/graphics.ts",
+      "../src/ts/main.ts",
+      "../src/ts/math.ts",
+      "../src/ts/modal.ts",
+      "../src/ts/obj.ts",
+      "../src/ts/other.ts",
+      "../src/ts/viewport.ts",
       "../../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es6.d.ts",
       "../../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es5.d.ts",
       "../../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.d.ts",
@@ -148,19 +165,7 @@
       "../../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.proxy.d.ts",
       "../../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.reflect.d.ts",
       "../../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.symbol.d.ts",
-      "../../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts",
-      "../src/ts/analytics.ts",
-      "../src/ts/animation.ts",
-      "../src/ts/css.ts",
-      "../src/ts/dom.ts",
-      "../src/ts/events.ts",
-      "../src/ts/graphics.ts",
-      "../src/ts/main.ts",
-      "../src/ts/math.ts",
-      "../src/ts/modal.ts",
-      "../src/ts/obj.ts",
-      "../src/ts/viewport.ts",
-      "../src/ts/other.ts"
+      "../../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts"
     ]
   },
   "version": "3.8.3"
