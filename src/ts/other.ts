@@ -10,6 +10,14 @@ function l(data: any): void {
     console.log(data);
 }
 
+/**
+ * Log active function name
+ * @param fnName
+ */
+function lfn(fnName: string): void {
+    l(' {} ' + fnName);
+}
+
 // debounce so filtering doesn't happen every millisecond
 function debounce(fn, threshold) {
     let timeout: any;
