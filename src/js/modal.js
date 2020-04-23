@@ -1,6 +1,6 @@
 function showBlanket() {
     let blanket = addDiv('blanket', 'z2 position-fixed top left vw vh o0 animated fadeIn', document.body);
-    addDiv('blanketcoat', 'position-absolute top left vw vh bg-gradient-dark o85', blanket);
+    addDiv('blanketcoat', 'position-absolute top left vw vh bg-dark o05', blanket);
     blanket.classList.remove('o0');
     blanket.addEventListener(transitionEvent, blanketHidden);
     isBlanketOn = true;
