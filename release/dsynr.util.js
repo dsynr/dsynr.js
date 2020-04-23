@@ -72,6 +72,15 @@ function getDimensions(e) {
 function hide(e) {
     e.style.display = 'none';
 }
+function addClass(e, classes) {
+    e.classList.add(classes);
+}
+function removeClass(e, classes) {
+    e.classList.remove(classes);
+}
+function hasClass(e, classes) {
+    return e.classList.contains(classes);
+}
 
 function addDiv(id = '', cls = '', root = false) {
     let div = document.createElement('DIV');
@@ -141,6 +150,8 @@ function centereStage(e) {
     let dimensions = getDimensions(e);
     e.style.marginTop = -(dimensions.h) / 2 + 'px';
     e.style.marginLeft = -(dimensions.w) / 2 + 'px';
+    e.style.top = '50%';
+    e.style.left = '50%';
 }
 function getBounds(e) {
     return e.getBoundingClientRect();
@@ -177,10 +188,10 @@ function blanketHidden(event) {
 function showAsModal(e) {
     if (!isBlanketOn) {
         showBlanket();
-        curModal = e;
-        curModal.classList.remove('zoomOut');
-        curModal.classList.add('zoomIn');
-        curModal.classList.remove('d-none');
+        let mid = 'dsynrModal-' + e.id;
+        addDiv(mid, 'curModal position-absolute z3 animated zoomIn', document.body);
+        curModal = getElementById(mid);
+        curModal.append(e);
         alignCurModal();
         curModal.focus();
         addModalListeners();

@@ -21,10 +21,10 @@ function blanketHidden(event) {
 function showAsModal(e) {
     if (!isBlanketOn) {
         showBlanket();
-        curModal = e;
-        curModal.classList.remove('zoomOut');
-        curModal.classList.add('zoomIn');
-        curModal.classList.remove('d-none');
+        let mid = 'dsynrModal-' + e.id;
+        addDiv(mid, 'curModal position-absolute z3 animated zoomIn', document.body);
+        curModal = getElementById(mid);
+        curModal.append(e);
         alignCurModal();
         curModal.focus();
         addModalListeners();
