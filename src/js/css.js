@@ -13,3 +13,12 @@ function getDimensions(e) {
 function hide(e) {
     e.style.display = 'none';
 }
+function addClass(e, classes) {
+    e.classList.add(classes);
+}
+function removeClass(e, classes) {
+    e.classList.remove(classes);
+}
+function hasClass(e, classes) {
+    return e.classList.contains(classes);
+}
