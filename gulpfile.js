@@ -2,6 +2,8 @@ const {series} = require('gulp');
 const gulp = require('gulp');
 const concat = require('gulp-concat');
 const minify = require('gulp-minify');
+const cleanCSS = require('gulp-clean-css');
+const sourcemaps = require('gulp-sourcemaps');
 // const clean = require('gulp-clean');
 const pipeline = require('readable-stream').pipeline;
 
@@ -9,6 +11,7 @@ const concatFileName = 'dsynr.util';
 const rootPath = 'src/';
 const jsPath = rootPath + 'js/';
 const tsPath = rootPath + 'ts/';
+const sassPath = rootPath + 'sass/';
 const releasePath = 'release/';
 
 function getScript(fileName, fType = 'ts') {
@@ -78,6 +81,14 @@ function compileDebugFile() {
     );
 }
 
+function compileCSS() {
+    return gulp.src([sassPath + '*.css'])
+        .pipe(cleanCSS())
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(releasePath));
+
+}
+
 /**
  * @todo
  */
@@ -85,4 +96,4 @@ function pushToLive() {
 
 }
 
-exports.default = series(concatJS, compileDebugFile);
+exports.default = series(concatJS, compileDebugFile, compileCSS);
