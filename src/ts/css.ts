@@ -17,3 +17,15 @@ function getDimensions(e: HTMLElement): any {
 function hide(e: HTMLElement): void {
     e.style.display = 'none';
 }
+
+function addClass(e: HTMLElement, classes: string): void {
+    e.classList.add(classes);
+}
+
+function removeClass(e: HTMLElement, classes: string): void {
+    e.classList.remove(classes);
+}
+
+function hasClass(e: HTMLElement, classes: string): boolean {
+    return e.classList.contains(classes);
+}
