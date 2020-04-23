@@ -2,6 +2,8 @@ function centereStage(e: HTMLElement): void {
     let dimensions = getDimensions(e);
     e.style.marginTop = -(dimensions.h) / 2 + 'px';
     e.style.marginLeft = -(dimensions.w) / 2 + 'px';
+    e.style.top = '50%';
+    e.style.left = '50%';
 }
 
 function getBounds(e: HTMLElement): ClientRect {
