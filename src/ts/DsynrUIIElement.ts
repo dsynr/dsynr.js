@@ -1,5 +1,6 @@
 class DsynrUIIElement implements DsynrUI {
     parent: HTMLElement;
+    itself: HTMLElement;
     content: HTMLElement;
     root: HTMLElement;
 
@@ -19,19 +20,19 @@ class DsynrUIIElement implements DsynrUI {
     destroy(): void {
     }
 
-    updatePref(preferences: object = {}): void {
+    public updatePref(preferences: object = {}): void {
     }
 
-    defaults(): void {
+    protected defaults(): void {
     }
 
-    setup(): void {
+    protected setup(): void {
     }
 
-    setName(context: string, name: string): string {
+    protected setName(context: string, name: string): string {
         return concatStr([this.namePrefix, context, this.nameSuffix], '-');
     }
 
-    setActive(): void {
+    protected setActive(): void {
     }
 }

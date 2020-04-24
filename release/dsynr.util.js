@@ -211,67 +211,6 @@ function isInViewportMostly(e) {
 }
 let vw, vh;
 
-function showBlanket() {
-    let blanket = addDiv('blanket', 'z2 position-fixed top left vw vh o0 animated fadeIn', document.body);
-    addDiv('blanketcoat', 'position-absolute top left vw vh bg-dark o05', blanket);
-    blanket.classList.remove('o0');
-    blanket.addEventListener(transitionEvent, blanketHidden);
-    isBlanketOn = true;
-}
-function hideBlanket() {
-    let blanket = getElementById('blanket');
-    blanket.classList.remove('fadeIn');
-    blanket.classList.add('fadeOut');
-}
-function blanketHidden(event) {
-    let blanket = getElementById('blanket');
-    if (event.animationName == 'fadeOut') {
-        blanket.removeEventListener(transitionEvent, blanketHidden);
-        blanket.remove();
-        isBlanketOn = false;
-    }
-}
-function showAsModal(e) {
-    if (!isBlanketOn) {
-        showBlanket();
-        let mid = 'dsynrModal-' + e.id;
-        addDiv(mid, 'curModal position-absolute z3 animated zoomIn', document.body);
-        curModal = getElementById(mid);
-        curModal.append(e);
-        alignCurModal();
-        curModal.focus();
-        addModalListeners();
-    }
-    else {
-        alert('MULTI-MODALS NOT YET ENABLED');
-    }
-}
-function closeCurModal() {
-    if (isBlanketOn) {
-        hideBlanket();
-        curModal.classList.remove('zoomIn');
-        curModal.classList.add('zoomOut');
-    }
-}
-function alignCurModal() {
-    if (isBlanketOn) {
-        centereStage(curModal);
-    }
-}
-function addModalListeners() {
-    window.addEventListener('resize', alignCurModal);
-    addListener('xModal', 'click', closeCurModal);
-    curModal.addEventListener(transitionEvent, modalHidden);
-}
-function modalHidden(event) {
-    if (event.animationName == 'zoomOut') {
-        curModal.classList.add('d-none');
-        curModal.classList.remove('zoomOut');
-        curModal.removeEventListener(transitionEvent, modalHidden);
-    }
-}
-let isBlanketOn = false, curModal;
-
 class modal extends DsynrUIIElement {
     constructor(modalContent, preferences = {}) {
         super();
@@ -285,10 +224,14 @@ class modal extends DsynrUIIElement {
     show() {
         this.content.style.display = '';
         this.root.classList.remove('o0');
-        totModals++;
+        totalModals++;
     }
     hide() {
-        throw new Error("Method not implemented.");
+        if (this.isOverlayOn) {
+            this.hideBlanket();
+            activeModal.classList.remove('zoomIn');
+            activeModal.classList.add('zoomOut');
+        }
     }
     destroy() {
         throw new Error("Method not implemented.");
@@ -301,10 +244,10 @@ class modal extends DsynrUIIElement {
         this.isOverlayOn = addProp(this, 'isOverlayOn', false);
         this.useOverlay = addProp(this, 'useOverlay', true);
         this.disableUnderlay = addProp(this, 'disableUnderlay', true);
-        this.suffix = addProp(this, 'suffix', totModals.toString());
-        this.prefix = addProp(this, 'prefix', 'dsynrModal');
+        this.nameSuffix = addProp(this, 'nameSuffix', totalModals.toString());
+        this.namePrefix = addProp(this, 'namePrefix', 'dsynrModal');
         this.animationClasses = addProp(this, 'animationClasses', 'animated fadeIn');
-        this.overlayClasses = addProp(this, 'overlayClasses', 'o05 bg-dark');
+        this.overlayClasses = addProp(this, 'overlayClasses', 'o50 bg-dark');
         this.underlayClasses = addProp(this, 'underlayClasses', this.stringup([positionClasses, 'z1 wmax hmax']));
         this.modalClasses = addProp(this, 'modalClasses', this.stringup([positionClasses, 'z2']));
         this.rootClasses = addProp(this, 'rootClasses', this.stringup([positionClasses, 'z3 o0']));
@@ -323,7 +266,7 @@ class modal extends DsynrUIIElement {
         lfn('setup');
         if (this.animate) {
             this.modalClasses = this.stringup([this.modalClasses, this.animationClasses]);
-            this.underlayClasses = this.stringup([this.underlayClasses, this.animationClasses]);
+            this.rootClasses = this.stringup([this.rootClasses, this.animationClasses]);
         }
         this.root = addDiv(this.setName('root', this.content.id), this.rootClasses, this.context);
         if (this.disableUnderlay) {
@@ -334,12 +277,12 @@ class modal extends DsynrUIIElement {
             }
             this.underlay = addDiv(this.setName('underlay', this.content.id), this.underlayClasses, this.root);
         }
-        this.theModal = addDiv(this.setName('modal', this.context.id), this.modalClasses, this.root);
+        this.itself = addDiv(this.setName('modal', this.context.id), this.modalClasses, this.root);
         if (this.animate) {
-            this.theModal.addEventListener(transitionEvent, this.modalHidden);
+            this.itself.addEventListener(transitionEvent, this.modalHidden);
         }
         window.addEventListener('resize', this.align);
-        this.theModal.appendChild(this.content);
+        this.itself.appendChild(this.content);
         this.align();
         this.setActive();
     }
@@ -355,7 +298,7 @@ class modal extends DsynrUIIElement {
         blanket = addDiv('blanket', this.overlayClasses, document.body);
         addDiv('blanketcoat', this.underlayClasses, blanket);
         blanket.classList.remove('o0');
-        blanket.addEventListener(transitionEvent, blanketHidden);
+        blanket.addEventListener(transitionEvent, this.blanketHidden);
         this.isOverlayOn = true;
     }
     hideBlanket() {
@@ -368,28 +311,21 @@ class modal extends DsynrUIIElement {
         let blanket;
         blanket = getElementById('blanket');
         if (event.animationName == 'fadeOut') {
-            blanket.removeEventListener(transitionEvent, blanketHidden);
+            blanket.removeEventListener(transitionEvent, this.blanketHidden);
             blanket.remove();
             this.isOverlayOn = false;
         }
     }
-    closeCurModal() {
-        if (this.isOverlayOn) {
-            this.hideBlanket();
-            curModal.classList.remove('zoomIn');
-            curModal.classList.add('zoomOut');
-        }
-    }
     align() {
         if (this.isOverlayOn) {
-            centereStage(this.theModal);
+            centereStage(this.itself);
         }
     }
     modalHidden(event) {
         if (event.animationName == 'zoomOut') {
-            curModal.classList.add('d-none');
-            curModal.classList.remove('zoomOut');
-            curModal.removeEventListener(transitionEvent, this.modalHidden);
+            activeModal.classList.add('d-none');
+            activeModal.classList.remove('zoomOut');
+            activeModal.removeEventListener(transitionEvent, this.modalHidden);
         }
     }
 }
@@ -397,11 +333,12 @@ function autoModalize(modalClass = 'dsynrModal') {
     lfn('autoModalize');
     makeArray(getElementsByClass(modalClass)).forEach(function (mdl, index) {
         mdl.style.display = 'none';
+        l(getData(mdl, 'dsynr-options'));
         let modl = new modal(mdl);
         modals.push(mdl);
     });
 }
-let activeModal, totModals = 0, modals = [];
+let activeModal, totalModals = 0, modals = [];
 
 (function () {
     updateViewportVars();

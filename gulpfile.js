@@ -43,7 +43,6 @@ function concatTS() {
 function concatJS() {
     return pipeline(
         gulp.src([
-            getScript('DsynrUIIElement', 'js'),
             getScript('analytics', 'js'),
             getScript('other', 'js'),
             getScript('string', 'js'),
@@ -55,8 +54,9 @@ function concatJS() {
             getScript('animation', 'js'),
             getScript('events', 'js'),
             getScript('viewport', 'js'),
-            getScript('modal', 'js'),
-            getScript('modal2', 'js'),
+            getScript('DsynrUIIElement', 'js'),
+            getScript('Modal', 'js'),
+            getScript('EnhancedSelect', 'js'),
             getScript('main', 'js'),
         ]),
         (concat(concatFileName + '.js')),

@@ -1,11 +1,10 @@
-declare class DsynrUIIElement implements DsynrUI {
+declare class EnhancedSelect extends DsynrUIIElement {
     parent: HTMLElement;
     itself: HTMLElement;
     content: HTMLElement;
     root: HTMLElement;
     namePrefix: string;
     nameSuffix: string;
-    constructor();
     show(): void;
     hide(): void;
     destroy(): void;
