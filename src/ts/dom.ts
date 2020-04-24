@@ -2,7 +2,6 @@ function addDiv(id: string = '', classes: string = '', parent: HTMLElement = doc
     let div: HTMLElement = document.createElement('DIV');
     div.id = id;
     div.className = classes;
-    l(parent);
     parent.appendChild(div);
     return div;
 }

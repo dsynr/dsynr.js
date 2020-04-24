@@ -1,8 +1,16 @@
 class modal {
-    constructor(modalContent, options = null) {
+    constructor(modalContent, preferences = null) {
         lfn('constructor-modal');
-        let alignmentClasses = 'top left';
-        let positionClasses = 'position-absolute';
+        this.content = modalContent;
+        this.setDefaults();
+        this.updatePreferences(preferences);
+        this.setup();
+        this.showModal();
+    }
+    setDefaults() {
+        lfn('setDefaultOptions');
+        let positionClasses = 'position-absolute top left';
+        this.context = addProp(this, 'context', document.body);
         this.animate = addProp(this, 'animate', true);
         this.isOverlayOn = addProp(this, 'isOverlayOn', false);
         this.useOverlay = addProp(this, 'useOverlay', true);
@@ -11,13 +19,9 @@ class modal {
         this.prefix = addProp(this, 'prefix', 'dsynrModal');
         this.animationClasses = addProp(this, 'animationClasses', 'animated fadeIn');
         this.overlayClasses = addProp(this, 'overlayClasses', 'o05 bg-dark');
-        this.underlayClasses = addProp(this, 'underlayClasses', this.stringup([positionClasses, alignmentClasses, 'z1 wmax hmax']));
+        this.underlayClasses = addProp(this, 'underlayClasses', this.stringup([positionClasses, 'z1 wmax hmax']));
         this.modalClasses = addProp(this, 'modalClasses', this.stringup([positionClasses, 'z2']));
-        this.rootClasses = addProp(this, 'rootClasses', 'z3 o0');
-        this.content = modalContent;
-        this.updateOptions(options);
-        this.setup();
-        this.showModal();
+        this.rootClasses = addProp(this, 'rootClasses', this.stringup([positionClasses, 'z3 o0']));
     }
     setup() {
         lfn('setup');
@@ -34,12 +38,12 @@ class modal {
             }
             this.underlay = addDiv(this.setName('underlay', this.content.id), this.underlayClasses, this.root);
         }
-        this.modal = addDiv(this.setName('modal', this.context.id), this.modalClasses, this.root);
+        this.theModal = addDiv(this.setName('modal', this.context.id), this.modalClasses, this.root);
         if (this.animate) {
-            curModal.addEventListener(transitionEvent, this.modalHidden);
+            this.theModal.addEventListener(transitionEvent, this.modalHidden);
         }
         window.addEventListener('resize', this.align);
-        this.modal.appendChild(this.content);
+        this.theModal.appendChild(this.content);
         this.align();
         this.setActive();
     }
@@ -53,16 +57,15 @@ class modal {
     stringup(strings, seperator = ' ') {
         return strings.join(seperator);
     }
-    updateOptions(options) {
+    updatePreferences(preferences) {
         lfn('updateOptions');
-        let preferences = getData(this.content, 'dsynr-options');
-        if (preferences !== null) {
-            options = JSON.parse(preferences);
+        let options = getData(this.content, 'dsynr-options');
+        if (options !== null) {
+            preferences = JSON.parse(options);
         }
-        else if (options !== null) {
-            updateProps(this, options);
+        else if (preferences !== null) {
+            updateProps(this, preferences);
         }
-        l(this);
     }
     showBlanket() {
         let blanket;
@@ -88,9 +91,8 @@ class modal {
         }
     }
     showModal() {
-        if (this.useOverlay) {
-            this.showBlanket();
-        }
+        this.content.style.display = '';
+        this.root.classList.remove('o0');
         totModals++;
     }
     closeCurModal() {
@@ -102,7 +104,7 @@ class modal {
     }
     align() {
         if (this.isOverlayOn) {
-            centereStage(this.modal);
+            centereStage(this.theModal);
         }
     }
     modalHidden(event) {
@@ -122,4 +124,4 @@ function autoModalize(modalClass = 'dsynrModal') {
         modals.push(mdl);
     });
 }
-let activeModal, totModals = 0, modals;
+let activeModal, totModals = 0, modals = [];

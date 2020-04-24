@@ -1,9 +1,8 @@
-function addDiv(id = '', cls = '', root = document.body) {
+function addDiv(id = '', classes = '', parent = document.body) {
     let div = document.createElement('DIV');
     div.id = id;
-    div.className = cls;
-    l(root);
-    root.appendChild(div);
+    div.className = classes;
+    parent.appendChild(div);
     return div;
 }
 function addText(txt = '', root) {

@@ -45,6 +45,7 @@ function concatJS() {
         gulp.src([
             getScript('analytics', 'js'),
             getScript('other', 'js'),
+            getScript('string', 'js'),
             getScript('math', 'js'),
             getScript('obj', 'js'),
             getScript('graphics', 'js'),

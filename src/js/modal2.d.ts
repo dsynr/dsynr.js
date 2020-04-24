@@ -2,7 +2,7 @@ declare class modal {
     private root;
     private context;
     private content;
-    private modal;
+    private theModal;
     private underlay;
     private rootClasses;
     private modalClasses;
@@ -15,12 +15,13 @@ declare class modal {
     private useOverlay;
     private isOverlayOn;
     private animate;
-    constructor(modalContent: HTMLElement, options?: object | null);
+    constructor(modalContent: HTMLElement, preferences?: object | null);
+    private setDefaults;
     private setup;
     private setActive;
     private setName;
     private stringup;
-    updateOptions(options: object | null): void;
+    updatePreferences(preferences: object | null): void;
     showBlanket(): void;
     hideBlanket(): void;
     blanketHidden(event: any): void;
