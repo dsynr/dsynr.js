@@ -1,4 +1,4 @@
-function cssDimension(val, unit = 'px') {
+function getCssDimension(val, unit = 'px') {
     return val + unit;
 }
 function randRadius() {
