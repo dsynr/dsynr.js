@@ -94,7 +94,7 @@
         "signature": "6b8b440b5a155721c1ee1222355e3222457035633c24859d297c2ea4425d8624"
       },
       "./src/ts/main.ts": {
-        "version": "b223ef17553f245ccb71b750652ed19f5a216fc2557846f910ec4930638cfa28",
+        "version": "f4ae1c63ee9c0e7ef267755a7aa71982404c4d4b63c3d9aae07c45e276dbee7f",
         "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
       },
       "./src/ts/math.ts": {
@@ -114,8 +114,8 @@
         "signature": "677c1fc70717b844ed6ce68b2c53558e7c6181e9fa7c68714952e624ad5d1013"
       },
       "./src/ts/viewport.ts": {
-        "version": "4986f0e8ed89fb2361f3d153115a045dee20868034380924020e346378b59e66",
-        "signature": "951c71053b1a26f7ad68e323bdac48cc90782dd69f6f8924417ede09deeebaaf"
+        "version": "c96ea98e35a6d9b59227a8fc33451accfc82e845bb3607e8a6a52ea30b246420",
+        "signature": "aa2b730558c73fe15612fe76f870d5d629f436f015a15b4722f7f812493dbba5"
       }
     },
     "options": {
@@ -160,12 +160,12 @@
       "./src/ts/dom.ts",
       "./src/ts/events.ts",
       "./src/ts/graphics.ts",
-      "./src/ts/main.ts",
       "./src/ts/math.ts",
+      "./src/ts/modal.ts",
       "./src/ts/obj.ts",
       "./src/ts/other.ts",
       "./src/ts/viewport.ts",
-      "./src/ts/modal.ts"
+      "./src/ts/main.ts"
     ]
   },
   "version": "3.8.3"

@@ -6,6 +6,11 @@ function centereStage(e: HTMLElement): void {
     e.style.left = '50%';
 }
 
+function updateViewportVars(): void {
+    vw = window.innerWidth;
+    vh = window.innerHeight;
+}
+
 function getBounds(e: HTMLElement): ClientRect {
     return e.getBoundingClientRect();
 }
@@ -25,3 +30,5 @@ function isInViewportMostly(e): boolean {
     return (bounding.top / 2 > -bounding.top);
     // return (getPercentage((e.clientHeight + bounding.top), 50) > -bounding.top);
 }
+
+let vw: number, vh: number;

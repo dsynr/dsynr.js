@@ -5,6 +5,10 @@ function centereStage(e) {
     e.style.top = '50%';
     e.style.left = '50%';
 }
+function updateViewportVars() {
+    vw = window.innerWidth;
+    vh = window.innerHeight;
+}
 function getBounds(e) {
     return e.getBoundingClientRect();
 }
@@ -16,3 +20,4 @@ function isInViewportMostly(e) {
     let bounding = getBounds(e);
     return (bounding.top / 2 > -bounding.top);
 }
+let vw, vh;

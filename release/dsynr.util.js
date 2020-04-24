@@ -153,6 +153,10 @@ function centereStage(e) {
     e.style.top = '50%';
     e.style.left = '50%';
 }
+function updateViewportVars() {
+    vw = window.innerWidth;
+    vh = window.innerHeight;
+}
 function getBounds(e) {
     return e.getBoundingClientRect();
 }
@@ -164,6 +168,7 @@ function isInViewportMostly(e) {
     let bounding = getBounds(e);
     return (bounding.top / 2 > -bounding.top);
 }
+let vw, vh;
 
 function showBlanket() {
     let blanket = addDiv('blanket', 'z2 position-fixed top left vw vh o0 animated fadeIn', document.body);
@@ -227,4 +232,5 @@ function modalHidden(event) {
 let isBlanketOn = false, curModal;
 
 (function () {
+    updateViewportVars();
 })();
