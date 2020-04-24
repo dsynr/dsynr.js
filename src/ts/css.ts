@@ -1,4 +1,4 @@
-function cssDimension(val: number, unit: string = 'px'): string {
+function getCssDimension(val: number, unit: string = 'px'): string {
     return val + unit;
 }
 
