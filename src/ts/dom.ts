@@ -1,11 +1,9 @@
-function addDiv(id: string = '', cls: string = '', root: HTMLElement | boolean = false): HTMLElement {
+function addDiv(id: string = '', cls: string = '', root: HTMLElement = document.body): HTMLElement {
     let div: HTMLElement = document.createElement('DIV');
     div.id = id;
     div.className = cls;
-    if (root) {
-        // @ts-ignore
-        root.appendChild(div);
-    }
+    l(root);
+    root.appendChild(div);
     return div;
 }
 
