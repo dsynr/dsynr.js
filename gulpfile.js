@@ -43,6 +43,7 @@ function concatTS() {
 function concatJS() {
     return pipeline(
         gulp.src([
+            getScript('DsynrUIIElement', 'js'),
             getScript('analytics', 'js'),
             getScript('other', 'js'),
             getScript('string', 'js'),

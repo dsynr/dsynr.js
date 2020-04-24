@@ -1,37 +1,25 @@
-class modalr {
+class modal extends DsynrUIIElement {
+    parent: HTMLElement;
+    content: HTMLElement;
+    root: HTMLElement;
+    namePrefix: string;
+    nameSuffix: string;
 
-    private root: HTMLElement;
-    private context: HTMLElement;
-    private content: HTMLElement;
-    private theModal: HTMLElement;
-    private underlay: HTMLElement;
-
-    private rootClasses: string;
-    private modalClasses: string;
-    private underlayClasses: string;
-    private overlayClasses: string;
-    private animationClasses: string;
-
-    private prefix: string;
-    private suffix: string;
-
-    private disableUnderlay: boolean;
-    private useOverlay: boolean;
-    private isOverlayOn: boolean;
-    private animate: boolean;
-
-    constructor(modalContent: HTMLElement, preferences: object | null = null) {
-        lfn('constructor-modal');
-
-        this.content = modalContent;
-
-        this.setDefaults();
-        this.updatePreferences(preferences);
-        this.setup();
-        this.showModal();
+    show() {
+        this.content.style.display = '';
+        this.root.classList.remove('o0');
+        totModals++;
     }
 
-    private setDefaults() {
+    hide() {
+        throw new Error("Method not implemented.");
+    }
+
+    destroy() {
+        throw new Error("Method not implemented.");
+    }
+
+    defaults() {
         lfn('setDefaultOptions');
 
         let positionClasses: string = 'position-absolute top left';
@@ -50,7 +38,18 @@ class modalr {
         this.rootClasses = addProp(this, 'rootClasses', this.stringup([positionClasses, 'z3 o0']));
     }
 
-    private setup() {
+    updatePref(preferences: object) {
+        lfn('updatePref');
+
+        let options: any = getData(this.content, 'dsynr-options');
+        if (options !== null) {
+            preferences = JSON.parse(options);
+        } else if (Object.keys(preferences).length > 0) {
+            updateProps(this, preferences);
+        }
+    }
+
+    setup() {
         lfn('setup');
 
         if (this.animate) {
@@ -83,28 +82,43 @@ class modalr {
         this.setActive();
     }
 
-    private setActive() {
+    setActive() {
         activeModal = this.root;
         this.content.focus();
     }
 
-    private setName(context: string, n: string): string {
-        return this.stringup([this.prefix, context, this.suffix], '-');
+    private context: HTMLElement;
+    private theModal: HTMLElement;
+    private underlay: HTMLElement;
+
+    private rootClasses: string;
+    private modalClasses: string;
+    private underlayClasses: string;
+    private overlayClasses: string;
+    private animationClasses: string;
+
+    private prefix: string;
+    private suffix: string;
+
+    private disableUnderlay: boolean;
+    private useOverlay: boolean;
+    private isOverlayOn: boolean;
+    private animate: boolean;
+
+    constructor(modalContent: HTMLElement, preferences: object = {}) {
+        super();
+        lfn('constructor-modal');
+
+        this.content = modalContent;
+
+        this.defaults();
+        this.updatePref(preferences);
+        this.setup();
+        this.show();
     }
 
     private stringup(strings: Array<any>, seperator: string = ' '): string {
         return strings.join(seperator);
-    }
-
-    public updatePreferences(preferences: object | null) {
-        lfn('updateOptions');
-
-        let options: any = getData(this.content, 'dsynr-options');
-        if (options !== null) {
-            preferences = JSON.parse(options);
-        } else if (preferences !== null) {
-            updateProps(this, preferences);
-        }
     }
 
     showBlanket(): void {
@@ -132,12 +146,6 @@ class modalr {
             blanket.remove();
             this.isOverlayOn = false;
         }
-    }
-
-    showModal(): void {
-        this.content.style.display = '';
-        this.root.classList.remove('o0');
-        totModals++;
     }
 
     closeCurModal(): void {

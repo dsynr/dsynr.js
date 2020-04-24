@@ -1,7 +1,17 @@
-declare class modal {
-    private root;
+declare class modal extends DsynrUIIElement {
+    parent: HTMLElement;
+    content: HTMLElement;
+    root: HTMLElement;
+    namePrefix: string;
+    nameSuffix: string;
+    show(): void;
+    hide(): void;
+    destroy(): void;
+    defaults(): void;
+    updatePref(preferences: object): void;
+    setup(): void;
+    setActive(): void;
     private context;
-    private content;
     private theModal;
     private underlay;
     private rootClasses;
@@ -15,17 +25,11 @@ declare class modal {
     private useOverlay;
     private isOverlayOn;
     private animate;
-    constructor(modalContent: HTMLElement, preferences?: object | null);
-    private setDefaults;
-    private setup;
-    private setActive;
-    private setName;
+    constructor(modalContent: HTMLElement, preferences?: object);
     private stringup;
-    updatePreferences(preferences: object | null): void;
     showBlanket(): void;
     hideBlanket(): void;
     blanketHidden(event: any): void;
-    showModal(): void;
     closeCurModal(): void;
     align(): void;
     modalHidden(event: any): void;

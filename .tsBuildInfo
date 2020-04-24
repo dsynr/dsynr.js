@@ -65,6 +65,14 @@
         "version": "3e0a459888f32b42138d5a39f706ff2d55d500ab1031e0988b5568b0f67c2303",
         "signature": "3e0a459888f32b42138d5a39f706ff2d55d500ab1031e0988b5568b0f67c2303"
       },
+      "./src/ts/dsynrui.ts": {
+        "version": "298308358786d6a5f8b851be8bc5efb701c0a2208aeb50b6ee69f0c817e60887",
+        "signature": "f271495f60ddab0c8e6c59f7a9e67c942c3289b4a807e3c739479befe4a3639b"
+      },
+      "./src/ts/dsynruiielement.ts": {
+        "version": "700466fc4fcad7657947137345d04bba4743ce0c868fbf5e1b53d877ffb1b09e",
+        "signature": "73be504d1fd9d569afd40c455d7354808cb71b4d6024ea46890340b1d77ad531"
+      },
       "./src/ts/analytics.ts": {
         "version": "0398552049c8886fba7d153cbaf6988b0ad047d96849f949d0d9bc3019488998",
         "signature": "50b548fed1cebf44473894cd313dd10b6fc560e16ffca8730588c215d5a3851d"
@@ -82,8 +90,8 @@
         "signature": "1dd9c7213c1ce8cb8d9897018d4bc87453871e40517e5174f7691b61dcd6db24"
       },
       "./src/ts/dom.ts": {
-        "version": "55f62418bc03643333d0eab551cbfbd9c27c8a7eff42b2b66b05ac7090167f51",
-        "signature": "cd367d5c3bc9e680d1a3e7a7d5203bbf5396b998cc233fdc0fabb43b8e5f50db"
+        "version": "ba875569236e18e2405596cffa46f607effc76627f1a864d3deb13d1dda6bf67",
+        "signature": "155dbfd38e2ff6f51317af15c5314effa6499319070621b58fdd507cfb023a9a"
       },
       "./src/ts/events.ts": {
         "version": "fb50a8b7f7ae3cc40dd86a17f22dad95f12bb921947a96ef87aad9e76e458ebc",
@@ -106,8 +114,8 @@
         "signature": "e54251502606f6e08674c12766513541f4fed0f80b034fba826b19e1417f537d"
       },
       "./src/ts/modal2.ts": {
-        "version": "c748d3b049c0d5d765f7c5ed8d291a8396ea0a5e05f39c2f314370faa56d5c2a",
-        "signature": "3dabd887242a55e8af99d103a99554d68039ddd9841e3dbe48d250f2cfbce25a"
+        "version": "fa206560fc2b0787ccd51fea1f2394c89c89608baaedf91792817c9ec01123f2",
+        "signature": "98ecae6b3b78b51062ebc5f09f09334eb5e6ada1008c15ccfeb87de5dbc88395"
       },
       "./src/ts/obj.ts": {
         "version": "30cd20eb47a2268e899f3a3586aaae0ba1ac68d48514e0d8ca625e8b5b275093",
@@ -116,6 +124,10 @@
       "./src/ts/other.ts": {
         "version": "d157123b3f70118b6b2e1a85f4153c99be218173ebd3913af57a394499d6bcb3",
         "signature": "677c1fc70717b844ed6ce68b2c53558e7c6181e9fa7c68714952e624ad5d1013"
+      },
+      "./src/ts/string.ts": {
+        "version": "7bac29405f74dfc808115afaa09d99784052da34099568b2a2ae8db850577af4",
+        "signature": "8787ff2e43f45a0631c017ae12516d8122cc60239b43a9d83a3dd7bd9c0e8c2b"
       },
       "./src/ts/viewport.ts": {
         "version": "c96ea98e35a6d9b59227a8fc33451accfc82e845bb3607e8a6a52ea30b246420",
@@ -141,6 +153,23 @@
     "referencedMap": {},
     "exportedModulesMap": {},
     "semanticDiagnosticsPerFile": [
+      "./src/ts/dsynruiielement.ts",
+      "./src/ts/dsynrui.ts",
+      "./src/ts/analytics.ts",
+      "./src/ts/animation.ts",
+      "./src/ts/css.ts",
+      "./src/ts/debug.ts",
+      "./src/ts/dom.ts",
+      "./src/ts/events.ts",
+      "./src/ts/graphics.ts",
+      "./src/ts/main.ts",
+      "./src/ts/math.ts",
+      "./src/ts/modal.ts",
+      "./src/ts/modal2.ts",
+      "./src/ts/obj.ts",
+      "./src/ts/other.ts",
+      "./src/ts/string.ts",
+      "./src/ts/viewport.ts",
       "../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es6.d.ts",
       "../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es5.d.ts",
       "../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.d.ts",
@@ -156,21 +185,7 @@
       "../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.proxy.d.ts",
       "../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.reflect.d.ts",
       "../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.symbol.d.ts",
-      "../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts",
-      "./src/ts/analytics.ts",
-      "./src/ts/animation.ts",
-      "./src/ts/css.ts",
-      "./src/ts/debug.ts",
-      "./src/ts/dom.ts",
-      "./src/ts/events.ts",
-      "./src/ts/graphics.ts",
-      "./src/ts/main.ts",
-      "./src/ts/math.ts",
-      "./src/ts/modal.ts",
-      "./src/ts/modal2.ts",
-      "./src/ts/other.ts",
-      "./src/ts/viewport.ts",
-      "./src/ts/obj.ts"
+      "../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts"
     ]
   },
   "version": "3.8.3"

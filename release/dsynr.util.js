@@ -1,3 +1,26 @@
+class DsynrUIIElement {
+    constructor() {
+        lfn('constructor-DsynrUIIElement');
+    }
+    show() {
+    }
+    hide() {
+    }
+    destroy() {
+    }
+    updatePref(preferences = {}) {
+    }
+    defaults() {
+    }
+    setup() {
+    }
+    setName(context, name) {
+        return concatStr([this.namePrefix, context, this.nameSuffix], '-');
+    }
+    setActive() {
+    }
+}
+
 function gtag(type, name, other) {
 }
 function PING(type, name) {
@@ -249,16 +272,28 @@ function modalHidden(event) {
 }
 let isBlanketOn = false, curModal;
 
-class modal {
-    constructor(modalContent, preferences = null) {
+class modal extends DsynrUIIElement {
+    constructor(modalContent, preferences = {}) {
+        super();
         lfn('constructor-modal');
         this.content = modalContent;
-        this.setDefaults();
-        this.updatePreferences(preferences);
+        this.defaults();
+        this.updatePref(preferences);
         this.setup();
-        this.showModal();
+        this.show();
     }
-    setDefaults() {
+    show() {
+        this.content.style.display = '';
+        this.root.classList.remove('o0');
+        totModals++;
+    }
+    hide() {
+        throw new Error("Method not implemented.");
+    }
+    destroy() {
+        throw new Error("Method not implemented.");
+    }
+    defaults() {
         lfn('setDefaultOptions');
         let positionClasses = 'position-absolute top left';
         this.context = addProp(this, 'context', document.body);
@@ -273,6 +308,16 @@ class modal {
         this.underlayClasses = addProp(this, 'underlayClasses', this.stringup([positionClasses, 'z1 wmax hmax']));
         this.modalClasses = addProp(this, 'modalClasses', this.stringup([positionClasses, 'z2']));
         this.rootClasses = addProp(this, 'rootClasses', this.stringup([positionClasses, 'z3 o0']));
+    }
+    updatePref(preferences) {
+        lfn('updatePref');
+        let options = getData(this.content, 'dsynr-options');
+        if (options !== null) {
+            preferences = JSON.parse(options);
+        }
+        else if (Object.keys(preferences).length > 0) {
+            updateProps(this, preferences);
+        }
     }
     setup() {
         lfn('setup');
@@ -302,21 +347,8 @@ class modal {
         activeModal = this.root;
         this.content.focus();
     }
-    setName(context, n) {
-        return this.stringup([this.prefix, context, this.suffix], '-');
-    }
     stringup(strings, seperator = ' ') {
         return strings.join(seperator);
-    }
-    updatePreferences(preferences) {
-        lfn('updateOptions');
-        let options = getData(this.content, 'dsynr-options');
-        if (options !== null) {
-            preferences = JSON.parse(options);
-        }
-        else if (preferences !== null) {
-            updateProps(this, preferences);
-        }
     }
     showBlanket() {
         let blanket;
@@ -340,11 +372,6 @@ class modal {
             blanket.remove();
             this.isOverlayOn = false;
         }
-    }
-    showModal() {
-        this.content.style.display = '';
-        this.root.classList.remove('o0');
-        totModals++;
     }
     closeCurModal() {
         if (this.isOverlayOn) {
@@ -370,7 +397,6 @@ function autoModalize(modalClass = 'dsynrModal') {
     lfn('autoModalize');
     makeArray(getElementsByClass(modalClass)).forEach(function (mdl, index) {
         mdl.style.display = 'none';
-        l(getData(mdl, 'dsynr-options'));
         let modl = new modal(mdl);
         modals.push(mdl);
     });
