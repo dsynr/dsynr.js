@@ -11,10 +11,20 @@ function get_rand_obj_item(obj: object) {
     return obj[keys[keys.length * Math.random() << 0]];
 }
 
-function updateProps(obj: Object, options: any): void {
-    for (let option in options) {
-        if (options.hasOwnProperty(option)) {
-            obj[option] = option;
+function updateProps(obj: Object, propSet: object): void {
+    for (let prop in propSet) {
+        if (propSet.hasOwnProperty(prop)) {
+            obj[prop] = propSet[prop];
         }
     }
+}
+
+function addProp(obj: object, propName: string, propVal: any = undefined) {
+    Object.defineProperty(obj, propName, {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        value: propVal
+    });
+    return obj[propName];
 }
