@@ -49,6 +49,22 @@ function get_rand_obj_item(obj) {
     let keys = Object.keys(obj);
     return obj[keys[keys.length * Math.random() << 0]];
 }
+function updateProps(obj, propSet) {
+    for (let prop in propSet) {
+        if (propSet.hasOwnProperty(prop)) {
+            obj[prop] = propSet[prop];
+        }
+    }
+}
+function addProp(obj, propName, propVal = undefined) {
+    Object.defineProperty(obj, propName, {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        value: propVal
+    });
+    return obj[propName];
+}
 
 function getRandColour() {
     return '#' + ('00000' + (Math.random() * (1 << 24) | 0).toString(16)).slice(-6);
@@ -57,7 +73,7 @@ function getRandColourRGBA(maxO = 1, maxR = 255, maxG = 255, maxB = 255) {
     return 'rgba(' + getRandFloor(0, maxR) + ',' + getRandFloor(0, maxG) + ',' + getRandFloor(0, maxB) + ',' + getRandDecimal(0, maxO) + ')';
 }
 
-function cssDimension(val, unit = 'px') {
+function getCssDimension(val, unit = 'px') {
     return val + unit;
 }
 function randRadius() {
@@ -82,13 +98,12 @@ function hasClass(e, classes) {
     return e.classList.contains(classes);
 }
 
-function addDiv(id = '', cls = '', root = false) {
+function addDiv(id = '', cls = '', root = document.body) {
     let div = document.createElement('DIV');
     div.id = id;
     div.className = cls;
-    if (root) {
-        root.appendChild(div);
-    }
+    l(root);
+    root.appendChild(div);
     return div;
 }
 function addText(txt = '', root) {
@@ -230,6 +245,132 @@ function modalHidden(event) {
     }
 }
 let isBlanketOn = false, curModal;
+
+class modal {
+    constructor(modalContent, options = null) {
+        lfn('constructor-modal');
+        let alignmentClasses = 'top left';
+        let positionClasses = 'position-absolute';
+        this.animate = addProp(this, 'animate', true);
+        this.isOverlayOn = addProp(this, 'isOverlayOn', false);
+        this.useOverlay = addProp(this, 'useOverlay', true);
+        this.disableUnderlay = addProp(this, 'disableUnderlay', true);
+        this.suffix = addProp(this, 'suffix', totModals.toString());
+        this.prefix = addProp(this, 'prefix', 'dsynrModal');
+        this.animationClasses = addProp(this, 'animationClasses', 'animated fadeIn');
+        this.overlayClasses = addProp(this, 'overlayClasses', 'o05 bg-dark');
+        this.underlayClasses = addProp(this, 'underlayClasses', this.stringup([positionClasses, alignmentClasses, 'z1 wmax hmax']));
+        this.modalClasses = addProp(this, 'modalClasses', this.stringup([positionClasses, 'z2']));
+        this.rootClasses = addProp(this, 'rootClasses', 'z3 o0');
+        this.content = modalContent;
+        this.updateOptions(options);
+        this.setup();
+        this.showModal();
+    }
+    setup() {
+        lfn('setup');
+        if (this.animate) {
+            this.modalClasses = this.stringup([this.modalClasses, this.animationClasses]);
+            this.underlayClasses = this.stringup([this.underlayClasses, this.animationClasses]);
+        }
+        this.root = addDiv(this.setName('root', this.content.id), this.rootClasses, this.context);
+        if (this.disableUnderlay) {
+            this.root.style.width = getCssDimension(this.context.clientWidth);
+            this.root.style.height = getCssDimension(this.context.clientHeight);
+            if (this.useOverlay) {
+                this.underlayClasses = this.stringup([this.underlayClasses, this.overlayClasses]);
+            }
+            this.underlay = addDiv(this.setName('underlay', this.content.id), this.underlayClasses, this.root);
+        }
+        this.modal = addDiv(this.setName('modal', this.context.id), this.modalClasses, this.root);
+        if (this.animate) {
+            curModal.addEventListener(transitionEvent, this.modalHidden);
+        }
+        window.addEventListener('resize', this.align);
+        this.modal.appendChild(this.content);
+        this.align();
+        this.setActive();
+    }
+    setActive() {
+        activeModal = this.root;
+        this.content.focus();
+    }
+    setName(context, n) {
+        return this.stringup([this.prefix, context, this.suffix], '-');
+    }
+    stringup(strings, seperator = ' ') {
+        return strings.join(seperator);
+    }
+    updateOptions(options) {
+        lfn('updateOptions');
+        let preferences = getData(this.content, 'dsynr-options');
+        if (preferences !== null) {
+            options = JSON.parse(preferences);
+        }
+        else if (options !== null) {
+            updateProps(this, options);
+        }
+        l(this);
+    }
+    showBlanket() {
+        let blanket;
+        blanket = addDiv('blanket', this.overlayClasses, document.body);
+        addDiv('blanketcoat', this.underlayClasses, blanket);
+        blanket.classList.remove('o0');
+        blanket.addEventListener(transitionEvent, blanketHidden);
+        this.isOverlayOn = true;
+    }
+    hideBlanket() {
+        let blanket;
+        blanket = getElementById('blanket');
+        blanket.classList.remove('fadeIn');
+        blanket.classList.add('fadeOut');
+    }
+    blanketHidden(event) {
+        let blanket;
+        blanket = getElementById('blanket');
+        if (event.animationName == 'fadeOut') {
+            blanket.removeEventListener(transitionEvent, blanketHidden);
+            blanket.remove();
+            this.isOverlayOn = false;
+        }
+    }
+    showModal() {
+        if (this.useOverlay) {
+            this.showBlanket();
+        }
+        totModals++;
+    }
+    closeCurModal() {
+        if (this.isOverlayOn) {
+            this.hideBlanket();
+            curModal.classList.remove('zoomIn');
+            curModal.classList.add('zoomOut');
+        }
+    }
+    align() {
+        if (this.isOverlayOn) {
+            centereStage(this.modal);
+        }
+    }
+    modalHidden(event) {
+        if (event.animationName == 'zoomOut') {
+            curModal.classList.add('d-none');
+            curModal.classList.remove('zoomOut');
+            curModal.removeEventListener(transitionEvent, this.modalHidden);
+        }
+    }
+}
+function autoModalize(modalClass = 'dsynrModal') {
+    lfn('autoModalize');
+    makeArray(getElementsByClass(modalClass)).forEach(function (mdl, index) {
+        mdl.style.display = 'none';
+        l(getData(mdl, 'dsynr-options'));
+        let modl = new modal(mdl);
+        modals.push(mdl);
+    });
+}
+let activeModal, totModals = 0, modals;
 
 (function () {
     updateViewportVars();

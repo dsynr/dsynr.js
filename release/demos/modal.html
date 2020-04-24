@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dsynr Demo - Modal</title>
+</head>
+<body>
+<div class="rootClass p-5 m-5 bg-light" id="root">
+
+    <form id="m1" class="dsynrModal" data-dsynr-options='{"context":"root"}'>
+        <div>
+            <h2>With Label and class</h2>
+            <label for="dsynrSelect">This is the label</label>
+            <select class="dsynrEnhanceSelect" id="dsynrSelect">
+                <option value="ov1">This is the first option</option>
+                <option value="ov1">This is the second option</option>
+                <option value="ov1">This is third option</option>
+                <option value="ov1">Fourth option</option>
+                <option value="ov1">Fifth</option>
+                <option value="ov1">6th</option>
+                <option value="ov1">7</option>
+                <option value="ov8">O8</option>
+            </select>
+        </div>
+
+
+        <div>
+            <h2>Without Label and class</h2>
+            <select id="dsynrSelect2">
+                <option value="ov1">This is the first option</option>
+                <option value="ov2">This is the second option</option>
+                <option value="ov3">This is third option</option>
+                <option value="ov1">Fourth option</option>
+                <option value="ov5">Fifth</option>
+                <option value="ov6">6th</option>
+                <option value="ov7">7</option>
+                <option value="ov8">O8</option>
+            </select>
+        </div>
+    </form>
+
+    <div class="p-5 m-5 border btn-group">
+        <div class="btn btn-outline-secondary" id="btn1">AutoModalize</div>
+        <div class="btn btn-primary" id="btn2">Modal With Existing Content</div>
+        <div class="btn btn-info disabled" id="btn3">Modal With Dynamic Content</div>
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="../util.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+<script src="../dsynr.debug.js"></script>
+<script src="../dsynr.util.js"></script>
+
+<script>
+
+    addListener('btn1', 'click', function (e) {
+        autoModalize();
+        e.target.classList.add('o5');
+    });
+
+    addListener('btn2', 'click', function (e) {
+        e.target.classList.add('o5');
+    });
+
+    addListener('btn3', 'click', function (e) {
+
+        e.target.classList.add('o5');
+    });
+
+</script>
+</body>
+</html>

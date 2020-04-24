@@ -54,6 +54,7 @@ function concatJS() {
             getScript('events', 'js'),
             getScript('viewport', 'js'),
             getScript('modal', 'js'),
+            getScript('modal2', 'js'),
             getScript('main', 'js'),
         ]),
         (concat(concatFileName + '.js')),
@@ -96,4 +97,5 @@ function pushToLive() {
 
 }
 
-exports.default = series(concatJS, compileDebugFile, compileCSS);
+// exports.default = series(concatJS, compileDebugFile, compileCSS);
+exports.default = series(concatJS);

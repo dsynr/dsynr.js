@@ -1,31 +1,8 @@
 class modal {
-
-    private root: HTMLElement;
-    private context: HTMLElement;
-    private content: HTMLElement;
-    private modal: HTMLElement;
-    private underlay: HTMLElement;
-
-    private rootClasses: string;
-    private modalClasses: string;
-    private underlayClasses: string;
-    private overlayClasses: string;
-    private animationClasses: string;
-
-    private prefix: string;
-    private suffix: string;
-
-    private disableUnderlay: boolean;
-    private useOverlay: boolean;
-    private isOverlayOn: boolean;
-    private animate: boolean;
-
-    constructor(modalContent: HTMLElement, options: object | null = null) {
+    constructor(modalContent, options = null) {
         lfn('constructor-modal');
-
-        let alignmentClasses: string = 'top left';
-        let positionClasses: string = 'position-absolute';
-
+        let alignmentClasses = 'top left';
+        let positionClasses = 'position-absolute';
         this.animate = addProp(this, 'animate', true);
         this.isOverlayOn = addProp(this, 'isOverlayOn', false);
         this.useOverlay = addProp(this, 'useOverlay', true);
@@ -37,92 +14,72 @@ class modal {
         this.underlayClasses = addProp(this, 'underlayClasses', this.stringup([positionClasses, alignmentClasses, 'z1 wmax hmax']));
         this.modalClasses = addProp(this, 'modalClasses', this.stringup([positionClasses, 'z2']));
         this.rootClasses = addProp(this, 'rootClasses', 'z3 o0');
-
-
         this.content = modalContent;
         this.updateOptions(options);
         this.setup();
         this.showModal();
     }
-
-    private setup() {
+    setup() {
         lfn('setup');
-
         if (this.animate) {
             this.modalClasses = this.stringup([this.modalClasses, this.animationClasses]);
             this.underlayClasses = this.stringup([this.underlayClasses, this.animationClasses]);
         }
-
         this.root = addDiv(this.setName('root', this.content.id), this.rootClasses, this.context);
-
-
         if (this.disableUnderlay) {
             this.root.style.width = getCssDimension(this.context.clientWidth);
             this.root.style.height = getCssDimension(this.context.clientHeight);
-
             if (this.useOverlay) {
                 this.underlayClasses = this.stringup([this.underlayClasses, this.overlayClasses]);
             }
-
             this.underlay = addDiv(this.setName('underlay', this.content.id), this.underlayClasses, this.root);
         }
-
         this.modal = addDiv(this.setName('modal', this.context.id), this.modalClasses, this.root);
-        //addListener('xModal', 'click', this.closeCurModal());
         if (this.animate) {
             curModal.addEventListener(transitionEvent, this.modalHidden);
         }
-        //update to detect parent (context) resizing opposed to just window
         window.addEventListener('resize', this.align);
         this.modal.appendChild(this.content);
         this.align();
         this.setActive();
     }
-
-    private setActive() {
+    setActive() {
         activeModal = this.root;
         this.content.focus();
     }
-
-    private setName(context: string, n: string): string {
+    setName(context, n) {
         return this.stringup([this.prefix, context, this.suffix], '-');
     }
-
-    private stringup(strings: Array<any>, seperator: string = ' '): string {
+    stringup(strings, seperator = ' ') {
         return strings.join(seperator);
     }
-
-    public updateOptions(options: object | null) {
+    updateOptions(options) {
         lfn('updateOptions');
-
-        let preferences: any = getData(this.content, 'dsynr-options');
+        let preferences = getData(this.content, 'dsynr-options');
         if (preferences !== null) {
             options = JSON.parse(preferences);
-        } else if (options !== null) {
+        }
+        else if (options !== null) {
             updateProps(this, options);
         }
         l(this);
     }
-
-    showBlanket(): void {
-        let blanket: HTMLElement;
+    showBlanket() {
+        let blanket;
         blanket = addDiv('blanket', this.overlayClasses, document.body);
         addDiv('blanketcoat', this.underlayClasses, blanket);
         blanket.classList.remove('o0');
         blanket.addEventListener(transitionEvent, blanketHidden);
         this.isOverlayOn = true;
     }
-
     hideBlanket() {
-        let blanket: HTMLElement;
+        let blanket;
         blanket = getElementById('blanket');
         blanket.classList.remove('fadeIn');
         blanket.classList.add('fadeOut');
     }
-
     blanketHidden(event) {
-        // Do something when the transition ends
-        let blanket: HTMLElement;
+        let blanket;
         blanket = getElementById('blanket');
         if (event.animationName == 'fadeOut') {
             blanket.removeEventListener(transitionEvent, blanketHidden);
@@ -130,31 +87,25 @@ class modal {
             this.isOverlayOn = false;
         }
     }
-
-    showModal(): void {
+    showModal() {
         if (this.useOverlay) {
             this.showBlanket();
         }
-
         totModals++;
     }
-
-    closeCurModal(): void {
+    closeCurModal() {
         if (this.isOverlayOn) {
             this.hideBlanket();
             curModal.classList.remove('zoomIn');
             curModal.classList.add('zoomOut');
         }
     }
-
     align() {
         if (this.isOverlayOn) {
             centereStage(this.modal);
         }
     }
-
     modalHidden(event) {
-        // Do something when the transition ends
         if (event.animationName == 'zoomOut') {
             curModal.classList.add('d-none');
             curModal.classList.remove('zoomOut');
@@ -162,8 +113,7 @@ class modal {
         }
     }
 }
-
-function autoModalize(modalClass: string = 'dsynrModal') {
+function autoModalize(modalClass = 'dsynrModal') {
     lfn('autoModalize');
     makeArray(getElementsByClass(modalClass)).forEach(function (mdl, index) {
         mdl.style.display = 'none';
@@ -172,5 +122,4 @@ function autoModalize(modalClass: string = 'dsynrModal') {
         modals.push(mdl);
     });
 }
-
-let activeModal: HTMLElement, totModals: number = 0, modals: Array<modal>;
+let activeModal, totModals = 0, modals;

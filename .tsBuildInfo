@@ -74,16 +74,16 @@
         "signature": "d0af34d51d5868a6bf164c2077d123a25431fb9019089dd437bfa55737f7db97"
       },
       "./src/ts/css.ts": {
-        "version": "bc848f4c1386a4936ea4992885c4deaf43f5e3aa915eeddc2d1d64659b8913b9",
-        "signature": "6f041241e00263cdf501c2ccaa923b402637f4fa5881c0f928b3bc93870cd1fc"
+        "version": "4bda95d09745ea874d430a877cf920bf418e2061e64d0f0488245745fed2fae1",
+        "signature": "cf4b275ad968f8d7abd1d0a80d2b3dfc659a923fe2397bdaf735ea9cb6db1a68"
       },
       "./src/ts/debug.ts": {
         "version": "079c59fefc92d8b14b792327affb079c6869f5d7ebcd04c9690ffc3b0c89a94b",
         "signature": "1dd9c7213c1ce8cb8d9897018d4bc87453871e40517e5174f7691b61dcd6db24"
       },
       "./src/ts/dom.ts": {
-        "version": "d38395686b178d5a8ee0ee25ab7e3b5c3b96a260f4fb6562bbebc62eb929113d",
-        "signature": "16515bb119ce3ee366ee0066d02b1ae592e52098b16ba20559017bc1d26eb2a0"
+        "version": "55f62418bc03643333d0eab551cbfbd9c27c8a7eff42b2b66b05ac7090167f51",
+        "signature": "cd367d5c3bc9e680d1a3e7a7d5203bbf5396b998cc233fdc0fabb43b8e5f50db"
       },
       "./src/ts/events.ts": {
         "version": "fb50a8b7f7ae3cc40dd86a17f22dad95f12bb921947a96ef87aad9e76e458ebc",
@@ -105,9 +105,13 @@
         "version": "a00e96033ed4038357ca736d44313aaaebbe8fd005259e5f2ede813c30da5a36",
         "signature": "e54251502606f6e08674c12766513541f4fed0f80b034fba826b19e1417f537d"
       },
+      "./src/ts/modal2.ts": {
+        "version": "c748d3b049c0d5d765f7c5ed8d291a8396ea0a5e05f39c2f314370faa56d5c2a",
+        "signature": "3dabd887242a55e8af99d103a99554d68039ddd9841e3dbe48d250f2cfbce25a"
+      },
       "./src/ts/obj.ts": {
-        "version": "e29c3b1329fe4acbaeb0665a481c27c74938d5906cbeb83031c678553be1716a",
-        "signature": "dbc1edc3384adb365df834602238062facf1ddffe22427c28e827d0608cc1c3a"
+        "version": "30cd20eb47a2268e899f3a3586aaae0ba1ac68d48514e0d8ca625e8b5b275093",
+        "signature": "ff4543d9cef485ca8e29d7677e51daef953b9c1fee61aef3a5430eea8378cfd2"
       },
       "./src/ts/other.ts": {
         "version": "d157123b3f70118b6b2e1a85f4153c99be218173ebd3913af57a394499d6bcb3",
@@ -160,12 +164,13 @@
       "./src/ts/dom.ts",
       "./src/ts/events.ts",
       "./src/ts/graphics.ts",
+      "./src/ts/main.ts",
       "./src/ts/math.ts",
       "./src/ts/modal.ts",
-      "./src/ts/obj.ts",
+      "./src/ts/modal2.ts",
       "./src/ts/other.ts",
       "./src/ts/viewport.ts",
-      "./src/ts/main.ts"
+      "./src/ts/obj.ts"
     ]
   },
   "version": "3.8.3"

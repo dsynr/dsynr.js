@@ -1,0 +1,33 @@
+declare class modal {
+    private root;
+    private context;
+    private content;
+    private modal;
+    private underlay;
+    private rootClasses;
+    private modalClasses;
+    private underlayClasses;
+    private overlayClasses;
+    private animationClasses;
+    private prefix;
+    private suffix;
+    private disableUnderlay;
+    private useOverlay;
+    private isOverlayOn;
+    private animate;
+    constructor(modalContent: HTMLElement, options?: object | null);
+    private setup;
+    private setActive;
+    private setName;
+    private stringup;
+    updateOptions(options: object | null): void;
+    showBlanket(): void;
+    hideBlanket(): void;
+    blanketHidden(event: any): void;
+    showModal(): void;
+    closeCurModal(): void;
+    align(): void;
+    modalHidden(event: any): void;
+}
+declare function autoModalize(modalClass?: string): void;
+declare let activeModal: HTMLElement, totModals: number, modals: Array<modal>;
