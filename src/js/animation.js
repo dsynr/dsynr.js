@@ -20,4 +20,5 @@ function whichAnimationEvent() {
             return animations[t];
         }
     }
-}
+} //
+//# sourceMappingURL=animation.js.map

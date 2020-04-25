@@ -73,6 +73,14 @@
         "version": "b43d1729ec7a483161054aa60d7c3fdd4c3e131eabff5e3d6cf855975297d373",
         "signature": "c1d458eeb3794a6affafa38fe7e316acd1fefd801ff13126d61c59817fd10e80"
       },
+      "./src/ts/enhancedselect.ts": {
+        "version": "7d1f4e9adeca4d093ea5017d5e6f5cbe4059813b9112c2bfb84bf958664b63b8",
+        "signature": "edac68ed91dd4459dd5df306223c84adb5cbf5a648c22824b5eb1ecc73b15b21"
+      },
+      "./src/ts/modal.ts": {
+        "version": "d72e48b1846603f8d3cc12ff7cb179229be85aed42291a8d8b8fc6865c783237",
+        "signature": "2526c9830f6b8c83c935e91992b62081b2b8f184834354a9bac96a16d0652afa"
+      },
       "./src/ts/analytics.ts": {
         "version": "0398552049c8886fba7d153cbaf6988b0ad047d96849f949d0d9bc3019488998",
         "signature": "50b548fed1cebf44473894cd313dd10b6fc560e16ffca8730588c215d5a3851d"
@@ -82,7 +90,7 @@
         "signature": "d0af34d51d5868a6bf164c2077d123a25431fb9019089dd437bfa55737f7db97"
       },
       "./src/ts/css.ts": {
-        "version": "4bda95d09745ea874d430a877cf920bf418e2061e64d0f0488245745fed2fae1",
+        "version": "884e39e8857cfbb34e785437b0294211800336a99a0d221563b322fe486a5983",
         "signature": "cf4b275ad968f8d7abd1d0a80d2b3dfc659a923fe2397bdaf735ea9cb6db1a68"
       },
       "./src/ts/debug.ts": {
@@ -109,10 +117,6 @@
         "version": "4cd4224d39ff4bd453ac54393fd317d698ae7a48df53da62078e724b3f8576dd",
         "signature": "2077ea7b8a1c12eb67da407a1f4d5804e5e04cca8c14e35e1a41c3b8ee1fce5d"
       },
-      "./src/ts/Modal.ts": {
-        "version": "a716a59e8eb5ecd83d3316718505bb7238e23977e4f7c280bddab8879cb5d594",
-        "signature": "95d15b6a1b919179cdbf8f318f4ead195eaae477a2cfdb4fedf61fc49878c042"
-      },
       "./src/ts/obj.ts": {
         "version": "30cd20eb47a2268e899f3a3586aaae0ba1ac68d48514e0d8ca625e8b5b275093",
         "signature": "ff4543d9cef485ca8e29d7677e51daef953b9c1fee61aef3a5430eea8378cfd2"
@@ -126,22 +130,23 @@
         "signature": "8787ff2e43f45a0631c017ae12516d8122cc60239b43a9d83a3dd7bd9c0e8c2b"
       },
       "./src/ts/viewport.ts": {
-        "version": "c96ea98e35a6d9b59227a8fc33451accfc82e845bb3607e8a6a52ea30b246420",
+        "version": "69b49f7dfca5c82b6068f9ac56ef5d9ace80b18fee7cfd5ab9158ecd3d327791",
         "signature": "aa2b730558c73fe15612fe76f870d5d629f436f015a15b4722f7f812493dbba5"
       }
     },
     "options": {
       "target": 2,
-      "removeComments": true,
       "noImplicitReturns": true,
       "noFallthroughCasesInSwitch": true,
       "noEmitOnError": true,
       "strictNullChecks": true,
       "diagnostics": true,
+      "skipLibCheck": true,
       "composite": true,
       "incremental": true,
       "tsBuildInfoFile": "./.tsBuildInfo",
       "forceConsistentCasingInFileNames": true,
+      "sourceMap": true,
       "rootDir": "./src/ts",
       "outDir": "./src/js",
       "configFilePath": "./tsconfig.json"
@@ -167,6 +172,7 @@
       "../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts",
       "./src/ts/dsynrui.ts",
       "./src/ts/dsynruiielement.ts",
+      "./src/ts/enhancedselect.ts",
       "./src/ts/analytics.ts",
       "./src/ts/animation.ts",
       "./src/ts/css.ts",
@@ -180,7 +186,7 @@
       "./src/ts/other.ts",
       "./src/ts/string.ts",
       "./src/ts/viewport.ts",
-      "./src/ts/Modal.ts"
+      "./src/ts/modal.ts"
     ]
   },
   "version": "3.8.3"

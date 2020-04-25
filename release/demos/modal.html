@@ -5,11 +5,11 @@
     <title>Dsynr Demo - Modal</title>
 </head>
 <body>
-<div class="rootClass p-5 bg-light vw vh" id="root">
+<div class="rootClass p-5 bg-light vw vh d-table" id="root">
 
-    <form id="m1" class="dsynrModal bg-dark p-5 rounded shadow" data-dsynr-options='{"context":"root"}'>
+    <form id="m1" class="dsynrModal bg-dark p-5 rounded shadow" data-dsynr-pref='{"parent":"root"}'>
 
-        <h1>Modal Title</h1>
+        <h1>Automodalize</h1>
 
         <div>
             <h2>With Label and class</h2>
@@ -50,6 +50,8 @@
 
 </div>
 
+<div id="m2" class="bg-info p-5 d-table"><img id="image" class="img-fluid" src="img.jpg" data-dsynr-pref='{"animate":false,"parent":"m2"}'/></div>
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <link rel="stylesheet" href="../util.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
@@ -63,13 +65,10 @@
         autoModalize();
         e.target.classList.add('o5');
     });
+    // getElementById('btn1').click();
 
+    new Modal(getElementById('image'));
     addListener('btn2', 'click', function (e) {
-        e.target.classList.add('o5');
-    });
-
-    addListener('btn3', 'click', function (e) {
-
         e.target.classList.add('o5');
     });
 

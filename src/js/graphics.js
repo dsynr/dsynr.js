@@ -4,3 +4,4 @@ function getRandColour() {
 function getRandColourRGBA(maxO = 1, maxR = 255, maxG = 255, maxB = 255) {
     return 'rgba(' + getRandFloor(0, maxR) + ',' + getRandFloor(0, maxG) + ',' + getRandFloor(0, maxB) + ',' + getRandDecimal(0, maxO) + ')';
 }
+//# sourceMappingURL=graphics.js.map

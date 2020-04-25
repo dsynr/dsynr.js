@@ -24,3 +24,4 @@ function addProp(obj, propName, propVal = undefined) {
     });
     return obj[propName];
 }
+//# sourceMappingURL=obj.js.map

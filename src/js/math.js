@@ -13,3 +13,4 @@ function getRandDecimal(min = 0, max = 1, precision = 2) {
 function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
 }
+//# sourceMappingURL=math.js.map

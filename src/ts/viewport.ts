@@ -1,7 +1,7 @@
 function centereStage(e: HTMLElement): void {
     let dimensions = getDimensions(e);
-    e.style.marginTop = -(dimensions.h) / 2 + 'px';
-    e.style.marginLeft = -(dimensions.w) / 2 + 'px';
+    e.style.marginTop = getCssDimension(-(dimensions.h) / 2);
+    e.style.marginLeft = getCssDimension(-(dimensions.w) / 2);
     e.style.top = '50%';
     e.style.left = '50%';
 }

@@ -19,7 +19,7 @@ function hide(e: HTMLElement): void {
 }
 
 function addClass(e: HTMLElement, classes: string): void {
-    e.classList.add(classes);
+    e.className += ' ' + classes;
 }
 
 function removeClass(e: HTMLElement, classes: string): void {

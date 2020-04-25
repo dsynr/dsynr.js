@@ -14,7 +14,7 @@ function hide(e) {
     e.style.display = 'none';
 }
 function addClass(e, classes) {
-    e.classList.add(classes);
+    e.className += ' ' + classes;
 }
 function removeClass(e, classes) {
     e.classList.remove(classes);
@@ -22,3 +22,4 @@ function removeClass(e, classes) {
 function hasClass(e, classes) {
     return e.classList.contains(classes);
 }
+//# sourceMappingURL=css.js.map

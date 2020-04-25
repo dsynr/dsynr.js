@@ -20,3 +20,4 @@ function getElementsByClass(className) {
 function getElementById(elementID) {
     return window[elementID];
 }
+//# sourceMappingURL=dom.js.map
