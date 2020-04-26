@@ -1,10 +1,6 @@
-declare class EnhancedSelect extends DsynrUIIElement {
-    parent: HTMLElement;
-    itself: HTMLElement;
-    content: HTMLElement;
-    root: HTMLElement;
-    namePrefix: string;
-    nameSuffix: string;
+declare class DsynrSelect extends DsynrUIIElement {
+    protected trigger: string;
+    constructor(select: HTMLSelectElement, preferences?: object);
     show(): void;
     hide(): void;
     destroy(): void;

@@ -1,7 +1,6 @@
 declare interface DsynrUI {
     parent: HTMLElement;
-    itself: HTMLElement;
-    content: HTMLElement;
+    instance: HTMLElement;
 
     show()
 

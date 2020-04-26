@@ -19,6 +19,20 @@ function getScript(fileName, fType = 'ts') {
     return (fType == 'js' ? jsPath : tsPath) + fileName + '.' + fType;
 }
 
+function getCls(fileName) {
+
+    return jsPath + 'classes/' + fileName + '.js';
+}
+
+function getInt(fileName) {
+
+    return jsPath +'interfaces/' +fileName + '.js';
+}
+function getComp(fileName) {
+
+    return jsPath +'components/' +fileName + '.js';
+}
+
 function concatTS() {
     return pipeline(
         gulp.src([
@@ -43,6 +57,9 @@ function concatTS() {
 function concatJS() {
     return pipeline(
         gulp.src([
+            getInt('*'),
+            getCls('*'),
+            getComp('*'),
             getScript('analytics', 'js'),
             getScript('other', 'js'),
             getScript('string', 'js'),
@@ -54,9 +71,6 @@ function concatJS() {
             getScript('animation', 'js'),
             getScript('events', 'js'),
             getScript('viewport', 'js'),
-            getScript('DsynrUIIElement', 'js'),
-            getScript('Modal', 'js'),
-            getScript('EnhancedSelect', 'js'),
             getScript('main', 'js'),
         ]),
         (concat(concatFileName + '.js')),

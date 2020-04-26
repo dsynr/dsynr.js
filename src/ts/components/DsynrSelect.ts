@@ -1,10 +1,20 @@
-class EnhancedSelect extends DsynrUIIElement {
-    parent: HTMLElement;
-    itself: HTMLElement;
-    content: HTMLElement;
-    root: HTMLElement;
-    namePrefix: string;
-    nameSuffix: string;
+class DsynrSelect extends DsynrUIIElement {
+
+    protected trigger: string; //"auto" => automatically shows as soon as instantiated
+
+    constructor(select: HTMLSelectElement, preferences: object = {}) {
+        super();
+        lfn('constructor-EnhancedSelect');
+
+        DsynrSelect.instances.push(this);
+        this.defaults();
+        this.updatePref(preferences);
+        this.setup();
+        if (this.trigger == 'auto') {
+            this.show();
+        }
+
+    }
 
     show(): void {
         throw new Error("Method not implemented.");

@@ -5,7 +5,8 @@
     <title>Dsynr Demo - Modal</title>
 </head>
 <body>
-<div class="rootClass p-5 bg-light vw vh d-table" id="root">
+
+<div class="rootClass p-5 bg-light vw vh2 d-table" id="root">
 
     <form id="m1" class="dsynrModal bg-dark p-5 rounded shadow" data-dsynr-pref='{"parent":"root"}'>
 
@@ -42,15 +43,15 @@
         </div>
     </form>
 
-    <div class="p-5 m-5 btn-group">
-        <div class="btn btn-outline-secondary" id="btn1">AutoModalize</div>
-        <div class="btn btn-primary" id="btn2">Modal With Existing Content</div>
-        <div class="btn btn-info disabled" id="btn3">Modal With Dynamic Content</div>
-    </div>
-
 </div>
 
-<div id="m2" class="bg-info p-5 d-table"><img id="image" class="img-fluid" src="img.jpg" data-dsynr-pref='{"animate":false,"parent":"m2"}'/></div>
+<div id="m2" class="bg-info p-5 d-table"><img id="image" class="img-fluid" src="img.jpg" data-dsynr-pref='{"animate":false,"parent":"m2","trigger":"btn2"}'/></div>
+
+
+<div class="p-5 m-5 btn-group">
+    <div class="btn btn-outline-secondary" id="btn1">AutoModalize</div>
+    <div class="btn btn-primary" id="btn2">Modal Via Trigger</div>
+</div>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <link rel="stylesheet" href="../util.css">
@@ -61,16 +62,12 @@
 
 <script>
 
-    addListener('btn1', 'click', function (e) {
+    addListener('btn1', 'click', function () {
         autoModalize();
-        e.target.classList.add('o5');
     });
     // getElementById('btn1').click();
 
-    new Modal(getElementById('image'));
-    addListener('btn2', 'click', function (e) {
-        e.target.classList.add('o5');
-    });
+    new DsynrModal(getElementById('image'));
 
 </script>
 </body>

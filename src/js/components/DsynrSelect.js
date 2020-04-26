@@ -1,4 +1,15 @@
-class EnhancedSelect extends DsynrUIIElement {
+class DsynrSelect extends DsynrUIIElement {
+    constructor(select, preferences = {}) {
+        super();
+        lfn('constructor-EnhancedSelect');
+        DsynrSelect.instances.push(this);
+        this.defaults();
+        this.updatePref(preferences);
+        this.setup();
+        if (this.trigger == 'auto') {
+            this.show();
+        }
+    }
     show() {
         throw new Error("Method not implemented.");
     }
@@ -24,4 +35,4 @@ class EnhancedSelect extends DsynrUIIElement {
         throw new Error("Method not implemented.");
     }
 }
-//# sourceMappingURL=EnhancedSelect.js.map
+//# sourceMappingURL=DsynrSelect.js.map
