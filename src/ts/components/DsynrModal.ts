@@ -14,34 +14,34 @@ class DsynrModal extends DsynrUIIElement {
         lfn('DsynrModal');
         super(modalContent, preferences);
 
-        this.defaults();
+        this.setDefaults();
         this.setup();
         if (this.trigger == 'auto') {
             this.show();
         }
     }
 
-    defaults() {
-        lfn('setDefaultOptions');
+    setDefaults(reset: boolean = false): void {
+        lfn('defaults');
 
         let positionClasses: string = 'position-absolute';
         let alignmentClasses: string = 'top left';
 
-        this.animate = addProp(this, 'animate', true);
-        this.isOverlayOn = addProp(this, 'isOverlayOn', false);
-        this.useOverlay = addProp(this, 'useOverlay', true);
-        this.disableUnderlay = addProp(this, 'disableUnderlay', true);
-        this.nameSuffix = addProp(this, 'nameSuffix', DsynrModal.instances.length.toString());
-        this.namePrefix = addProp(this, 'namePrefix', 'dsynrModal');
-        this.animationClasses = addProp(this, 'animationClasses', 'animated fadeIn');
-        this.overlayClasses = addProp(this, 'overlayClasses', 'o50 bg-dark');
-        this.underlayClasses = addProp(this, 'underlayClasses', concatStr([positionClasses, alignmentClasses, 'z1 wmax hmax']));
-        this.instanceClasses = addProp(this, 'modalClasses', concatStr([positionClasses, 'z2']));
-        this.rootClasses = addProp(this, 'rootClasses', concatStr([positionClasses, alignmentClasses, 'z3 o0']));
-        this.trigger = addProp(this, 'trigger', 'auto');
+        this.animate = addProp(this, 'animate', true, reset);
+        this.isOverlayOn = addProp(this, 'isOverlayOn', false, reset);
+        this.useOverlay = addProp(this, 'useOverlay', true, reset);
+        this.disableUnderlay = addProp(this, 'disableUnderlay', true, reset);
+        this.nameSuffix = addProp(this, 'nameSuffix', DsynrModal.instances.length.toString(), reset);
+        this.namePrefix = addProp(this, 'namePrefix', 'dsynrModal', reset);
+        this.animationClasses = addProp(this, 'animationClasses', 'animated fadeIn', reset);
+        this.overlayClasses = addProp(this, 'overlayClasses', 'o50 bg-dark', reset);
+        this.underlayClasses = addProp(this, 'underlayClasses', concatStr([positionClasses, alignmentClasses, 'z1 wmax hmax']), reset);
+        this.instanceClasses = addProp(this, 'modalClasses', concatStr([positionClasses, 'z2']), reset);
+        this.rootClasses = addProp(this, 'rootClasses', concatStr([positionClasses, alignmentClasses, 'z3 o0']), reset);
+        this.trigger = addProp(this, 'trigger', 'auto', reset);
     }
 
-    setup() {
+    setup(): void {
         lfn('setup');
 
         if (typeof this.parent === 'string') {
@@ -77,7 +77,7 @@ class DsynrModal extends DsynrUIIElement {
         l('Modal READY!');
     }
 
-    show() {
+    show(): void {
         lfn('show via : ' + this.trigger);
         if (this.animate) {
             addClass(this.instance, this.animationClasses);
@@ -88,7 +88,7 @@ class DsynrModal extends DsynrUIIElement {
         this.setActive();
     }
 
-    hide() {
+    hide(): void {
         lfn('hide');
         if (this.isOverlayOn) {
             this.hideBlanket();
@@ -97,11 +97,11 @@ class DsynrModal extends DsynrUIIElement {
         }
     }
 
-    destroy() {
+    destroy(): void {
         throw new Error("Method not implemented.");
     }
 
-    setActive() {
+    setActive(): void {
         this.instanceRoot = this.instanceRoot;
         this.content.focus();
     }

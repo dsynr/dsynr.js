@@ -19,7 +19,7 @@ function updateProps(obj: Object, propSet: object): void {
     }
 }
 
-function addProp(obj: object, propName: string, propVal: any = undefined, overwrite: boolean = false) {
+function addProp(obj: object, propName: string, propVal: any = undefined, overwrite: boolean = false): any {
     if (overwrite || !obj.hasOwnProperty(propName)) {
         Object.defineProperty(obj, propName, {
             configurable: true,

@@ -2,7 +2,7 @@ class DsynrModal extends DsynrUIIElement {
     constructor(modalContent, preferences = {}) {
         lfn('DsynrModal');
         super(modalContent, preferences);
-        this.defaults();
+        this.setDefaults();
         this.setup();
         if (this.trigger == 'auto') {
             this.show();
@@ -30,7 +30,7 @@ class DsynrModal extends DsynrUIIElement {
     destroy() {
         throw new Error("Method not implemented.");
     }
-    defaults() {
+    setDefaults() {
         lfn('setDefaultOptions');
         let positionClasses = 'position-absolute';
         let alignmentClasses = 'top left';

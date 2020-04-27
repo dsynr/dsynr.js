@@ -12,7 +12,7 @@ declare class DsynrModal extends DsynrUIIElement {
     show(): void;
     hide(): void;
     destroy(): void;
-    defaults(): void;
+    setDefaults(): void;
     setup(): void;
     setActive(): void;
     showBlanket(): void;
