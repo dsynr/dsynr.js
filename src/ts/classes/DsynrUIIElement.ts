@@ -30,7 +30,7 @@ abstract class DsynrUIIElement implements DsynrUI {
     destroy(): void {
     }
 
-    setPref(preferences: object) {
+    setPref(preferences: object):void {
         lfn('setPref');
 
         if (Object.keys(preferences).length > 0) {

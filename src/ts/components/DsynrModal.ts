@@ -115,14 +115,14 @@ class DsynrModal extends DsynrUIIElement {
         this.isOverlayOn = true;
     }
 
-    hideBlanket() {
+    hideBlanket():void {
         let blanket: HTMLElement;
         blanket = getElementById('blanket');
         blanket.classList.remove('fadeIn');
         blanket.classList.add('fadeOut');
     }
 
-    blanketHidden(event) {
+    blanketHidden(event):void {
         // Do something when the transition ends
         let blanket: HTMLElement;
         blanket = getElementById('blanket');
@@ -133,11 +133,11 @@ class DsynrModal extends DsynrUIIElement {
         }
     }
 
-    align() {
+    align(): void {
         centereStage(this.instance);
     }
 
-    private modalHidden(event) {
+    private modalHidden(event):void {
         // Do something when the transition ends
         if (event.animationName == 'zoomOut') {
             this.instanceRoot.classList.add('d-none');
@@ -147,7 +147,7 @@ class DsynrModal extends DsynrUIIElement {
     }
 }
 
-function autoModalize(modalClass: string = 'dsynrModal') {
+function autoModalize(modalClass: string = 'dsynrModal'): void {
     lfn('autoModalize');
     makeArray(getElementsByClass(modalClass)).forEach(function (modal, index) {
         new DsynrModal(modal);
