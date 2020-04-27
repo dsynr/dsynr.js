@@ -21,30 +21,6 @@ class DsynrModal extends DsynrUIIElement {
         }
     }
 
-    show() {
-        lfn('show via : ' + this.trigger);
-        if (this.animate) {
-            addClass(this.instance, this.animationClasses);
-            addClass(this.instanceRoot, this.animationClasses);
-        } else {
-            removeClass(this.instanceRoot, 'o0');
-        }
-        this.setActive();
-    }
-
-    hide() {
-        lfn('hide');
-        if (this.isOverlayOn) {
-            this.hideBlanket();
-            removeClass(this.instanceRoot, 'zoomIn');
-            addClass(this.instanceRoot, 'zoomOut');
-        }
-    }
-
-    destroy() {
-        throw new Error("Method not implemented.");
-    }
-
     defaults() {
         lfn('setDefaultOptions');
 
@@ -101,6 +77,30 @@ class DsynrModal extends DsynrUIIElement {
         l('Modal READY!');
     }
 
+    show() {
+        lfn('show via : ' + this.trigger);
+        if (this.animate) {
+            addClass(this.instance, this.animationClasses);
+            addClass(this.instanceRoot, this.animationClasses);
+        } else {
+            removeClass(this.instanceRoot, 'o0');
+        }
+        this.setActive();
+    }
+
+    hide() {
+        lfn('hide');
+        if (this.isOverlayOn) {
+            this.hideBlanket();
+            removeClass(this.instanceRoot, 'zoomIn');
+            addClass(this.instanceRoot, 'zoomOut');
+        }
+    }
+
+    destroy() {
+        throw new Error("Method not implemented.");
+    }
+
     setActive() {
         this.instanceRoot = this.instanceRoot;
         this.content.focus();
@@ -149,7 +149,7 @@ class DsynrModal extends DsynrUIIElement {
 
 function autoModalize(modalClass: string = 'dsynrModal') {
     lfn('autoModalize');
-    makeArray(getElementsByClass(modalClass)).forEach(function (mdl, index) {
-        new DsynrModal(mdl);
+    makeArray(getElementsByClass(modalClass)).forEach(function (modal, index) {
+        new DsynrModal(modal);
     });
 }

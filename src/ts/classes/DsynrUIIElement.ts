@@ -37,14 +37,12 @@ abstract class DsynrUIIElement implements DsynrUI {
             updateProps(this, preferences);
         } else {
             let options: any = getData(this.content, this.prefAttr);
-            l(options);
             if (options !== null) {
                 preferences = JSON.parse(options);
                 updateProps(this, preferences);
             }
 
         }
-        l(this);
     }
 
     protected defaults(): void {

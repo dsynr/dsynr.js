@@ -20,8 +20,6 @@ function updateProps(obj: Object, propSet: object): void {
 }
 
 function addProp(obj: object, propName: string, propVal: any = undefined, overwrite: boolean = false) {
-    lfn('addProp');
-    l(propName+":"+propVal)
     if (overwrite || !obj.hasOwnProperty(propName)) {
         Object.defineProperty(obj, propName, {
             configurable: true,
@@ -30,6 +28,5 @@ function addProp(obj: object, propName: string, propVal: any = undefined, overwr
             value: propVal
         });
     }
-    // l(obj);
     return obj[propName];
 }

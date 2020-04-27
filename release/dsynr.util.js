@@ -4,7 +4,6 @@ class DsynrUIIElement {
         this.parent = document.body;
         this.prefAttr = 'dsynr-pref';
         lfn('DsynrUIIElement');
-        l(element);
         this.content = element;
         this.updatePref(preferences);
         DsynrUIIElement.instances.push(this);
