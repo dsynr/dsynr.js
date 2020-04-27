@@ -22,7 +22,7 @@ class DsynrModal extends DsynrUIIElement {
     }
 
     setDefaults(reset: boolean = false): void {
-        lfn('defaults');
+        lfn('setDefaults');
 
         let positionClasses: string = 'position-absolute';
         let alignmentClasses: string = 'top left';

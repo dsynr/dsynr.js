@@ -9,7 +9,7 @@ class DsynrModal extends DsynrUIIElement {
         }
     }
     setDefaults(reset = false) {
-        lfn('defaults');
+        lfn('setDefaults');
         let positionClasses = 'position-absolute';
         let alignmentClasses = 'top left';
         this.animate = addProp(this, 'animate', true, reset);
