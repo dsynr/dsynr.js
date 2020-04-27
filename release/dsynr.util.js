@@ -5,7 +5,7 @@ class DsynrUIIElement {
         this.prefAttr = 'dsynr-pref';
         lfn('DsynrUIIElement');
         this.content = element;
-        this.updatePref(preferences);
+        this.setPref(preferences);
         DsynrUIIElement.instances.push(this);
     }
     show() {
@@ -14,22 +14,20 @@ class DsynrUIIElement {
     }
     destroy() {
     }
-    updatePref(preferences) {
-        lfn('updatePref');
+    setPref(preferences) {
+        lfn('setPref');
         if (Object.keys(preferences).length > 0) {
             updateProps(this, preferences);
         }
         else {
             let options = getData(this.content, this.prefAttr);
-            l(options);
             if (options !== null) {
                 preferences = JSON.parse(options);
                 updateProps(this, preferences);
             }
         }
-        l(this);
     }
-    defaults() {
+    setDefaults(reset = false) {
     }
     setup() {
     }
@@ -51,44 +49,22 @@ class DsynrModal extends DsynrUIIElement {
             this.show();
         }
     }
-    show() {
-        lfn('show via : ' + this.trigger);
-        if (this.animate) {
-            addClass(this.instance, this.animationClasses);
-            addClass(this.instanceRoot, this.animationClasses);
-        }
-        else {
-            removeClass(this.instanceRoot, 'o0');
-        }
-        this.setActive();
-    }
-    hide() {
-        lfn('hide');
-        if (this.isOverlayOn) {
-            this.hideBlanket();
-            removeClass(this.instanceRoot, 'zoomIn');
-            addClass(this.instanceRoot, 'zoomOut');
-        }
-    }
-    destroy() {
-        throw new Error("Method not implemented.");
-    }
-    setDefaults() {
-        lfn('setDefaultOptions');
+    setDefaults(reset = false) {
+        lfn('defaults');
         let positionClasses = 'position-absolute';
         let alignmentClasses = 'top left';
-        this.animate = addProp(this, 'animate', true);
-        this.isOverlayOn = addProp(this, 'isOverlayOn', false);
-        this.useOverlay = addProp(this, 'useOverlay', true);
-        this.disableUnderlay = addProp(this, 'disableUnderlay', true);
-        this.nameSuffix = addProp(this, 'nameSuffix', DsynrModal.instances.length.toString());
-        this.namePrefix = addProp(this, 'namePrefix', 'dsynrModal');
-        this.animationClasses = addProp(this, 'animationClasses', 'animated fadeIn');
-        this.overlayClasses = addProp(this, 'overlayClasses', 'o50 bg-dark');
-        this.underlayClasses = addProp(this, 'underlayClasses', concatStr([positionClasses, alignmentClasses, 'z1 wmax hmax']));
-        this.instanceClasses = addProp(this, 'modalClasses', concatStr([positionClasses, 'z2']));
-        this.rootClasses = addProp(this, 'rootClasses', concatStr([positionClasses, alignmentClasses, 'z3 o0']));
-        this.trigger = addProp(this, 'trigger', 'auto');
+        this.animate = addProp(this, 'animate', true, reset);
+        this.isOverlayOn = addProp(this, 'isOverlayOn', false, reset);
+        this.useOverlay = addProp(this, 'useOverlay', true, reset);
+        this.disableUnderlay = addProp(this, 'disableUnderlay', true, reset);
+        this.nameSuffix = addProp(this, 'nameSuffix', DsynrModal.instances.length.toString(), reset);
+        this.namePrefix = addProp(this, 'namePrefix', 'dsynrModal', reset);
+        this.animationClasses = addProp(this, 'animationClasses', 'animated fadeIn', reset);
+        this.overlayClasses = addProp(this, 'overlayClasses', 'o50 bg-dark', reset);
+        this.underlayClasses = addProp(this, 'underlayClasses', concatStr([positionClasses, alignmentClasses, 'z1 wmax hmax']), reset);
+        this.instanceClasses = addProp(this, 'modalClasses', concatStr([positionClasses, 'z2']), reset);
+        this.rootClasses = addProp(this, 'rootClasses', concatStr([positionClasses, alignmentClasses, 'z3 o0']), reset);
+        this.trigger = addProp(this, 'trigger', 'auto', reset);
     }
     setup() {
         lfn('setup');
@@ -118,6 +94,28 @@ class DsynrModal extends DsynrUIIElement {
         //     modals[modals.length].align();
         // });
         l('Modal READY!');
+    }
+    show() {
+        lfn('show via : ' + this.trigger);
+        if (this.animate) {
+            addClass(this.instance, this.animationClasses);
+            addClass(this.instanceRoot, this.animationClasses);
+        }
+        else {
+            removeClass(this.instanceRoot, 'o0');
+        }
+        this.setActive();
+    }
+    hide() {
+        lfn('hide');
+        if (this.isOverlayOn) {
+            this.hideBlanket();
+            removeClass(this.instanceRoot, 'zoomIn');
+            addClass(this.instanceRoot, 'zoomOut');
+        }
+    }
+    destroy() {
+        throw new Error("Method not implemented.");
     }
     setActive() {
         this.instanceRoot = this.instanceRoot;
@@ -161,8 +159,8 @@ class DsynrModal extends DsynrUIIElement {
 }
 function autoModalize(modalClass = 'dsynrModal') {
     lfn('autoModalize');
-    makeArray(getElementsByClass(modalClass)).forEach(function (mdl, index) {
-        new DsynrModal(mdl);
+    makeArray(getElementsByClass(modalClass)).forEach(function (modal, index) {
+        new DsynrModal(modal);
     });
 }
 //# sourceMappingURL=DsynrModal.js.map
@@ -247,8 +245,6 @@ function updateProps(obj, propSet) {
     }
 }
 function addProp(obj, propName, propVal = undefined, overwrite = false) {
-    lfn('addProp');
-    l(propName + ":" + propVal);
     if (overwrite || !obj.hasOwnProperty(propName)) {
         Object.defineProperty(obj, propName, {
             configurable: true,
@@ -257,7 +253,6 @@ function addProp(obj, propName, propVal = undefined, overwrite = false) {
             value: propVal
         });
     }
-    // l(obj);
     return obj[propName];
 }
 //# sourceMappingURL=obj.js.map

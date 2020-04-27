@@ -9,11 +9,11 @@ declare class DsynrModal extends DsynrUIIElement {
     private useOverlay;
     private isOverlayOn;
     constructor(modalContent: HTMLElement, preferences?: object);
+    setDefaults(reset?: boolean): void;
+    setup(): void;
     show(): void;
     hide(): void;
     destroy(): void;
-    setDefaults(): void;
-    setup(): void;
     setActive(): void;
     showBlanket(): void;
     hideBlanket(): void;

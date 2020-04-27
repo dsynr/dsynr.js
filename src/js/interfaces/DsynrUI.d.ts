@@ -1,7 +1,10 @@
 declare interface DsynrUI {
     parent: HTMLElement;
     instance: HTMLElement;
-    show(): any;
-    hide(): any;
-    destroy(): any;
+    setPref(preferences: object): void;
+    setDefaults(reset: boolean): void;
+    setup(): void;
+    show(): void;
+    hide(): void;
+    destroy(): void;
 }

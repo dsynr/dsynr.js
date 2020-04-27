@@ -102,7 +102,7 @@
         "signature": "2077ea7b8a1c12eb67da407a1f4d5804e5e04cca8c14e35e1a41c3b8ee1fce5d"
       },
       "./src/ts/obj.ts": {
-        "version": "9763acb8e3378840018374ef1758b61fece9f5d7154bdf8182a39a9437e2bbf0",
+        "version": "83c42bb7159f41f5d156b290e6317a4cec5c3f366b49339394ae799d99489896",
         "signature": "2b7028990d970850dc4d9ae05d06631ce7f3ae434ae54fec9e85903718106524"
       },
       "./src/ts/other.ts": {
@@ -118,16 +118,16 @@
         "signature": "aa2b730558c73fe15612fe76f870d5d629f436f015a15b4722f7f812493dbba5"
       },
       "./src/ts/classes/dsynruiielement.ts": {
-        "version": "d5ea9d89aa83e8ed20c31bf004f5db6a8d181ac87c8edea67373ae76914cd760",
-        "signature": "bd80282db70b3f6d0a37e78259448725f764940273896517a52cb6745e5f3701"
+        "version": "0035a3488347d687dc24010c4e0393b9f857117a072f768a8ae93f2fd8728dff",
+        "signature": "acf9320fe76f0286a4e9c66cd7aa4b565ec3c2b37999fea6d3c0585da485b078"
       },
       "./src/ts/components/dsynrmodal.ts": {
-        "version": "667b1846150200ba075d7646ee354abd2ef849f86335c0b7617839cac0035f81",
-        "signature": "34d47c723bfcc7364fb2fcd72853b445dbdb95303a63f04cc04a918558fbadcb"
+        "version": "b3abf9cc5b7375f8f2896ba576e4d0f311271f12e0d5c463fbd481c68ceed5dc",
+        "signature": "76ca0b8c411ff9093f753d43495736cdcae92637278972c955fe1855b0f43db5"
       },
       "./src/ts/interfaces/dsynrui.ts": {
-        "version": "c37875c0b42fdc3b30cad59900c8f01b31866899e49c6b126134c5ab6e68c532",
-        "signature": "43226ac777592c9da41e47a4a8626e9182089fec95ea5901077d4bf71f794da8"
+        "version": "c311a7e7d823dd170263f1cd572bafaa778b7ede75eea6e8e9c74959e8632b47",
+        "signature": "4147d47de9c105d6268745eceffec70fcbc2d591bbd98d8d23eec6e00cc91e7c"
       }
     },
     "options": {
@@ -167,6 +167,8 @@
       "../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.reflect.d.ts",
       "../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.symbol.d.ts",
       "../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts",
+      "./src/ts/obj.ts",
+      "./src/ts/classes/dsynruiielement.ts",
       "./src/ts/analytics.ts",
       "./src/ts/animation.ts",
       "./src/ts/css.ts",
@@ -176,13 +178,11 @@
       "./src/ts/graphics.ts",
       "./src/ts/main.ts",
       "./src/ts/math.ts",
-      "./src/ts/obj.ts",
       "./src/ts/other.ts",
       "./src/ts/string.ts",
       "./src/ts/viewport.ts",
       "./src/ts/components/dsynrmodal.ts",
-      "./src/ts/interfaces/dsynrui.ts",
-      "./src/ts/classes/dsynruiielement.ts"
+      "./src/ts/interfaces/dsynrui.ts"
     ]
   },
   "version": "3.8.3"

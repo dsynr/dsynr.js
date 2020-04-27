@@ -4,7 +4,7 @@ class DsynrUIIElement {
         this.prefAttr = 'dsynr-pref';
         lfn('DsynrUIIElement');
         this.content = element;
-        this.updatePref(preferences);
+        this.setPref(preferences);
         DsynrUIIElement.instances.push(this);
     }
     show() {
@@ -13,22 +13,20 @@ class DsynrUIIElement {
     }
     destroy() {
     }
-    updatePref(preferences) {
-        lfn('updatePref');
+    setPref(preferences) {
+        lfn('setPref');
         if (Object.keys(preferences).length > 0) {
             updateProps(this, preferences);
         }
         else {
             let options = getData(this.content, this.prefAttr);
-            l(options);
             if (options !== null) {
                 preferences = JSON.parse(options);
                 updateProps(this, preferences);
             }
         }
-        l(this);
     }
-    defaults() {
+    setDefaults(reset = false) {
     }
     setup() {
     }

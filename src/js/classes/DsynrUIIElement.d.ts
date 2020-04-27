@@ -13,9 +13,9 @@ declare abstract class DsynrUIIElement implements DsynrUI {
     show(): void;
     hide(): void;
     destroy(): void;
-    updatePref(preferences: object): void;
-    protected defaults(): void;
-    protected setup(): void;
+    setPref(preferences: object): void;
+    setDefaults(reset?: boolean): void;
+    setup(): void;
     protected setName(context: string, name: string): string;
     protected setActive(): void;
 }
