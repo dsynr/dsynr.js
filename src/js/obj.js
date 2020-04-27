@@ -15,13 +15,18 @@ function updateProps(obj, propSet) {
         }
     }
 }
-function addProp(obj, propName, propVal = undefined) {
-    Object.defineProperty(obj, propName, {
-        configurable: true,
-        enumerable: true,
-        writable: true,
-        value: propVal
-    });
+function addProp(obj, propName, propVal = undefined, overwrite = false) {
+    lfn('addProp');
+    l(propName + ":" + propVal);
+    if (overwrite || !obj.hasOwnProperty(propName)) {
+        Object.defineProperty(obj, propName, {
+            configurable: true,
+            enumerable: true,
+            writable: true,
+            value: propVal
+        });
+    }
+    // l(obj);
     return obj[propName];
 }
 //# sourceMappingURL=obj.js.map

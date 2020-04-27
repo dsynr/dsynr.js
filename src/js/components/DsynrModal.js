@@ -1,9 +1,7 @@
 class DsynrModal extends DsynrUIIElement {
     constructor(modalContent, preferences = {}) {
-        lfn('constructor-Modal');
-        super(preferences);
-        DsynrModal.instances.push(this);
-        this.content = modalContent;
+        lfn('DsynrModal');
+        super(modalContent, preferences);
         this.defaults();
         this.setup();
         if (this.trigger == 'auto') {
@@ -36,14 +34,13 @@ class DsynrModal extends DsynrUIIElement {
         lfn('setDefaultOptions');
         let positionClasses = 'position-absolute';
         let alignmentClasses = 'top left';
-        this.parent = addProp(this, 'parent', document.body);
         this.animate = addProp(this, 'animate', true);
         this.isOverlayOn = addProp(this, 'isOverlayOn', false);
         this.useOverlay = addProp(this, 'useOverlay', true);
         this.disableUnderlay = addProp(this, 'disableUnderlay', true);
         this.nameSuffix = addProp(this, 'nameSuffix', DsynrModal.instances.length.toString());
         this.namePrefix = addProp(this, 'namePrefix', 'dsynrModal');
-        this.animationClasses = addProp(this, 'animationClass', 'animated fadeIn');
+        this.animationClasses = addProp(this, 'animationClasses', 'animated fadeIn');
         this.overlayClasses = addProp(this, 'overlayClasses', 'o50 bg-dark');
         this.underlayClasses = addProp(this, 'underlayClasses', concatStr([positionClasses, alignmentClasses, 'z1 wmax hmax']));
         this.instanceClasses = addProp(this, 'modalClasses', concatStr([positionClasses, 'z2']));

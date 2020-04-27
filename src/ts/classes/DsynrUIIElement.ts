@@ -14,9 +14,11 @@ abstract class DsynrUIIElement implements DsynrUI {
 
     private prefAttr: string = 'dsynr-pref';
 
-    constructor(preferences: object = {}) {
-        lfn('constructor-DsynrUIIElement');
+    protected constructor(element: HTMLElement, preferences: object = {}) {
+        lfn('DsynrUIIElement');
+        this.content = element;
         this.updatePref(preferences);
+        DsynrUIIElement.instances.push(this);
     }
 
     show(): void {
@@ -34,7 +36,8 @@ abstract class DsynrUIIElement implements DsynrUI {
         if (Object.keys(preferences).length > 0) {
             updateProps(this, preferences);
         } else {
-            let options: any = getData(this.parent, this.prefAttr);
+            let options: any = getData(this.content, this.prefAttr);
+            l(options);
             if (options !== null) {
                 preferences = JSON.parse(options);
                 updateProps(this, preferences);

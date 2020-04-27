@@ -102,8 +102,8 @@
         "signature": "2077ea7b8a1c12eb67da407a1f4d5804e5e04cca8c14e35e1a41c3b8ee1fce5d"
       },
       "./src/ts/obj.ts": {
-        "version": "30cd20eb47a2268e899f3a3586aaae0ba1ac68d48514e0d8ca625e8b5b275093",
-        "signature": "ff4543d9cef485ca8e29d7677e51daef953b9c1fee61aef3a5430eea8378cfd2"
+        "version": "9763acb8e3378840018374ef1758b61fece9f5d7154bdf8182a39a9437e2bbf0",
+        "signature": "2b7028990d970850dc4d9ae05d06631ce7f3ae434ae54fec9e85903718106524"
       },
       "./src/ts/other.ts": {
         "version": "d157123b3f70118b6b2e1a85f4153c99be218173ebd3913af57a394499d6bcb3",
@@ -118,16 +118,12 @@
         "signature": "aa2b730558c73fe15612fe76f870d5d629f436f015a15b4722f7f812493dbba5"
       },
       "./src/ts/classes/dsynruiielement.ts": {
-        "version": "f329f8e62995d3de0d4e6daa83a511a808c55ab8f02e2c51581b2275adfeb7ad",
-        "signature": "5be9d1b7cf8a0cb4c41edb52ad522555653ada0517b87f8feb99383fe270bc12"
+        "version": "d5ea9d89aa83e8ed20c31bf004f5db6a8d181ac87c8edea67373ae76914cd760",
+        "signature": "bd80282db70b3f6d0a37e78259448725f764940273896517a52cb6745e5f3701"
       },
       "./src/ts/components/dsynrmodal.ts": {
-        "version": "2a0561817430016e871f29888b41dda1ef9fbfaa7edf09c88335abf8fc32da19",
+        "version": "667b1846150200ba075d7646ee354abd2ef849f86335c0b7617839cac0035f81",
         "signature": "34d47c723bfcc7364fb2fcd72853b445dbdb95303a63f04cc04a918558fbadcb"
-      },
-      "./src/ts/components/dsynrselect.ts": {
-        "version": "94b1764edae0fa25c964f0b463a20f8e6276e90ad2a33c9d406644454156e69b",
-        "signature": "b5064fcaaa99e6320811003302e80f54ba7ba7cbaaca55002d87f74bef5d9787"
       },
       "./src/ts/interfaces/dsynrui.ts": {
         "version": "c37875c0b42fdc3b30cad59900c8f01b31866899e49c6b126134c5ab6e68c532",
@@ -147,6 +143,7 @@
       "tsBuildInfoFile": "./.tsBuildInfo",
       "forceConsistentCasingInFileNames": true,
       "sourceMap": true,
+      "inlineSources": true,
       "rootDir": "./src/ts",
       "outDir": "./src/js",
       "configFilePath": "./tsconfig.json"
@@ -184,7 +181,6 @@
       "./src/ts/string.ts",
       "./src/ts/viewport.ts",
       "./src/ts/components/dsynrmodal.ts",
-      "./src/ts/components/dsynrselect.ts",
       "./src/ts/interfaces/dsynrui.ts",
       "./src/ts/classes/dsynruiielement.ts"
     ]

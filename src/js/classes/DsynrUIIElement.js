@@ -1,9 +1,11 @@
 class DsynrUIIElement {
-    constructor(preferences = {}) {
+    constructor(element, preferences = {}) {
         this.parent = document.body;
         this.prefAttr = 'dsynr-pref';
-        lfn('constructor-DsynrUIIElement');
+        lfn('DsynrUIIElement');
+        this.content = element;
         this.updatePref(preferences);
+        DsynrUIIElement.instances.push(this);
     }
     show() {
     }
@@ -17,7 +19,8 @@ class DsynrUIIElement {
             updateProps(this, preferences);
         }
         else {
-            let options = getData(this.parent, this.prefAttr);
+            let options = getData(this.content, this.prefAttr);
+            l(options);
             if (options !== null) {
                 preferences = JSON.parse(options);
                 updateProps(this, preferences);

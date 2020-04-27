@@ -1,10 +1,13 @@
 //# sourceMappingURL=DsynrUI.js.map
 class DsynrUIIElement {
-    constructor(preferences = {}) {
+    constructor(element, preferences = {}) {
         this.parent = document.body;
         this.prefAttr = 'dsynr-pref';
-        lfn('constructor-DsynrUIIElement');
+        lfn('DsynrUIIElement');
+        l(element);
+        this.content = element;
         this.updatePref(preferences);
+        DsynrUIIElement.instances.push(this);
     }
     show() {
     }
@@ -18,7 +21,8 @@ class DsynrUIIElement {
             updateProps(this, preferences);
         }
         else {
-            let options = getData(this.parent, this.prefAttr);
+            let options = getData(this.content, this.prefAttr);
+            l(options);
             if (options !== null) {
                 preferences = JSON.parse(options);
                 updateProps(this, preferences);
@@ -40,10 +44,8 @@ DsynrUIIElement.instances = [];
 //# sourceMappingURL=DsynrUIIElement.js.map
 class DsynrModal extends DsynrUIIElement {
     constructor(modalContent, preferences = {}) {
-        lfn('constructor-Modal');
-        super(preferences);
-        DsynrModal.instances.push(this);
-        this.content = modalContent;
+        lfn('DsynrModal');
+        super(modalContent, preferences);
         this.defaults();
         this.setup();
         if (this.trigger == 'auto') {
@@ -76,14 +78,13 @@ class DsynrModal extends DsynrUIIElement {
         lfn('setDefaultOptions');
         let positionClasses = 'position-absolute';
         let alignmentClasses = 'top left';
-        this.parent = addProp(this, 'parent', document.body);
         this.animate = addProp(this, 'animate', true);
         this.isOverlayOn = addProp(this, 'isOverlayOn', false);
         this.useOverlay = addProp(this, 'useOverlay', true);
         this.disableUnderlay = addProp(this, 'disableUnderlay', true);
         this.nameSuffix = addProp(this, 'nameSuffix', DsynrModal.instances.length.toString());
         this.namePrefix = addProp(this, 'namePrefix', 'dsynrModal');
-        this.animationClasses = addProp(this, 'animationClass', 'animated fadeIn');
+        this.animationClasses = addProp(this, 'animationClasses', 'animated fadeIn');
         this.overlayClasses = addProp(this, 'overlayClasses', 'o50 bg-dark');
         this.underlayClasses = addProp(this, 'underlayClasses', concatStr([positionClasses, alignmentClasses, 'z1 wmax hmax']));
         this.instanceClasses = addProp(this, 'modalClasses', concatStr([positionClasses, 'z2']));
@@ -166,44 +167,6 @@ function autoModalize(modalClass = 'dsynrModal') {
     });
 }
 //# sourceMappingURL=DsynrModal.js.map
-class DsynrSelect extends DsynrUIIElement {
-    constructor(select, preferences = {}) {
-        super();
-        lfn('constructor-EnhancedSelect');
-        DsynrSelect.instances.push(this);
-        this.defaults();
-        this.updatePref(preferences);
-        this.setup();
-        if (this.trigger == 'auto') {
-            this.show();
-        }
-    }
-    show() {
-        throw new Error("Method not implemented.");
-    }
-    hide() {
-        throw new Error("Method not implemented.");
-    }
-    destroy() {
-        throw new Error("Method not implemented.");
-    }
-    updatePref(preferences) {
-        throw new Error("Method not implemented.");
-    }
-    defaults() {
-        throw new Error("Method not implemented.");
-    }
-    setup() {
-        throw new Error("Method not implemented.");
-    }
-    setName(context, name) {
-        throw new Error("Method not implemented.");
-    }
-    setActive() {
-        throw new Error("Method not implemented.");
-    }
-}
-//# sourceMappingURL=DsynrSelect.js.map
 /**
  * @todo
  */
@@ -284,13 +247,18 @@ function updateProps(obj, propSet) {
         }
     }
 }
-function addProp(obj, propName, propVal = undefined) {
-    Object.defineProperty(obj, propName, {
-        configurable: true,
-        enumerable: true,
-        writable: true,
-        value: propVal
-    });
+function addProp(obj, propName, propVal = undefined, overwrite = false) {
+    lfn('addProp');
+    l(propName + ":" + propVal);
+    if (overwrite || !obj.hasOwnProperty(propName)) {
+        Object.defineProperty(obj, propName, {
+            configurable: true,
+            enumerable: true,
+            writable: true,
+            value: propVal
+        });
+    }
+    // l(obj);
     return obj[propName];
 }
 //# sourceMappingURL=obj.js.map

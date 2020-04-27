@@ -19,12 +19,17 @@ function updateProps(obj: Object, propSet: object): void {
     }
 }
 
-function addProp(obj: object, propName: string, propVal: any = undefined) {
-    Object.defineProperty(obj, propName, {
-        configurable: true,
-        enumerable: true,
-        writable: true,
-        value: propVal
-    });
+function addProp(obj: object, propName: string, propVal: any = undefined, overwrite: boolean = false) {
+    lfn('addProp');
+    l(propName+":"+propVal)
+    if (overwrite || !obj.hasOwnProperty(propName)) {
+        Object.defineProperty(obj, propName, {
+            configurable: true,
+            enumerable: true,
+            writable: true,
+            value: propVal
+        });
+    }
+    // l(obj);
     return obj[propName];
 }
