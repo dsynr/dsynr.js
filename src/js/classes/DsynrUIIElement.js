@@ -27,7 +27,7 @@ class DsynrUIIElement {
     addListeners() { }
     setActive() {
     }
-    show(instance) {
+    show() {
     }
     hide() {
     }

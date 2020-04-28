@@ -7,7 +7,7 @@
 <body>
 
 <form id="f1" class="bg-warning m-5 p-5 rounded shadow vw2">
-    <select id="dsynrSelect3" class="dsynrSelect" data-dsynr-pref=''>
+    <select id="dsynrSelect3" class="dsynrSelect" data-dsynr-pref='{"showFinder":true}'>
         <option value="ov1">This is the first option</option>
         <option value="ov2">This is the second option</option>
         <option value="ov3">This is third option</option>
@@ -50,7 +50,7 @@
     addListener('b1', 'click', function () {
         autoEnhanceSelects('dsynrSelect');
     });
-
+    autoEnhanceSelects();
     autoModalize();
 
 </script>

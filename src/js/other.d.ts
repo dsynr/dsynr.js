@@ -3,7 +3,7 @@
  * @param element e DOM element
  * @param string attrName Name of the data-attribute
  */
-declare function getData(e: Element, attrName: string): string | null;
+declare function getData(e: Element, attrName: string): any;
 /**
  * Set data attribute for a DOM element
  * @param element e DOM element

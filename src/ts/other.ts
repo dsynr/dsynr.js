@@ -3,7 +3,7 @@
  * @param element e DOM element
  * @param string attrName Name of the data-attribute
  */
-function getData(e: Element, attrName: string): string | null {
+function getData(e: Element, attrName: string): any {
     return e.getAttribute('data-' + attrName);
 }
 

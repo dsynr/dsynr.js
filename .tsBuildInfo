@@ -106,8 +106,8 @@
         "signature": "2b7028990d970850dc4d9ae05d06631ce7f3ae434ae54fec9e85903718106524"
       },
       "./src/ts/other.ts": {
-        "version": "d157123b3f70118b6b2e1a85f4153c99be218173ebd3913af57a394499d6bcb3",
-        "signature": "677c1fc70717b844ed6ce68b2c53558e7c6181e9fa7c68714952e624ad5d1013"
+        "version": "a63349c780a337c1f0a101c93075533b667b54ad09edc72b8a3ba1f396dee1bd",
+        "signature": "94f26a9c936a8804339f9c71b1776f769b1efcdd40b70aaeed92942ae6f0862f"
       },
       "./src/ts/string.ts": {
         "version": "7bac29405f74dfc808115afaa09d99784052da34099568b2a2ae8db850577af4",
@@ -118,20 +118,20 @@
         "signature": "aa2b730558c73fe15612fe76f870d5d629f436f015a15b4722f7f812493dbba5"
       },
       "./src/ts/classes/dsynruiielement.ts": {
-        "version": "b05883cc8a8909f52dacc8847abf0d747c9d5f8a49ed251bba13f9cd4fd9f117",
-        "signature": "99c8f08843659ebd0ea234b63fd19856a055aa8900b60e3a5f12845d212d30e2"
+        "version": "28d268fc842a38362e31d35e819b88699f58be5c295c8b366b0d9dd31f8fe780",
+        "signature": "e36ea075a30a830fd7771938069cbdf4125ad4b35df87acc7cec9b72408d51af"
       },
       "./src/ts/components/dsynrmodal.ts": {
-        "version": "192c0b3d6daeb2ccdeeef01c3e26ca2bfbcbefd286791c431180e9cf4c2b2899",
+        "version": "41fb2ee519bf470057d2cb625f901993c3ca7facdcc0069c811f87ad3336b02d",
         "signature": "5c41f212f14a478ddb39f9a120d6555cfd9bef20ea0ef312e55e1920250faad8"
       },
       "./src/ts/components/dsynrselect.ts": {
-        "version": "a55cb8c962a557d71ef51932599f2bd16c9e1c810e76157d92a8f4ec8348f632",
-        "signature": "80407473af7052028d6a7e4657663fe03ccadb96afa59b1ba83f73617488a002"
+        "version": "f17156d04f1236fee8146957020bdc97a4a1c1ab612e305c79d26d39f585d94d",
+        "signature": "1be42bc9188377bcb40545a4aab2eedf5bfbc70c939f5be0bdc1c4212ce2e70e"
       },
       "./src/ts/interfaces/dsynrui.ts": {
-        "version": "7c69351ef58b35e8b0b6f77bd685ecff8230df445efe61ff9a6f6441be796928",
-        "signature": "d699edf7e664fa737493207a2381c885c8ae648da53288cc677c06b4e4fca5de"
+        "version": "c311a7e7d823dd170263f1cd572bafaa778b7ede75eea6e8e9c74959e8632b47",
+        "signature": "4147d47de9c105d6268745eceffec70fcbc2d591bbd98d8d23eec6e00cc91e7c"
       }
     },
     "options": {
@@ -171,7 +171,6 @@
       "../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.reflect.d.ts",
       "../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.symbol.d.ts",
       "../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts",
-      "./src/ts/components/dsynrselect.ts",
       "./src/ts/analytics.ts",
       "./src/ts/animation.ts",
       "./src/ts/css.ts",
@@ -187,7 +186,8 @@
       "./src/ts/viewport.ts",
       "./src/ts/classes/dsynruiielement.ts",
       "./src/ts/components/dsynrmodal.ts",
-      "./src/ts/interfaces/dsynrui.ts"
+      "./src/ts/interfaces/dsynrui.ts",
+      "./src/ts/components/dsynrselect.ts"
     ]
   },
   "version": "3.8.3"
