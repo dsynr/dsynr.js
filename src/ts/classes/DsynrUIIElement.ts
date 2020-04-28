@@ -47,7 +47,7 @@ abstract class DsynrUIIElement implements DsynrUI {
     protected setActive(): void {
     }
 
-    show(instance: object): void {
+    show(): void {
     }
 
     hide(): void {
