@@ -37,7 +37,7 @@ class DsynrModal extends DsynrUIIElement {
         this.overlayClasses = addProp(this, 'overlayClasses', 'o50 bg-dark', reset);
         this.underlayClasses = addProp(this, 'underlayClasses', concatStr([positionClasses, alignmentClasses, 'z1 wmax hmax']), reset);
         this.instanceClasses = addProp(this, 'modalClasses', concatStr([positionClasses, 'z2']), reset);
-        this.rootClasses = addProp(this, 'rootClasses', concatStr([positionClasses, alignmentClasses, 'z3 o0']), reset);
+        this.rootClasses = addProp(this, 'rootClasses', concatStr([positionClasses, alignmentClasses, 'z3 o0 d-none']), reset);
         this.trigger = addProp(this, 'trigger', 'auto', reset);
     }
 
@@ -62,15 +62,9 @@ class DsynrModal extends DsynrUIIElement {
 
         this.instance = addDiv(this.setName('modal', this.parent.id), this.instanceClasses, this.instanceRoot);
 
-        if (this.trigger != 'auto') {
-            addListener(this.trigger, 'click', this.show);
-        }
-        if (this.animate) {
-            this.instance.addEventListener(transitionEvent, this.modalHidden);
-        }
+        this.addListeners();
         //update to detect parent (parent) resizing opposed to just window
         this.instance.appendChild(this.content);
-        this.align();
         // window.addEventListener('resize', function () {
         //     modals[modals.length].align();
         // });
@@ -78,7 +72,9 @@ class DsynrModal extends DsynrUIIElement {
     }
 
     show(): void {
-        lfn('show via : ' + this.trigger);
+        lfn('show triggered via : ' + this.trigger);
+        removeClass(this.instanceRoot, 'd-none');
+        this.align();
         if (this.animate) {
             addClass(this.instance, this.animationClasses);
             addClass(this.instanceRoot, this.animationClasses);
@@ -102,8 +98,25 @@ class DsynrModal extends DsynrUIIElement {
     }
 
     setActive(): void {
+        lfn('setActive');
         this.instanceRoot = this.instanceRoot;
         this.content.focus();
+    }
+
+    addListeners() {
+        lfn('addListeners');
+        let self: DsynrModal = this;
+        if (this.trigger != 'auto') {
+            l('setting trigger to : ' + this.trigger);
+            addListener(this.trigger, 'click', function () {
+                self.show();
+            });
+        }
+
+        if (this.animate) {
+            l('enabling animation');
+            this.instance.addEventListener(transitionEvent, self.modalHidden);
+        }
     }
 
     showBlanket(): void {
@@ -115,14 +128,14 @@ class DsynrModal extends DsynrUIIElement {
         this.isOverlayOn = true;
     }
 
-    hideBlanket():void {
+    hideBlanket(): void {
         let blanket: HTMLElement;
         blanket = getElementById('blanket');
         blanket.classList.remove('fadeIn');
         blanket.classList.add('fadeOut');
     }
 
-    blanketHidden(event):void {
+    blanketHidden(event): void {
         // Do something when the transition ends
         let blanket: HTMLElement;
         blanket = getElementById('blanket');
@@ -134,10 +147,11 @@ class DsynrModal extends DsynrUIIElement {
     }
 
     align(): void {
+        lfn('align');
         centereStage(this.instance);
     }
 
-    private modalHidden(event):void {
+    private modalHidden(event): void {
         // Do something when the transition ends
         if (event.animationName == 'zoomOut') {
             this.instanceRoot.classList.add('d-none');

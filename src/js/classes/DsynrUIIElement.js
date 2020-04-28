@@ -7,11 +7,9 @@ class DsynrUIIElement {
         this.setPref(preferences);
         DsynrUIIElement.instances.push(this);
     }
-    show() {
+    setDefaults(reset = false) {
     }
-    hide() {
-    }
-    destroy() {
+    setup() {
     }
     setPref(preferences) {
         lfn('setPref');
@@ -26,14 +24,17 @@ class DsynrUIIElement {
             }
         }
     }
-    setDefaults(reset = false) {
+    addListeners() { }
+    setActive() {
     }
-    setup() {
+    show(instance) {
+    }
+    hide() {
+    }
+    destroy() {
     }
     setName(context, name) {
         return concatStr([this.namePrefix, context, this.nameSuffix], '-');
-    }
-    setActive() {
     }
 }
 DsynrUIIElement.instances = [];

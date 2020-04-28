@@ -8,11 +8,9 @@ class DsynrUIIElement {
         this.setPref(preferences);
         DsynrUIIElement.instances.push(this);
     }
-    show() {
+    setDefaults(reset = false) {
     }
-    hide() {
-    }
-    destroy() {
+    setup() {
     }
     setPref(preferences) {
         lfn('setPref');
@@ -27,14 +25,17 @@ class DsynrUIIElement {
             }
         }
     }
-    setDefaults(reset = false) {
+    addListeners() { }
+    setActive() {
     }
-    setup() {
+    show(instance) {
+    }
+    hide() {
+    }
+    destroy() {
     }
     setName(context, name) {
         return concatStr([this.namePrefix, context, this.nameSuffix], '-');
-    }
-    setActive() {
     }
 }
 DsynrUIIElement.instances = [];
@@ -50,7 +51,7 @@ class DsynrModal extends DsynrUIIElement {
         }
     }
     setDefaults(reset = false) {
-        lfn('defaults');
+        lfn('setDefaults');
         let positionClasses = 'position-absolute';
         let alignmentClasses = 'top left';
         this.animate = addProp(this, 'animate', true, reset);
@@ -63,7 +64,7 @@ class DsynrModal extends DsynrUIIElement {
         this.overlayClasses = addProp(this, 'overlayClasses', 'o50 bg-dark', reset);
         this.underlayClasses = addProp(this, 'underlayClasses', concatStr([positionClasses, alignmentClasses, 'z1 wmax hmax']), reset);
         this.instanceClasses = addProp(this, 'modalClasses', concatStr([positionClasses, 'z2']), reset);
-        this.rootClasses = addProp(this, 'rootClasses', concatStr([positionClasses, alignmentClasses, 'z3 o0']), reset);
+        this.rootClasses = addProp(this, 'rootClasses', concatStr([positionClasses, alignmentClasses, 'z3 o0 d-none']), reset);
         this.trigger = addProp(this, 'trigger', 'auto', reset);
     }
     setup() {
@@ -81,22 +82,18 @@ class DsynrModal extends DsynrUIIElement {
             this.underlay = addDiv(this.setName('underlay', this.content.id), this.underlayClasses, this.instanceRoot);
         }
         this.instance = addDiv(this.setName('modal', this.parent.id), this.instanceClasses, this.instanceRoot);
-        if (this.trigger != 'auto') {
-            addListener(this.trigger, 'click', this.show);
-        }
-        if (this.animate) {
-            this.instance.addEventListener(transitionEvent, this.modalHidden);
-        }
+        this.addListeners();
         //update to detect parent (parent) resizing opposed to just window
         this.instance.appendChild(this.content);
-        this.align();
         // window.addEventListener('resize', function () {
         //     modals[modals.length].align();
         // });
         l('Modal READY!');
     }
     show() {
-        lfn('show via : ' + this.trigger);
+        lfn('show triggered via : ' + this.trigger);
+        removeClass(this.instanceRoot, 'd-none');
+        this.align();
         if (this.animate) {
             addClass(this.instance, this.animationClasses);
             addClass(this.instanceRoot, this.animationClasses);
@@ -118,8 +115,23 @@ class DsynrModal extends DsynrUIIElement {
         throw new Error("Method not implemented.");
     }
     setActive() {
+        lfn('setActive');
         this.instanceRoot = this.instanceRoot;
         this.content.focus();
+    }
+    addListeners() {
+        lfn('addListeners');
+        let self = this;
+        if (this.trigger != 'auto') {
+            l('setting trigger to : ' + this.trigger);
+            addListener(this.trigger, 'click', function () {
+                self.show();
+            });
+        }
+        if (this.animate) {
+            l('enabling animation');
+            this.instance.addEventListener(transitionEvent, self.modalHidden);
+        }
     }
     showBlanket() {
         let blanket;
@@ -146,6 +158,7 @@ class DsynrModal extends DsynrUIIElement {
         }
     }
     align() {
+        lfn('align');
         centereStage(this.instance);
     }
     modalHidden(event) {
@@ -164,6 +177,21 @@ function autoModalize(modalClass = 'dsynrModal') {
     });
 }
 //# sourceMappingURL=DsynrModal.js.map
+class DsynrSelect extends DsynrUIIElement {
+    constructor(element, preferences = {}) {
+        super(element, preferences);
+    }
+    setDefaults(reset = false) {
+        super.setDefaults(reset);
+    }
+}
+function autoEnhanceSelects(selectClass = 'dsynrSelect') {
+    lfn('autoEnhanceSelects');
+    makeArray(getElementsByClass(selectClass)).forEach(function (select, index) {
+        new DsynrSelect(select);
+    });
+}
+//# sourceMappingURL=DsynrSelect.js.map
 /**
  * @todo
  */

@@ -15,6 +15,7 @@ declare class DsynrModal extends DsynrUIIElement {
     hide(): void;
     destroy(): void;
     setActive(): void;
+    addListeners(): void;
     showBlanket(): void;
     hideBlanket(): void;
     blanketHidden(event: any): void;

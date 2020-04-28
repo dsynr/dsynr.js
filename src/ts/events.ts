@@ -1,4 +1,4 @@
-function addListener(eID, event, fn) {
+function addListener(eID, event, fn):void {
     if (getElementById(eID) !== undefined) {
         getElementById(eID).addEventListener(event, fn);
     }

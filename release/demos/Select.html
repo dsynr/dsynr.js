@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dsynr Demo - Enhanced Select</title>
+</head>
+<body>
+
+<form id="f1" class="bg-warning m-5 p-5 rounded shadow vw2">
+    <select id="dsynrSelect3" class="dsynrSelect" data-dsynr-pref=''>
+        <option value="ov1">This is the first option</option>
+        <option value="ov2">This is the second option</option>
+        <option value="ov3">This is third option</option>
+    </select>
+</form>
+
+<div class="dsynrModal p-5 bg-light d-table" id="modal" data-dsynr-pref='{"trigger":"b2"}'>
+    <h1>The Title</h1>
+    <label for="dsynrSelect1">This is the Label</label>
+    <select id="dsynrSelect1" class="dsynrSelect" data-dsynr-pref='{}'>
+        <option value="ov1">This is the first option</option>
+        <option value="ov2">This is the second option</option>
+        <option value="ov3">This is third option</option>
+    </select>
+
+    <hr/>
+    <p>This one without any options or class</p>
+    <select id="dsynrSelect2">
+        <option value="ov1">This is the first option</option>
+        <option value="ov2">This is the second option</option>
+        <option value="ov3">This is third option</option>
+    </select>
+
+</div>
+
+<div class="p-5 m-5 btn-group">
+    <div class="btn btn-outline-secondary" id="b1">Simply Enhance</div>
+    <div class="btn btn-primary" id="b2">Nested Enhance</div>
+</div>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="../util.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+<script src="../dsynr.debug.js"></script>
+<script src="../dsynr.util.js"></script>
+
+<script>
+
+    addListener('b1', 'click', function () {
+        autoEnhanceSelects('dsynrSelect');
+    });
+
+    autoModalize();
+
+</script>
+</body>
+</html>

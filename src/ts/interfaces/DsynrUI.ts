@@ -8,7 +8,7 @@ declare interface DsynrUI {
 
     setup(): void
 
-    show(): void
+    show(instance:object): void
 
     hide(): void
 

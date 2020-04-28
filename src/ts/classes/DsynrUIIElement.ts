@@ -21,16 +21,13 @@ abstract class DsynrUIIElement implements DsynrUI {
         DsynrUIIElement.instances.push(this);
     }
 
-    show(): void {
+    setDefaults(reset: boolean = false): void {
     }
 
-    hide(): void {
+    setup(): void {
     }
 
-    destroy(): void {
-    }
-
-    setPref(preferences: object):void {
+    setPref(preferences: object): void {
         lfn('setPref');
 
         if (Object.keys(preferences).length > 0) {
@@ -45,16 +42,21 @@ abstract class DsynrUIIElement implements DsynrUI {
         }
     }
 
-    setDefaults(reset: boolean = false): void {
+    protected addListeners():void{}
+
+    protected setActive(): void {
     }
 
-    setup(): void {
+    show(instance: object): void {
+    }
+
+    hide(): void {
+    }
+
+    destroy(): void {
     }
 
     protected setName(context: string, name: string): string {
         return concatStr([this.namePrefix, context, this.nameSuffix], '-');
-    }
-
-    protected setActive(): void {
     }
 }

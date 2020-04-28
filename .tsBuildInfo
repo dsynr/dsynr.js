@@ -86,7 +86,7 @@
         "signature": "155dbfd38e2ff6f51317af15c5314effa6499319070621b58fdd507cfb023a9a"
       },
       "./src/ts/events.ts": {
-        "version": "fb50a8b7f7ae3cc40dd86a17f22dad95f12bb921947a96ef87aad9e76e458ebc",
+        "version": "757792e0da60b0d6de7a5390be9da08d0f13e13eef0654bd5feab971c644c8e0",
         "signature": "077994e0934746de161903b3d8056a43f26e80e7e1667efc2dd70cc4f1180f08"
       },
       "./src/ts/graphics.ts": {
@@ -118,16 +118,20 @@
         "signature": "aa2b730558c73fe15612fe76f870d5d629f436f015a15b4722f7f812493dbba5"
       },
       "./src/ts/classes/dsynruiielement.ts": {
-        "version": "0035a3488347d687dc24010c4e0393b9f857117a072f768a8ae93f2fd8728dff",
-        "signature": "acf9320fe76f0286a4e9c66cd7aa4b565ec3c2b37999fea6d3c0585da485b078"
+        "version": "b05883cc8a8909f52dacc8847abf0d747c9d5f8a49ed251bba13f9cd4fd9f117",
+        "signature": "99c8f08843659ebd0ea234b63fd19856a055aa8900b60e3a5f12845d212d30e2"
       },
       "./src/ts/components/dsynrmodal.ts": {
-        "version": "f62452ffbd4e34e19d5b8b173f5d897661c8464cbd53f7e12156f66b871f163d",
-        "signature": "76ca0b8c411ff9093f753d43495736cdcae92637278972c955fe1855b0f43db5"
+        "version": "e30e2e281432d652886185f4b2cfb75cb6298638292d2d10ee1ef9ab51d8ac1d",
+        "signature": "fb6546b234313456f852e6b6ac5fda95aa4b42b3017cccead640391f96f91baf"
+      },
+      "./src/ts/components/dsynrselect.ts": {
+        "version": "94a5dc080b6822d473fb371912a3757ec9db45547d8c9ba2f9a1b3d1d46316ff",
+        "signature": "2e6f400a7772f86223f073a1f008aedfb54dcdc54e32138d421ed618ef5c245a"
       },
       "./src/ts/interfaces/dsynrui.ts": {
-        "version": "c311a7e7d823dd170263f1cd572bafaa778b7ede75eea6e8e9c74959e8632b47",
-        "signature": "4147d47de9c105d6268745eceffec70fcbc2d591bbd98d8d23eec6e00cc91e7c"
+        "version": "7c69351ef58b35e8b0b6f77bd685ecff8230df445efe61ff9a6f6441be796928",
+        "signature": "d699edf7e664fa737493207a2381c885c8ae648da53288cc677c06b4e4fca5de"
       }
     },
     "options": {
@@ -181,6 +185,7 @@
       "./src/ts/string.ts",
       "./src/ts/viewport.ts",
       "./src/ts/classes/dsynruiielement.ts",
+      "./src/ts/components/dsynrselect.ts",
       "./src/ts/interfaces/dsynrui.ts",
       "./src/ts/components/dsynrmodal.ts"
     ]

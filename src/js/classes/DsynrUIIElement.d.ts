@@ -10,12 +10,13 @@ declare abstract class DsynrUIIElement implements DsynrUI {
     protected animate: boolean;
     private prefAttr;
     protected constructor(element: HTMLElement, preferences?: object);
-    show(): void;
-    hide(): void;
-    destroy(): void;
-    setPref(preferences: object): void;
     setDefaults(reset?: boolean): void;
     setup(): void;
-    protected setName(context: string, name: string): string;
+    setPref(preferences: object): void;
+    protected addListeners(): void;
     protected setActive(): void;
+    show(instance: object): void;
+    hide(): void;
+    destroy(): void;
+    protected setName(context: string, name: string): string;
 }

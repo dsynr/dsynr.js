@@ -4,7 +4,7 @@ declare interface DsynrUI {
     setPref(preferences: object): void;
     setDefaults(reset: boolean): void;
     setup(): void;
-    show(): void;
+    show(instance: object): void;
     hide(): void;
     destroy(): void;
 }
