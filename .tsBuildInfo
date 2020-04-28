@@ -122,12 +122,12 @@
         "signature": "99c8f08843659ebd0ea234b63fd19856a055aa8900b60e3a5f12845d212d30e2"
       },
       "./src/ts/components/dsynrmodal.ts": {
-        "version": "e30e2e281432d652886185f4b2cfb75cb6298638292d2d10ee1ef9ab51d8ac1d",
-        "signature": "fb6546b234313456f852e6b6ac5fda95aa4b42b3017cccead640391f96f91baf"
+        "version": "192c0b3d6daeb2ccdeeef01c3e26ca2bfbcbefd286791c431180e9cf4c2b2899",
+        "signature": "5c41f212f14a478ddb39f9a120d6555cfd9bef20ea0ef312e55e1920250faad8"
       },
       "./src/ts/components/dsynrselect.ts": {
-        "version": "94a5dc080b6822d473fb371912a3757ec9db45547d8c9ba2f9a1b3d1d46316ff",
-        "signature": "2e6f400a7772f86223f073a1f008aedfb54dcdc54e32138d421ed618ef5c245a"
+        "version": "a55cb8c962a557d71ef51932599f2bd16c9e1c810e76157d92a8f4ec8348f632",
+        "signature": "80407473af7052028d6a7e4657663fe03ccadb96afa59b1ba83f73617488a002"
       },
       "./src/ts/interfaces/dsynrui.ts": {
         "version": "7c69351ef58b35e8b0b6f77bd685ecff8230df445efe61ff9a6f6441be796928",
@@ -171,6 +171,7 @@
       "../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.reflect.d.ts",
       "../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.symbol.d.ts",
       "../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts",
+      "./src/ts/components/dsynrselect.ts",
       "./src/ts/analytics.ts",
       "./src/ts/animation.ts",
       "./src/ts/css.ts",
@@ -185,9 +186,8 @@
       "./src/ts/string.ts",
       "./src/ts/viewport.ts",
       "./src/ts/classes/dsynruiielement.ts",
-      "./src/ts/components/dsynrselect.ts",
-      "./src/ts/interfaces/dsynrui.ts",
-      "./src/ts/components/dsynrmodal.ts"
+      "./src/ts/components/dsynrmodal.ts",
+      "./src/ts/interfaces/dsynrui.ts"
     ]
   },
   "version": "3.8.3"

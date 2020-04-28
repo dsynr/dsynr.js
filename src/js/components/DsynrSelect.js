@@ -5,6 +5,9 @@ class DsynrSelect extends DsynrUIIElement {
     setDefaults(reset = false) {
         super.setDefaults(reset);
     }
+    setup() {
+        super.setup();
+    }
 }
 function autoEnhanceSelects(selectClass = 'dsynrSelect') {
     lfn('autoEnhanceSelects');
