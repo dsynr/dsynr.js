@@ -23,7 +23,7 @@ class DsynrSelect extends DsynrUIIElement {
         this.nameSuffix = addProp(this, 'nameSuffix', DsynrSelect.instances.length.toString(), reset);
         this.namePrefix = addProp(this, 'namePrefix', 'dsynrEnhancedSelect', reset);
         this.optionPrefix = addProp(this, 'namePrefix', concatStr([this.namePrefix, 'option'], '-'), reset);
-        this.instanceClasses = addProp(this, 'instanceClasses', concatStr([this.namePrefix, 'bg-light p-5']), reset);
+        this.instanceClasses = addProp(this, 'instanceClasses', concatStr([this.namePrefix, 'rounded bg-light shadow p-5']), reset);
         this.showFinder = addProp(this, 'showFinder', false, reset);
         this.triggerCls = addProp(this, 'btnCls', concatStr([this.namePrefix, 'trigger btn btn-link'], '-'), reset);
         this.optCls = addProp(this, 'optCls', concatStr([this.optionPrefix, 'hand p-2']), reset);
@@ -46,7 +46,7 @@ class DsynrSelect extends DsynrUIIElement {
         makeArray(this.options).forEach(function (o: HTMLOptionElement, index: number) {
             self.addESOption(o, index);
         });
-        this.modal = new DsynrModal(this.instance, {'trigger': 'auto'});
+        this.modal = new DsynrModal(this.instance, {'trigger': 'auto', 'parent': this.content.parentElement});
     }
 
     private update(selectOption: HTMLElement): void {

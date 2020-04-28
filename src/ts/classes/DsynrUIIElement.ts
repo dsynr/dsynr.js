@@ -16,6 +16,7 @@ abstract class DsynrUIIElement implements DsynrUI {
 
     protected constructor(element: HTMLElement, preferences: object = {}) {
         lfn('DsynrUIIElement');
+
         this.content = element;
         this.setPref(preferences);
         DsynrUIIElement.instances.push(this);
@@ -29,20 +30,23 @@ abstract class DsynrUIIElement implements DsynrUI {
 
     setPref(preferences: object): void {
         lfn('setPref');
+        // l(preferences);
 
         if (Object.keys(preferences).length > 0) {
-            updateProps(this, preferences);
+            // l('Object.keys(preferences).length:' + Object.keys(preferences).length);
+            // l(Object.keys(preferences).length > 0);
+            //updateProps(this, preferences);
         } else {
             let options: any = getData(this.content, this.prefAttr);
             if (options !== null) {
                 preferences = JSON.parse(options);
-                updateProps(this, preferences);
             }
-
         }
+        updateProps(this, preferences);
     }
 
-    protected addListeners():void{}
+    protected addListeners(): void {
+    }
 
     protected setActive(): void {
     }

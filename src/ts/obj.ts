@@ -12,10 +12,12 @@ function get_rand_obj_item(obj: object) {
 }
 
 function updateProps(obj: Object, propSet: object): void {
+    // lfn('updateProps...');
     for (let prop in propSet) {
         if (propSet.hasOwnProperty(prop)) {
             obj[prop] = propSet[prop];
         }
+        // l(prop + ':' + obj[prop]);
     }
 }
 

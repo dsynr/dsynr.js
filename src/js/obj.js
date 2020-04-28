@@ -9,10 +9,12 @@ function get_rand_obj_item(obj) {
     return obj[keys[keys.length * Math.random() << 0]];
 }
 function updateProps(obj, propSet) {
+    // lfn('updateProps...');
     for (let prop in propSet) {
         if (propSet.hasOwnProperty(prop)) {
             obj[prop] = propSet[prop];
         }
+        // l(prop + ':' + obj[prop]);
     }
 }
 function addProp(obj, propName, propVal = undefined, overwrite = false) {

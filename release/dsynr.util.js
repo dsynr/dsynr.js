@@ -14,18 +14,22 @@ class DsynrUIIElement {
     }
     setPref(preferences) {
         lfn('setPref');
+        // l(preferences);
         if (Object.keys(preferences).length > 0) {
-            updateProps(this, preferences);
+            // l('Object.keys(preferences).length:' + Object.keys(preferences).length);
+            // l(Object.keys(preferences).length > 0);
+            //updateProps(this, preferences);
         }
         else {
             let options = getData(this.content, this.prefAttr);
             if (options !== null) {
                 preferences = JSON.parse(options);
-                updateProps(this, preferences);
             }
         }
+        updateProps(this, preferences);
     }
-    addListeners() { }
+    addListeners() {
+    }
     setActive() {
     }
     show() {
@@ -73,8 +77,30 @@ class DsynrModal extends DsynrUIIElement {
     setup() {
         lfn('setup');
         if (typeof this.parent === 'string') {
-            this.parent = getElementById(this.parent);
+            if (this.parent == 'parent') {
+                this.parent = this.content.parentElement;
+            }
+            else {
+                this.parent = getElementById(this.parent);
+            }
         }
+        let self = this;
+        if (this.trigger != 'auto') {
+            l('setting trigger to : ' + this.trigger);
+            addListener(this.trigger, 'click', function () {
+                self.show();
+            });
+        }
+        l('Modal Trigger READY!');
+    }
+    /**
+     * @todo
+     * add animationEnd listener for root and then animate modal
+     * add optional animationEnd listener for modal
+     */
+    show() {
+        lfn('show triggered via : ' + this.trigger);
+        l(this);
         this.instanceRoot = addDiv(this.setName('root', this.content.id), this.rootClasses, this.parent);
         if (this.disableUnderlay) {
             this.instanceRoot.style.width = getCssDimension(this.parent.clientWidth);
@@ -91,15 +117,6 @@ class DsynrModal extends DsynrUIIElement {
         // window.addEventListener('resize', function () {
         //     modals[modals.length].align();
         // });
-        l('Modal READY!');
-    }
-    /**
-     * @todo
-     * add animationEnd listener for root and then animate modal
-     * add optional animationEnd listener for modal
-     */
-    show() {
-        lfn('show triggered via : ' + this.trigger);
         removeClass(this.instanceRoot, 'd-none');
         this.align();
         if (this.animate) {
@@ -135,12 +152,6 @@ class DsynrModal extends DsynrUIIElement {
     addListeners() {
         lfn('addListeners');
         let self = this;
-        if (this.trigger != 'auto') {
-            l('setting trigger to : ' + this.trigger);
-            addListener(this.trigger, 'click', function () {
-                self.show();
-            });
-        }
         if (this.animate) {
             l('enabling animation');
             this.instance.addEventListener(transitionEvent, self.modalHidden);
@@ -202,7 +213,7 @@ class DsynrSelect extends DsynrUIIElement {
         this.nameSuffix = addProp(this, 'nameSuffix', DsynrSelect.instances.length.toString(), reset);
         this.namePrefix = addProp(this, 'namePrefix', 'dsynrEnhancedSelect', reset);
         this.optionPrefix = addProp(this, 'namePrefix', concatStr([this.namePrefix, 'option'], '-'), reset);
-        this.instanceClasses = addProp(this, 'instanceClasses', concatStr([this.namePrefix, 'bg-light p-5']), reset);
+        this.instanceClasses = addProp(this, 'instanceClasses', concatStr([this.namePrefix, 'rounded bg-light shadow p-5']), reset);
         this.showFinder = addProp(this, 'showFinder', false, reset);
         this.triggerCls = addProp(this, 'btnCls', concatStr([this.namePrefix, 'trigger btn btn-link'], '-'), reset);
         this.optCls = addProp(this, 'optCls', concatStr([this.optionPrefix, 'hand p-2']), reset);
@@ -223,7 +234,7 @@ class DsynrSelect extends DsynrUIIElement {
         makeArray(this.options).forEach(function (o, index) {
             self.addESOption(o, index);
         });
-        this.modal = new DsynrModal(this.instance, { 'trigger': 'auto' });
+        this.modal = new DsynrModal(this.instance, { 'trigger': 'auto', 'parent': this.content.parentElement });
     }
     update(selectOption) {
         lfn('update');
@@ -340,10 +351,12 @@ function get_rand_obj_item(obj) {
     return obj[keys[keys.length * Math.random() << 0]];
 }
 function updateProps(obj, propSet) {
+    // lfn('updateProps...');
     for (let prop in propSet) {
         if (propSet.hasOwnProperty(prop)) {
             obj[prop] = propSet[prop];
         }
+        // l(prop + ':' + obj[prop]);
     }
 }
 function addProp(obj, propName, propVal = undefined, overwrite = false) {

@@ -102,7 +102,7 @@
         "signature": "2077ea7b8a1c12eb67da407a1f4d5804e5e04cca8c14e35e1a41c3b8ee1fce5d"
       },
       "./src/ts/obj.ts": {
-        "version": "83c42bb7159f41f5d156b290e6317a4cec5c3f366b49339394ae799d99489896",
+        "version": "94b97e87a8d78aa7c28285aaaf4e34e1453aea96178a628b46e7caa06e6b2bf5",
         "signature": "2b7028990d970850dc4d9ae05d06631ce7f3ae434ae54fec9e85903718106524"
       },
       "./src/ts/other.ts": {
@@ -118,15 +118,15 @@
         "signature": "aa2b730558c73fe15612fe76f870d5d629f436f015a15b4722f7f812493dbba5"
       },
       "./src/ts/classes/dsynruiielement.ts": {
-        "version": "28d268fc842a38362e31d35e819b88699f58be5c295c8b366b0d9dd31f8fe780",
+        "version": "39dd59bc56ca56f27c5c5db2fb5ddb80d7c76586b9dde63645e4ae2c2d1ce774",
         "signature": "e36ea075a30a830fd7771938069cbdf4125ad4b35df87acc7cec9b72408d51af"
       },
       "./src/ts/components/dsynrmodal.ts": {
-        "version": "41fb2ee519bf470057d2cb625f901993c3ca7facdcc0069c811f87ad3336b02d",
+        "version": "e74fc20f4d044eb7494baffe992973fd9ebab06f49e2e87c03cb5f6642901120",
         "signature": "5c41f212f14a478ddb39f9a120d6555cfd9bef20ea0ef312e55e1920250faad8"
       },
       "./src/ts/components/dsynrselect.ts": {
-        "version": "f17156d04f1236fee8146957020bdc97a4a1c1ab612e305c79d26d39f585d94d",
+        "version": "58143224ebaeeaec885838b784c90d73bcb8c2d32ce4b7760ff5f489a2d6e616",
         "signature": "1be42bc9188377bcb40545a4aab2eedf5bfbc70c939f5be0bdc1c4212ce2e70e"
       },
       "./src/ts/interfaces/dsynrui.ts": {
@@ -184,10 +184,10 @@
       "./src/ts/other.ts",
       "./src/ts/string.ts",
       "./src/ts/viewport.ts",
-      "./src/ts/classes/dsynruiielement.ts",
       "./src/ts/components/dsynrmodal.ts",
+      "./src/ts/components/dsynrselect.ts",
       "./src/ts/interfaces/dsynrui.ts",
-      "./src/ts/components/dsynrselect.ts"
+      "./src/ts/classes/dsynruiielement.ts"
     ]
   },
   "version": "3.8.3"

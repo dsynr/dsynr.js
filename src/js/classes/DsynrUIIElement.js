@@ -13,18 +13,22 @@ class DsynrUIIElement {
     }
     setPref(preferences) {
         lfn('setPref');
+        // l(preferences);
         if (Object.keys(preferences).length > 0) {
-            updateProps(this, preferences);
+            // l('Object.keys(preferences).length:' + Object.keys(preferences).length);
+            // l(Object.keys(preferences).length > 0);
+            //updateProps(this, preferences);
         }
         else {
             let options = getData(this.content, this.prefAttr);
             if (options !== null) {
                 preferences = JSON.parse(options);
-                updateProps(this, preferences);
             }
         }
+        updateProps(this, preferences);
     }
-    addListeners() { }
+    addListeners() {
+    }
     setActive() {
     }
     show() {

@@ -31,8 +31,30 @@ class DsynrModal extends DsynrUIIElement {
     setup() {
         lfn('setup');
         if (typeof this.parent === 'string') {
-            this.parent = getElementById(this.parent);
+            if (this.parent == 'parent') {
+                this.parent = this.content.parentElement;
+            }
+            else {
+                this.parent = getElementById(this.parent);
+            }
         }
+        let self = this;
+        if (this.trigger != 'auto') {
+            l('setting trigger to : ' + this.trigger);
+            addListener(this.trigger, 'click', function () {
+                self.show();
+            });
+        }
+        l('Modal Trigger READY!');
+    }
+    /**
+     * @todo
+     * add animationEnd listener for root and then animate modal
+     * add optional animationEnd listener for modal
+     */
+    show() {
+        lfn('show triggered via : ' + this.trigger);
+        l(this);
         this.instanceRoot = addDiv(this.setName('root', this.content.id), this.rootClasses, this.parent);
         if (this.disableUnderlay) {
             this.instanceRoot.style.width = getCssDimension(this.parent.clientWidth);
@@ -49,15 +71,6 @@ class DsynrModal extends DsynrUIIElement {
         // window.addEventListener('resize', function () {
         //     modals[modals.length].align();
         // });
-        l('Modal READY!');
-    }
-    /**
-     * @todo
-     * add animationEnd listener for root and then animate modal
-     * add optional animationEnd listener for modal
-     */
-    show() {
-        lfn('show triggered via : ' + this.trigger);
         removeClass(this.instanceRoot, 'd-none');
         this.align();
         if (this.animate) {
@@ -93,12 +106,6 @@ class DsynrModal extends DsynrUIIElement {
     addListeners() {
         lfn('addListeners');
         let self = this;
-        if (this.trigger != 'auto') {
-            l('setting trigger to : ' + this.trigger);
-            addListener(this.trigger, 'click', function () {
-                self.show();
-            });
-        }
         if (this.animate) {
             l('enabling animation');
             this.instance.addEventListener(transitionEvent, self.modalHidden);
