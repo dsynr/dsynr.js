@@ -13,12 +13,15 @@ class DsynrModal extends DsynrUIIElement {
         let positionClasses = 'position-absolute';
         let alignmentClasses = 'top left';
         this.animate = addProp(this, 'animate', true, reset);
+        this.modalAnimate = addProp(this, 'modalAnimate', true, reset);
+        this.animateTogether = addProp(this, 'animateTogether', true, reset);
         this.isOverlayOn = addProp(this, 'isOverlayOn', false, reset);
         this.useOverlay = addProp(this, 'useOverlay', true, reset);
         this.disableUnderlay = addProp(this, 'disableUnderlay', true, reset);
         this.nameSuffix = addProp(this, 'nameSuffix', DsynrModal.instances.length.toString(), reset);
         this.namePrefix = addProp(this, 'namePrefix', 'dsynrModal', reset);
-        this.animationClasses = addProp(this, 'animationClasses', 'animated fadeIn', reset);
+        this.animationClasses = addProp(this, 'animationClasses', 'animated fadeInDown', reset);
+        this.modalAnimationClasses = addProp(this, 'modalAnimationClasses', 'animated flipInX', reset);
         this.overlayClasses = addProp(this, 'overlayClasses', 'o50 bg-dark', reset);
         this.underlayClasses = addProp(this, 'underlayClasses', concatStr([positionClasses, alignmentClasses, 'z1 wmax hmax']), reset);
         this.instanceClasses = addProp(this, 'modalClasses', concatStr([positionClasses, 'z2']), reset);
@@ -48,13 +51,23 @@ class DsynrModal extends DsynrUIIElement {
         // });
         l('Modal READY!');
     }
+    /**
+     * @todo
+     * add animationEnd listener for root and then animate modal
+     * add optional animationEnd listener for modal
+     */
     show() {
         lfn('show triggered via : ' + this.trigger);
         removeClass(this.instanceRoot, 'd-none');
         this.align();
         if (this.animate) {
-            addClass(this.instance, this.animationClasses);
             addClass(this.instanceRoot, this.animationClasses);
+            if (this.animateTogether) {
+                addClass(this.instance, this.modalAnimationClasses);
+            }
+            else {
+                //@todo animationEnd
+            }
         }
         else {
             removeClass(this.instanceRoot, 'o0');

@@ -8,9 +8,17 @@ declare class DsynrModal extends DsynrUIIElement {
     private disableUnderlay;
     private useOverlay;
     private isOverlayOn;
+    private animateTogether;
+    private modalAnimate;
+    private modalAnimationClasses;
     constructor(modalContent: HTMLElement, preferences?: object);
     setDefaults(reset?: boolean): void;
     setup(): void;
+    /**
+     * @todo
+     * add animationEnd listener for root and then animate modal
+     * add optional animationEnd listener for modal
+     */
     show(): void;
     hide(): void;
     destroy(): void;
