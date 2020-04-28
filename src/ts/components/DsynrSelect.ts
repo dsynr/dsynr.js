@@ -9,12 +9,13 @@ class DsynrSelect extends DsynrUIIElement {
     private optCls: string;
     private optionPrefix: string;
 
-
     constructor(select: HTMLElement, preferences: object = {}) {
         super(select, preferences);
-        lfn('DsynrSelect');
-        this.setDefaults();
-        this.setup();
+        if (!this.selfAbort) {
+            lfn('DsynrSelect');
+            this.setDefaults();
+            this.setup();
+        }
     }
 
     setDefaults(reset: boolean = false): void {
@@ -87,11 +88,11 @@ class DsynrSelect extends DsynrUIIElement {
     hide() {
         lfn('dsynrSelect_exitDsynrSelect');
     }
-}
 
-function autoEnhanceSelects(selectClass: string = 'dsynrSelect'): void {
-    lfn('autoEnhanceSelects');
-    makeArray(getElementsByClass(selectClass)).forEach(function (select, index) {
-        new DsynrSelect(select);
-    });
+    static auto(selectClass: string = 'dsynrSelect'): void {
+        lfn('auto');
+        makeArray(getElementsByClass(selectClass)).forEach(function (instance) {
+            new DsynrSelect(instance);
+        });
+    }
 }

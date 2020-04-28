@@ -29,5 +29,5 @@ declare class DsynrModal extends DsynrUIIElement {
     blanketHidden(event: any): void;
     align(): void;
     private modalHidden;
+    static auto(modalClass?: string): void;
 }
-declare function autoModalize(modalClass?: string): void;

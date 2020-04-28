@@ -2,11 +2,24 @@
 class DsynrUIIElement {
     constructor(element, preferences = {}) {
         this.parent = document.body;
+        this.selfAbort = false;
         this.prefAttr = 'dsynr-pref';
         lfn('DsynrUIIElement');
         this.content = element;
-        this.setPref(preferences);
-        DsynrUIIElement.instances.push(this);
+        let self = this;
+        if (DsynrUIIElement.instances.length > 0) {
+            DsynrUIIElement.instances.forEach(function (instance, index) {
+                if (instance.content === element) {
+                    self.selfAbort = true;
+                    l("already instantiated, aborting...");
+                    return;
+                }
+            });
+        }
+        if (!this.selfAbort) {
+            this.setPref(preferences);
+            DsynrUIIElement.instances.push(this);
+        }
     }
     setDefaults(reset = false) {
     }
@@ -46,12 +59,14 @@ DsynrUIIElement.instances = [];
 //# sourceMappingURL=DsynrUIIElement.js.map
 class DsynrModal extends DsynrUIIElement {
     constructor(modalContent, preferences = {}) {
-        lfn('DsynrModal');
         super(modalContent, preferences);
-        this.setDefaults();
-        this.setup();
-        if (this.trigger == 'auto') {
-            this.show();
+        if (!this.selfAbort) {
+            lfn('DsynrModal');
+            this.setDefaults();
+            this.setup();
+            if (this.trigger == 'auto') {
+                this.show();
+            }
         }
     }
     setDefaults(reset = false) {
@@ -193,20 +208,22 @@ class DsynrModal extends DsynrUIIElement {
             this.instanceRoot.removeEventListener(transitionEvent, this.modalHidden);
         }
     }
-}
-function autoModalize(modalClass = 'dsynrModal') {
-    lfn('autoModalize');
-    makeArray(getElementsByClass(modalClass)).forEach(function (modal, index) {
-        new DsynrModal(modal);
-    });
+    static auto(modalClass = 'dsynrModal') {
+        lfn('auto');
+        makeArray(getElementsByClass(modalClass)).forEach(function (instance) {
+            new DsynrModal(instance);
+        });
+    }
 }
 //# sourceMappingURL=DsynrModal.js.map
 class DsynrSelect extends DsynrUIIElement {
     constructor(select, preferences = {}) {
         super(select, preferences);
-        lfn('DsynrSelect');
-        this.setDefaults();
-        this.setup();
+        if (!this.selfAbort) {
+            lfn('DsynrSelect');
+            this.setDefaults();
+            this.setup();
+        }
     }
     setDefaults(reset = false) {
         lfn('setDefaults');
@@ -269,12 +286,12 @@ class DsynrSelect extends DsynrUIIElement {
     hide() {
         lfn('dsynrSelect_exitDsynrSelect');
     }
-}
-function autoEnhanceSelects(selectClass = 'dsynrSelect') {
-    lfn('autoEnhanceSelects');
-    makeArray(getElementsByClass(selectClass)).forEach(function (select, index) {
-        new DsynrSelect(select);
-    });
+    static auto(selectClass = 'dsynrSelect') {
+        lfn('auto');
+        makeArray(getElementsByClass(selectClass)).forEach(function (instance) {
+            new DsynrSelect(instance);
+        });
+    }
 }
 //# sourceMappingURL=DsynrSelect.js.map
 /**
@@ -350,15 +367,6 @@ function get_rand_obj_item(obj) {
     let keys = Object.keys(obj);
     return obj[keys[keys.length * Math.random() << 0]];
 }
-function updateProps(obj, propSet) {
-    // lfn('updateProps...');
-    for (let prop in propSet) {
-        if (propSet.hasOwnProperty(prop)) {
-            obj[prop] = propSet[prop];
-        }
-        // l(prop + ':' + obj[prop]);
-    }
-}
 function addProp(obj, propName, propVal = undefined, overwrite = false) {
     if (overwrite || !obj.hasOwnProperty(propName)) {
         Object.defineProperty(obj, propName, {
@@ -369,6 +377,28 @@ function addProp(obj, propName, propVal = undefined, overwrite = false) {
         });
     }
     return obj[propName];
+}
+function updateProps(obj, propSet) {
+    // lfn('updateProps...');
+    for (let prop in propSet) {
+        if (propSet.hasOwnProperty(prop)) {
+            obj[prop] = propSet[prop];
+        }
+        // l(prop + ':' + obj[prop]);
+    }
+}
+function hasInstance(objList, obj) {
+    lfn('hasInstance');
+    l(objList);
+    let hasIt = false;
+    objList.forEach(function (o, i) {
+        if (o === obj) {
+            hasIt = true;
+            return;
+        }
+    });
+    l(hasIt);
+    return hasIt;
 }
 //# sourceMappingURL=obj.js.map
 function getRandColour() {

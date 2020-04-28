@@ -15,13 +15,14 @@ class DsynrModal extends DsynrUIIElement {
     private modalAnimationClasses: string;
 
     constructor(modalContent: HTMLElement, preferences: object = {}) {
-        lfn('DsynrModal');
         super(modalContent, preferences);
-
-        this.setDefaults();
-        this.setup();
-        if (this.trigger == 'auto') {
-            this.show();
+        if (!this.selfAbort) {
+            lfn('DsynrModal');
+            this.setDefaults();
+            this.setup();
+            if (this.trigger == 'auto') {
+                this.show();
+            }
         }
     }
 
@@ -183,11 +184,11 @@ class DsynrModal extends DsynrUIIElement {
             this.instanceRoot.removeEventListener(transitionEvent, this.modalHidden);
         }
     }
-}
 
-function autoModalize(modalClass: string = 'dsynrModal'): void {
-    lfn('autoModalize');
-    makeArray(getElementsByClass(modalClass)).forEach(function (modal, index) {
-        new DsynrModal(modal);
-    });
+    static auto(modalClass: string = 'dsynrModal'): void {
+        lfn('auto');
+        makeArray(getElementsByClass(modalClass)).forEach(function (instance) {
+            new DsynrModal(instance);
+        });
+    }
 }

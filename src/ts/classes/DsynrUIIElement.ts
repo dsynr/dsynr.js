@@ -12,14 +12,30 @@ abstract class DsynrUIIElement implements DsynrUI {
     protected animationClasses: string;
     protected animate: boolean;
 
+    protected selfAbort: boolean = false;
+
     private prefAttr: string = 'dsynr-pref';
 
     protected constructor(element: HTMLElement, preferences: object = {}) {
         lfn('DsynrUIIElement');
 
         this.content = element;
-        this.setPref(preferences);
-        DsynrUIIElement.instances.push(this);
+
+        let self: DsynrUIIElement = this;
+        if (DsynrUIIElement.instances.length > 0) {
+            DsynrUIIElement.instances.forEach(function (instance, index) {
+                if (instance.content === element) {
+                    self.selfAbort = true;
+                    l("already instantiated, aborting...");
+                    return;
+                }
+            });
+        }
+
+        if (!this.selfAbort) {
+            this.setPref(preferences);
+            DsynrUIIElement.instances.push(this);
+        }
     }
 
     setDefaults(reset: boolean = false): void {

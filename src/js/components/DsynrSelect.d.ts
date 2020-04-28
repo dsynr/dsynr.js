@@ -16,5 +16,5 @@ declare class DsynrSelect extends DsynrUIIElement {
     private setTrigger;
     private getOption;
     hide(): void;
+    static auto(selectClass?: string): void;
 }
-declare function autoEnhanceSelects(selectClass?: string): void;

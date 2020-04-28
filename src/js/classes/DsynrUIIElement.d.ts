@@ -8,6 +8,7 @@ declare abstract class DsynrUIIElement implements DsynrUI {
     protected instanceClasses: string;
     protected animationClasses: string;
     protected animate: boolean;
+    protected selfAbort: boolean;
     private prefAttr;
     protected constructor(element: HTMLElement, preferences?: object);
     setDefaults(reset?: boolean): void;

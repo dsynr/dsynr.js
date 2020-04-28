@@ -11,16 +11,6 @@ function get_rand_obj_item(obj: object) {
     return obj[keys[keys.length * Math.random() << 0]];
 }
 
-function updateProps(obj: Object, propSet: object): void {
-    // lfn('updateProps...');
-    for (let prop in propSet) {
-        if (propSet.hasOwnProperty(prop)) {
-            obj[prop] = propSet[prop];
-        }
-        // l(prop + ':' + obj[prop]);
-    }
-}
-
 function addProp(obj: object, propName: string, propVal: any = undefined, overwrite: boolean = false): any {
     if (overwrite || !obj.hasOwnProperty(propName)) {
         Object.defineProperty(obj, propName, {
@@ -31,4 +21,28 @@ function addProp(obj: object, propName: string, propVal: any = undefined, overwr
         });
     }
     return obj[propName];
+}
+
+function updateProps(obj: object, propSet: object): void {
+    // lfn('updateProps...');
+    for (let prop in propSet) {
+        if (propSet.hasOwnProperty(prop)) {
+            obj[prop] = propSet[prop];
+        }
+        // l(prop + ':' + obj[prop]);
+    }
+}
+
+function hasInstance(objList: Array<object>, obj: object): boolean {
+    lfn('hasInstance');
+    l(objList);
+    let hasIt: boolean = false;
+    objList.forEach(function (o, i) {
+        if (o === obj) {
+            hasIt = true;
+            return;
+        }
+    });
+    l(hasIt);
+    return hasIt;
 }

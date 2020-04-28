@@ -1,11 +1,13 @@
 class DsynrModal extends DsynrUIIElement {
     constructor(modalContent, preferences = {}) {
-        lfn('DsynrModal');
         super(modalContent, preferences);
-        this.setDefaults();
-        this.setup();
-        if (this.trigger == 'auto') {
-            this.show();
+        if (!this.selfAbort) {
+            lfn('DsynrModal');
+            this.setDefaults();
+            this.setup();
+            if (this.trigger == 'auto') {
+                this.show();
+            }
         }
     }
     setDefaults(reset = false) {
@@ -147,11 +149,11 @@ class DsynrModal extends DsynrUIIElement {
             this.instanceRoot.removeEventListener(transitionEvent, this.modalHidden);
         }
     }
-}
-function autoModalize(modalClass = 'dsynrModal') {
-    lfn('autoModalize');
-    makeArray(getElementsByClass(modalClass)).forEach(function (modal, index) {
-        new DsynrModal(modal);
-    });
+    static auto(modalClass = 'dsynrModal') {
+        lfn('auto');
+        makeArray(getElementsByClass(modalClass)).forEach(function (instance) {
+            new DsynrModal(instance);
+        });
+    }
 }
 //# sourceMappingURL=DsynrModal.js.map

@@ -1,11 +1,24 @@
 class DsynrUIIElement {
     constructor(element, preferences = {}) {
         this.parent = document.body;
+        this.selfAbort = false;
         this.prefAttr = 'dsynr-pref';
         lfn('DsynrUIIElement');
         this.content = element;
-        this.setPref(preferences);
-        DsynrUIIElement.instances.push(this);
+        let self = this;
+        if (DsynrUIIElement.instances.length > 0) {
+            DsynrUIIElement.instances.forEach(function (instance, index) {
+                if (instance.content === element) {
+                    self.selfAbort = true;
+                    l("already instantiated, aborting...");
+                    return;
+                }
+            });
+        }
+        if (!this.selfAbort) {
+            this.setPref(preferences);
+            DsynrUIIElement.instances.push(this);
+        }
     }
     setDefaults(reset = false) {
     }

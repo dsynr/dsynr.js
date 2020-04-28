@@ -1,9 +1,11 @@
 class DsynrSelect extends DsynrUIIElement {
     constructor(select, preferences = {}) {
         super(select, preferences);
-        lfn('DsynrSelect');
-        this.setDefaults();
-        this.setup();
+        if (!this.selfAbort) {
+            lfn('DsynrSelect');
+            this.setDefaults();
+            this.setup();
+        }
     }
     setDefaults(reset = false) {
         lfn('setDefaults');
@@ -66,11 +68,11 @@ class DsynrSelect extends DsynrUIIElement {
     hide() {
         lfn('dsynrSelect_exitDsynrSelect');
     }
-}
-function autoEnhanceSelects(selectClass = 'dsynrSelect') {
-    lfn('autoEnhanceSelects');
-    makeArray(getElementsByClass(selectClass)).forEach(function (select, index) {
-        new DsynrSelect(select);
-    });
+    static auto(selectClass = 'dsynrSelect') {
+        lfn('auto');
+        makeArray(getElementsByClass(selectClass)).forEach(function (instance) {
+            new DsynrSelect(instance);
+        });
+    }
 }
 //# sourceMappingURL=DsynrSelect.js.map

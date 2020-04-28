@@ -53,9 +53,9 @@
     <div class="btn btn-primary" id="btn2">Modal Via Trigger</div>
 </div>
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="bootstrap.min.css">
 <link rel="stylesheet" href="../util.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+<link rel="stylesheet" href="animate.min.css">
 
 <script src="../dsynr.debug.js"></script>
 <script src="../dsynr.util.js"></script>
@@ -63,7 +63,7 @@
 <script>
 
     addListener('btn1', 'click', function () {
-        autoModalize();
+        DsynrModal.auto();
     });
     // getElementById('btn1').click();
 
