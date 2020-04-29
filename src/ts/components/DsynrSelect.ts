@@ -1,7 +1,6 @@
 class DsynrSelect extends DsynrUIIElement {
 
     content: HTMLSelectElement;
-    private modal: DsynrModal;
     private trigger: HTMLElement;
     private options: HTMLOptionsCollection;
     private adoptParent: boolean;
@@ -9,6 +8,9 @@ class DsynrSelect extends DsynrUIIElement {
     private triggerCls: string;
     private optCls: string;
     private optionPrefix: string;
+
+    private modal: DsynrModal;
+    private modalPref: object;
 
     constructor(select: HTMLElement, preferences: object = {}) {
         super(select, preferences);
@@ -20,6 +22,9 @@ class DsynrSelect extends DsynrUIIElement {
     }
 
     setDefaults(reset: boolean = false): void {
+
+        super.setDefaults();
+
         lfn('setDefaults');
 
         this.adoptParent = addProp(this, 'adoptParent', true, reset);
@@ -50,7 +55,9 @@ class DsynrSelect extends DsynrUIIElement {
             makeArray(this.options).forEach(function (o: HTMLOptionElement, index: number) {
                 self.addESOption(o, index);
             });
-            this.modal = new DsynrModal(this.instance, {'trigger': 'auto', 'parent': this.parent, 'adoptParent': this.adoptParent});
+
+            this.modalPref = mergeObjs(this.preferences, {'trigger': 'auto', 'parent': this.parent, 'adoptParent': this.adoptParent});
+            this.modal = new DsynrModal(this.instance, this.modalPref);
         }
         this.setActive();
     }

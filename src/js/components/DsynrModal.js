@@ -9,10 +9,10 @@ class DsynrModal extends DsynrUIIElement {
     }
     setDefaults(reset = false) {
         lfn('setDefaults');
+        super.setDefaults();
         let positionClasses = 'position-absolute';
         let alignmentClasses = 'top left';
         this.adoptParent = addProp(this, 'adoptParent', true, reset);
-        this.animate = addProp(this, 'animate', true, reset);
         this.modalAnimate = addProp(this, 'modalAnimate', true, reset);
         this.animateTogether = addProp(this, 'animateTogether', true, reset);
         this.isOverlayOn = addProp(this, 'isOverlayOn', false, reset);
@@ -20,7 +20,6 @@ class DsynrModal extends DsynrUIIElement {
         this.disableUnderlay = addProp(this, 'disableUnderlay', true, reset);
         this.nameSuffix = addProp(this, 'nameSuffix', DsynrModal.instances.length.toString(), reset);
         this.namePrefix = addProp(this, 'namePrefix', 'dsynrModal', reset);
-        this.animationClasses = addProp(this, 'animationClasses', 'animated fadeInDown', reset);
         this.modalAnimationClasses = addProp(this, 'modalAnimationClasses', 'animated flipInX', reset);
         this.overlayClasses = addProp(this, 'overlayClasses', 'o50 bg-dark', reset);
         this.underlayClasses = addProp(this, 'underlayClasses', concatStr([positionClasses, alignmentClasses, 'z1 wmax hmax']), reset);

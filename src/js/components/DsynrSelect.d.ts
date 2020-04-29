@@ -1,6 +1,5 @@
 declare class DsynrSelect extends DsynrUIIElement {
     content: HTMLSelectElement;
-    private modal;
     private trigger;
     private options;
     private adoptParent;
@@ -8,6 +7,8 @@ declare class DsynrSelect extends DsynrUIIElement {
     private triggerCls;
     private optCls;
     private optionPrefix;
+    private modal;
+    private modalPref;
     constructor(select: HTMLElement, preferences?: object);
     setDefaults(reset?: boolean): void;
     setup(): void;

@@ -15,17 +15,18 @@ class DsynrUIIElement {
             });
         }
         if (!this.selfAbort) {
-            this.setPref(preferences);
+            this.preferences = preferences;
+            this.setPref();
             this.setParent();
             DsynrUIIElement.instances.push(this);
             l(DsynrUIIElement.instances);
         }
     }
-    setPref(preferences) {
+    setPref() {
         lfn('setPref');
-        l(preferences);
-        if (Object.keys(preferences).length > 0) {
-            l('Object.keys(preferences).length:' + Object.keys(preferences).length);
+        // l(this.preferences);
+        if (Object.keys(this.preferences).length > 0) {
+            l('Object.keys(preferences).length:' + Object.keys(this.preferences).length);
             // l(Object.keys(preferences).length > 0);
             //updateProps(this, preferences);
         }
@@ -34,10 +35,10 @@ class DsynrUIIElement {
             l(options);
             if (options !== null) {
                 l('parsing preferences as JSON');
-                preferences = JSON.parse(options);
+                this.preferences = JSON.parse(options);
             }
         }
-        updateProps(this, preferences);
+        updateProps(this, this.preferences);
     }
     setup() {
     }
@@ -59,6 +60,9 @@ class DsynrUIIElement {
         l(this.parent);
     }
     setDefaults(reset = false) {
+        lfn('setDefaults super ');
+        this.animate = addProp(this, 'animate', true, reset);
+        this.animationClasses = addProp(this, 'animationClasses', 'animated fadeIn', reset);
     }
     addListeners() {
     }

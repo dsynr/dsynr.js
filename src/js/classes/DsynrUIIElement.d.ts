@@ -3,6 +3,7 @@ declare abstract class DsynrUIIElement implements DsynrUI {
     static activeInstance: any;
     parent: HTMLElement;
     instance: HTMLElement;
+    preferences: object;
     protected content: HTMLElement;
     protected namePrefix: string;
     protected nameSuffix: string;
@@ -12,7 +13,7 @@ declare abstract class DsynrUIIElement implements DsynrUI {
     protected selfAbort: boolean;
     private prefAttr;
     protected constructor(element: HTMLElement, preferences: object);
-    setPref(preferences: object): void;
+    setPref(): void;
     setup(): void;
     setParent(): void;
     setDefaults(reset?: boolean): void;

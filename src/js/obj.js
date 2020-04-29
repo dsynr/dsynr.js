@@ -28,6 +28,12 @@ function updateProps(obj, propSet) {
         l(prop + ':' + obj[prop]);
     }
 }
+function mergeObjs(main, sub) {
+    for (let prop in sub) {
+        main[prop] = sub[prop];
+    }
+    return main;
+}
 function hasInstance(objList, obj) {
     lfn('hasInstance');
     l(objList);

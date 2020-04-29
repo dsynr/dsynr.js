@@ -25,12 +25,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a40d500-3c83-4dd3-83d5-91876b3160f7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.tsBuildInfo" beforeDir="false" afterPath="$PROJECT_DIR$/.tsBuildInfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/demos/Select.html" beforeDir="false" afterPath="$PROJECT_DIR$/release/demos/Select.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/release/dsynr.util.js" beforeDir="false" afterPath="$PROJECT_DIR$/release/dsynr.util.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/release/dsynr.util.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/release/dsynr.util.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/components/DsynrModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrModal.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/components/DsynrModal.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrModal.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/components/DsynrSelect.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrSelect.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/components/DsynrSelect.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrSelect.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/components/DsynrSelect.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrSelect.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/obj.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/obj.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/obj.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/obj.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/obj.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/obj.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ts/classes/DsynrUIIElement.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/classes/DsynrUIIElement.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ts/components/DsynrModal.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/components/DsynrModal.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ts/components/DsynrSelect.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/components/DsynrSelect.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ts/obj.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/obj.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -158,7 +172,7 @@
       <workItem from="1587947253458" duration="5010000" />
       <workItem from="1588021354902" duration="22774000" />
       <workItem from="1588091729319" duration="15110000" />
-      <workItem from="1588113422040" duration="11214000" />
+      <workItem from="1588113422040" duration="14766000" />
     </task>
     <servers />
   </component>

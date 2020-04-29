@@ -16,17 +16,18 @@ class DsynrUIIElement {
             });
         }
         if (!this.selfAbort) {
-            this.setPref(preferences);
+            this.preferences = preferences;
+            this.setPref();
             this.setParent();
             DsynrUIIElement.instances.push(this);
             l(DsynrUIIElement.instances);
         }
     }
-    setPref(preferences) {
+    setPref() {
         lfn('setPref');
-        l(preferences);
-        if (Object.keys(preferences).length > 0) {
-            l('Object.keys(preferences).length:' + Object.keys(preferences).length);
+        // l(this.preferences);
+        if (Object.keys(this.preferences).length > 0) {
+            l('Object.keys(preferences).length:' + Object.keys(this.preferences).length);
             // l(Object.keys(preferences).length > 0);
             //updateProps(this, preferences);
         }
@@ -35,10 +36,10 @@ class DsynrUIIElement {
             l(options);
             if (options !== null) {
                 l('parsing preferences as JSON');
-                preferences = JSON.parse(options);
+                this.preferences = JSON.parse(options);
             }
         }
-        updateProps(this, preferences);
+        updateProps(this, this.preferences);
     }
     setup() {
     }
@@ -60,6 +61,9 @@ class DsynrUIIElement {
         l(this.parent);
     }
     setDefaults(reset = false) {
+        lfn('setDefaults super ');
+        this.animate = addProp(this, 'animate', true, reset);
+        this.animationClasses = addProp(this, 'animationClasses', 'animated fadeIn', reset);
     }
     addListeners() {
     }
@@ -88,10 +92,10 @@ class DsynrModal extends DsynrUIIElement {
     }
     setDefaults(reset = false) {
         lfn('setDefaults');
+        super.setDefaults();
         let positionClasses = 'position-absolute';
         let alignmentClasses = 'top left';
         this.adoptParent = addProp(this, 'adoptParent', true, reset);
-        this.animate = addProp(this, 'animate', true, reset);
         this.modalAnimate = addProp(this, 'modalAnimate', true, reset);
         this.animateTogether = addProp(this, 'animateTogether', true, reset);
         this.isOverlayOn = addProp(this, 'isOverlayOn', false, reset);
@@ -99,7 +103,6 @@ class DsynrModal extends DsynrUIIElement {
         this.disableUnderlay = addProp(this, 'disableUnderlay', true, reset);
         this.nameSuffix = addProp(this, 'nameSuffix', DsynrModal.instances.length.toString(), reset);
         this.namePrefix = addProp(this, 'namePrefix', 'dsynrModal', reset);
-        this.animationClasses = addProp(this, 'animationClasses', 'animated fadeInDown', reset);
         this.modalAnimationClasses = addProp(this, 'modalAnimationClasses', 'animated flipInX', reset);
         this.overlayClasses = addProp(this, 'overlayClasses', 'o50 bg-dark', reset);
         this.underlayClasses = addProp(this, 'underlayClasses', concatStr([positionClasses, alignmentClasses, 'z1 wmax hmax']), reset);
@@ -262,6 +265,7 @@ class DsynrSelect extends DsynrUIIElement {
         }
     }
     setDefaults(reset = false) {
+        super.setDefaults();
         lfn('setDefaults');
         this.adoptParent = addProp(this, 'adoptParent', true, reset);
         this.nameSuffix = addProp(this, 'nameSuffix', DsynrSelect.instances.length.toString(), reset);
@@ -289,7 +293,8 @@ class DsynrSelect extends DsynrUIIElement {
             makeArray(this.options).forEach(function (o, index) {
                 self.addESOption(o, index);
             });
-            this.modal = new DsynrModal(this.instance, { 'trigger': 'auto', 'parent': this.parent, 'adoptParent': this.adoptParent });
+            this.modalPref = mergeObjs(this.preferences, { 'trigger': 'auto', 'parent': this.parent, 'adoptParent': this.adoptParent });
+            this.modal = new DsynrModal(this.instance, this.modalPref);
         }
         this.setActive();
     }
@@ -429,6 +434,12 @@ function updateProps(obj, propSet) {
         }
         l(prop + ':' + obj[prop]);
     }
+}
+function mergeObjs(main, sub) {
+    for (let prop in sub) {
+        main[prop] = sub[prop];
+    }
+    return main;
 }
 function hasInstance(objList, obj) {
     lfn('hasInstance');

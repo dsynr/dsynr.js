@@ -102,8 +102,8 @@
         "signature": "2077ea7b8a1c12eb67da407a1f4d5804e5e04cca8c14e35e1a41c3b8ee1fce5d"
       },
       "./src/ts/obj.ts": {
-        "version": "3484d8ad90847a2cf475355c353817e04fae2a7204bba68062d06cff46232336",
-        "signature": "cd86a2a186e33bb185c22d58c13a382234c92dad19722ce4cb573e4f24796a4a"
+        "version": "14b065afab8af69f42d5dee3f5592dcd5a07f051f1d934f12115ae27e1d96810",
+        "signature": "d907a7c663db0728446f4193d0fa68944565de36f097c78bc0264fb7fef560a6"
       },
       "./src/ts/other.ts": {
         "version": "a63349c780a337c1f0a101c93075533b667b54ad09edc72b8a3ba1f396dee1bd",
@@ -118,16 +118,16 @@
         "signature": "aa2b730558c73fe15612fe76f870d5d629f436f015a15b4722f7f812493dbba5"
       },
       "./src/ts/classes/dsynruiielement.ts": {
-        "version": "505e6335445ea81d1fa5f10557f625a6d439af4192e438fd56a2065d9d9940a3",
-        "signature": "64f7c91be662208c5a67606e996552917eb802e1dc678a27a2659e3191ab622f"
+        "version": "c177925a11f8f33bc772bb3b36f356fbebca890b8b3e04ec10260f4b5c500b0e",
+        "signature": "e6bbab42818cffdee87f6dc1578f6e24ba05618718f1fe425fd86726b0c10774"
       },
       "./src/ts/components/dsynrmodal.ts": {
-        "version": "c31df68f7b6ce3eb45dc2c7db0fc5f02b623edebd831298ded5a12d88eb97edc",
+        "version": "a36192c5b4ad29a6eb71d604aa05ce3411309d93d457a7d245eb1b13a082fd7e",
         "signature": "ab4e9af3ecdf0688d05732d6d26f42825294605f07a54577d481e3e5a14d0718"
       },
       "./src/ts/components/dsynrselect.ts": {
-        "version": "77c4c936d2065870beaa0856b0790eebf7b93c198ff12e76240aea423813c54f",
-        "signature": "62a6b1f448796f15fd1fd21af4b3c39cb30866e20851fdcb53b620541b22fa11"
+        "version": "f07ab9e434da54eeed7922d0ba2a2fdf57560983d2fb8a9398c0b63056c8d655",
+        "signature": "af3f678dceb78311ebcde9882e1d472587a6bf8614639329274ca6e56b72f65a"
       },
       "./src/ts/interfaces/dsynrui.ts": {
         "version": "c311a7e7d823dd170263f1cd572bafaa778b7ede75eea6e8e9c74959e8632b47",
@@ -184,10 +184,10 @@
       "./src/ts/other.ts",
       "./src/ts/string.ts",
       "./src/ts/viewport.ts",
-      "./src/ts/classes/dsynruiielement.ts",
+      "./src/ts/components/dsynrmodal.ts",
       "./src/ts/components/dsynrselect.ts",
       "./src/ts/interfaces/dsynrui.ts",
-      "./src/ts/components/dsynrmodal.ts"
+      "./src/ts/classes/dsynruiielement.ts"
     ]
   },
   "version": "3.8.3"

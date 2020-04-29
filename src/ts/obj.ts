@@ -33,6 +33,13 @@ function updateProps(obj: object, propSet: object): void {
     }
 }
 
+function mergeObjs(main: object, sub: object): object {
+    for (let prop in sub) {
+        main[prop] = sub[prop];
+    }
+    return main;
+}
+
 function hasInstance(objList: Array<object>, obj: object): boolean {
     lfn('hasInstance');
     l(objList);

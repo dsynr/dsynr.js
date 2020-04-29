@@ -5,6 +5,7 @@ abstract class DsynrUIIElement implements DsynrUI {
 
     parent: HTMLElement;
     instance: HTMLElement;
+    preferences: object;
 
     protected content: HTMLElement;
     protected namePrefix: string;
@@ -34,19 +35,20 @@ abstract class DsynrUIIElement implements DsynrUI {
         }
 
         if (!this.selfAbort) {
-            this.setPref(preferences);
+            this.preferences = preferences;
+            this.setPref();
             this.setParent();
             DsynrUIIElement.instances.push(this);
             l(DsynrUIIElement.instances);
         }
     }
 
-    setPref(preferences: object): void {
+    setPref(): void {
         lfn('setPref');
-        l(preferences);
+        // l(this.preferences);
 
-        if (Object.keys(preferences).length > 0) {
-            l('Object.keys(preferences).length:' + Object.keys(preferences).length);
+        if (Object.keys(this.preferences).length > 0) {
+            l('Object.keys(preferences).length:' + Object.keys(this.preferences).length);
             // l(Object.keys(preferences).length > 0);
             //updateProps(this, preferences);
         } else {
@@ -54,10 +56,10 @@ abstract class DsynrUIIElement implements DsynrUI {
             l(options);
             if (options !== null) {
                 l('parsing preferences as JSON');
-                preferences = JSON.parse(options);
+                this.preferences = JSON.parse(options);
             }
         }
-        updateProps(this, preferences);
+        updateProps(this, this.preferences);
     }
 
     setup(): void {
@@ -80,6 +82,9 @@ abstract class DsynrUIIElement implements DsynrUI {
     }
 
     setDefaults(reset: boolean = false): void {
+        lfn('setDefaults super ');
+        this.animate = addProp(this, 'animate', true, reset);
+        this.animationClasses = addProp(this, 'animationClasses', 'animated fadeIn', reset);
     }
 
     protected addListeners(): void {

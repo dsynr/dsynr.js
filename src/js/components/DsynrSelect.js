@@ -8,6 +8,7 @@ class DsynrSelect extends DsynrUIIElement {
         }
     }
     setDefaults(reset = false) {
+        super.setDefaults();
         lfn('setDefaults');
         this.adoptParent = addProp(this, 'adoptParent', true, reset);
         this.nameSuffix = addProp(this, 'nameSuffix', DsynrSelect.instances.length.toString(), reset);
@@ -35,7 +36,8 @@ class DsynrSelect extends DsynrUIIElement {
             makeArray(this.options).forEach(function (o, index) {
                 self.addESOption(o, index);
             });
-            this.modal = new DsynrModal(this.instance, { 'trigger': 'auto', 'parent': this.parent, 'adoptParent': this.adoptParent });
+            this.modalPref = mergeObjs(this.preferences, { 'trigger': 'auto', 'parent': this.parent, 'adoptParent': this.adoptParent });
+            this.modal = new DsynrModal(this.instance, this.modalPref);
         }
         this.setActive();
     }
