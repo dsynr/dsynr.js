@@ -4,6 +4,7 @@ class DsynrSelect extends DsynrUIIElement {
     private modal: DsynrModal;
     private trigger: HTMLElement;
     private options: HTMLOptionsCollection;
+    private adoptParent: boolean;
     private showFinder: boolean;
     private triggerCls: string;
     private optCls: string;
@@ -21,6 +22,7 @@ class DsynrSelect extends DsynrUIIElement {
     setDefaults(reset: boolean = false): void {
         lfn('setDefaults');
 
+        this.adoptParent = addProp(this, 'adoptParent', true, reset);
         this.nameSuffix = addProp(this, 'nameSuffix', DsynrSelect.instances.length.toString(), reset);
         this.namePrefix = addProp(this, 'namePrefix', 'dsynrEnhancedSelect', reset);
         this.optionPrefix = addProp(this, 'namePrefix', concatStr([this.namePrefix, 'option'], '-'), reset);
@@ -41,13 +43,16 @@ class DsynrSelect extends DsynrUIIElement {
     }
 
     show(): void {
-        lfn('show triggered via : ' + this.trigger.id);
-        this.instance = addDiv(this.setName('', this.content.id), this.instanceClasses);
-        let self: DsynrSelect = this;
-        makeArray(this.options).forEach(function (o: HTMLOptionElement, index: number) {
-            self.addESOption(o, index);
-        });
-        this.modal = new DsynrModal(this.instance, {'trigger': 'auto', 'parent': this.content.parentElement});
+        if (DsynrSelect.activeInstance !== this) {
+            lfn('show triggered via : ' + this.trigger.id);
+            this.instance = addDiv(this.setName('', this.content.id), this.instanceClasses);
+            let self: DsynrSelect = this;
+            makeArray(this.options).forEach(function (o: HTMLOptionElement, index: number) {
+                self.addESOption(o, index);
+            });
+            this.modal = new DsynrModal(this.instance, {'trigger': 'auto', 'parent': this.parent, 'adoptParent': this.adoptParent});
+        }
+        this.setActive();
     }
 
     private update(selectOption: HTMLElement): void {
@@ -87,6 +92,10 @@ class DsynrSelect extends DsynrUIIElement {
 
     hide() {
         lfn('dsynrSelect_exitDsynrSelect');
+    }
+
+    protected setActive(): void {
+        DsynrSelect.activeInstance = this;
     }
 
     static auto(selectClass: string = 'dsynrSelect'): void {

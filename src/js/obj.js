@@ -20,12 +20,12 @@ function addProp(obj, propName, propVal = undefined, overwrite = false) {
     return obj[propName];
 }
 function updateProps(obj, propSet) {
-    // lfn('updateProps...');
+    lfn('updateProps...');
     for (let prop in propSet) {
         if (propSet.hasOwnProperty(prop)) {
             obj[prop] = propSet[prop];
         }
-        // l(prop + ':' + obj[prop]);
+        l(prop + ':' + obj[prop]);
     }
 }
 function hasInstance(objList, obj) {

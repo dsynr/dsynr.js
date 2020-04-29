@@ -3,6 +3,7 @@ declare class DsynrSelect extends DsynrUIIElement {
     private modal;
     private trigger;
     private options;
+    private adoptParent;
     private showFinder;
     private triggerCls;
     private optCls;
@@ -16,5 +17,6 @@ declare class DsynrSelect extends DsynrUIIElement {
     private setTrigger;
     private getOption;
     hide(): void;
+    protected setActive(): void;
     static auto(selectClass?: string): void;
 }

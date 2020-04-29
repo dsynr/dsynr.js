@@ -1,5 +1,6 @@
 declare abstract class DsynrUIIElement implements DsynrUI {
     static instances: Array<any>;
+    static activeInstance: any;
     parent: HTMLElement;
     instance: HTMLElement;
     protected content: HTMLElement;
@@ -10,10 +11,11 @@ declare abstract class DsynrUIIElement implements DsynrUI {
     protected animate: boolean;
     protected selfAbort: boolean;
     private prefAttr;
-    protected constructor(element: HTMLElement, preferences?: object);
-    setDefaults(reset?: boolean): void;
-    setup(): void;
+    protected constructor(element: HTMLElement, preferences: object);
     setPref(preferences: object): void;
+    setup(): void;
+    setParent(): void;
+    setDefaults(reset?: boolean): void;
     protected addListeners(): void;
     protected setActive(): void;
     show(): void;

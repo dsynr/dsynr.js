@@ -24,12 +24,12 @@ function addProp(obj: object, propName: string, propVal: any = undefined, overwr
 }
 
 function updateProps(obj: object, propSet: object): void {
-    // lfn('updateProps...');
+    lfn('updateProps...');
     for (let prop in propSet) {
         if (propSet.hasOwnProperty(prop)) {
             obj[prop] = propSet[prop];
         }
-        // l(prop + ':' + obj[prop]);
+        l(prop + ':' + obj[prop]);
     }
 }
 

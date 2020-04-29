@@ -9,6 +9,7 @@ class DsynrSelect extends DsynrUIIElement {
     }
     setDefaults(reset = false) {
         lfn('setDefaults');
+        this.adoptParent = addProp(this, 'adoptParent', true, reset);
         this.nameSuffix = addProp(this, 'nameSuffix', DsynrSelect.instances.length.toString(), reset);
         this.namePrefix = addProp(this, 'namePrefix', 'dsynrEnhancedSelect', reset);
         this.optionPrefix = addProp(this, 'namePrefix', concatStr([this.namePrefix, 'option'], '-'), reset);
@@ -27,13 +28,16 @@ class DsynrSelect extends DsynrUIIElement {
         l('Select Trigger READY!');
     }
     show() {
-        lfn('show triggered via : ' + this.trigger.id);
-        this.instance = addDiv(this.setName('', this.content.id), this.instanceClasses);
-        let self = this;
-        makeArray(this.options).forEach(function (o, index) {
-            self.addESOption(o, index);
-        });
-        this.modal = new DsynrModal(this.instance, { 'trigger': 'auto', 'parent': this.content.parentElement });
+        if (DsynrSelect.activeInstance !== this) {
+            lfn('show triggered via : ' + this.trigger.id);
+            this.instance = addDiv(this.setName('', this.content.id), this.instanceClasses);
+            let self = this;
+            makeArray(this.options).forEach(function (o, index) {
+                self.addESOption(o, index);
+            });
+            this.modal = new DsynrModal(this.instance, { 'trigger': 'auto', 'parent': this.parent, 'adoptParent': this.adoptParent });
+        }
+        this.setActive();
     }
     update(selectOption) {
         lfn('update');
@@ -67,6 +71,9 @@ class DsynrSelect extends DsynrUIIElement {
     }
     hide() {
         lfn('dsynrSelect_exitDsynrSelect');
+    }
+    setActive() {
+        DsynrSelect.activeInstance = this;
     }
     static auto(selectClass = 'dsynrSelect') {
         lfn('auto');

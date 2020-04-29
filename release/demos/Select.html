@@ -6,18 +6,18 @@
 </head>
 <body>
 
-<form id="f1" class="bg-warning m-5 p-5 rounded shadow vw2">
-    <select id="dsynrSelect3" class="dsynrSelect" data-dsynr-pref='{"showFinder":true}'>
+<form id="f1" class="bg-light m-5 p-5 rounded shadow vw2">
+    <select id="dsynrSelect3" class="dsynrSelect" data-dsynr-pref='{"parent":"f1"}'>
         <option value="ov1">This is the first option</option>
         <option value="ov2">This is the second option</option>
         <option value="ov3">This is third option</option>
     </select>
 </form>
 
-<div class="dsynrModal p-5 bg-light d-table" id="modal" data-dsynr-pref='{"trigger":"b2"}'>
-    <h1>The Title</h1>
+<div class="dsynrModal p-5 bg-light d-table position-relative" id="modal" data-dsynr-pref='{"trigger":"b2"}'>
+    <h1>Modal Title</h1>
     <label for="dsynrSelect1">This is the Label</label>
-    <select id="dsynrSelect1" class="dsynrSelect" data-dsynr-pref='{}'>
+    <select id="dsynrSelect1" class="dsynrSelect" data-dsynr-pref='{"showFinder":true,"parent":"parent"}'>
         <option value="ov1">This is the first option</option>
         <option value="ov2">This is the second option</option>
         <option value="ov3">This is third option</option>
@@ -30,7 +30,6 @@
         <option value="ov2">This is the second option</option>
         <option value="ov3">This is third option</option>
     </select>
-
 </div>
 
 <div class="p-5 m-5 btn-group">
@@ -48,7 +47,6 @@
 <script>
 
     addListener('b1', 'click', function () {
-        // autoEnhanceSelects('dsynrSelect');
         DsynrSelect.auto();
     });
     DsynrModal.auto();

@@ -1,6 +1,5 @@
 class DsynrUIIElement {
-    constructor(element, preferences = {}) {
-        this.parent = document.body;
+    constructor(element, preferences) {
         this.selfAbort = false;
         this.prefAttr = 'dsynr-pref';
         lfn('DsynrUIIElement');
@@ -17,28 +16,49 @@ class DsynrUIIElement {
         }
         if (!this.selfAbort) {
             this.setPref(preferences);
+            this.setParent();
             DsynrUIIElement.instances.push(this);
+            l(DsynrUIIElement.instances);
         }
-    }
-    setDefaults(reset = false) {
-    }
-    setup() {
     }
     setPref(preferences) {
         lfn('setPref');
-        // l(preferences);
+        l(preferences);
         if (Object.keys(preferences).length > 0) {
-            // l('Object.keys(preferences).length:' + Object.keys(preferences).length);
+            l('Object.keys(preferences).length:' + Object.keys(preferences).length);
             // l(Object.keys(preferences).length > 0);
             //updateProps(this, preferences);
         }
         else {
             let options = getData(this.content, this.prefAttr);
+            l(options);
             if (options !== null) {
+                l('parsing preferences as JSON');
                 preferences = JSON.parse(options);
             }
         }
         updateProps(this, preferences);
+    }
+    setup() {
+    }
+    setParent() {
+        lfn('setParent');
+        l(this.parent);
+        if (typeof this.parent === 'string') {
+            l(this.parent);
+            if (this.parent == 'parent') {
+                this.parent = this.content.parentElement;
+            }
+            else {
+                this.parent = getElementById(this.parent);
+            }
+        }
+        else if (this.parent === undefined) {
+            this.parent = document.body;
+        }
+        l(this.parent);
+    }
+    setDefaults(reset = false) {
     }
     addListeners() {
     }

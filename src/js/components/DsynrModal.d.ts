@@ -8,6 +8,7 @@ declare class DsynrModal extends DsynrUIIElement {
     private disableUnderlay;
     private useOverlay;
     private isOverlayOn;
+    private adoptParent;
     private animateTogether;
     private modalAnimate;
     private modalAnimationClasses;
@@ -20,6 +21,7 @@ declare class DsynrModal extends DsynrUIIElement {
      * add optional animationEnd listener for modal
      */
     show(): void;
+    private resizeRoot;
     hide(): void;
     destroy(): void;
     setActive(): void;

@@ -1,8 +1,9 @@
 abstract class DsynrUIIElement implements DsynrUI {
 
     static instances: Array<any> = [];
+    static activeInstance: any;
 
-    parent: HTMLElement = document.body;
+    parent: HTMLElement;
     instance: HTMLElement;
 
     protected content: HTMLElement;
@@ -16,7 +17,7 @@ abstract class DsynrUIIElement implements DsynrUI {
 
     private prefAttr: string = 'dsynr-pref';
 
-    protected constructor(element: HTMLElement, preferences: object = {}) {
+    protected constructor(element: HTMLElement, preferences: object) {
         lfn('DsynrUIIElement');
 
         this.content = element;
@@ -34,31 +35,51 @@ abstract class DsynrUIIElement implements DsynrUI {
 
         if (!this.selfAbort) {
             this.setPref(preferences);
+            this.setParent();
             DsynrUIIElement.instances.push(this);
+            l(DsynrUIIElement.instances);
         }
     }
 
-    setDefaults(reset: boolean = false): void {
+    setPref(preferences: object): void {
+        lfn('setPref');
+        l(preferences);
+
+        if (Object.keys(preferences).length > 0) {
+            l('Object.keys(preferences).length:' + Object.keys(preferences).length);
+            // l(Object.keys(preferences).length > 0);
+            //updateProps(this, preferences);
+        } else {
+            let options: any = getData(this.content, this.prefAttr);
+            l(options);
+            if (options !== null) {
+                l('parsing preferences as JSON');
+                preferences = JSON.parse(options);
+            }
+        }
+        updateProps(this, preferences);
     }
 
     setup(): void {
     }
 
-    setPref(preferences: object): void {
-        lfn('setPref');
-        // l(preferences);
-
-        if (Object.keys(preferences).length > 0) {
-            // l('Object.keys(preferences).length:' + Object.keys(preferences).length);
-            // l(Object.keys(preferences).length > 0);
-            //updateProps(this, preferences);
-        } else {
-            let options: any = getData(this.content, this.prefAttr);
-            if (options !== null) {
-                preferences = JSON.parse(options);
+    setParent(): void {
+        lfn('setParent');
+        l(this.parent);
+        if (typeof this.parent === 'string') {
+            l(this.parent);
+            if (this.parent == 'parent') {
+                this.parent = <HTMLElement>this.content.parentElement;
+            } else {
+                this.parent = getElementById(this.parent);
             }
+        } else if (this.parent === undefined) {
+            this.parent = document.body;
         }
-        updateProps(this, preferences);
+        l(this.parent);
+    }
+
+    setDefaults(reset: boolean = false): void {
     }
 
     protected addListeners(): void {
