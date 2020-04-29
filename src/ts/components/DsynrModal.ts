@@ -51,6 +51,7 @@ class DsynrModal extends DsynrUIIElement {
         lfn('setup');
 
         let self: DsynrModal = this;
+        addClass(this.content, 'd-none');
         if (this.trigger != 'auto') {
             l('setting trigger to : ' + this.trigger);
             addListener(this.trigger, 'click', function () {
@@ -72,6 +73,10 @@ class DsynrModal extends DsynrUIIElement {
         if (DsynrModal.activeInstance !== this) {
             lfn('show triggered via : ' + this.trigger);
             l(this);
+
+
+            addClass(this.content, 'o0');
+            removeClass(this.content, 'd-none');
 
             if (this.parent === undefined) {
                 l('parent unavailable, adding modal to body');
@@ -100,6 +105,7 @@ class DsynrModal extends DsynrUIIElement {
 
 
             removeClass(this.instanceRoot, 'd-none');
+            removeClass(this.content, 'o0');
 
             l(this.parent.id);
             if (this.adoptParent && (this.content.clientHeight > this.parent.clientHeight || this.content.clientWidth > this.parent.clientWidth)) {

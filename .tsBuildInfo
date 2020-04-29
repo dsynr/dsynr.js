@@ -122,7 +122,7 @@
         "signature": "64f7c91be662208c5a67606e996552917eb802e1dc678a27a2659e3191ab622f"
       },
       "./src/ts/components/dsynrmodal.ts": {
-        "version": "126156d0556bde5ec47e1a80a60b5e674e985731755c0868a057a498671596e9",
+        "version": "c31df68f7b6ce3eb45dc2c7db0fc5f02b623edebd831298ded5a12d88eb97edc",
         "signature": "ab4e9af3ecdf0688d05732d6d26f42825294605f07a54577d481e3e5a14d0718"
       },
       "./src/ts/components/dsynrselect.ts": {
