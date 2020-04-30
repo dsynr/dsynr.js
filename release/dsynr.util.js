@@ -46,6 +46,10 @@ class DsynrUIIElement {
     setParent() {
         lfn('setParent');
         l(this.parent);
+        if (this.parent === undefined) {
+            // @ts-ignore
+            this.parent = 'parent';
+        }
         if (typeof this.parent === 'string') {
             l(this.parent);
             if (this.parent == 'parent') {
@@ -54,9 +58,6 @@ class DsynrUIIElement {
             else {
                 this.parent = getElementById(this.parent);
             }
-        }
-        else if (this.parent === undefined) {
-            this.parent = document.body;
         }
         l(this.parent);
     }
@@ -101,13 +102,16 @@ class DsynrModal extends DsynrUIIElement {
         this.isOverlayOn = addProp(this, 'isOverlayOn', false, reset);
         this.useOverlay = addProp(this, 'useOverlay', true, reset);
         this.disableUnderlay = addProp(this, 'disableUnderlay', true, reset);
+        this.animateUnderlay = addProp(this, 'animateUnderlay', true, reset);
         this.nameSuffix = addProp(this, 'nameSuffix', DsynrModal.instances.length.toString(), reset);
         this.namePrefix = addProp(this, 'namePrefix', 'dsynrModal', reset);
         this.modalAnimationClasses = addProp(this, 'modalAnimationClasses', 'animated flipInX', reset);
         this.overlayClasses = addProp(this, 'overlayClasses', 'o50 bg-dark', reset);
-        this.underlayClasses = addProp(this, 'underlayClasses', concatStr([positionClasses, alignmentClasses, 'z1 wmax hmax']), reset);
+        this.parentSizingClasses = addProp(this, 'sizingClasses', 'wmax hmax', reset);
+        this.windowSizingClasses = addProp(this, 'windowSizingClasses', 'vw vh', reset);
+        this.underlayClasses = addProp(this, 'underlayClasses', concatStr([positionClasses, alignmentClasses, this.parentSizingClasses, 'z1']), reset);
         this.instanceClasses = addProp(this, 'instanceClasses', concatStr([positionClasses, 'z2']), reset);
-        this.rootClasses = addProp(this, 'rootClasses', concatStr([positionClasses, alignmentClasses, 'z3 o0 d-none']), reset);
+        this.instanceRootClasses = addProp(this, 'rootClasses', concatStr([positionClasses, alignmentClasses, this.parentSizingClasses, 'z3 o0 d-none']), reset);
         this.trigger = addProp(this, 'trigger', 'auto', reset);
     }
     setup() {
@@ -141,9 +145,9 @@ class DsynrModal extends DsynrUIIElement {
                 l('parent unavailable, adding modal to body');
                 this.parent = document.body;
             }
-            this.instanceRoot = addDiv(this.setName('root', this.content.id), this.rootClasses, this.parent);
+            this.instanceRoot = addDiv(this.setName('root', this.content.id), this.instanceRootClasses, this.parent);
             if (this.disableUnderlay) {
-                this.resizeRoot();
+                // this.resizeRoot();
                 if (this.useOverlay) {
                     this.underlayClasses = concatStr([this.underlayClasses, this.overlayClasses]);
                 }
@@ -168,7 +172,12 @@ class DsynrModal extends DsynrUIIElement {
             }
             this.align();
             if (this.animate) {
-                addClass(this.instanceRoot, this.animationClasses);
+                if (this.animateUnderlay) {
+                    addClass(this.instanceRoot, this.animationClasses);
+                }
+                else {
+                    removeClass(this.instanceRoot, 'o0');
+                }
                 if (this.animateTogether) {
                     addClass(this.instance, this.modalAnimationClasses);
                 }
@@ -183,8 +192,15 @@ class DsynrModal extends DsynrUIIElement {
         }
     }
     resizeRoot() {
-        this.instanceRoot.style.width = getCssDimension(this.parent.clientWidth);
-        this.instanceRoot.style.height = getCssDimension(this.parent.clientHeight);
+        lfn('resizeRoot');
+        if (this.parent == document.body) {
+            removeClass(this.instanceRoot, this.parentSizingClasses);
+            addClass(this.instanceRoot, this.windowSizingClasses);
+        }
+        else {
+            this.instanceRoot.style.width = getCssDimension(this.parent.clientWidth);
+            this.instanceRoot.style.height = getCssDimension(this.parent.clientHeight);
+        }
     }
     hide() {
         lfn('hide');
@@ -462,6 +478,11 @@ function getRandColourRGBA(maxO = 1, maxR = 255, maxG = 255, maxB = 255) {
     return 'rgba(' + getRandFloor(0, maxR) + ',' + getRandFloor(0, maxG) + ',' + getRandFloor(0, maxB) + ',' + getRandDecimal(0, maxO) + ')';
 }
 //# sourceMappingURL=graphics.js.map
+/**
+ *
+ * @param val
+ * @param unit
+ */
 function getCssDimension(val, unit = 'px') {
     return val + unit;
 }
@@ -471,18 +492,41 @@ function randRadius() {
 function randWidth() {
     return getRandomArbitrary(2, 15);
 }
+/**
+ *
+ * @param e
+ */
 function getDimensions(e) {
     return { w: e.clientWidth, h: e.clientHeight };
 }
+/**
+ *
+ * @param e
+ */
 function hide(e) {
     e.style.display = 'none';
 }
+/**
+ *
+ * @param e
+ * @param classes
+ */
 function addClass(e, classes) {
-    e.className += ' ' + classes;
+    e.classList.add(...classes.split(' '));
 }
+/**
+ *
+ * @param e
+ * @param classes
+ */
 function removeClass(e, classes) {
-    e.classList.remove(classes);
+    e.classList.remove(...classes.split(' '));
 }
+/**
+ *
+ * @param e
+ * @param classes
+ */
 function hasClass(e, classes) {
     return e.classList.contains(classes);
 }

@@ -45,6 +45,10 @@ class DsynrUIIElement {
     setParent() {
         lfn('setParent');
         l(this.parent);
+        if (this.parent === undefined) {
+            // @ts-ignore
+            this.parent = 'parent';
+        }
         if (typeof this.parent === 'string') {
             l(this.parent);
             if (this.parent == 'parent') {
@@ -53,9 +57,6 @@ class DsynrUIIElement {
             else {
                 this.parent = getElementById(this.parent);
             }
-        }
-        else if (this.parent === undefined) {
-            this.parent = document.body;
         }
         l(this.parent);
     }

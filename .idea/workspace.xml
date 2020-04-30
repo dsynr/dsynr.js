@@ -30,21 +30,13 @@
       <change beforePath="$PROJECT_DIR$/release/demos/Select.html" beforeDir="false" afterPath="$PROJECT_DIR$/release/demos/Select.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/release/dsynr.util.js" beforeDir="false" afterPath="$PROJECT_DIR$/release/dsynr.util.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/release/dsynr.util.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/release/dsynr.util.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.d.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/components/DsynrModal.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrModal.d.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/components/DsynrModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrModal.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/components/DsynrModal.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrModal.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/DsynrSelect.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrSelect.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/DsynrSelect.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrSelect.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/DsynrSelect.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrSelect.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/obj.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/obj.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/obj.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/obj.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/obj.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/obj.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ts/classes/DsynrUIIElement.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/classes/DsynrUIIElement.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ts/components/DsynrModal.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/components/DsynrModal.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ts/components/DsynrSelect.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/components/DsynrSelect.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ts/obj.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/obj.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,6 +85,9 @@
         </option>
       </RecentBranches>
     </option>
+  </component>
+  <component name="NamedScopeManager">
+    <scope name="ts" pattern="file[util.js]:src/ts//*" />
   </component>
   <component name="ProjectId" id="1axVs68X6IGjytiyfYJT6O1hISa" />
   <component name="ProjectViewState">
@@ -172,7 +167,9 @@
       <workItem from="1587947253458" duration="5010000" />
       <workItem from="1588021354902" duration="22774000" />
       <workItem from="1588091729319" duration="15110000" />
-      <workItem from="1588113422040" duration="14766000" />
+      <workItem from="1588113422040" duration="15010000" />
+      <workItem from="1588167505437" duration="6215000" />
+      <workItem from="1588197343291" duration="5588000" />
     </task>
     <servers />
   </component>
@@ -199,6 +196,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="845" y="402" key="#Notifications/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1587924677793" />
+    <state x="552" y="180" key="#Plugins" timestamp="1588197358862">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="552" y="180" key="#Plugins/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1588197358862" />
     <state x="414" y="198" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587677690277">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -300,10 +301,14 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="552" y="272" key="Vcs.Push.Dialog.v2/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1587961960042" />
-    <state x="92" y="92" width="1736" height="896" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1587763155146">
+    <state x="92" y="92" width="1736" height="896" maximized="true" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1588200235800">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="92" y="92" width="1736" height="896" key="com.intellij.history.integration.ui.views.FileHistoryDialog/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1587763155146" />
+    <state x="92" y="92" width="1736" height="896" maximized="true" key="com.intellij.history.integration.ui.views.FileHistoryDialog/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1588200235800" />
+    <state x="92" y="92" width="1736" height="896" key="com.intellij.history.integration.ui.views.SelectionHistoryDialog" timestamp="1588200235800">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="92" y="92" width="1736" height="896" key="com.intellij.history.integration.ui.views.SelectionHistoryDialog/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1588200235800" />
     <state x="667" y="296" width="586" height="488" key="find.popup" timestamp="1587771717314">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -325,6 +330,10 @@
     </state>
     <state x="616" y="250" key="run.anything.popup/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1588115518267" />
     <state x="616" y="250" key="run.anything.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1587735462862" />
+    <state x="752" y="398" width="489" height="387" key="scopes" timestamp="1588199596366">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="752" y="398" width="489" height="387" key="scopes/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1588199596366" />
     <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1588045237829">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

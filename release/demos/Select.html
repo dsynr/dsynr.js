@@ -14,22 +14,32 @@
     </select>
 </form>
 
-<div class="dsynrModal p-5 bg-light d-table position-relative" id="modal" data-dsynr-pref='{"trigger":"b2"}'>
+<div class="dsynrModal p-5 bg-light d-table position-relative vw2 vh2" id="modal" data-dsynr-pref='{"trigger":"b2"}'>
     <h1>Modal Title</h1>
     <label for="dsynrSelect1">This is the Label</label>
-    <select id="dsynrSelect1" class="dsynrSelect" data-dsynr-pref='{"showFinder":true,"parent":"parent","modalAnimationClasses":"animated jello","useOverlay":true,"disableUnderlay":true}'>
+    <select id="dsynrSelect1" class="dsynrSelect" data-dsynr-pref='{"showFinder":true,"parent":"parent","animateUnderlay":true,"modalAnimationClasses":"animated heartBeat","useOverlay":true,"disableUnderlay":true,"adoptParent":0}'>
+        <option value="ov8">8</option>
         <option value="ov1">This is the first option</option>
         <option value="ov2">This is the second option</option>
         <option value="ov3">This is third option</option>
+        <option value="ov4">This is the 4th option</option>
+        <option value="ov5">This is option 5</option>
+        <option value="ov6">Sixth option</option>
+        <option value="ov7">7th option</option>
+        <option value="ov9">This is the option 9</option>
+        <option value="ov10">This 10th</option>
+        <option value="ov11">eleven</option>
+        <option value="ov12">Twelfth</option>
     </select>
 
     <hr/>
     <p>This one without any options or class</p>
-    <select id="dsynrSelect2">
+    <select id="dsynrSelect2" data-dsynr-pref='{"adoptParent":1}'>
         <option value="ov1">This is the first option</option>
         <option value="ov2">This is the second option</option>
         <option value="ov3">This is third option</option>
     </select>
+    <div id="b3" class="btn btn-dark">Enhance the left outs</div>
 </div>
 
 <div class="p-5 m-5 btn-group">
@@ -48,6 +58,9 @@
 
     addListener('b1', 'click', function () {
         DsynrSelect.auto();
+    });
+    addListener('b3', 'click', function () {
+        new DsynrSelect(getElementById('dsynrSelect2'));
     });
     DsynrModal.auto();
 

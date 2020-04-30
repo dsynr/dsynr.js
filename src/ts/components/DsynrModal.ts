@@ -3,16 +3,19 @@ class DsynrModal extends DsynrUIIElement {
     private instanceRoot: HTMLElement;
     private underlay: HTMLElement;
     private trigger: string; //"auto" => automatically shows as soon as instantiated
-    private rootClasses: string;
+    private instanceRootClasses: string;
     private underlayClasses: string;
     private overlayClasses: string;
     private disableUnderlay: boolean;
     private useOverlay: boolean;
     private isOverlayOn: boolean;
     private adoptParent: boolean;
+    private animateUnderlay: boolean;
     private animateTogether: boolean;
     private modalAnimate: boolean;
     private modalAnimationClasses: string;
+    private parentSizingClasses: string;
+    private windowSizingClasses: string;
 
     constructor(modalContent: HTMLElement, preferences: object = {}) {
         super(modalContent, preferences);
@@ -37,13 +40,16 @@ class DsynrModal extends DsynrUIIElement {
         this.isOverlayOn = addProp(this, 'isOverlayOn', false, reset);
         this.useOverlay = addProp(this, 'useOverlay', true, reset);
         this.disableUnderlay = addProp(this, 'disableUnderlay', true, reset);
+        this.animateUnderlay = addProp(this, 'animateUnderlay', true, reset);
         this.nameSuffix = addProp(this, 'nameSuffix', DsynrModal.instances.length.toString(), reset);
         this.namePrefix = addProp(this, 'namePrefix', 'dsynrModal', reset);
         this.modalAnimationClasses = addProp(this, 'modalAnimationClasses', 'animated flipInX', reset);
         this.overlayClasses = addProp(this, 'overlayClasses', 'o50 bg-dark', reset);
-        this.underlayClasses = addProp(this, 'underlayClasses', concatStr([positionClasses, alignmentClasses, 'z1 wmax hmax']), reset);
+        this.parentSizingClasses = addProp(this, 'sizingClasses', 'wmax hmax', reset);
+        this.windowSizingClasses = addProp(this, 'windowSizingClasses', 'vw vh', reset);
+        this.underlayClasses = addProp(this, 'underlayClasses', concatStr([positionClasses, alignmentClasses, this.parentSizingClasses, 'z1']), reset);
         this.instanceClasses = addProp(this, 'instanceClasses', concatStr([positionClasses, 'z2']), reset);
-        this.rootClasses = addProp(this, 'rootClasses', concatStr([positionClasses, alignmentClasses, 'z3 o0 d-none']), reset);
+        this.instanceRootClasses = addProp(this, 'rootClasses', concatStr([positionClasses, alignmentClasses, this.parentSizingClasses, 'z3 o0 d-none']), reset);
         this.trigger = addProp(this, 'trigger', 'auto', reset);
     }
 
@@ -82,10 +88,10 @@ class DsynrModal extends DsynrUIIElement {
                 l('parent unavailable, adding modal to body');
                 this.parent = document.body;
             }
-            this.instanceRoot = addDiv(this.setName('root', this.content.id), this.rootClasses, this.parent);
+            this.instanceRoot = addDiv(this.setName('root', this.content.id), this.instanceRootClasses, this.parent);
 
             if (this.disableUnderlay) {
-                this.resizeRoot();
+                // this.resizeRoot();
 
                 if (this.useOverlay) {
                     this.underlayClasses = concatStr([this.underlayClasses, this.overlayClasses]);
@@ -118,7 +124,11 @@ class DsynrModal extends DsynrUIIElement {
 
             this.align();
             if (this.animate) {
-                addClass(this.instanceRoot, this.animationClasses);
+                if (this.animateUnderlay) {
+                    addClass(this.instanceRoot, this.animationClasses);
+                } else {
+                    removeClass(this.instanceRoot, 'o0');
+                }
                 if (this.animateTogether) {
                     addClass(this.instance, this.modalAnimationClasses);
                 } else {
@@ -132,8 +142,15 @@ class DsynrModal extends DsynrUIIElement {
     }
 
     private resizeRoot() {
-        this.instanceRoot.style.width = getCssDimension(this.parent.clientWidth);
-        this.instanceRoot.style.height = getCssDimension(this.parent.clientHeight);
+        lfn('resizeRoot');
+        if (this.parent == document.body) {
+            removeClass(this.instanceRoot, this.parentSizingClasses);
+            addClass(this.instanceRoot, this.windowSizingClasses);
+        }
+        else {
+            this.instanceRoot.style.width = getCssDimension(this.parent.clientWidth);
+            this.instanceRoot.style.height = getCssDimension(this.parent.clientHeight);
+        }
     }
 
     hide(): void {
