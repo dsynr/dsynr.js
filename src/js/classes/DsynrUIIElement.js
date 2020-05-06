@@ -74,6 +74,8 @@ class DsynrUIIElement {
     hide() {
     }
     destroy() {
+        lfn('destroy');
+        this.instance.remove();
     }
     setName(context, name) {
         return concatStr([this.namePrefix, context, this.nameSuffix], '-');

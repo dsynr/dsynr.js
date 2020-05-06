@@ -102,6 +102,8 @@ abstract class DsynrUIIElement implements DsynrUI {
     }
 
     destroy(): void {
+        lfn('destroy');
+        this.instance.remove();
     }
 
     protected setName(context: string, name: string): string {

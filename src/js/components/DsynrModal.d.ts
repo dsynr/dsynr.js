@@ -7,12 +7,13 @@ declare class DsynrModal extends DsynrUIIElement {
     private overlayClasses;
     private disableUnderlay;
     private useOverlay;
-    private isOverlayOn;
     private adoptParent;
     private animateUnderlay;
     private animateTogether;
     private modalAnimate;
-    private modalAnimationClasses;
+    private autoDestroy;
+    private modalAnimateInClasses;
+    private modalAnimateOutClasses;
     private parentSizingClasses;
     private windowSizingClasses;
     constructor(modalContent: HTMLElement, preferences?: object);
@@ -24,13 +25,11 @@ declare class DsynrModal extends DsynrUIIElement {
      * add optional animationEnd listener for modal
      */
     show(): void;
+    hide(destroy?: boolean): void;
     private resizeRoot;
-    hide(): void;
     destroy(): void;
     setActive(): void;
     addListeners(): void;
-    showBlanket(): void;
-    hideBlanket(): void;
     blanketHidden(event: any): void;
     align(): void;
     private modalHidden;

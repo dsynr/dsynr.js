@@ -75,6 +75,8 @@ class DsynrUIIElement {
     hide() {
     }
     destroy() {
+        lfn('destroy');
+        this.instance.remove();
     }
     setName(context, name) {
         return concatStr([this.namePrefix, context, this.nameSuffix], '-');
@@ -96,16 +98,19 @@ class DsynrModal extends DsynrUIIElement {
         super.setDefaults();
         let positionClasses = 'position-absolute';
         let alignmentClasses = 'top left';
+        let animateClasses = 'animated';
         this.adoptParent = addProp(this, 'adoptParent', true, reset);
         this.modalAnimate = addProp(this, 'modalAnimate', true, reset);
+        this.autoDestroy = addProp(this, 'autoDestroy', true, reset);
         this.animateTogether = addProp(this, 'animateTogether', true, reset);
-        this.isOverlayOn = addProp(this, 'isOverlayOn', false, reset);
+        // this.isOverlayOn = addProp(this, 'isOverlayOn', false, reset);
         this.useOverlay = addProp(this, 'useOverlay', true, reset);
         this.disableUnderlay = addProp(this, 'disableUnderlay', true, reset);
         this.animateUnderlay = addProp(this, 'animateUnderlay', true, reset);
         this.nameSuffix = addProp(this, 'nameSuffix', DsynrModal.instances.length.toString(), reset);
         this.namePrefix = addProp(this, 'namePrefix', 'dsynrModal', reset);
-        this.modalAnimationClasses = addProp(this, 'modalAnimationClasses', 'animated flipInX', reset);
+        this.modalAnimateInClasses = addProp(this, 'modalAnimateInClasses', concatStr([animateClasses, 'flipInX']), reset);
+        this.modalAnimateOutClasses = addProp(this, 'modalAnimateOutClasses', concatStr([animateClasses, 'flipOutY']), reset);
         this.overlayClasses = addProp(this, 'overlayClasses', 'o50 bg-dark', reset);
         this.parentSizingClasses = addProp(this, 'sizingClasses', 'wmax hmax', reset);
         this.windowSizingClasses = addProp(this, 'windowSizingClasses', 'vw vh', reset);
@@ -179,7 +184,7 @@ class DsynrModal extends DsynrUIIElement {
                     removeClass(this.instanceRoot, 'o0');
                 }
                 if (this.animateTogether) {
-                    addClass(this.instance, this.modalAnimationClasses);
+                    addClass(this.instance, this.modalAnimateInClasses);
                 }
                 else {
                     //@todo animationEnd
@@ -189,6 +194,17 @@ class DsynrModal extends DsynrUIIElement {
                 removeClass(this.instanceRoot, 'o0');
             }
             this.setActive();
+        }
+    }
+    hide(destroy = this.autoDestroy) {
+        lfn('hide');
+        if (this.useOverlay) {
+            removeClass(this.instanceRoot, this.modalAnimateInClasses);
+            addClass(this.instanceRoot, this.modalAnimateOutClasses);
+        }
+        if (destroy) {
+            l('TODO ONANIMATIONEND END LISTENER...');
+            this.destroy();
         }
     }
     resizeRoot() {
@@ -202,16 +218,9 @@ class DsynrModal extends DsynrUIIElement {
             this.instanceRoot.style.height = getCssDimension(this.parent.clientHeight);
         }
     }
-    hide() {
-        lfn('hide');
-        if (this.isOverlayOn) {
-            this.hideBlanket();
-            removeClass(this.instanceRoot, 'zoomIn');
-            addClass(this.instanceRoot, 'zoomOut');
-        }
-    }
     destroy() {
-        throw new Error("Method not implemented.");
+        lfn('destroying modal..');
+        this.instanceRoot.remove();
     }
     setActive() {
         lfn('setActive');
@@ -227,20 +236,6 @@ class DsynrModal extends DsynrUIIElement {
             this.instance.addEventListener(transitionEvent, self.modalHidden);
         }
     }
-    showBlanket() {
-        let blanket;
-        blanket = addDiv('blanket', this.overlayClasses, document.body);
-        addDiv('blanketcoat', this.underlayClasses, blanket);
-        blanket.classList.remove('o0');
-        blanket.addEventListener(transitionEvent, this.blanketHidden);
-        this.isOverlayOn = true;
-    }
-    hideBlanket() {
-        let blanket;
-        blanket = getElementById('blanket');
-        blanket.classList.remove('fadeIn');
-        blanket.classList.add('fadeOut');
-    }
     blanketHidden(event) {
         // Do something when the transition ends
         let blanket;
@@ -248,7 +243,7 @@ class DsynrModal extends DsynrUIIElement {
         if (event.animationName == 'fadeOut') {
             blanket.removeEventListener(transitionEvent, this.blanketHidden);
             blanket.remove();
-            this.isOverlayOn = false;
+            // this.isOverlayOn = false;
         }
     }
     align() {
@@ -289,8 +284,10 @@ class DsynrSelect extends DsynrUIIElement {
         this.optionPrefix = addProp(this, 'namePrefix', concatStr([this.namePrefix, 'option'], '-'), reset);
         this.instanceClasses = addProp(this, 'instanceClasses', concatStr([this.namePrefix, 'rounded bg-light shadow p-5']), reset);
         this.showFinder = addProp(this, 'showFinder', false, reset);
+        this.autoExit = addProp(this, 'autoExit', true, reset);
         this.triggerCls = addProp(this, 'btnCls', concatStr([this.namePrefix, 'trigger btn btn-link'], '-'), reset);
         this.optCls = addProp(this, 'optCls', concatStr([this.optionPrefix, 'hand p-2']), reset);
+        this.optClsActive = addProp(this, 'optClsActive', 'active bg-warning rounded', reset);
     }
     setup() {
         lfn('setup');
@@ -298,6 +295,7 @@ class DsynrSelect extends DsynrUIIElement {
             this.content.id = 'dsynrSelect-' + DsynrSelect.instances.length;
         }
         this.options = this.content.options;
+        this.option = this.options[this.options.selectedIndex];
         this.setTrigger();
         l('Select Trigger READY!');
     }
@@ -316,12 +314,25 @@ class DsynrSelect extends DsynrUIIElement {
     }
     update(selectOption) {
         lfn('update');
+        removeClass(this.esPrevOpt, this.optClsActive);
+        this.option = selectOption;
+        addClass(this.option, this.optClsActive);
+        this.esPrevOpt = getElementById(selectOption.id);
         this.content.selectedIndex = parseInt(getData(selectOption, 'index'));
+        this.trigger.textContent = this.option.innerText;
+        if (this.autoExit) {
+            this.destroy();
+        }
     }
     addESOption(o, i) {
         lfn('addESOption');
         let oid = concatStr([this.optionPrefix, this.content.id, i], '-');
-        addDiv(oid, this.optCls, this.instance);
+        let ocls;
+        ocls = (i == this.option.index) ? concatStr([this.optCls, this.optClsActive]) : ocls = this.optCls;
+        addDiv(oid, ocls, this.instance);
+        if (i == this.option.index) {
+            this.esPrevOpt = getElementById(oid);
+        }
         let oe = getElementById(oid);
         oe.textContent = o.text;
         setData(oe, 'index', o.index.toString());
@@ -334,20 +345,19 @@ class DsynrSelect extends DsynrUIIElement {
     setTrigger() {
         lfn('addTrigger');
         this.trigger = addDiv(this.setName('btn', this.content.id), this.triggerCls, this.content.parentElement);
-        addText(this.options[0].text, this.trigger);
+        addText(this.option.text, this.trigger);
         let self = this;
         addListener(this.trigger.id, 'click', function () {
             self.show();
         });
         hide(this.content);
     }
-    getOption() {
-        lfn('dsynrSelect_getDsynrSelectOption');
-    }
-    hide() {
-        lfn('dsynrSelect_exitDsynrSelect');
+    destroy() {
+        lfn('destroy');
+        this.modal.hide(true);
     }
     setActive() {
+        lfn('setActive');
         DsynrSelect.activeInstance = this;
     }
     static auto(selectClass = 'dsynrSelect') {

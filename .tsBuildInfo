@@ -118,16 +118,16 @@
         "signature": "aa2b730558c73fe15612fe76f870d5d629f436f015a15b4722f7f812493dbba5"
       },
       "./src/ts/classes/dsynruiielement.ts": {
-        "version": "b080cbce427a5e0d062ad55c89a07a0077af104c69b4e1168a924c5c3b9b26c8",
+        "version": "2e52467a55cb77473270578d792139fb0af0f000c75e8ada12ba9f6559cde6ea",
         "signature": "e6bbab42818cffdee87f6dc1578f6e24ba05618718f1fe425fd86726b0c10774"
       },
       "./src/ts/components/dsynrmodal.ts": {
-        "version": "291f3133c0473e76b68c8199afecea51144055552dfc08372bd32728baa63cd3",
-        "signature": "441078e222988f7ff7656462e21683de0681243f90889241e0290dde6e5f3f66"
+        "version": "53aff420e56bf264688fd240f4c611beebdf159bcd5d77d171db23c0c94bb462",
+        "signature": "97e36dc8144a28f19e82cb9f506de7d93dce0b13772611f34284dc84bea5295d"
       },
       "./src/ts/components/dsynrselect.ts": {
-        "version": "f07ab9e434da54eeed7922d0ba2a2fdf57560983d2fb8a9398c0b63056c8d655",
-        "signature": "af3f678dceb78311ebcde9882e1d472587a6bf8614639329274ca6e56b72f65a"
+        "version": "ad962aaaec56ddc41e9f189b0051cfdd2dfb03c3d0b9a8e571bad35425fa2068",
+        "signature": "833c23c8f7acea1b49f9c6816bc708b97858ec60b4c831b6c00d293ec38ff999"
       },
       "./src/ts/interfaces/dsynrui.ts": {
         "version": "c311a7e7d823dd170263f1cd572bafaa778b7ede75eea6e8e9c74959e8632b47",

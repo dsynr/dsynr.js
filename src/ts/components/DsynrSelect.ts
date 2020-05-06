@@ -3,10 +3,14 @@ class DsynrSelect extends DsynrUIIElement {
     content: HTMLSelectElement;
     private trigger: HTMLElement;
     private options: HTMLOptionsCollection;
+    private option: HTMLOptionElement;
+    private esPrevOpt: HTMLElement;
     private adoptParent: boolean;
     private showFinder: boolean;
+    private autoExit: boolean;
     private triggerCls: string;
     private optCls: string;
+    private optClsActive: string;
     private optionPrefix: string;
 
     private modal: DsynrModal;
@@ -33,8 +37,10 @@ class DsynrSelect extends DsynrUIIElement {
         this.optionPrefix = addProp(this, 'namePrefix', concatStr([this.namePrefix, 'option'], '-'), reset);
         this.instanceClasses = addProp(this, 'instanceClasses', concatStr([this.namePrefix, 'rounded bg-light shadow p-5']), reset);
         this.showFinder = addProp(this, 'showFinder', false, reset);
+        this.autoExit = addProp(this, 'autoExit', true, reset);
         this.triggerCls = addProp(this, 'btnCls', concatStr([this.namePrefix, 'trigger btn btn-link'], '-'), reset);
         this.optCls = addProp(this, 'optCls', concatStr([this.optionPrefix, 'hand p-2']), reset);
+        this.optClsActive = addProp(this, 'optClsActive', 'active bg-warning rounded', reset);
     }
 
     setup(): void {
@@ -43,6 +49,7 @@ class DsynrSelect extends DsynrUIIElement {
             this.content.id = 'dsynrSelect-' + DsynrSelect.instances.length;
         }
         this.options = this.content.options;
+        this.option = this.options[this.options.selectedIndex];
         this.setTrigger();
         l('Select Trigger READY!');
     }
@@ -62,15 +69,29 @@ class DsynrSelect extends DsynrUIIElement {
         this.setActive();
     }
 
-    private update(selectOption: HTMLElement): void {
+    private update(selectOption: HTMLOptionElement): void {
         lfn('update');
+        removeClass(this.esPrevOpt, this.optClsActive);
+        this.option = selectOption;
+        addClass(this.option, this.optClsActive);
+        this.esPrevOpt = getElementById(selectOption.id);
         this.content.selectedIndex = parseInt(getData(selectOption, 'index'));
+        this.trigger.textContent = this.option.innerText;
+        if (this.autoExit) {
+            this.destroy();
+        }
     }
 
     private addESOption(o: HTMLOptionElement, i: number): void {
         lfn('addESOption');
         let oid: string = concatStr([this.optionPrefix, this.content.id, i], '-');
-        addDiv(oid, this.optCls, this.instance);
+        let ocls: string;
+        ocls = (i == this.option.index) ? concatStr([this.optCls, this.optClsActive]) : ocls = this.optCls;
+
+        addDiv(oid, ocls, this.instance);
+        if (i == this.option.index) {
+            this.esPrevOpt = getElementById(oid);
+        }
         let oe: HTMLOptionElement = <HTMLOptionElement>getElementById(oid);
         oe.textContent = o.text;
         setData(oe, 'index', o.index.toString());
@@ -85,7 +106,7 @@ class DsynrSelect extends DsynrUIIElement {
     private setTrigger(): void {
         lfn('addTrigger');
         this.trigger = addDiv(this.setName('btn', this.content.id), this.triggerCls, <HTMLElement>this.content.parentElement);
-        addText(this.options[0].text, this.trigger);
+        addText(this.option.text, this.trigger);
         let self: DsynrSelect = this;
         addListener(this.trigger.id, 'click', function () {
             self.show();
@@ -93,15 +114,13 @@ class DsynrSelect extends DsynrUIIElement {
         hide(this.content);
     }
 
-    private getOption() {
-        lfn('dsynrSelect_getDsynrSelectOption');
-    }
-
-    hide() {
-        lfn('dsynrSelect_exitDsynrSelect');
+    destroy() {
+        lfn('destroy');
+        this.modal.hide(true);
     }
 
     protected setActive(): void {
+        lfn('setActive');
         DsynrSelect.activeInstance = this;
     }
 

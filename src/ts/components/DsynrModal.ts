@@ -8,12 +8,14 @@ class DsynrModal extends DsynrUIIElement {
     private overlayClasses: string;
     private disableUnderlay: boolean;
     private useOverlay: boolean;
-    private isOverlayOn: boolean;
+    // private isOverlayOn: boolean;
     private adoptParent: boolean;
     private animateUnderlay: boolean;
     private animateTogether: boolean;
     private modalAnimate: boolean;
-    private modalAnimationClasses: string;
+    private autoDestroy: boolean;
+    private modalAnimateInClasses: string;
+    private modalAnimateOutClasses: string;
     private parentSizingClasses: string;
     private windowSizingClasses: string;
 
@@ -33,17 +35,20 @@ class DsynrModal extends DsynrUIIElement {
 
         let positionClasses: string = 'position-absolute';
         let alignmentClasses: string = 'top left';
+        let animateClasses: string = 'animated';
 
         this.adoptParent = addProp(this, 'adoptParent', true, reset);
         this.modalAnimate = addProp(this, 'modalAnimate', true, reset);
+        this.autoDestroy = addProp(this, 'autoDestroy', true, reset);
         this.animateTogether = addProp(this, 'animateTogether', true, reset);
-        this.isOverlayOn = addProp(this, 'isOverlayOn', false, reset);
+        // this.isOverlayOn = addProp(this, 'isOverlayOn', false, reset);
         this.useOverlay = addProp(this, 'useOverlay', true, reset);
         this.disableUnderlay = addProp(this, 'disableUnderlay', true, reset);
         this.animateUnderlay = addProp(this, 'animateUnderlay', true, reset);
         this.nameSuffix = addProp(this, 'nameSuffix', DsynrModal.instances.length.toString(), reset);
         this.namePrefix = addProp(this, 'namePrefix', 'dsynrModal', reset);
-        this.modalAnimationClasses = addProp(this, 'modalAnimationClasses', 'animated flipInX', reset);
+        this.modalAnimateInClasses = addProp(this, 'modalAnimateInClasses', concatStr([animateClasses, 'flipInX']), reset);
+        this.modalAnimateOutClasses = addProp(this, 'modalAnimateOutClasses', concatStr([animateClasses, 'flipOutY']), reset);
         this.overlayClasses = addProp(this, 'overlayClasses', 'o50 bg-dark', reset);
         this.parentSizingClasses = addProp(this, 'sizingClasses', 'wmax hmax', reset);
         this.windowSizingClasses = addProp(this, 'windowSizingClasses', 'vw vh', reset);
@@ -130,7 +135,7 @@ class DsynrModal extends DsynrUIIElement {
                     removeClass(this.instanceRoot, 'o0');
                 }
                 if (this.animateTogether) {
-                    addClass(this.instance, this.modalAnimationClasses);
+                    addClass(this.instance, this.modalAnimateInClasses);
                 } else {
                     //@todo animationEnd
                 }
@@ -141,29 +146,32 @@ class DsynrModal extends DsynrUIIElement {
         }
     }
 
+    hide(destroy: boolean = this.autoDestroy): void {
+        lfn('hide');
+        if (this.useOverlay) {
+            removeClass(this.instanceRoot, this.modalAnimateInClasses);
+            addClass(this.instanceRoot, this.modalAnimateOutClasses);
+        }
+        if (destroy) {
+            l('TODO ONANIMATIONEND LISTENER...');
+            this.destroy();
+        }
+    }
+
     private resizeRoot() {
         lfn('resizeRoot');
         if (this.parent == document.body) {
             removeClass(this.instanceRoot, this.parentSizingClasses);
             addClass(this.instanceRoot, this.windowSizingClasses);
-        }
-        else {
+        } else {
             this.instanceRoot.style.width = getCssDimension(this.parent.clientWidth);
             this.instanceRoot.style.height = getCssDimension(this.parent.clientHeight);
         }
     }
 
-    hide(): void {
-        lfn('hide');
-        if (this.isOverlayOn) {
-            this.hideBlanket();
-            removeClass(this.instanceRoot, 'zoomIn');
-            addClass(this.instanceRoot, 'zoomOut');
-        }
-    }
-
     destroy(): void {
-        throw new Error("Method not implemented.");
+        lfn('destroying modal..');
+        this.instanceRoot.remove();
     }
 
     setActive(): void {
@@ -182,22 +190,6 @@ class DsynrModal extends DsynrUIIElement {
         }
     }
 
-    showBlanket(): void {
-        let blanket: HTMLElement;
-        blanket = addDiv('blanket', this.overlayClasses, document.body);
-        addDiv('blanketcoat', this.underlayClasses, blanket);
-        blanket.classList.remove('o0');
-        blanket.addEventListener(transitionEvent, this.blanketHidden);
-        this.isOverlayOn = true;
-    }
-
-    hideBlanket(): void {
-        let blanket: HTMLElement;
-        blanket = getElementById('blanket');
-        blanket.classList.remove('fadeIn');
-        blanket.classList.add('fadeOut');
-    }
-
     blanketHidden(event): void {
         // Do something when the transition ends
         let blanket: HTMLElement;
@@ -205,7 +197,7 @@ class DsynrModal extends DsynrUIIElement {
         if (event.animationName == 'fadeOut') {
             blanket.removeEventListener(transitionEvent, this.blanketHidden);
             blanket.remove();
-            this.isOverlayOn = false;
+            // this.isOverlayOn = false;
         }
     }
 
