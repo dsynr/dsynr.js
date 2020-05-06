@@ -5,6 +5,7 @@ declare interface DsynrUI {
     setDefaults(reset: boolean): void;
     setup(): void;
     show(): void;
+    attention(): void;
     hide(): void;
     destroy(): void;
 }

@@ -10,8 +10,11 @@ abstract class DsynrUIIElement implements DsynrUI {
     protected content: HTMLElement;
     protected namePrefix: string;
     protected nameSuffix: string;
-    protected instanceClasses: string;
-    protected animationClasses: string;
+    protected instanceClass: string;
+    protected animateClass: string;
+    protected animateInClass: string;
+    protected animateOutClass: string;
+    protected animateAttentionClass: string;
     protected animate: boolean;
 
     protected selfAbort: boolean = false;
@@ -86,13 +89,19 @@ abstract class DsynrUIIElement implements DsynrUI {
     setDefaults(reset: boolean = false): void {
         lfn('setDefaults super ');
         this.animate = addProp(this, 'animate', true, reset);
-        this.animationClasses = addProp(this, 'animationClasses', 'animated fadeIn', reset);
+        this.animateClass = addProp(this, 'animateClass', 'animated', reset);
+        this.animateInClass = addProp(this, 'animateInClass', concatStr([this.animateClass, 'fadeIn']), reset);
+        this.animateOutClass = addProp(this, 'animateOutClass', concatStr([this.animateClass, 'fadeOut']), reset);
+        this.animateAttentionClass = addProp(this, 'animateOutClass', concatStr([this.animateClass, 'heartBeat']), reset);
     }
 
     protected addListeners(): void {
     }
 
     protected setActive(): void {
+    }
+
+    attention(): void {
     }
 
     show(): void {

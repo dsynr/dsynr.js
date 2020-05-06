@@ -118,20 +118,20 @@
         "signature": "aa2b730558c73fe15612fe76f870d5d629f436f015a15b4722f7f812493dbba5"
       },
       "./src/ts/classes/dsynruiielement.ts": {
-        "version": "2e52467a55cb77473270578d792139fb0af0f000c75e8ada12ba9f6559cde6ea",
-        "signature": "e6bbab42818cffdee87f6dc1578f6e24ba05618718f1fe425fd86726b0c10774"
+        "version": "2ed8aecbf75dbd4a561f558ab758f25f055c77285c1146ee75573b8c61c43590",
+        "signature": "14c5a604c69cbb163d5062c08289c4e56d6cd3ff48da2eba61431ae8694c9122"
       },
       "./src/ts/components/dsynrmodal.ts": {
-        "version": "53aff420e56bf264688fd240f4c611beebdf159bcd5d77d171db23c0c94bb462",
-        "signature": "97e36dc8144a28f19e82cb9f506de7d93dce0b13772611f34284dc84bea5295d"
+        "version": "c55bdcda6ea72a6ddc23d07814b4c239efa1099c6924f24cc7f43dbe542a691c",
+        "signature": "072896a8b6b78d3d05240eea54438836792a9a1256a2c397d62c6bbc153393c8"
       },
       "./src/ts/components/dsynrselect.ts": {
-        "version": "ad962aaaec56ddc41e9f189b0051cfdd2dfb03c3d0b9a8e571bad35425fa2068",
-        "signature": "833c23c8f7acea1b49f9c6816bc708b97858ec60b4c831b6c00d293ec38ff999"
+        "version": "bacb03e9e128fab1697e22e0fa7f93d693222cfb16b63e136b0d7cdb1aad3777",
+        "signature": "2cd8df7912db22ad29353cbd33268c43424cf48255cc2fe960ff596c05acbe8d"
       },
       "./src/ts/interfaces/dsynrui.ts": {
-        "version": "c311a7e7d823dd170263f1cd572bafaa778b7ede75eea6e8e9c74959e8632b47",
-        "signature": "4147d47de9c105d6268745eceffec70fcbc2d591bbd98d8d23eec6e00cc91e7c"
+        "version": "d1a5aab6bc5fb900ffcfd1ea1b715b57ee3107cc7a99c94abdefc38787c94151",
+        "signature": "4d413cfd2038643323ffb0d741866955e2156f150f42edc94bb411d2e7ef573d"
       }
     },
     "options": {

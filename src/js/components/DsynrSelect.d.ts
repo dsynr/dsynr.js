@@ -1,12 +1,13 @@
 declare class DsynrSelect extends DsynrUIIElement {
     content: HTMLSelectElement;
     private trigger;
+    private esPrevOpt;
     private options;
     private option;
-    private esPrevOpt;
     private adoptParent;
     private showFinder;
     private autoExit;
+    private isActive;
     private triggerCls;
     private optCls;
     private optClsActive;
@@ -17,6 +18,7 @@ declare class DsynrSelect extends DsynrUIIElement {
     setDefaults(reset?: boolean): void;
     setup(): void;
     show(): void;
+    attention(): void;
     private update;
     private addESOption;
     private setTrigger;

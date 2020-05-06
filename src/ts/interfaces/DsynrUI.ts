@@ -10,6 +10,8 @@ declare interface DsynrUI {
 
     show(): void
 
+    attention(): void
+
     hide(): void
 
     destroy(): void

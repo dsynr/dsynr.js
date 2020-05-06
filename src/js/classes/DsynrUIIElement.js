@@ -63,11 +63,16 @@ class DsynrUIIElement {
     setDefaults(reset = false) {
         lfn('setDefaults super ');
         this.animate = addProp(this, 'animate', true, reset);
-        this.animationClasses = addProp(this, 'animationClasses', 'animated fadeIn', reset);
+        this.animateClass = addProp(this, 'animateClass', 'animated', reset);
+        this.animateInClass = addProp(this, 'animateInClass', concatStr([this.animateClass, 'fadeIn']), reset);
+        this.animateOutClass = addProp(this, 'animateOutClass', concatStr([this.animateClass, 'fadeOut']), reset);
+        this.animateAttentionClass = addProp(this, 'animateOutClass', concatStr([this.animateClass, 'heartBeat']), reset);
     }
     addListeners() {
     }
     setActive() {
+    }
+    attention() {
     }
     show() {
     }

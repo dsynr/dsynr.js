@@ -2,20 +2,21 @@ declare class DsynrModal extends DsynrUIIElement {
     private instanceRoot;
     private underlay;
     private trigger;
-    private instanceRootClasses;
-    private underlayClasses;
-    private overlayClasses;
+    private instanceRootClass;
+    private parentSizingClass;
+    private windowSizingClass;
+    private underlayClass;
+    private overlayClass;
     private disableUnderlay;
     private useOverlay;
     private adoptParent;
-    private animateUnderlay;
-    private animateTogether;
-    private modalAnimate;
     private autoDestroy;
-    private modalAnimateInClasses;
-    private modalAnimateOutClasses;
-    private parentSizingClasses;
-    private windowSizingClasses;
+    private animateUnderlay;
+    private displayTogether;
+    private animateModal;
+    private modalAnimateInClass;
+    private modalAnimateAttentionClass;
+    private modalAnimateOutClass;
     constructor(modalContent: HTMLElement, preferences?: object);
     setDefaults(reset?: boolean): void;
     setup(): void;
@@ -25,6 +26,8 @@ declare class DsynrModal extends DsynrUIIElement {
      * add optional animationEnd listener for modal
      */
     show(): void;
+    attention(): void;
+    private animateDisplay;
     hide(destroy?: boolean): void;
     private resizeRoot;
     destroy(): void;

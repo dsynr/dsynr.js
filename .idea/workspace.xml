@@ -27,8 +27,10 @@
     <list default="true" id="5a40d500-3c83-4dd3-83d5-91876b3160f7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.tsBuildInfo" beforeDir="false" afterPath="$PROJECT_DIR$/.tsBuildInfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/demos/Select.html" beforeDir="false" afterPath="$PROJECT_DIR$/release/demos/Select.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/release/dsynr.util.js" beforeDir="false" afterPath="$PROJECT_DIR$/release/dsynr.util.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/release/dsynr.util.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/release/dsynr.util.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.d.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/components/DsynrModal.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrModal.d.ts" afterDir="false" />
@@ -37,9 +39,12 @@
       <change beforePath="$PROJECT_DIR$/src/js/components/DsynrSelect.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrSelect.d.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/components/DsynrSelect.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrSelect.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/components/DsynrSelect.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrSelect.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/interfaces/DsynrUI.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/interfaces/DsynrUI.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/interfaces/DsynrUI.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/interfaces/DsynrUI.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ts/classes/DsynrUIIElement.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/classes/DsynrUIIElement.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ts/components/DsynrModal.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/components/DsynrModal.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ts/components/DsynrSelect.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/components/DsynrSelect.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ts/interfaces/DsynrUI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/interfaces/DsynrUI.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +108,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="HTML" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="TypeScript&#10;HTML" />
     <property name="js.buildTools.grunt.grunt-cli.package" value="" />
     <property name="js.buildTools.gulp.gulp_package_dir" value="$PROJECT_DIR$/node_modules/gulp" />
     <property name="js.last.introduce.type" value="VAR" />
@@ -180,12 +185,22 @@
       <workItem from="1588358515292" duration="1213000" />
       <workItem from="1588368525111" duration="651000" />
       <workItem from="1588378675258" duration="1983000" />
-      <workItem from="1588713298272" duration="7257000" />
+      <workItem from="1588713298272" duration="21370000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -228,6 +243,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="331" y="19" width="1329" height="943" key="CommitChangelistDialog2/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1587770232300" />
+    <state x="92" y="92" width="1736" height="896" maximized="true" key="DiffContextDialog" timestamp="1588803134918">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="92" y="92" width="1736" height="896" maximized="true" key="DiffContextDialog/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1588803134918" />
     <state x="633" y="340" width="670" height="672" key="EditFileWatcherDialog" timestamp="1587947167463">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -300,10 +319,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1877" height="363" key="GridCell.Tab.3.right/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1587788145106" />
-    <state x="732" y="242" key="RollbackChangesDialog" timestamp="1587964014696">
+    <state x="732" y="242" key="RollbackChangesDialog" timestamp="1588803733268">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="732" y="242" key="RollbackChangesDialog/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1587964014696" />
+    <state x="732" y="242" key="RollbackChangesDialog/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1588803733268" />
     <state x="917" y="241" width="998" height="708" key="SettingsEditor" timestamp="1588041314201">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -320,6 +339,14 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="92" y="92" width="1736" height="896" key="com.intellij.history.integration.ui.views.SelectionHistoryDialog/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1588200235800" />
+    <state x="567" y="150" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1588783166723">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="567" y="150" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1588783166723" />
+    <state x="-1920" y="292" width="1447" height="1067" maximized="true" key="dock-window-1" timestamp="1588804205497">
+      <screen x="-1920" y="292" width="1920" height="1080" />
+    </state>
+    <state x="-1920" y="292" width="1447" height="1067" maximized="true" key="dock-window-1/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1588804205497" />
     <state x="667" y="296" width="586" height="520" key="find.popup" timestamp="1588723797062">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -336,10 +363,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="736" y="313" key="refactoring.ChangeSignatureDialog/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1588046648764" />
-    <state x="616" y="250" key="run.anything.popup" timestamp="1588115518267">
+    <state x="616" y="250" key="run.anything.popup" timestamp="1588779335389">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="616" y="250" key="run.anything.popup/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1588115518267" />
+    <state x="616" y="250" key="run.anything.popup/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1588779335388" />
     <state x="616" y="250" key="run.anything.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1587735462862" />
     <state x="752" y="398" width="489" height="387" key="scopes" timestamp="1588199596366">
       <screen x="0" y="0" width="1920" height="1080" />
@@ -355,15 +382,9 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/js/components/DsynrSelect.js</url>
-          <line>28</line>
+          <line>29</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/ts/components/DsynrModal.ts</url>
-          <line>151</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

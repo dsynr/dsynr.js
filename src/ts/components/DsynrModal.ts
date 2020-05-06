@@ -37,8 +37,8 @@ class DsynrModal extends DsynrUIIElement {
 
         super.setDefaults();
 
-        let positionClasses: string = 'position-absolute';
-        let alignmentClasses: string = 'top left';
+        let positionClass: string = 'position-absolute';
+        let alignmentClass: string = 'top left';
 
         this.adoptParent = addProp(this, 'adoptParent', true, reset);
         this.animateModal = addProp(this, 'animateModal', true, reset);
@@ -57,13 +57,13 @@ class DsynrModal extends DsynrUIIElement {
         this.modalAnimateAttentionClass = addProp(this, 'modalAnimateAttentionClass', concatStr([this.animateClass, 'shake']), reset);
 
         this.overlayClass = addProp(this, 'overlayClass', 'o50 bg-dark', reset);
-        this.parentSizingClass = addProp(this, 'sizingClasses', 'wmax hmax', reset);
+        this.parentSizingClass = addProp(this, 'sizingClass', 'wmax hmax', reset);
         this.windowSizingClass = addProp(this, 'windowSizingClass', 'vw vh', reset);
 
-        this.underlayClass = addProp(this, 'underlayClass', concatStr([positionClasses, alignmentClasses, this.parentSizingClass, 'z1']), reset);
+        this.underlayClass = addProp(this, 'underlayClass', concatStr([positionClass, alignmentClass, this.parentSizingClass, 'z1']), reset);
 
-        this.instanceClass = addProp(this, 'instanceClasses', concatStr([positionClasses, 'z2 o0']), reset);
-        this.instanceRootClass = addProp(this, 'rootClasses', concatStr([positionClasses, alignmentClasses, this.parentSizingClass, 'z3 o0 d-none']), reset);
+        this.instanceClass = addProp(this, 'instanceClass', concatStr([positionClass, 'z2 o0']), reset);
+        this.instanceRootClass = addProp(this, 'instanceRootClass', concatStr([positionClass, alignmentClass, this.parentSizingClass, 'z3 o0 d-none']), reset);
 
         this.trigger = addProp(this, 'trigger', 'auto', reset);
     }
@@ -128,6 +128,7 @@ class DsynrModal extends DsynrUIIElement {
 
 
             removeClass(this.instanceRoot, 'd-none');
+            removeClass(this.instance, 'o0');
             removeClass(this.content, 'o0');
 
             l(this.parent.id);
@@ -140,24 +141,7 @@ class DsynrModal extends DsynrUIIElement {
             }
 
             this.align();
-
-            // this.animateDisplay();
-
-            // if (this.animate) {
-            //     if (this.animateUnderlay) {
-            //         addClass(this.instanceRoot, this.animateInClass);
-            //     } else {
-            //         removeClass(this.instanceRoot, 'o0');
-            //     }
-            //     if (this.displayTogether) {
-            //         addClass(this.instance, this.modalAnimateInClass);
-            //     } else {
-            //         //@todo animationEnd
-            //     }
-            // } else {
-            //     removeClass(this.instanceRoot, 'o0');
-            // }
-
+            this.animateDisplay();
             this.setActive();
         }
     }
@@ -169,13 +153,15 @@ class DsynrModal extends DsynrUIIElement {
 
     private animateDisplay(getAttention: boolean = false): void {
         lfn('animateDisplay');
+
         if (this.displayTogether) {
 
             if (this.animate && this.animateUnderlay) {
                 if (getAttention) {
                     removeClass(this.instanceRoot, this.animateInClass);
-                    removeClass(this.instance, this.modalAnimateInClass);
                     addClass(this.instanceRoot, this.animateAttentionClass);
+
+                    removeClass(this.instance, this.modalAnimateInClass);
                     addClass(this.instance, this.modalAnimateAttentionClass);
                 } else {
                     addClass(this.instanceRoot, this.animateInClass);
@@ -254,7 +240,13 @@ class DsynrModal extends DsynrUIIElement {
 
     align(): void {
         lfn('align');
+        if(!this.disableUnderlay){
+            addClass(this.instanceRoot,this.parentSizingClass);
+        }
         centereStage(this.instance);
+        if(!this.disableUnderlay){
+            //@todo removeClass(this.instanceRoot,this.parentSizingClass);
+        }
     }
 
     private modalHidden(event): void {
