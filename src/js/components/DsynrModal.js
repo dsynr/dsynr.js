@@ -55,8 +55,7 @@ class DsynrModal extends DsynrUIIElement {
      */
     show() {
         if (DsynrModal.activeInstance !== this) {
-            lfn('show triggered via : ' + this.trigger);
-            l(this);
+            lfn('show via : ' + this.trigger);
             addClass(this.content, 'o0');
             removeClass(this.content, 'd-none');
             if (this.parent === undefined) {

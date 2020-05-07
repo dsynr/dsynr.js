@@ -122,11 +122,11 @@
         "signature": "14c5a604c69cbb163d5062c08289c4e56d6cd3ff48da2eba61431ae8694c9122"
       },
       "./src/ts/components/dsynrmodal.ts": {
-        "version": "c55bdcda6ea72a6ddc23d07814b4c239efa1099c6924f24cc7f43dbe542a691c",
+        "version": "721abfbe3fc55d1af73e8542a58703692e42ac4e00a5983d081c967ea6a602c1",
         "signature": "072896a8b6b78d3d05240eea54438836792a9a1256a2c397d62c6bbc153393c8"
       },
       "./src/ts/components/dsynrselect.ts": {
-        "version": "bacb03e9e128fab1697e22e0fa7f93d693222cfb16b63e136b0d7cdb1aad3777",
+        "version": "7c8edcbee317e968822b2f866201df9500b8a63fa862854d2fd3f42fa289f2a9",
         "signature": "2cd8df7912db22ad29353cbd33268c43424cf48255cc2fe960ff596c05acbe8d"
       },
       "./src/ts/interfaces/dsynrui.ts": {
@@ -185,9 +185,9 @@
       "./src/ts/string.ts",
       "./src/ts/viewport.ts",
       "./src/ts/classes/dsynruiielement.ts",
-      "./src/ts/components/dsynrselect.ts",
+      "./src/ts/components/dsynrmodal.ts",
       "./src/ts/interfaces/dsynrui.ts",
-      "./src/ts/components/dsynrmodal.ts"
+      "./src/ts/components/dsynrselect.ts"
     ]
   },
   "version": "3.8.3"

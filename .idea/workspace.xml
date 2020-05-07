@@ -27,24 +27,9 @@
     <list default="true" id="5a40d500-3c83-4dd3-83d5-91876b3160f7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.tsBuildInfo" beforeDir="false" afterPath="$PROJECT_DIR$/.tsBuildInfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/release/demos/Select.html" beforeDir="false" afterPath="$PROJECT_DIR$/release/demos/Select.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/release/dsynr.util.js" beforeDir="false" afterPath="$PROJECT_DIR$/release/dsynr.util.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/release/dsynr.util.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/release/dsynr.util.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/DsynrModal.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrModal.d.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/components/DsynrModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrModal.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/components/DsynrModal.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrModal.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/DsynrSelect.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrSelect.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/DsynrSelect.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrSelect.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/DsynrSelect.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrSelect.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/interfaces/DsynrUI.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/interfaces/DsynrUI.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/interfaces/DsynrUI.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/interfaces/DsynrUI.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ts/classes/DsynrUIIElement.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/classes/DsynrUIIElement.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ts/components/DsynrModal.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/components/DsynrModal.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ts/components/DsynrSelect.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/components/DsynrSelect.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ts/interfaces/DsynrUI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/interfaces/DsynrUI.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,7 +170,7 @@
       <workItem from="1588358515292" duration="1213000" />
       <workItem from="1588368525111" duration="651000" />
       <workItem from="1588378675258" duration="1983000" />
-      <workItem from="1588713298272" duration="21370000" />
+      <workItem from="1588713298272" duration="22755000" />
     </task>
     <servers />
   </component>
@@ -343,10 +328,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="567" y="150" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1588783166723" />
-    <state x="-1920" y="292" width="1447" height="1067" maximized="true" key="dock-window-1" timestamp="1588804205497">
-      <screen x="-1920" y="292" width="1920" height="1080" />
+    <state x="0" y="13" width="1447" height="1067" maximized="true" key="dock-window-1" timestamp="1588815632079">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="-1920" y="292" width="1447" height="1067" maximized="true" key="dock-window-1/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1588804205497" />
+    <state x="0" y="13" width="1447" height="1067" maximized="true" key="dock-window-1/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1588815632079" />
     <state x="667" y="296" width="586" height="520" key="find.popup" timestamp="1588723797062">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -385,6 +370,12 @@
           <line>29</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/ts/components/DsynrModal.ts</url>
+          <line>244</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

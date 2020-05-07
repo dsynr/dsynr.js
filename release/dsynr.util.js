@@ -146,8 +146,7 @@ class DsynrModal extends DsynrUIIElement {
      */
     show() {
         if (DsynrModal.activeInstance !== this) {
-            lfn('show triggered via : ' + this.trigger);
-            l(this);
+            lfn('show via : ' + this.trigger);
             addClass(this.content, 'o0');
             removeClass(this.content, 'd-none');
             if (this.parent === undefined) {
@@ -369,7 +368,7 @@ class DsynrSelect extends DsynrUIIElement {
         let oid = concatStr([this.optionPrefix, this.content.id, i], '-');
         let ocls;
         l(this.esPrevOpt);
-        ocls = (i == this.option.index) ? concatStr([this.optCls, this.optClsActive]) : ocls = this.optCls;
+        ocls = (i == this.content.selectedIndex) ? concatStr([this.optCls, this.optClsActive]) : ocls = this.optCls;
         addDiv(oid, ocls, this.instance);
         if (i == this.option.index) {
             this.esPrevOpt = getElementById(oid);

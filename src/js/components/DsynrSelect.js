@@ -69,7 +69,7 @@ class DsynrSelect extends DsynrUIIElement {
         let oid = concatStr([this.optionPrefix, this.content.id, i], '-');
         let ocls;
         l(this.esPrevOpt);
-        ocls = (i == this.option.index) ? concatStr([this.optCls, this.optClsActive]) : ocls = this.optCls;
+        ocls = (i == this.content.selectedIndex) ? concatStr([this.optCls, this.optClsActive]) : ocls = this.optCls;
         addDiv(oid, ocls, this.instance);
         if (i == this.option.index) {
             this.esPrevOpt = getElementById(oid);
