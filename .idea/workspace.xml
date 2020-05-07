@@ -27,9 +27,15 @@
     <list default="true" id="5a40d500-3c83-4dd3-83d5-91876b3160f7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.tsBuildInfo" beforeDir="false" afterPath="$PROJECT_DIR$/.tsBuildInfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/dsynr.util.js" beforeDir="false" afterPath="$PROJECT_DIR$/release/dsynr.util.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/dsynr.util.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/release/dsynr.util.min.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/components/DsynrModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrModal.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/components/DsynrModal.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrModal.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/components/DsynrSelect.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrSelect.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/components/DsynrSelect.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrSelect.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/components/DsynrSelect.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrSelect.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ts/components/DsynrModal.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/components/DsynrModal.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ts/components/DsynrSelect.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/components/DsynrSelect.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,7 +176,7 @@
       <workItem from="1588358515292" duration="1213000" />
       <workItem from="1588368525111" duration="651000" />
       <workItem from="1588378675258" duration="1983000" />
-      <workItem from="1588713298272" duration="22755000" />
+      <workItem from="1588713298272" duration="26965000" />
     </task>
     <servers />
   </component>
@@ -373,7 +379,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/ts/components/DsynrModal.ts</url>
-          <line>244</line>
+          <line>253</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="11" />
         </line-breakpoint>

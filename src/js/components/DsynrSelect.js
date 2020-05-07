@@ -39,6 +39,8 @@ class DsynrSelect extends DsynrUIIElement {
         }
         else {
             this.instance = addDiv(this.setName('', this.content.id), this.instanceClass);
+            this.instance.tabIndex = 0;
+            this.instance.style.outline = 'none';
             let self = this;
             makeArray(this.options).forEach(function (o, index) {
                 self.addESOption(o, index);
@@ -70,9 +72,11 @@ class DsynrSelect extends DsynrUIIElement {
         let ocls;
         l(this.esPrevOpt);
         ocls = (i == this.content.selectedIndex) ? concatStr([this.optCls, this.optClsActive]) : ocls = this.optCls;
-        addDiv(oid, ocls, this.instance);
+        let eso = addDiv(oid, ocls, this.instance);
+        eso.tabIndex = i;
+        eso.style.outline = 'none';
         if (i == this.option.index) {
-            this.esPrevOpt = getElementById(oid);
+            this.esPrevOpt = eso;
         }
         let oe = getElementById(oid);
         oe.textContent = o.text;
@@ -82,16 +86,51 @@ class DsynrSelect extends DsynrUIIElement {
             lclk(oe.id);
             self.update(oe);
         });
+        addListener(oe.id, 'keydown', function (ev) {
+            if (ev.key == 'Enter') {
+                self.update(oe);
+            }
+        });
     }
     setTrigger() {
         lfn('addTrigger');
         this.trigger = addDiv(this.setName('btn', this.content.id), this.triggerCls, this.content.parentElement);
         addText(this.option.text, this.trigger);
         let self = this;
-        addListener(this.trigger.id, 'click', function () {
+        addListener(this.trigger.id, 'click', function (ev) {
+            ev.preventDefault();
             self.show();
         });
         hide(this.content);
+    }
+    addListeners() {
+        lfn('addListeners...');
+        let self = this;
+        addListener(this.instance.id, 'focus', ev => {
+            l('focused!');
+        });
+        addListener(this.instance.id, 'keydown', function (evnt) {
+            switch (evnt.key) {
+                case 'ArrowDown':
+                case 'ArrowRight':
+                case 'Tab':
+                    self.next();
+                    break;
+                case 'ArrowUp':
+                case 'ArrowLeft':
+                    self.prev();
+                    break;
+                case 'Escape':
+                    self.destroy();
+                    break;
+            }
+        });
+    }
+    next() {
+        lfn('next');
+    }
+    prev() {
+        lfn('prev');
     }
     destroy() {
         lfn('destroy');
@@ -103,6 +142,8 @@ class DsynrSelect extends DsynrUIIElement {
         lfn('setActive');
         this.isActive = true;
         DsynrSelect.activeInstance = this;
+        this.addListeners();
+        this.instance.focus();
     }
     static auto(selectClass = 'dsynrSelect') {
         lfn('auto');

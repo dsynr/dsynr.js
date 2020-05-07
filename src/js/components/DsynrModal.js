@@ -168,7 +168,16 @@ class DsynrModal extends DsynrUIIElement {
         if (this.animate) {
             l('enabling animation');
             this.instance.addEventListener(transitionEvent, self.modalHidden);
+            // this.instance.addEventListener(transitionEvent, self.modalHidden);
         }
+        addListener(this.instanceRoot.id, 'keydown', function (evnt) {
+            if (evnt.key == 'Escape') {
+                self.hide(true);
+            }
+        });
+        addListener(this.instanceRoot.id, 'click', function (evnt) {
+            self.hide(true);
+        });
     }
     blanketHidden(event) {
         // Do something when the transition ends

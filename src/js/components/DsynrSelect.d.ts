@@ -22,6 +22,9 @@ declare class DsynrSelect extends DsynrUIIElement {
     private update;
     private addESOption;
     private setTrigger;
+    protected addListeners(): void;
+    private next;
+    private prev;
     destroy(): void;
     protected setActive(): void;
     static auto(selectClass?: string): void;

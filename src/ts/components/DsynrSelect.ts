@@ -65,6 +65,8 @@ class DsynrSelect extends DsynrUIIElement {
             this.attention();
         } else {
             this.instance = addDiv(this.setName('', this.content.id), this.instanceClass);
+            this.instance.tabIndex = 0;
+            this.instance.style.outline = 'none';
             let self: DsynrSelect = this;
             makeArray(this.options).forEach(function (o: HTMLOptionElement, index: number) {
                 self.addESOption(o, index);
@@ -101,9 +103,11 @@ class DsynrSelect extends DsynrUIIElement {
         l(this.esPrevOpt);
         ocls = (i == this.content.selectedIndex) ? concatStr([this.optCls, this.optClsActive]) : ocls = this.optCls;
 
-        addDiv(oid, ocls, this.instance);
+        let eso: HTMLElement = addDiv(oid, ocls, this.instance);
+        eso.tabIndex = i;
+        eso.style.outline = 'none';
         if (i == this.option.index) {
-            this.esPrevOpt = getElementById(oid);
+            this.esPrevOpt = eso;
         }
         let oe: HTMLOptionElement = <HTMLOptionElement>getElementById(oid);
         oe.textContent = o.text;
@@ -114,6 +118,11 @@ class DsynrSelect extends DsynrUIIElement {
             lclk(oe.id);
             self.update(oe);
         });
+        addListener(oe.id, 'keydown', function (ev) {
+            if (ev.key == 'Enter') {
+                self.update(oe);
+            }
+        });
     }
 
     private setTrigger(): void {
@@ -121,10 +130,43 @@ class DsynrSelect extends DsynrUIIElement {
         this.trigger = addDiv(this.setName('btn', this.content.id), this.triggerCls, <HTMLElement>this.content.parentElement);
         addText(this.option.text, this.trigger);
         let self: DsynrSelect = this;
-        addListener(this.trigger.id, 'click', function () {
+        addListener(this.trigger.id, 'click', function (ev) {
+            ev.preventDefault();
             self.show();
         });
         hide(this.content);
+    }
+
+    protected addListeners() {
+        lfn('addListeners...');
+        let self: DsynrSelect = this;
+        addListener(this.instance.id, 'focus', ev => {
+            l('focused!');
+        });
+        addListener(this.instance.id, 'keydown', function (evnt: KeyboardEvent) {
+            switch (evnt.key) {
+                case 'ArrowDown':
+                case 'ArrowRight':
+                case 'Tab':
+                    self.next();
+                    break;
+                case 'ArrowUp':
+                case 'ArrowLeft':
+                    self.prev();
+                    break;
+                case 'Escape':
+                    self.destroy();
+                    break;
+            }
+        });
+    }
+
+    private next(): void {
+        lfn('next');
+    }
+
+    private prev(): void {
+        lfn('prev');
     }
 
     destroy() {
@@ -138,6 +180,8 @@ class DsynrSelect extends DsynrUIIElement {
         lfn('setActive');
         this.isActive = true;
         DsynrSelect.activeInstance = this;
+        this.addListeners();
+        this.instance.focus();
     }
 
     static auto(selectClass: string = 'dsynrSelect'): void {

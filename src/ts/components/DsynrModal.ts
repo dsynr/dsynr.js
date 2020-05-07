@@ -222,7 +222,16 @@ class DsynrModal extends DsynrUIIElement {
         if (this.animate) {
             l('enabling animation');
             this.instance.addEventListener(transitionEvent, self.modalHidden);
+            // this.instance.addEventListener(transitionEvent, self.modalHidden);
         }
+        addListener(this.instanceRoot.id, 'keydown', function (evnt: KeyboardEvent) {
+            if (evnt.key == 'Escape') {
+                self.hide(true);
+            }
+        });
+        addListener(this.instanceRoot.id, 'click', function (evnt: MouseEvent) {
+            self.hide(true);
+        });
     }
 
     blanketHidden(event): void {
@@ -238,11 +247,11 @@ class DsynrModal extends DsynrUIIElement {
 
     align(): void {
         lfn('align');
-        if(!this.disableUnderlay){
-            addClass(this.instanceRoot,this.parentSizingClass);
+        if (!this.disableUnderlay) {
+            addClass(this.instanceRoot, this.parentSizingClass);
         }
         centereStage(this.instance);
-        if(!this.disableUnderlay){
+        if (!this.disableUnderlay) {
             //@todo removeClass(this.instanceRoot,this.parentSizingClass);
         }
     }
