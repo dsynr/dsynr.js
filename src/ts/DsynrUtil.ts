@@ -405,7 +405,7 @@ class DsynrUtil {
     }
 
     getPageScripts(): void {
-        let ths: this;
+        let ths: DsynrUtil;
         function _(parentNode: HTMLElement): void {
             for (let node of parentNode.children) {
                 if (node.hasAttribute('src') && node.getAttribute('src') != null) {
