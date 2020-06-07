@@ -333,6 +333,7 @@ class DsynrUtil {
             typeof formData !== "boolean" ? this.post(url, formData) : this.request(url, saveAs);
         } else {
             this.failed();
+            l('eh!!');
         }
     }
 

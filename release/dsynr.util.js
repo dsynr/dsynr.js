@@ -739,6 +739,7 @@ class DsynrUtil {
         }
         else {
             this.failed();
+            l('eh!!');
         }
     }
     request(url, saveAs = false) {
