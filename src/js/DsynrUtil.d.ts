@@ -9,7 +9,7 @@ declare class DsynrUtil {
     totalRequestDatasets: number;
     documentScripts: Array<string>;
     private currentRequest;
-    private reqDataReady;
+    private readonly reqDataReady;
     constructor();
     /**
      * @todo

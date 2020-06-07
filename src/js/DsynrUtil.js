@@ -3,7 +3,7 @@
 class DsynrUtil {
     constructor() {
         this.transitionEvent = this.whichAnimationEvent();
-        this.domain = window.location.origin + '/';
+        this.domain = document.baseURI;
         this.requestDataset = {};
         this.totalRequestDatasets = 0;
         this.documentScripts = [];
@@ -342,10 +342,11 @@ class DsynrUtil {
         new DsynrModal(fdp);
     }
     getPageScripts() {
+        let ths;
         function _(parentNode) {
             for (let node of parentNode.children) {
                 if (node.hasAttribute('src') && node.getAttribute('src') != null) {
-                    this.documentScripts.push(node.getAttribute('src'));
+                    ths.documentScripts.push(node.getAttribute('src'));
                 }
             }
         }

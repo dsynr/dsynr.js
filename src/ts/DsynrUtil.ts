@@ -4,12 +4,12 @@ class DsynrUtil {
     vw: number;
     vh: number;
     transitionEvent = this.whichAnimationEvent();
-    domain: string = window.location.origin + '/';
+    domain: string = document.baseURI;
     requestDataset = {};
     totalRequestDatasets = 0;
     documentScripts: Array<string> = [];
     private currentRequest: XMLHttpRequest;
-    private reqDataReady: Event;
+    private readonly reqDataReady: Event;
 
     constructor() {
         this.updateViewportVars();
@@ -405,10 +405,11 @@ class DsynrUtil {
     }
 
     getPageScripts(): void {
+        let ths: this;
         function _(parentNode: HTMLElement): void {
             for (let node of parentNode.children) {
                 if (node.hasAttribute('src') && node.getAttribute('src') != null) {
-                    this.documentScripts.push(<string>node.getAttribute('src'));
+                    ths.documentScripts.push(<string>node.getAttribute('src'));
 
                 }
             }

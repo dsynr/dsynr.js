@@ -29,6 +29,11 @@
   <component name="ChangeListManager">
     <list default="true" id="5a40d500-3c83-4dd3-83d5-91876b3160f7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.tsBuildInfo" beforeDir="false" afterPath="$PROJECT_DIR$/.tsBuildInfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/DsynrUtil.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/DsynrUtil.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/DsynrUtil.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/DsynrUtil.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/DsynrUtil.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/DsynrUtil.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ts/DsynrUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/DsynrUtil.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +180,9 @@
       <workItem from="1588713298272" duration="26965000" />
       <workItem from="1591503292801" duration="3534000" />
       <workItem from="1591515185886" duration="28000" />
-      <workItem from="1591515427970" duration="1575000" />
+      <workItem from="1591515427970" duration="2158000" />
+      <workItem from="1591541636356" duration="655000" />
+      <workItem from="1591542486841" duration="1198000" />
     </task>
     <servers />
   </component>
