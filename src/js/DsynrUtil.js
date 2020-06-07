@@ -267,31 +267,48 @@ class DsynrUtil {
         return (bounding.top / 2 > -bounding.top);
         // return (getPercentage((e.clientHeight + bounding.top), 50) > -bounding.top);
     }
-    request(uri, saveAs = false) {
-        this.lfn('request');
-        this.currentRequest = new XMLHttpRequest();
-        this.l(this.currentRequest);
-        if (this.currentRequest) {
-            this.currentRequest.open('GET', uri, true);
-            this.setHeaders();
-            this.currentRequest.send();
-            let ths = this;
-            this.currentRequest.addEventListener('readystatechange', function () {
-                ths.stateChanged(ths, saveAs);
-            });
-            this.l('GETTING: ' + uri);
+    ajax(url, saveAs = false, formData = false) {
+        this.lfn('ajax');
+        this.curReq = new XMLHttpRequest();
+        if (this.curReq) {
+            typeof formData !== "boolean" ? this.post(url, formData) : this.request(url, saveAs);
         }
         else {
             this.failed();
         }
     }
-    setHeaders() {
-        this.currentRequest.setRequestHeader('Cache-Control', 'no-cache');
-        this.currentRequest.setRequestHeader('Powered-by', 'Dsynr.com');
+    request(url, saveAs = false) {
+        this.lfn('request');
+        this.curReq.open('GET', url, true);
+        this.setHeaders();
+        this.curReq.send();
+        let ths = this;
+        this.curReq.addEventListener('readystatechange', function () {
+            ths.stateChanged(ths, saveAs);
+        });
+        this.l('GETTING: ' + url);
+    }
+    post(url, formData) {
+        this.lfn('post');
+        this.curReq.open('POST', url, true);
+        this.setHeaders(true);
+        this.curReq.send(formData);
+        let ths = this;
+        this.curReq.addEventListener('readystatechange', function () {
+            ths.stateChanged(ths, false);
+        });
+        this.l('POSTING: ' + url);
+    }
+    setHeaders(isPost = false) {
+        if (isPost) {
+            this.curReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        }
+        this.curReq.setRequestHeader('Cache-Control', 'no-cache');
+        this.curReq.setRequestHeader('Powered-by', 'Dsynr.com');
     }
     stateChanged(ths, saveAs) {
         this.lfn('stateChanged');
-        let req = ths.currentRequest;
+        let req = ths.curReq;
         if (req.readyState === XMLHttpRequest.DONE) {
             if (req.status === 200) {
                 ths.succeeded(saveAs);
@@ -313,10 +330,10 @@ class DsynrUtil {
         this.totalRequestDatasets++;
         if (typeof saveAs === 'string') {
             this.l('Saving to dataset; Reference key: ' + saveAs);
-            // this.requestDataset[saveAs] = this.htmlToElements(this.currentRequest.response);
-            this.requestDataset[saveAs] = this.currentRequest.response;
+            // this.requestDataset[saveAs] = this.htmlToElements(this.curReq.response);
+            this.requestDataset[saveAs] = this.curReq.response;
         }
-        this.addFetchedData(this.currentRequest.response);
+        this.addFetchedData(this.curReq.response);
     }
     addFetchedData(requestResponse, parent = document.body) {
         let fdp = this.addDiv('dsynrFetchedData-' + this.totalRequestDatasets, 'd-none', parent);

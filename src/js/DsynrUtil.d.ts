@@ -8,7 +8,7 @@ declare class DsynrUtil {
     requestDataset: {};
     totalRequestDatasets: number;
     documentScripts: Array<string>;
-    private currentRequest;
+    private curReq;
     private readonly reqDataReady;
     constructor();
     /**
@@ -101,7 +101,9 @@ declare class DsynrUtil {
     getBounds(e: HTMLElement): ClientRect;
     isInViewportSlightly(e: HTMLElement): boolean;
     isInViewportMostly(e: any): boolean;
-    request(uri: string, saveAs?: string | boolean): void;
+    ajax(url: string, saveAs?: string | boolean, formData?: FormData | boolean): void;
+    private request;
+    private post;
     private setHeaders;
     private stateChanged;
     private failed;

@@ -8,7 +8,7 @@ class DsynrUtil {
     requestDataset = {};
     totalRequestDatasets = 0;
     documentScripts: Array<string> = [];
-    private currentRequest: XMLHttpRequest;
+    private curReq: XMLHttpRequest;
     private readonly reqDataReady: Event;
 
     constructor() {
@@ -326,32 +326,52 @@ class DsynrUtil {
         // return (getPercentage((e.clientHeight + bounding.top), 50) > -bounding.top);
     }
 
-    request(uri: string, saveAs: string | boolean = false): void {
-        this.lfn('request');
-        this.currentRequest = new XMLHttpRequest();
-        this.l(this.currentRequest);
-        if (this.currentRequest) {
-            this.currentRequest.open('GET', uri, true);
-            this.setHeaders();
-            this.currentRequest.send();
-            let ths = this;
-            this.currentRequest.addEventListener('readystatechange', function () {
-                ths.stateChanged(ths, saveAs);
-            });
-            this.l('GETTING: ' + uri);
+    ajax(url: string, saveAs: string | boolean = false, formData: FormData | boolean = false): void {
+        this.lfn('ajax');
+        this.curReq = new XMLHttpRequest();
+        if (this.curReq) {
+            typeof formData !== "boolean" ? this.post(url, formData) : this.request(url, saveAs);
         } else {
             this.failed();
         }
     }
 
-    private setHeaders() {
-        this.currentRequest.setRequestHeader('Cache-Control', 'no-cache');
-        this.currentRequest.setRequestHeader('Powered-by', 'Dsynr.com');
+    private request(url: string, saveAs: string | boolean = false): void {
+        this.lfn('request');
+        this.curReq.open('GET', url, true);
+        this.setHeaders();
+        this.curReq.send();
+        let ths = this;
+        this.curReq.addEventListener('readystatechange', function () {
+            ths.stateChanged(ths, saveAs);
+        });
+        this.l('GETTING: ' + url);
+    }
+
+    private post(url: string, formData: FormData): void {
+        this.lfn('post');
+        this.curReq.open('POST', url, true);
+        this.setHeaders(true);
+        this.curReq.send(formData);
+        let ths = this;
+        this.curReq.addEventListener('readystatechange', function () {
+            ths.stateChanged(ths, false);
+        });
+        this.l('POSTING: ' + url);
+
+    }
+
+    private setHeaders(isPost: boolean = false) {
+        if (isPost) {
+            this.curReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        }
+        this.curReq.setRequestHeader('Cache-Control', 'no-cache');
+        this.curReq.setRequestHeader('Powered-by', 'Dsynr.com');
     }
 
     private stateChanged(ths: DsynrUtil, saveAs: string | boolean): any {
         this.lfn('stateChanged');
-        let req = ths.currentRequest;
+        let req = ths.curReq;
         if (req.readyState === XMLHttpRequest.DONE) {
             if (req.status === 200) {
                 ths.succeeded(saveAs);
@@ -373,10 +393,10 @@ class DsynrUtil {
         this.totalRequestDatasets++;
         if (typeof saveAs === 'string') {
             this.l('Saving to dataset; Reference key: ' + saveAs);
-            // this.requestDataset[saveAs] = this.htmlToElements(this.currentRequest.response);
-            this.requestDataset[saveAs] = this.currentRequest.response;
+            // this.requestDataset[saveAs] = this.htmlToElements(this.curReq.response);
+            this.requestDataset[saveAs] = this.curReq.response;
         }
-        this.addFetchedData(this.currentRequest.response);
+        this.addFetchedData(this.curReq.response);
     }
 
     addFetchedData(requestResponse: string, parent: HTMLElement = document.body): void {
