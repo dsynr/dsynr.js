@@ -72,12 +72,12 @@ function concatJS() {
     );
 }
 
-function compileDebugFile() {
+function concatWPJS() {
     return pipeline(
         gulp.src([
-            getScript('debug', 'js'),
+            getScript('DsynrUtilWp', 'js')
         ]),
-        (concat('dsynr.debug.js')),
+        (concat('DsynrUtilWp.js')),
         minify({
             ext: {
                 min: '.min.js'
@@ -102,5 +102,5 @@ function pushToLive() {
 
 }
 
-// exports.default = series(concatJS, compileDebugFile, compileCSS);
-exports.default = series(concatJS);
+// exports.default = series(concatJS, compileCSS);
+exports.default = series(concatJS, concatWPJS);
