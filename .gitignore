@@ -3,3 +3,4 @@
 /.idea/*
 # ignore node dependency directories
 node_modules/
+.idea/workspace.xml
