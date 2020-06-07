@@ -108,6 +108,7 @@ declare class DsynrUtil {
     private succeeded;
     addFetchedData(requestResponse: string, parent?: HTMLElement): void;
     private showFetchedData;
+    getPageScripts(): void;
     /**
      * Log to the console
      * @param data

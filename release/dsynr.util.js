@@ -485,17 +485,17 @@ class DsynrUtil {
     }
     /**
      * Get data attribute value of a DOM element
-     * @param element e DOM element
-     * @param string attrName Name of the data-attribute
+     * @param e
+     * @param attrName
      */
     getData(e, attrName) {
         return e.getAttribute('data-' + attrName);
     }
     /**
      * Set data attribute for a DOM element
-     * @param element e DOM element
-     * @param string attrName Name of the data-attribute
-     * @param string attrVal Value to be set for the attribute, default ''
+     * @param e
+     * @param attrName
+     * @param attrVal
      */
     setData(e, attrName, attrVal = '') {
         e.setAttribute('data-' + attrName, attrVal);
@@ -784,6 +784,9 @@ class DsynrUtil {
     addFetchedData(requestResponse, parent = document.body) {
         let fdp = this.addDiv('dsynrFetchedData-' + this.totalRequestDatasets, 'd-none', parent);
         let ths = this;
+        if (this.totalRequestDatasets == 0) {
+            this.reqDataReady = new Event('reqDataReady');
+        }
         this.addListener(fdp.id, 'reqDataReady', function () {
             ths.showFetchedData(fdp);
         });
@@ -803,6 +806,17 @@ class DsynrUtil {
         this.lfn('showFetchedData');
         this.removeClass(fdp, 'd-none');
         new DsynrModal(fdp);
+    }
+    getPageScripts() {
+        function _(parentNode) {
+            for (let node of parentNode.children) {
+                if (node.hasAttribute('src') && node.getAttribute('src') != null) {
+                    this.documentScripts.push(node.getAttribute('src'));
+                }
+            }
+        }
+        _(document.head);
+        _(document.body);
     }
     /**
      * Log to the console

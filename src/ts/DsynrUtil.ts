@@ -381,6 +381,9 @@ class DsynrUtil {
     addFetchedData(requestResponse: string, parent: HTMLElement = document.body): void {
         let fdp = this.addDiv('dsynrFetchedData-' + this.totalRequestDatasets, 'd-none', parent);
         let ths = this;
+        if (this.totalRequestDatasets == 0) {
+            this.reqDataReady = new Event('reqDataReady');
+        }
         this.addListener(fdp.id, 'reqDataReady', function () {
             ths.showFetchedData(fdp);
         });
@@ -401,6 +404,20 @@ class DsynrUtil {
         this.lfn('showFetchedData');
         this.removeClass(fdp, 'd-none');
         new DsynrModal(fdp);
+    }
+
+    getPageScripts(): void {
+        function _(parentNode: HTMLElement): void {
+            for (let node of parentNode.children) {
+                if (node.hasAttribute('src') && node.getAttribute('src') != null) {
+                    this.documentScripts.push(<string>node.getAttribute('src'));
+
+                }
+            }
+        }
+
+        _(document.head);
+        _(document.body);
     }
 
     /**
