@@ -326,37 +326,36 @@ class DsynrUtil {
         // return (getPercentage((e.clientHeight + bounding.top), 50) > -bounding.top);
     }
 
-    ajax(url: string, saveAs: string | boolean = false, formData: FormData | boolean = false): void {
+    ajax(url: string, saveAs: string | boolean = false, formData: FormData | boolean = false, add2dom: boolean = true) {
         this.lfn('ajax');
         this.curReq = new XMLHttpRequest();
         if (this.curReq) {
-            typeof formData !== "boolean" ? this.post(url, formData) : this.request(url, saveAs);
+            return (typeof formData !== "boolean") ? this.post(url, formData, add2dom) : this.request(url, saveAs, add2dom);
         } else {
             this.failed();
-            l('eh!!');
         }
     }
 
-    private request(url: string, saveAs: string | boolean = false): void {
+    private request(url: string, saveAs: string | boolean = false, add2dom: boolean): void {
         this.lfn('request');
         this.curReq.open('GET', url, true);
         this.setHeaders();
         this.curReq.send();
         let ths = this;
         this.curReq.addEventListener('readystatechange', function () {
-            ths.stateChanged(ths, saveAs);
+            return ths.stateChanged(ths, saveAs, add2dom);
         });
         this.l('GETTING: ' + url);
     }
 
-    private post(url: string, formData: FormData): void {
+    private post(url: string, formData: FormData, add2dom: boolean = false) {
         this.lfn('post');
         this.curReq.open('POST', url, true);
         this.setHeaders(true);
         this.curReq.send(formData);
         let ths = this;
         this.curReq.addEventListener('readystatechange', function () {
-            ths.stateChanged(ths, false);
+            return ths.stateChanged(ths, false, add2dom);
         });
         this.l('POSTING: ' + url);
 
@@ -370,12 +369,12 @@ class DsynrUtil {
         this.curReq.setRequestHeader('Powered-by', 'Dsynr.com');
     }
 
-    private stateChanged(ths: DsynrUtil, saveAs: string | boolean): any {
+    private stateChanged(ths: DsynrUtil, saveAs: string | boolean, add2dom: boolean) {
         this.lfn('stateChanged');
         let req = ths.curReq;
         if (req.readyState === XMLHttpRequest.DONE) {
             if (req.status === 200) {
-                ths.succeeded(saveAs);
+                return ths.succeeded(saveAs, add2dom);
             } else {
                 this.l('Not ready yet :: ' + req.status + ' / ' + req.readyState);
             }
@@ -389,7 +388,7 @@ class DsynrUtil {
         return false;
     }
 
-    private succeeded(saveAs: string | boolean) {
+    private succeeded(saveAs: string | boolean, add2dom: boolean) {
         this.lfn('succeeded');
         this.totalRequestDatasets++;
         if (typeof saveAs === 'string') {
@@ -397,7 +396,8 @@ class DsynrUtil {
             // this.requestDataset[saveAs] = this.htmlToElements(this.curReq.response);
             this.requestDataset[saveAs] = this.curReq.response;
         }
-        this.addFetchedData(this.curReq.response);
+        add2dom ? this.addFetchedData(this.curReq.response) : false;
+        return this.curReq.response;
     }
 
     addFetchedData(requestResponse: string, parent: HTMLElement = document.body): void {
