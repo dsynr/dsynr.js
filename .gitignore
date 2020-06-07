@@ -1,5 +1,5 @@
 **/.DS_Store
 *.log
-/.idea/
+/.idea/*
 # ignore node dependency directories
 node_modules/
