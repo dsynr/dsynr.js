@@ -25,83 +25,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a40d500-3c83-4dd3-83d5-91876b3160f7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/ts/DsynrUtil.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/util.js.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/util.js.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.tsBuildInfo" beforeDir="false" afterPath="$PROJECT_DIR$/.tsBuildInfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gulpfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/gulpfile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/release/demos/Select.html" beforeDir="false" afterPath="$PROJECT_DIR$/release/demos/Select.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/release/demos/modal.html" beforeDir="false" afterPath="$PROJECT_DIR$/release/demos/modal.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/release/dsynr.debug.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/release/dsynr.debug.min.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/release/dsynr.util.js" beforeDir="false" afterPath="$PROJECT_DIR$/release/dsynr.util.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/release/dsynr.util.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/release/dsynr.util.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/analytics.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/analytics.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/analytics.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/analytics.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/analytics.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/analytics.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/animation.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/animation.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/animation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/animation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/animation.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/animation.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/DsynrUtil.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/DsynrUtil.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/DsynrUtil.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/DsynrUtil.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/DsynrUtil.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/DsynrUtil.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/_loose/analytics.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/analytics.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/_loose/analytics.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/analytics.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/_loose/animation.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/animation.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/_loose/animation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/animation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/_loose/css.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/css.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/_loose/css.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/css.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/_loose/debug.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/debug.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/_loose/debug.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/debug.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/_loose/dom.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/dom.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/_loose/dom.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/dom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/_loose/events.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/events.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/_loose/events.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/events.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/_loose/graphics.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/graphics.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/_loose/graphics.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/graphics.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/_loose/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/_loose/math.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/math.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/_loose/math.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/math.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/_loose/obj.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/obj.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/_loose/obj.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/obj.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/_loose/other.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/other.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/_loose/other.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/other.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/_loose/string.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/string.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/_loose/string.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/string.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/_loose/viewport.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/viewport.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/_loose/viewport.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/viewport.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/components/DsynrModal.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrModal.d.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/components/DsynrModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrModal.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/components/DsynrModal.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrModal.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/DsynrSelect.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrSelect.d.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/components/DsynrSelect.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrSelect.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/DsynrSelect.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrSelect.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/css.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/css.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/css.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/css.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/css.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/css.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/debug.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/debug.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/debug.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/debug.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/debug.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/debug.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/dom.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/dom.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/dom.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/dom.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/dom.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/dom.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/events.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/events.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/events.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/events.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/events.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/events.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/graphics.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/graphics.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/graphics.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/graphics.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/graphics.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/graphics.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/interfaces/DsynrUI.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/interfaces/DsynrUI.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/main.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/main.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/main.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/main.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/math.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/math.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/math.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/math.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/math.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/math.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/obj.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/obj.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/obj.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/obj.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/obj.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/obj.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/other.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/other.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/other.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/other.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/other.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/other.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/string.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/string.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/string.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/string.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/string.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/string.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/viewport.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/viewport.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/viewport.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/viewport.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/viewport.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/viewport.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ts/analytics.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/_loose/analytics.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ts/animation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/_loose/animation.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ts/classes/DsynrUIIElement.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/classes/DsynrUIIElement.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ts/DsynrUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/DsynrUtil.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ts/components/DsynrModal.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/components/DsynrModal.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ts/components/DsynrSelect.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/components/DsynrSelect.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ts/css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/_loose/css.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ts/debug.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/_loose/debug.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ts/dom.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/_loose/dom.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ts/events.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/_loose/events.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ts/graphics.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/_loose/graphics.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ts/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/_loose/main.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ts/math.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/_loose/math.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ts/obj.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/_loose/obj.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ts/other.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/_loose/other.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ts/string.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/_loose/string.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ts/viewport.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/_loose/viewport.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,22 +134,23 @@
     <property name="js.last.introduce.type" value="VAR" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/ts" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="watcher.settings" />
     <property name="settings.editor.splitter.proportion" value="0.27726808" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\IntelliJ IDEA 2020.1.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="ts.rename.search.for.dynamic.occurrences" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\AbhishekJain\Desktop\New folder\util.js\src\ts" />
-      <recent name="C:\Users\AbhishekJain\Desktop\New folder\util.js\release\demos" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\AbhishekJain\Desktop\New folder\util\src\js\_loose" />
       <recent name="C:\Users\AbhishekJain\Desktop\New folder\util\src\ts\looseFn" />
       <recent name="C:\Users\AbhishekJain\Desktop\New folder\util.js\src\ts\components" />
       <recent name="C:\Users\AbhishekJain\Desktop\New folder\util.js\src\ts\classes" />
       <recent name="C:\Users\AbhishekJain\Desktop\New folder\util.js\src\ts\interfaces" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\AbhishekJain\Desktop\New folder\util.js\src\ts" />
+      <recent name="C:\Users\AbhishekJain\Desktop\New folder\util.js\release\demos" />
     </key>
   </component>
   <component name="RunManager">
@@ -299,6 +262,10 @@
     </state>
     <state x="765" y="259" key="#com.intellij.ide.util.MemberChooser/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1587766735112" />
     <state x="765" y="259" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080/-1920.145.1920.1080@0.0.1920.1080" timestamp="1588022978145" />
+    <state x="707" y="394" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1591514055519">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="707" y="394" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1591514055519" />
     <state x="331" y="19" width="1329" height="943" key="CommitChangelistDialog2" timestamp="1587770232300">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -447,7 +414,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/ts/components/DsynrModal.ts</url>
-          <line>253</line>
+          <line>254</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>

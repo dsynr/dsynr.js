@@ -1,3 +1,4 @@
+///<reference path="../DsynrUtil.ts"/>
 class DsynrModal extends DsynrUIIElement {
     constructor(modalContent, preferences = {}) {
         super(modalContent, preferences);
@@ -182,7 +183,7 @@ class DsynrModal extends DsynrUIIElement {
     blanketHidden(event) {
         // Do something when the transition ends
         let blanket;
-        blanket = getElementById('blanket');
+        blanket = d.getElementById('blanket');
         if (event.animationName == 'fadeOut') {
             blanket.removeEventListener(d.transitionEvent, this.blanketHidden);
             blanket.remove();

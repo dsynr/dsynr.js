@@ -65,9 +65,17 @@
         "version": "3e0a459888f32b42138d5a39f706ff2d55d500ab1031e0988b5568b0f67c2303",
         "signature": "3e0a459888f32b42138d5a39f706ff2d55d500ab1031e0988b5568b0f67c2303"
       },
+      "./src/ts/components/dsynrselect.ts": {
+        "version": "1c21945fc3d6f072b9b8085b503093345743001da3b4e141dfcdc02725f1daad",
+        "signature": "209986344f36b0fa6249e9fd9b6c06331f8a103133451930c7d22e4c4a141c75"
+      },
+      "./src/ts/components/dsynrmodal.ts": {
+        "version": "af0e3805b7d53f06c24c6546126b2d7056d44aa8929286e77f74d74e88eea3a5",
+        "signature": "c917f017723c653fc11a7cc33aa62c955b00b90c11dc88767cc69856db7665e3"
+      },
       "./src/ts/dsynrutil.ts": {
-        "version": "319c3b14f53506d56654c7d6db7ce14a2502ccd5e79449e0d5bbdfc213a897df",
-        "signature": "71e694cf427c94a0c427823a7db2954f7fe4e6cf7388ff157c6bb9bd3dfd0e49"
+        "version": "b8f32469ae59a143e5f833be764a8b27591f7c25bfb69a76e7d2237138c8bb25",
+        "signature": "08c994a855481a1b35445b21aabc8a6b0ea1d6919b77d152e72e01295aebf29a"
       },
       "./src/ts/_loose/analytics.ts": {
         "version": "0398552049c8886fba7d153cbaf6988b0ad047d96849f949d0d9bc3019488998",
@@ -125,14 +133,6 @@
         "version": "aaa81b64354b2169a95fe9ce7eee28be7af34eb1f7a5673dabd60bd08c525db7",
         "signature": "14c5a604c69cbb163d5062c08289c4e56d6cd3ff48da2eba61431ae8694c9122"
       },
-      "./src/ts/components/dsynrmodal.ts": {
-        "version": "30f35db9d1891283e1b93888d562c94c9384877c7585aa9085f980172553fbae",
-        "signature": "072896a8b6b78d3d05240eea54438836792a9a1256a2c397d62c6bbc153393c8"
-      },
-      "./src/ts/components/dsynrselect.ts": {
-        "version": "1c21945fc3d6f072b9b8085b503093345743001da3b4e141dfcdc02725f1daad",
-        "signature": "209986344f36b0fa6249e9fd9b6c06331f8a103133451930c7d22e4c4a141c75"
-      },
       "./src/ts/interfaces/dsynrui.ts": {
         "version": "d1a5aab6bc5fb900ffcfd1ea1b715b57ee3107cc7a99c94abdefc38787c94151",
         "signature": "4d413cfd2038643323ffb0d741866955e2156f150f42edc94bb411d2e7ef573d"
@@ -156,7 +156,15 @@
       "outDir": "./src/js",
       "configFilePath": "./tsconfig.json"
     },
-    "referencedMap": {},
+    "referencedMap": {
+      "./src/ts/components/dsynrmodal.ts": [
+        "./src/ts/dsynrutil.ts"
+      ],
+      "./src/ts/dsynrutil.ts": [
+        "./src/ts/components/dsynrselect.ts",
+        "./src/ts/components/dsynrmodal.ts"
+      ]
+    },
     "exportedModulesMap": {},
     "semanticDiagnosticsPerFile": [
       "../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es6.d.ts",
@@ -176,6 +184,8 @@
       "../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.symbol.d.ts",
       "../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts",
       "./src/ts/dsynrutil.ts",
+      "./src/ts/components/dsynrselect.ts",
+      "./src/ts/components/dsynrmodal.ts",
       "./src/ts/_loose/analytics.ts",
       "./src/ts/_loose/animation.ts",
       "./src/ts/_loose/css.ts",
@@ -190,9 +200,7 @@
       "./src/ts/_loose/string.ts",
       "./src/ts/_loose/viewport.ts",
       "./src/ts/classes/dsynruiielement.ts",
-      "./src/ts/components/dsynrmodal.ts",
-      "./src/ts/interfaces/dsynrui.ts",
-      "./src/ts/components/dsynrselect.ts"
+      "./src/ts/interfaces/dsynrui.ts"
     ]
   },
   "version": "3.8.3"

@@ -1,7 +1,15 @@
+/// <reference path="components/DsynrSelect.d.ts" />
+/// <reference path="components/DsynrModal.d.ts" />
 declare class DsynrUtil {
     vw: number;
     vh: number;
     transitionEvent: any;
+    domain: string;
+    requestDataset: {};
+    totalRequestDatasets: number;
+    documentScripts: Array<string>;
+    private currentRequest;
+    private reqDataReady;
     constructor();
     /**
      * @todo
@@ -13,15 +21,15 @@ declare class DsynrUtil {
     PING(type: any, name: any): void;
     /**
      * Get data attribute value of a DOM element
-     * @param element e DOM element
-     * @param string attrName Name of the data-attribute
+     * @param e
+     * @param attrName
      */
     getData(e: Element, attrName: string): any;
     /**
      * Set data attribute for a DOM element
-     * @param element e DOM element
-     * @param string attrName Name of the data-attribute
-     * @param string attrVal Value to be set for the attribute, default ''
+     * @param e
+     * @param attrName
+     * @param attrVal
      */
     setData(e: Element, attrName: string, attrVal?: string): void;
     debounce(fn: any, threshold: any): () => void;
@@ -93,19 +101,26 @@ declare class DsynrUtil {
     getBounds(e: HTMLElement): ClientRect;
     isInViewportSlightly(e: HTMLElement): boolean;
     isInViewportMostly(e: any): boolean;
+    request(uri: string, saveAs?: string | boolean): void;
+    private setHeaders;
+    private stateChanged;
+    private failed;
+    private succeeded;
+    addFetchedData(requestResponse: string, parent?: HTMLElement): void;
+    private showFetchedData;
     /**
      * Log to the console
-     * @param any data
+     * @param data
      */
     l(data: any): void;
     /**
      * Log active function name
-     * @param string functionName
+     * @param functionName
      */
     lfn(functionName: string): void;
     /**
      * Log click
-     * @param e
+     * @param element
      */
     lclk(element: string): void;
 }

@@ -1,3 +1,4 @@
+///<reference path="../DsynrUtil.ts"/>
 class DsynrModal extends DsynrUIIElement {
 
     private instanceRoot: HTMLElement;
@@ -237,7 +238,7 @@ class DsynrModal extends DsynrUIIElement {
     blanketHidden(event): void {
         // Do something when the transition ends
         let blanket: HTMLElement;
-        blanket = getElementById('blanket');
+        blanket = d.getElementById('blanket');
         if (event.animationName == 'fadeOut') {
             blanket.removeEventListener(d.transitionEvent, this.blanketHidden);
             blanket.remove();

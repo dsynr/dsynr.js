@@ -1,7 +1,15 @@
+///<reference path="components/DsynrSelect.ts"/>
+///<reference path="components/DsynrModal.ts"/>
 class DsynrUtil {
     vw: number;
     vh: number;
     transitionEvent = this.whichAnimationEvent();
+    domain: string = window.location.origin + '/';
+    requestDataset = {};
+    totalRequestDatasets = 0;
+    documentScripts: Array<string> = [];
+    private currentRequest: XMLHttpRequest;
+    private reqDataReady: Event;
 
     constructor() {
         this.updateViewportVars();
@@ -21,8 +29,8 @@ class DsynrUtil {
 
     /**
      * Get data attribute value of a DOM element
-     * @param element e DOM element
-     * @param string attrName Name of the data-attribute
+     * @param e
+     * @param attrName
      */
     getData(e: Element, attrName: string): any {
         return e.getAttribute('data-' + attrName);
@@ -30,9 +38,9 @@ class DsynrUtil {
 
     /**
      * Set data attribute for a DOM element
-     * @param element e DOM element
-     * @param string attrName Name of the data-attribute
-     * @param string attrVal Value to be set for the attribute, default ''
+     * @param e
+     * @param attrName
+     * @param attrVal
      */
     setData(e: Element, attrName: string, attrVal: string = '') {
         e.setAttribute('data-' + attrName, attrVal);
@@ -241,8 +249,8 @@ class DsynrUtil {
     }
 
     animateIn(): void {
-        this.makeArray(getElementsByClass('animated')).forEach((e) => {
-            if (this.getData(e, 'ani') !== null && this.getData(e, 'ani') != null && isInViewportSlightly(e)) {
+        this.makeArray(this.getElementsByClass('animated')).forEach((e) => {
+            if (this.getData(e, 'ani') !== null && this.getData(e, 'ani') != null && this.isInViewportSlightly(e)) {
                 e.classList.remove('o0');
                 e.classList.add(e.dataset.ani);
             }
@@ -302,7 +310,7 @@ class DsynrUtil {
     }
 
     isInViewportSlightly(e: HTMLElement): boolean {
-        let bounding = getBounds(e);
+        let bounding = this.getBounds(e);
         return (
             bounding.top >= 0 //&&
             // bounding.left >= 0 &&
@@ -312,14 +320,92 @@ class DsynrUtil {
     }
 
     isInViewportMostly(e): boolean {
-        let bounding = getBounds(e);
+        let bounding = this.getBounds(e);
         return (bounding.top / 2 > -bounding.top);
         // return (getPercentage((e.clientHeight + bounding.top), 50) > -bounding.top);
     }
 
+    request(uri: string, saveAs: string | boolean = false): void {
+        this.lfn('request');
+        this.currentRequest = new XMLHttpRequest();
+        this.l(this.currentRequest);
+        if (this.currentRequest) {
+            this.currentRequest.open('GET', uri, true);
+            this.setHeaders();
+            this.currentRequest.send();
+            let ths = this;
+            this.currentRequest.addEventListener('readystatechange', function () {
+                ths.stateChanged(ths, saveAs);
+            });
+            this.l('GETTING: ' + uri);
+        } else {
+            this.failed();
+        }
+    }
+
+    private setHeaders() {
+        this.currentRequest.setRequestHeader('Cache-Control', 'no-cache');
+        this.currentRequest.setRequestHeader('Powered-by', 'Dsynr.com');
+    }
+
+    private stateChanged(ths: DsynrUtil, saveAs: string | boolean): any {
+        this.lfn('stateChanged');
+        let req = ths.currentRequest;
+        if (req.readyState === XMLHttpRequest.DONE) {
+            if (req.status === 200) {
+                ths.succeeded(saveAs);
+            } else {
+                this.l('Not ready yet :: ' + req.status + ' / ' + req.readyState);
+            }
+        } else {
+            this.l(req);
+        }
+    }
+
+    private failed(): boolean {
+        this.l('Cannot create an XMLHTTP instance');
+        return false;
+    }
+
+    private succeeded(saveAs: string | boolean) {
+        this.lfn('succeeded');
+        this.totalRequestDatasets++;
+        if (typeof saveAs === 'string') {
+            this.l('Saving to dataset; Reference key: ' + saveAs);
+            // this.requestDataset[saveAs] = this.htmlToElements(this.currentRequest.response);
+            this.requestDataset[saveAs] = this.currentRequest.response;
+        }
+        this.addFetchedData(this.currentRequest.response);
+    }
+
+    addFetchedData(requestResponse: string, parent: HTMLElement = document.body): void {
+        let fdp = this.addDiv('dsynrFetchedData-' + this.totalRequestDatasets, 'd-none', parent);
+        let ths = this;
+        this.addListener(fdp.id, 'reqDataReady', function () {
+            ths.showFetchedData(fdp);
+        });
+        fdp.innerHTML = requestResponse;
+        DsynrSelect.auto();
+        let fetchedScriptTags = fdp.getElementsByTagName('script');
+        for (let i = 0; i < fetchedScriptTags.length; ++i) {
+            let scriptSRC = fetchedScriptTags[i].getAttribute('src');
+            // @ts-ignore
+            if (scriptSRC !== null && !this.documentScripts.includes(scriptSRC)) {
+                this.addJS(scriptSRC);
+            }
+        }
+        fdp.dispatchEvent(this.reqDataReady);
+    }
+
+    private showFetchedData(fdp: HTMLElement): void {
+        this.lfn('showFetchedData');
+        this.removeClass(fdp, 'd-none');
+        new DsynrModal(fdp);
+    }
+
     /**
      * Log to the console
-     * @param any data
+     * @param data
      */
     l(data: any): void {
         console.log(data);
@@ -327,7 +413,7 @@ class DsynrUtil {
 
     /**
      * Log active function name
-     * @param string functionName
+     * @param functionName
      */
     lfn(functionName: string): void {
         this.l(' {} ' + functionName);
@@ -335,7 +421,7 @@ class DsynrUtil {
 
     /**
      * Log click
-     * @param e
+     * @param element
      */
     lclk(element: string) {
         this.l('* click ' + element);

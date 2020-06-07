@@ -89,6 +89,7 @@ class DsynrUIIElement {
 }
 DsynrUIIElement.instances = [];
 //# sourceMappingURL=DsynrUIIElement.js.map
+///<reference path="../DsynrUtil.ts"/>
 class DsynrModal extends DsynrUIIElement {
     constructor(modalContent, preferences = {}) {
         super(modalContent, preferences);
@@ -273,7 +274,7 @@ class DsynrModal extends DsynrUIIElement {
     blanketHidden(event) {
         // Do something when the transition ends
         let blanket;
-        blanket = getElementById('blanket');
+        blanket = d.getElementById('blanket');
         if (event.animationName == 'fadeOut') {
             blanket.removeEventListener(d.transitionEvent, this.blanketHidden);
             blanket.remove();
@@ -461,9 +462,15 @@ class DsynrSelect extends DsynrUIIElement {
     }
 }
 //# sourceMappingURL=DsynrSelect.js.map
+///<reference path="components/DsynrSelect.ts"/>
+///<reference path="components/DsynrModal.ts"/>
 class DsynrUtil {
     constructor() {
         this.transitionEvent = this.whichAnimationEvent();
+        this.domain = window.location.origin + '/';
+        this.requestDataset = {};
+        this.totalRequestDatasets = 0;
+        this.documentScripts = [];
         this.updateViewportVars();
     }
     /**
@@ -661,8 +668,8 @@ class DsynrUtil {
         document.head.appendChild(js);
     }
     animateIn() {
-        this.makeArray(getElementsByClass('animated')).forEach((e) => {
-            if (this.getData(e, 'ani') !== null && this.getData(e, 'ani') != null && isInViewportSlightly(e)) {
+        this.makeArray(this.getElementsByClass('animated')).forEach((e) => {
+            if (this.getData(e, 'ani') !== null && this.getData(e, 'ani') != null && this.isInViewportSlightly(e)) {
                 e.classList.remove('o0');
                 e.classList.add(e.dataset.ani);
             }
@@ -711,7 +718,7 @@ class DsynrUtil {
         return e.getBoundingClientRect();
     }
     isInViewportSlightly(e) {
-        let bounding = getBounds(e);
+        let bounding = this.getBounds(e);
         return (bounding.top >= 0 //&&
         // bounding.left >= 0 &&
         // bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
@@ -719,27 +726,101 @@ class DsynrUtil {
         );
     }
     isInViewportMostly(e) {
-        let bounding = getBounds(e);
+        let bounding = this.getBounds(e);
         return (bounding.top / 2 > -bounding.top);
         // return (getPercentage((e.clientHeight + bounding.top), 50) > -bounding.top);
     }
+    request(uri, saveAs = false) {
+        this.lfn('request');
+        this.currentRequest = new XMLHttpRequest();
+        this.l(this.currentRequest);
+        if (this.currentRequest) {
+            this.currentRequest.open('GET', uri, true);
+            this.setHeaders();
+            this.currentRequest.send();
+            let ths = this;
+            this.currentRequest.addEventListener('readystatechange', function () {
+                ths.stateChanged(ths, saveAs);
+            });
+            this.l('GETTING: ' + uri);
+        }
+        else {
+            this.failed();
+        }
+    }
+    setHeaders() {
+        this.currentRequest.setRequestHeader('Cache-Control', 'no-cache');
+        this.currentRequest.setRequestHeader('Powered-by', 'Dsynr.com');
+    }
+    stateChanged(ths, saveAs) {
+        this.lfn('stateChanged');
+        let req = ths.currentRequest;
+        if (req.readyState === XMLHttpRequest.DONE) {
+            if (req.status === 200) {
+                ths.succeeded(saveAs);
+            }
+            else {
+                this.l('Not ready yet :: ' + req.status + ' / ' + req.readyState);
+            }
+        }
+        else {
+            this.l(req);
+        }
+    }
+    failed() {
+        this.l('Cannot create an XMLHTTP instance');
+        return false;
+    }
+    succeeded(saveAs) {
+        this.lfn('succeeded');
+        this.totalRequestDatasets++;
+        if (typeof saveAs === 'string') {
+            this.l('Saving to dataset; Reference key: ' + saveAs);
+            // this.requestDataset[saveAs] = this.htmlToElements(this.currentRequest.response);
+            this.requestDataset[saveAs] = this.currentRequest.response;
+        }
+        this.addFetchedData(this.currentRequest.response);
+    }
+    addFetchedData(requestResponse, parent = document.body) {
+        let fdp = this.addDiv('dsynrFetchedData-' + this.totalRequestDatasets, 'd-none', parent);
+        let ths = this;
+        this.addListener(fdp.id, 'reqDataReady', function () {
+            ths.showFetchedData(fdp);
+        });
+        fdp.innerHTML = requestResponse;
+        DsynrSelect.auto();
+        let fetchedScriptTags = fdp.getElementsByTagName('script');
+        for (let i = 0; i < fetchedScriptTags.length; ++i) {
+            let scriptSRC = fetchedScriptTags[i].getAttribute('src');
+            // @ts-ignore
+            if (scriptSRC !== null && !this.documentScripts.includes(scriptSRC)) {
+                this.addJS(scriptSRC);
+            }
+        }
+        fdp.dispatchEvent(this.reqDataReady);
+    }
+    showFetchedData(fdp) {
+        this.lfn('showFetchedData');
+        this.removeClass(fdp, 'd-none');
+        new DsynrModal(fdp);
+    }
     /**
      * Log to the console
-     * @param any data
+     * @param data
      */
     l(data) {
         console.log(data);
     }
     /**
      * Log active function name
-     * @param string functionName
+     * @param functionName
      */
     lfn(functionName) {
         this.l(' {} ' + functionName);
     }
     /**
      * Log click
-     * @param e
+     * @param element
      */
     lclk(element) {
         this.l('* click ' + element);
