@@ -6,7 +6,6 @@ class DsynrUtil {
         this.domain = document.baseURI;
         this.requestDataset = {};
         this.totalRequestDatasets = 0;
-        this.documentScripts = [];
         this.updateViewportVars();
         this.reqDataReady = new Event('reqDataReady');
     }
@@ -330,7 +329,7 @@ class DsynrUtil {
         for (let i = 0; i < fetchedScriptTags.length; ++i) {
             let scriptSRC = fetchedScriptTags[i].getAttribute('src');
             // @ts-ignore
-            if (scriptSRC !== null && !this.documentScripts.includes(scriptSRC)) {
+            if (scriptSRC !== null && !DsynrUtil.documentScripts.includes(scriptSRC)) {
                 this.addJS(scriptSRC);
             }
         }
@@ -342,11 +341,10 @@ class DsynrUtil {
         new DsynrModal(fdp);
     }
     getPageScripts() {
-        let ths;
         function _(parentNode) {
             for (let node of parentNode.children) {
                 if (node.hasAttribute('src') && node.getAttribute('src') != null) {
-                    ths.documentScripts.push(node.getAttribute('src'));
+                    DsynrUtil.documentScripts.push(node.getAttribute('src'));
                 }
             }
         }
@@ -375,5 +373,6 @@ class DsynrUtil {
         this.l('* click ' + element);
     }
 }
+DsynrUtil.documentScripts = [];
 let d = new DsynrUtil();
 //# sourceMappingURL=DsynrUtil.js.map

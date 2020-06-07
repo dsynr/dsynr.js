@@ -7,7 +7,7 @@ declare class DsynrUtil {
     domain: string;
     requestDataset: {};
     totalRequestDatasets: number;
-    documentScripts: Array<string>;
+    static documentScripts: Array<string>;
     private currentRequest;
     private readonly reqDataReady;
     constructor();
