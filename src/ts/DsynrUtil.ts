@@ -13,6 +13,7 @@ class DsynrUtil {
 
     constructor() {
         this.updateViewportVars();
+        this.reqDataReady = new Event('reqDataReady');
     }
 
     /**
@@ -381,9 +382,6 @@ class DsynrUtil {
     addFetchedData(requestResponse: string, parent: HTMLElement = document.body): void {
         let fdp = this.addDiv('dsynrFetchedData-' + this.totalRequestDatasets, 'd-none', parent);
         let ths = this;
-        if (this.totalRequestDatasets == 0) {
-            this.reqDataReady = new Event('reqDataReady');
-        }
         this.addListener(fdp.id, 'reqDataReady', function () {
             ths.showFetchedData(fdp);
         });

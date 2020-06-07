@@ -74,7 +74,7 @@
         "signature": "c917f017723c653fc11a7cc33aa62c955b00b90c11dc88767cc69856db7665e3"
       },
       "./src/ts/dsynrutil.ts": {
-        "version": "81c61bf957e960673607f9a8df8b3a5ab743b8d4ca8180ee19c2cdf61c9a425f",
+        "version": "4aee8de2f53d8c4fa57657d690ba417eaf3e6f1955e667523d52881ac56e391d",
         "signature": "34da06358c46394d200abd6681066340b186fd73544ac447d0e555fa13e2924f"
       },
       "./src/ts/_loose/analytics.ts": {

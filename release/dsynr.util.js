@@ -472,6 +472,7 @@ class DsynrUtil {
         this.totalRequestDatasets = 0;
         this.documentScripts = [];
         this.updateViewportVars();
+        this.reqDataReady = new Event('reqDataReady');
     }
     /**
      * @todo
@@ -784,9 +785,6 @@ class DsynrUtil {
     addFetchedData(requestResponse, parent = document.body) {
         let fdp = this.addDiv('dsynrFetchedData-' + this.totalRequestDatasets, 'd-none', parent);
         let ths = this;
-        if (this.totalRequestDatasets == 0) {
-            this.reqDataReady = new Event('reqDataReady');
-        }
         this.addListener(fdp.id, 'reqDataReady', function () {
             ths.showFetchedData(fdp);
         });
