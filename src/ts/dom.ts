@@ -25,3 +25,10 @@ function getElementsByClass(className: string): HTMLCollection {
 function getElementById(elementID: string): HTMLElement {
     return window[elementID];
 }
+
+function addJS(src: string, id: string = ''): void {
+    let js = document.createElement('script');
+    js.setAttribute('src', src);
+    js.id = id;
+    document.head.appendChild(js);
+}
