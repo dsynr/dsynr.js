@@ -7,7 +7,7 @@ class DsynrUtil {
     domain: string = document.baseURI;
     requestDataset = {};
     totalRequestDatasets = 0;
-    static documentScripts: Array<string> = [];
+    documentScripts: Array<string> = [];
     private currentRequest: XMLHttpRequest;
     private readonly reqDataReady: Event;
 
@@ -391,7 +391,7 @@ class DsynrUtil {
         for (let i = 0; i < fetchedScriptTags.length; ++i) {
             let scriptSRC = fetchedScriptTags[i].getAttribute('src');
             // @ts-ignore
-            if (scriptSRC !== null && !DsynrUtil.documentScripts.includes(scriptSRC)) {
+            if (scriptSRC !== null && !this.documentScripts.includes(scriptSRC)) {
                 this.addJS(scriptSRC);
             }
         }
@@ -404,11 +404,11 @@ class DsynrUtil {
         new DsynrModal(fdp);
     }
 
-    getPageScripts(): void {
+    getPageScripts(dsynrUtil: DsynrUtil): void {
         function _(parentNode: HTMLElement): void {
             for (let node of parentNode.children) {
                 if (node.hasAttribute('src') && node.getAttribute('src') != null) {
-                    DsynrUtil.documentScripts.push(<string>node.getAttribute('src'));
+                    dsynrUtil.documentScripts.push(<string>node.getAttribute('src'));
 
                 }
             }

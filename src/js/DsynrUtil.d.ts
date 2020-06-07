@@ -7,7 +7,7 @@ declare class DsynrUtil {
     domain: string;
     requestDataset: {};
     totalRequestDatasets: number;
-    static documentScripts: Array<string>;
+    documentScripts: Array<string>;
     private currentRequest;
     private readonly reqDataReady;
     constructor();
@@ -108,7 +108,7 @@ declare class DsynrUtil {
     private succeeded;
     addFetchedData(requestResponse: string, parent?: HTMLElement): void;
     private showFetchedData;
-    getPageScripts(): void;
+    getPageScripts(dsynrUtil: DsynrUtil): void;
     /**
      * Log to the console
      * @param data
