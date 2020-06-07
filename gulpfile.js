@@ -77,7 +77,7 @@ function concatWPJS() {
         gulp.src([
             getScript('DsynrUtilWp', 'js')
         ]),
-        (concat('DsynrUtilWp.js')),
+        (concat('dsynr.util.wp.js')),
         minify({
             ext: {
                 min: '.min.js'
