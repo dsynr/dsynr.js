@@ -1,0 +1,1 @@
+{"version":3,"file":"main.js","sourceRoot":"","sources":["../../ts/_loose/main.ts"],"names":[],"mappings":"AAAA,CAAC;IACG,kBAAkB,EAAE,CAAC;AACzB,CAAC,CAAC,EAAE,CAAC","sourcesContent":["(function () {\n    updateViewportVars();\n})();\n"]}

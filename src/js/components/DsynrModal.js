@@ -2,49 +2,49 @@ class DsynrModal extends DsynrUIIElement {
     constructor(modalContent, preferences = {}) {
         super(modalContent, preferences);
         if (!this.selfAbort) {
-            lfn('DsynrModal');
+            d.lfn('DsynrModal');
             this.setDefaults();
             this.setup();
         }
     }
     setDefaults(reset = false) {
-        lfn('setDefaults');
+        d.lfn('setDefaults');
         super.setDefaults();
         let positionClass = 'position-absolute';
         let alignmentClass = 'top left';
-        this.adoptParent = addProp(this, 'adoptParent', true, reset);
-        this.animateModal = addProp(this, 'animateModal', true, reset);
-        this.autoDestroy = addProp(this, 'autoDestroy', true, reset);
-        this.displayTogether = addProp(this, 'displayTogether', true, reset);
-        this.useOverlay = addProp(this, 'useOverlay', true, reset);
-        this.disableUnderlay = addProp(this, 'disableUnderlay', true, reset);
-        this.animateUnderlay = addProp(this, 'animateUnderlay', true, reset);
-        this.nameSuffix = addProp(this, 'nameSuffix', DsynrModal.instances.length.toString(), reset);
-        this.namePrefix = addProp(this, 'namePrefix', 'dsynrModal', reset);
-        this.modalAnimateInClass = addProp(this, 'modalAnimateInClass', concatStr([this.animateClass, 'flipInX']), reset);
-        this.modalAnimateOutClass = addProp(this, 'modalAnimateOutClass', concatStr([this.animateClass, 'flipOutY']), reset);
-        this.modalAnimateAttentionClass = addProp(this, 'modalAnimateAttentionClass', concatStr([this.animateClass, 'shake']), reset);
-        this.overlayClass = addProp(this, 'overlayClass', 'o50 bg-dark', reset);
-        this.parentSizingClass = addProp(this, 'sizingClass', 'wmax hmax', reset);
-        this.windowSizingClass = addProp(this, 'windowSizingClass', 'vw vh', reset);
-        this.underlayClass = addProp(this, 'underlayClass', concatStr([positionClass, alignmentClass, this.parentSizingClass, 'z1']), reset);
-        this.instanceClass = addProp(this, 'instanceClass', concatStr([positionClass, 'z2 o0']), reset);
-        this.instanceRootClass = addProp(this, 'instanceRootClass', concatStr([positionClass, alignmentClass, this.parentSizingClass, 'z3 o0 d-none']), reset);
-        this.trigger = addProp(this, 'trigger', 'auto', reset);
+        this.adoptParent = d.addProp(this, 'adoptParent', true, reset);
+        this.animateModal = d.addProp(this, 'animateModal', true, reset);
+        this.autoDestroy = d.addProp(this, 'autoDestroy', true, reset);
+        this.displayTogether = d.addProp(this, 'displayTogether', true, reset);
+        this.useOverlay = d.addProp(this, 'useOverlay', true, reset);
+        this.disableUnderlay = d.addProp(this, 'disableUnderlay', true, reset);
+        this.animateUnderlay = d.addProp(this, 'animateUnderlay', true, reset);
+        this.nameSuffix = d.addProp(this, 'nameSuffix', DsynrModal.instances.length.toString(), reset);
+        this.namePrefix = d.addProp(this, 'namePrefix', 'dsynrModal', reset);
+        this.modalAnimateInClass = d.addProp(this, 'modalAnimateInClass', d.concatStr([this.animateClass, 'flipInX']), reset);
+        this.modalAnimateOutClass = d.addProp(this, 'modalAnimateOutClass', d.concatStr([this.animateClass, 'flipOutY']), reset);
+        this.modalAnimateAttentionClass = d.addProp(this, 'modalAnimateAttentionClass', d.concatStr([this.animateClass, 'shake']), reset);
+        this.overlayClass = d.addProp(this, 'overlayClass', 'o50 bg-dark', reset);
+        this.parentSizingClass = d.addProp(this, 'sizingClass', 'wmax hmax', reset);
+        this.windowSizingClass = d.addProp(this, 'windowSizingClass', 'vw vh', reset);
+        this.underlayClass = d.addProp(this, 'underlayClass', d.concatStr([positionClass, alignmentClass, this.parentSizingClass, 'z1']), reset);
+        this.instanceClass = d.addProp(this, 'instanceClass', d.concatStr([positionClass, 'z2 o0']), reset);
+        this.instanceRootClass = d.addProp(this, 'instanceRootClass', d.concatStr([positionClass, alignmentClass, this.parentSizingClass, 'z3 o0 d-none']), reset);
+        this.trigger = d.addProp(this, 'trigger', 'auto', reset);
     }
     setup() {
-        lfn('setup');
+        d.lfn('setup');
         let self = this;
-        addClass(this.content, 'd-none');
+        d.addClass(this.content, 'd-none');
         if (this.trigger != 'auto') {
-            l('setting trigger to : ' + this.trigger);
-            addListener(this.trigger, 'click', function () {
+            d.l('setting trigger to : ' + this.trigger);
+            d.addListener(this.trigger, 'click', function () {
                 self.show();
             });
-            l('Modal Trigger READY!');
+            d.l('Modal Trigger READY!');
         }
         else {
-            l('Triggering Automatically...');
+            d.l('Triggering Automatically...');
             this.show();
         }
     }
@@ -55,38 +55,38 @@ class DsynrModal extends DsynrUIIElement {
      */
     show() {
         if (DsynrModal.activeInstance !== this) {
-            lfn('show via : ' + this.trigger);
-            addClass(this.content, 'o0');
-            removeClass(this.content, 'd-none');
+            d.lfn('show via : ' + this.trigger);
+            d.addClass(this.content, 'o0');
+            d.removeClass(this.content, 'd-none');
             if (this.parent === undefined) {
-                l('parent unavailable, adding modal to body');
+                d.l('parent unavailable, adding modal to body');
                 this.parent = document.body;
             }
-            this.instanceRoot = addDiv(this.setName('root', this.content.id), this.instanceRootClass, this.parent);
+            this.instanceRoot = d.addDiv(this.setName('root', this.content.id), this.instanceRootClass, this.parent);
             if (this.disableUnderlay) {
                 // this.resizeRoot();
                 if (this.useOverlay) {
-                    this.underlayClass = concatStr([this.underlayClass, this.overlayClass]);
+                    this.underlayClass = d.concatStr([this.underlayClass, this.overlayClass]);
                 }
-                this.underlay = addDiv(this.setName('underlay', this.content.id), this.underlayClass, this.instanceRoot);
+                this.underlay = d.addDiv(this.setName('underlay', this.content.id), this.underlayClass, this.instanceRoot);
             }
             else {
-                removeClass(this.instanceRoot, this.parentSizingClass);
+                d.removeClass(this.instanceRoot, this.parentSizingClass);
             }
-            this.instance = addDiv(this.setName('modal', this.parent.id), this.instanceClass, this.instanceRoot);
+            this.instance = d.addDiv(this.setName('modal', this.parent.id), this.instanceClass, this.instanceRoot);
             this.addListeners();
             //update to detect parent (parent) resizing opposed to just window
             this.instance.appendChild(this.content);
             // window.addEventListener('resize', function () {
             //     modals[modals.length].align();
             // });
-            removeClass(this.instanceRoot, 'd-none');
-            removeClass(this.instance, 'o0');
-            removeClass(this.content, 'o0');
-            l(this.parent.id);
+            d.removeClass(this.instanceRoot, 'd-none');
+            d.removeClass(this.instance, 'o0');
+            d.removeClass(this.content, 'o0');
+            d.l(this.parent.id);
             if (this.adoptParent && (this.content.clientHeight > this.parent.clientHeight || this.content.clientWidth > this.parent.clientWidth)) {
-                lfn('adoptParent');
-                l('parent cannot accommodate child, adopting body as parent!');
+                d.lfn('adoptParent');
+                d.l('parent cannot accommodate child, adopting body as parent!');
                 this.parent = document.body;
                 this.parent.append(this.instanceRoot);
                 this.resizeRoot();
@@ -97,22 +97,22 @@ class DsynrModal extends DsynrUIIElement {
         }
     }
     attention() {
-        lfn('attention');
+        d.lfn('attention');
         this.animateDisplay(true);
     }
     animateDisplay(getAttention = false) {
-        lfn('animateDisplay');
+        d.lfn('animateDisplay');
         if (this.displayTogether) {
             if (this.animate && this.animateUnderlay) {
                 if (getAttention) {
-                    removeClass(this.instanceRoot, this.animateInClass);
-                    addClass(this.instanceRoot, this.animateAttentionClass);
-                    removeClass(this.instance, this.modalAnimateInClass);
-                    addClass(this.instance, this.modalAnimateAttentionClass);
+                    d.removeClass(this.instanceRoot, this.animateInClass);
+                    d.addClass(this.instanceRoot, this.animateAttentionClass);
+                    d.removeClass(this.instance, this.modalAnimateInClass);
+                    d.addClass(this.instance, this.modalAnimateAttentionClass);
                 }
                 else {
-                    addClass(this.instanceRoot, this.animateInClass);
-                    addClass(this.instance, this.modalAnimateInClass);
+                    d.addClass(this.instanceRoot, this.animateInClass);
+                    d.addClass(this.instance, this.modalAnimateInClass);
                 }
             }
             else {
@@ -120,8 +120,8 @@ class DsynrModal extends DsynrUIIElement {
                     //@todo
                 }
                 else {
-                    removeClass(this.instanceRoot, 'o0');
-                    removeClass(this.instance, 'o0');
+                    d.removeClass(this.instanceRoot, 'o0');
+                    d.removeClass(this.instance, 'o0');
                 }
             }
         }
@@ -130,52 +130,52 @@ class DsynrModal extends DsynrUIIElement {
         }
     }
     hide(destroy = this.autoDestroy) {
-        lfn('hide');
+        d.lfn('hide');
         if (this.useOverlay) {
-            removeClass(this.instanceRoot, this.modalAnimateInClass);
-            addClass(this.instanceRoot, this.modalAnimateOutClass);
+            d.removeClass(this.instanceRoot, this.modalAnimateInClass);
+            d.addClass(this.instanceRoot, this.modalAnimateOutClass);
         }
         if (destroy) {
-            l('TODO ONANIMATIONEND LISTENER...');
+            d.l('TODO ONANIMATIONEND LISTENER...');
             this.destroy();
         }
         DsynrModal.activeInstance = false;
     }
     resizeRoot() {
-        lfn('resizeRoot');
+        d.lfn('resizeRoot');
         if (this.parent == document.body) {
-            removeClass(this.instanceRoot, this.parentSizingClass);
-            addClass(this.instanceRoot, this.windowSizingClass);
+            d.removeClass(this.instanceRoot, this.parentSizingClass);
+            d.addClass(this.instanceRoot, this.windowSizingClass);
         }
         else {
-            this.instanceRoot.style.width = getCssDimension(this.parent.clientWidth);
-            this.instanceRoot.style.height = getCssDimension(this.parent.clientHeight);
+            this.instanceRoot.style.width = d.getCssDimension(this.parent.clientWidth);
+            this.instanceRoot.style.height = d.getCssDimension(this.parent.clientHeight);
         }
     }
     destroy() {
-        lfn('destroying modal..');
+        d.lfn('destroying modal..');
         this.instanceRoot.remove();
     }
     setActive() {
-        lfn('setActive');
+        d.lfn('setActive');
         this.instanceRoot = this.instanceRoot;
         this.content.focus();
         DsynrModal.activeInstance = this;
     }
     addListeners() {
-        lfn('addListeners');
+        d.lfn('addListeners');
         let self = this;
         if (this.animate) {
-            l('enabling animation');
-            this.instance.addEventListener(transitionEvent, self.modalHidden);
-            // this.instance.addEventListener(transitionEvent, self.modalHidden);
+            d.l('enabling animation');
+            this.instance.addEventListener(d.transitionEvent, self.modalHidden);
+            // this.instance.addEventListener(d.transitionEvent, self.modalHidden);
         }
-        addListener(this.instanceRoot.id, 'keydown', function (evnt) {
+        d.addListener(this.instanceRoot.id, 'keydown', function (evnt) {
             if (evnt.key == 'Escape') {
                 self.hide(true);
             }
         });
-        addListener(this.instanceRoot.id, 'click', function (evnt) {
+        d.addListener(this.instanceRoot.id, 'click', function (evnt) {
             self.hide(true);
         });
     }
@@ -184,19 +184,19 @@ class DsynrModal extends DsynrUIIElement {
         let blanket;
         blanket = getElementById('blanket');
         if (event.animationName == 'fadeOut') {
-            blanket.removeEventListener(transitionEvent, this.blanketHidden);
+            blanket.removeEventListener(d.transitionEvent, this.blanketHidden);
             blanket.remove();
             // this.isOverlayOn = false;
         }
     }
     align() {
-        lfn('align');
+        d.lfn('align');
         if (!this.disableUnderlay) {
-            addClass(this.instanceRoot, this.parentSizingClass);
+            d.addClass(this.instanceRoot, this.parentSizingClass);
         }
-        centereStage(this.instance);
+        d.centereStage(this.instance);
         if (!this.disableUnderlay) {
-            //@todo removeClass(this.instanceRoot,this.parentSizingClass);
+            //@todo d.removeClass(this.instanceRoot,this.parentSizingClass);
         }
     }
     modalHidden(event) {
@@ -204,12 +204,12 @@ class DsynrModal extends DsynrUIIElement {
         if (event.animationName == 'zoomOut') {
             this.instanceRoot.classList.add('d-none');
             this.instanceRoot.classList.remove('zoomOut');
-            this.instanceRoot.removeEventListener(transitionEvent, this.modalHidden);
+            this.instanceRoot.removeEventListener(d.transitionEvent, this.modalHidden);
         }
     }
     static auto(modalClass = 'dsynrModal') {
-        lfn('auto');
-        makeArray(getElementsByClass(modalClass)).forEach(function (instance) {
+        d.lfn('auto');
+        d.makeArray(d.getElementsByClass(modalClass)).forEach(function (instance) {
             new DsynrModal(instance);
         });
     }

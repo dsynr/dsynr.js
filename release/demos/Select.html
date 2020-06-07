@@ -51,16 +51,15 @@
 <link rel="stylesheet" href="../util.css">
 <link rel="stylesheet" href="animate.min.css">
 
-<script src="../dsynr.debug.js"></script>
 <script src="../dsynr.util.js"></script>
 
 <script>
 
-    addListener('b1', 'click', function () {
+    d.addListener('b1', 'click', function () {
         DsynrSelect.auto();
     });
-    addListener('b3', 'click', function () {
-        new DsynrSelect(getElementById('dsynrSelect2'));
+    d.addListener('b3', 'click', function () {
+        new DsynrSelect(d.getElementById('dsynrSelect2'));
     });
     DsynrModal.auto();
 

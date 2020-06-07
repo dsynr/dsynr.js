@@ -3,14 +3,14 @@ class DsynrUIIElement {
     constructor(element, preferences) {
         this.selfAbort = false;
         this.prefAttr = 'dsynr-pref';
-        lfn('DsynrUIIElement');
+        d.lfn('DsynrUIIElement');
         this.content = element;
         let self = this;
         if (DsynrUIIElement.instances.length > 0) {
             DsynrUIIElement.instances.forEach(function (instance, index) {
                 if (instance.content === element) {
                     self.selfAbort = true;
-                    l("already instantiated, aborting...");
+                    d.l("already instantiated, aborting...");
                     return;
                 }
             });
@@ -20,54 +20,54 @@ class DsynrUIIElement {
             this.setPref();
             this.setParent();
             DsynrUIIElement.instances.push(this);
-            l(DsynrUIIElement.instances);
+            d.l(DsynrUIIElement.instances);
         }
     }
     setPref() {
-        lfn('setPref');
-        // l(this.preferences);
+        d.lfn('setPref');
+        // d.l(this.preferences);
         if (Object.keys(this.preferences).length > 0) {
-            l('Object.keys(preferences).length:' + Object.keys(this.preferences).length);
-            // l(Object.keys(preferences).length > 0);
-            //updateProps(this, preferences);
+            d.l('Object.keys(preferences).length:' + Object.keys(this.preferences).length);
+            // d.l(Object.keys(preferences).length > 0);
+            //d.updateProps(this, preferences);
         }
         else {
-            let options = getData(this.content, this.prefAttr);
-            l(options);
+            let options = d.getData(this.content, this.prefAttr);
+            d.l(options);
             if (options !== null) {
-                l('parsing preferences as JSON');
+                d.l('parsing preferences as JSON');
                 this.preferences = JSON.parse(options);
             }
         }
-        updateProps(this, this.preferences);
+        d.updateProps(this, this.preferences);
     }
     setup() {
     }
     setParent() {
-        lfn('setParent');
-        l(this.parent);
+        d.lfn('setParent');
+        d.l(this.parent);
         if (this.parent === undefined) {
             // @ts-ignore
             this.parent = 'parent';
         }
         if (typeof this.parent === 'string') {
-            l(this.parent);
+            d.l(this.parent);
             if (this.parent == 'parent') {
                 this.parent = this.content.parentElement;
             }
             else {
-                this.parent = getElementById(this.parent);
+                this.parent = d.getElementById(this.parent);
             }
         }
-        l(this.parent);
+        d.l(this.parent);
     }
     setDefaults(reset = false) {
-        lfn('setDefaults super ');
-        this.animate = addProp(this, 'animate', true, reset);
-        this.animateClass = addProp(this, 'animateClass', 'animated', reset);
-        this.animateInClass = addProp(this, 'animateInClass', concatStr([this.animateClass, 'fadeIn']), reset);
-        this.animateOutClass = addProp(this, 'animateOutClass', concatStr([this.animateClass, 'fadeOut']), reset);
-        this.animateAttentionClass = addProp(this, 'animateOutClass', concatStr([this.animateClass, 'heartBeat']), reset);
+        d.lfn('setDefaults super ');
+        this.animate = d.addProp(this, 'animate', true, reset);
+        this.animateClass = d.addProp(this, 'animateClass', 'animated', reset);
+        this.animateInClass = d.addProp(this, 'animateInClass', d.concatStr([this.animateClass, 'fadeIn']), reset);
+        this.animateOutClass = d.addProp(this, 'animateOutClass', d.concatStr([this.animateClass, 'fadeOut']), reset);
+        this.animateAttentionClass = d.addProp(this, 'animateOutClass', d.concatStr([this.animateClass, 'heartBeat']), reset);
     }
     addListeners() {
     }
@@ -80,11 +80,11 @@ class DsynrUIIElement {
     hide() {
     }
     destroy() {
-        lfn('destroy');
+        d.lfn('destroy');
         this.instance.remove();
     }
     setName(context, name) {
-        return concatStr([this.namePrefix, context, this.nameSuffix], '-');
+        return d.concatStr([this.namePrefix, context, this.nameSuffix], '-');
     }
 }
 DsynrUIIElement.instances = [];
@@ -93,49 +93,49 @@ class DsynrModal extends DsynrUIIElement {
     constructor(modalContent, preferences = {}) {
         super(modalContent, preferences);
         if (!this.selfAbort) {
-            lfn('DsynrModal');
+            d.lfn('DsynrModal');
             this.setDefaults();
             this.setup();
         }
     }
     setDefaults(reset = false) {
-        lfn('setDefaults');
+        d.lfn('setDefaults');
         super.setDefaults();
         let positionClass = 'position-absolute';
         let alignmentClass = 'top left';
-        this.adoptParent = addProp(this, 'adoptParent', true, reset);
-        this.animateModal = addProp(this, 'animateModal', true, reset);
-        this.autoDestroy = addProp(this, 'autoDestroy', true, reset);
-        this.displayTogether = addProp(this, 'displayTogether', true, reset);
-        this.useOverlay = addProp(this, 'useOverlay', true, reset);
-        this.disableUnderlay = addProp(this, 'disableUnderlay', true, reset);
-        this.animateUnderlay = addProp(this, 'animateUnderlay', true, reset);
-        this.nameSuffix = addProp(this, 'nameSuffix', DsynrModal.instances.length.toString(), reset);
-        this.namePrefix = addProp(this, 'namePrefix', 'dsynrModal', reset);
-        this.modalAnimateInClass = addProp(this, 'modalAnimateInClass', concatStr([this.animateClass, 'flipInX']), reset);
-        this.modalAnimateOutClass = addProp(this, 'modalAnimateOutClass', concatStr([this.animateClass, 'flipOutY']), reset);
-        this.modalAnimateAttentionClass = addProp(this, 'modalAnimateAttentionClass', concatStr([this.animateClass, 'shake']), reset);
-        this.overlayClass = addProp(this, 'overlayClass', 'o50 bg-dark', reset);
-        this.parentSizingClass = addProp(this, 'sizingClass', 'wmax hmax', reset);
-        this.windowSizingClass = addProp(this, 'windowSizingClass', 'vw vh', reset);
-        this.underlayClass = addProp(this, 'underlayClass', concatStr([positionClass, alignmentClass, this.parentSizingClass, 'z1']), reset);
-        this.instanceClass = addProp(this, 'instanceClass', concatStr([positionClass, 'z2 o0']), reset);
-        this.instanceRootClass = addProp(this, 'instanceRootClass', concatStr([positionClass, alignmentClass, this.parentSizingClass, 'z3 o0 d-none']), reset);
-        this.trigger = addProp(this, 'trigger', 'auto', reset);
+        this.adoptParent = d.addProp(this, 'adoptParent', true, reset);
+        this.animateModal = d.addProp(this, 'animateModal', true, reset);
+        this.autoDestroy = d.addProp(this, 'autoDestroy', true, reset);
+        this.displayTogether = d.addProp(this, 'displayTogether', true, reset);
+        this.useOverlay = d.addProp(this, 'useOverlay', true, reset);
+        this.disableUnderlay = d.addProp(this, 'disableUnderlay', true, reset);
+        this.animateUnderlay = d.addProp(this, 'animateUnderlay', true, reset);
+        this.nameSuffix = d.addProp(this, 'nameSuffix', DsynrModal.instances.length.toString(), reset);
+        this.namePrefix = d.addProp(this, 'namePrefix', 'dsynrModal', reset);
+        this.modalAnimateInClass = d.addProp(this, 'modalAnimateInClass', d.concatStr([this.animateClass, 'flipInX']), reset);
+        this.modalAnimateOutClass = d.addProp(this, 'modalAnimateOutClass', d.concatStr([this.animateClass, 'flipOutY']), reset);
+        this.modalAnimateAttentionClass = d.addProp(this, 'modalAnimateAttentionClass', d.concatStr([this.animateClass, 'shake']), reset);
+        this.overlayClass = d.addProp(this, 'overlayClass', 'o50 bg-dark', reset);
+        this.parentSizingClass = d.addProp(this, 'sizingClass', 'wmax hmax', reset);
+        this.windowSizingClass = d.addProp(this, 'windowSizingClass', 'vw vh', reset);
+        this.underlayClass = d.addProp(this, 'underlayClass', d.concatStr([positionClass, alignmentClass, this.parentSizingClass, 'z1']), reset);
+        this.instanceClass = d.addProp(this, 'instanceClass', d.concatStr([positionClass, 'z2 o0']), reset);
+        this.instanceRootClass = d.addProp(this, 'instanceRootClass', d.concatStr([positionClass, alignmentClass, this.parentSizingClass, 'z3 o0 d-none']), reset);
+        this.trigger = d.addProp(this, 'trigger', 'auto', reset);
     }
     setup() {
-        lfn('setup');
+        d.lfn('setup');
         let self = this;
-        addClass(this.content, 'd-none');
+        d.addClass(this.content, 'd-none');
         if (this.trigger != 'auto') {
-            l('setting trigger to : ' + this.trigger);
-            addListener(this.trigger, 'click', function () {
+            d.l('setting trigger to : ' + this.trigger);
+            d.addListener(this.trigger, 'click', function () {
                 self.show();
             });
-            l('Modal Trigger READY!');
+            d.l('Modal Trigger READY!');
         }
         else {
-            l('Triggering Automatically...');
+            d.l('Triggering Automatically...');
             this.show();
         }
     }
@@ -146,38 +146,38 @@ class DsynrModal extends DsynrUIIElement {
      */
     show() {
         if (DsynrModal.activeInstance !== this) {
-            lfn('show via : ' + this.trigger);
-            addClass(this.content, 'o0');
-            removeClass(this.content, 'd-none');
+            d.lfn('show via : ' + this.trigger);
+            d.addClass(this.content, 'o0');
+            d.removeClass(this.content, 'd-none');
             if (this.parent === undefined) {
-                l('parent unavailable, adding modal to body');
+                d.l('parent unavailable, adding modal to body');
                 this.parent = document.body;
             }
-            this.instanceRoot = addDiv(this.setName('root', this.content.id), this.instanceRootClass, this.parent);
+            this.instanceRoot = d.addDiv(this.setName('root', this.content.id), this.instanceRootClass, this.parent);
             if (this.disableUnderlay) {
                 // this.resizeRoot();
                 if (this.useOverlay) {
-                    this.underlayClass = concatStr([this.underlayClass, this.overlayClass]);
+                    this.underlayClass = d.concatStr([this.underlayClass, this.overlayClass]);
                 }
-                this.underlay = addDiv(this.setName('underlay', this.content.id), this.underlayClass, this.instanceRoot);
+                this.underlay = d.addDiv(this.setName('underlay', this.content.id), this.underlayClass, this.instanceRoot);
             }
             else {
-                removeClass(this.instanceRoot, this.parentSizingClass);
+                d.removeClass(this.instanceRoot, this.parentSizingClass);
             }
-            this.instance = addDiv(this.setName('modal', this.parent.id), this.instanceClass, this.instanceRoot);
+            this.instance = d.addDiv(this.setName('modal', this.parent.id), this.instanceClass, this.instanceRoot);
             this.addListeners();
             //update to detect parent (parent) resizing opposed to just window
             this.instance.appendChild(this.content);
             // window.addEventListener('resize', function () {
             //     modals[modals.length].align();
             // });
-            removeClass(this.instanceRoot, 'd-none');
-            removeClass(this.instance, 'o0');
-            removeClass(this.content, 'o0');
-            l(this.parent.id);
+            d.removeClass(this.instanceRoot, 'd-none');
+            d.removeClass(this.instance, 'o0');
+            d.removeClass(this.content, 'o0');
+            d.l(this.parent.id);
             if (this.adoptParent && (this.content.clientHeight > this.parent.clientHeight || this.content.clientWidth > this.parent.clientWidth)) {
-                lfn('adoptParent');
-                l('parent cannot accommodate child, adopting body as parent!');
+                d.lfn('adoptParent');
+                d.l('parent cannot accommodate child, adopting body as parent!');
                 this.parent = document.body;
                 this.parent.append(this.instanceRoot);
                 this.resizeRoot();
@@ -188,22 +188,22 @@ class DsynrModal extends DsynrUIIElement {
         }
     }
     attention() {
-        lfn('attention');
+        d.lfn('attention');
         this.animateDisplay(true);
     }
     animateDisplay(getAttention = false) {
-        lfn('animateDisplay');
+        d.lfn('animateDisplay');
         if (this.displayTogether) {
             if (this.animate && this.animateUnderlay) {
                 if (getAttention) {
-                    removeClass(this.instanceRoot, this.animateInClass);
-                    addClass(this.instanceRoot, this.animateAttentionClass);
-                    removeClass(this.instance, this.modalAnimateInClass);
-                    addClass(this.instance, this.modalAnimateAttentionClass);
+                    d.removeClass(this.instanceRoot, this.animateInClass);
+                    d.addClass(this.instanceRoot, this.animateAttentionClass);
+                    d.removeClass(this.instance, this.modalAnimateInClass);
+                    d.addClass(this.instance, this.modalAnimateAttentionClass);
                 }
                 else {
-                    addClass(this.instanceRoot, this.animateInClass);
-                    addClass(this.instance, this.modalAnimateInClass);
+                    d.addClass(this.instanceRoot, this.animateInClass);
+                    d.addClass(this.instance, this.modalAnimateInClass);
                 }
             }
             else {
@@ -211,8 +211,8 @@ class DsynrModal extends DsynrUIIElement {
                     //@todo
                 }
                 else {
-                    removeClass(this.instanceRoot, 'o0');
-                    removeClass(this.instance, 'o0');
+                    d.removeClass(this.instanceRoot, 'o0');
+                    d.removeClass(this.instance, 'o0');
                 }
             }
         }
@@ -221,52 +221,52 @@ class DsynrModal extends DsynrUIIElement {
         }
     }
     hide(destroy = this.autoDestroy) {
-        lfn('hide');
+        d.lfn('hide');
         if (this.useOverlay) {
-            removeClass(this.instanceRoot, this.modalAnimateInClass);
-            addClass(this.instanceRoot, this.modalAnimateOutClass);
+            d.removeClass(this.instanceRoot, this.modalAnimateInClass);
+            d.addClass(this.instanceRoot, this.modalAnimateOutClass);
         }
         if (destroy) {
-            l('TODO ONANIMATIONEND LISTENER...');
+            d.l('TODO ONANIMATIONEND LISTENER...');
             this.destroy();
         }
         DsynrModal.activeInstance = false;
     }
     resizeRoot() {
-        lfn('resizeRoot');
+        d.lfn('resizeRoot');
         if (this.parent == document.body) {
-            removeClass(this.instanceRoot, this.parentSizingClass);
-            addClass(this.instanceRoot, this.windowSizingClass);
+            d.removeClass(this.instanceRoot, this.parentSizingClass);
+            d.addClass(this.instanceRoot, this.windowSizingClass);
         }
         else {
-            this.instanceRoot.style.width = getCssDimension(this.parent.clientWidth);
-            this.instanceRoot.style.height = getCssDimension(this.parent.clientHeight);
+            this.instanceRoot.style.width = d.getCssDimension(this.parent.clientWidth);
+            this.instanceRoot.style.height = d.getCssDimension(this.parent.clientHeight);
         }
     }
     destroy() {
-        lfn('destroying modal..');
+        d.lfn('destroying modal..');
         this.instanceRoot.remove();
     }
     setActive() {
-        lfn('setActive');
+        d.lfn('setActive');
         this.instanceRoot = this.instanceRoot;
         this.content.focus();
         DsynrModal.activeInstance = this;
     }
     addListeners() {
-        lfn('addListeners');
+        d.lfn('addListeners');
         let self = this;
         if (this.animate) {
-            l('enabling animation');
-            this.instance.addEventListener(transitionEvent, self.modalHidden);
-            // this.instance.addEventListener(transitionEvent, self.modalHidden);
+            d.l('enabling animation');
+            this.instance.addEventListener(d.transitionEvent, self.modalHidden);
+            // this.instance.addEventListener(d.transitionEvent, self.modalHidden);
         }
-        addListener(this.instanceRoot.id, 'keydown', function (evnt) {
+        d.addListener(this.instanceRoot.id, 'keydown', function (evnt) {
             if (evnt.key == 'Escape') {
                 self.hide(true);
             }
         });
-        addListener(this.instanceRoot.id, 'click', function (evnt) {
+        d.addListener(this.instanceRoot.id, 'click', function (evnt) {
             self.hide(true);
         });
     }
@@ -275,19 +275,19 @@ class DsynrModal extends DsynrUIIElement {
         let blanket;
         blanket = getElementById('blanket');
         if (event.animationName == 'fadeOut') {
-            blanket.removeEventListener(transitionEvent, this.blanketHidden);
+            blanket.removeEventListener(d.transitionEvent, this.blanketHidden);
             blanket.remove();
             // this.isOverlayOn = false;
         }
     }
     align() {
-        lfn('align');
+        d.lfn('align');
         if (!this.disableUnderlay) {
-            addClass(this.instanceRoot, this.parentSizingClass);
+            d.addClass(this.instanceRoot, this.parentSizingClass);
         }
-        centereStage(this.instance);
+        d.centereStage(this.instance);
         if (!this.disableUnderlay) {
-            //@todo removeClass(this.instanceRoot,this.parentSizingClass);
+            //@todo d.removeClass(this.instanceRoot,this.parentSizingClass);
         }
     }
     modalHidden(event) {
@@ -295,12 +295,12 @@ class DsynrModal extends DsynrUIIElement {
         if (event.animationName == 'zoomOut') {
             this.instanceRoot.classList.add('d-none');
             this.instanceRoot.classList.remove('zoomOut');
-            this.instanceRoot.removeEventListener(transitionEvent, this.modalHidden);
+            this.instanceRoot.removeEventListener(d.transitionEvent, this.modalHidden);
         }
     }
     static auto(modalClass = 'dsynrModal') {
-        lfn('auto');
-        makeArray(getElementsByClass(modalClass)).forEach(function (instance) {
+        d.lfn('auto');
+        d.makeArray(d.getElementsByClass(modalClass)).forEach(function (instance) {
             new DsynrModal(instance);
         });
     }
@@ -310,50 +310,50 @@ class DsynrSelect extends DsynrUIIElement {
     constructor(select, preferences = {}) {
         super(select, preferences);
         if (!this.selfAbort) {
-            lfn('DsynrSelect');
+            d.lfn('DsynrSelect');
             this.setDefaults();
             this.setup();
         }
     }
     setDefaults(reset = false) {
         super.setDefaults();
-        lfn('setDefaults');
-        this.adoptParent = addProp(this, 'adoptParent', true, reset);
-        this.nameSuffix = addProp(this, 'nameSuffix', DsynrSelect.instances.length.toString(), reset);
-        this.namePrefix = addProp(this, 'namePrefix', 'dsynrEnhancedSelect', reset);
-        this.optionPrefix = addProp(this, 'namePrefix', concatStr([this.namePrefix, 'option'], '-'), reset);
-        this.instanceClass = addProp(this, 'instanceClasses', concatStr([this.namePrefix, 'rounded bg-light shadow p-5']), reset);
-        this.showFinder = addProp(this, 'showFinder', false, reset);
-        this.autoExit = addProp(this, 'autoExit', true, reset);
-        this.isActive = addProp(this, 'isActive', false, reset);
-        this.triggerCls = addProp(this, 'btnCls', concatStr([this.namePrefix, 'trigger btn btn-link'], '-'), reset);
-        this.optCls = addProp(this, 'optCls', concatStr([this.optionPrefix, 'hand p-2']), reset);
-        this.optClsActive = addProp(this, 'optClsActive', 'active bg-warning rounded', reset);
+        d.lfn('setDefaults');
+        this.adoptParent = d.addProp(this, 'adoptParent', true, reset);
+        this.nameSuffix = d.addProp(this, 'nameSuffix', DsynrSelect.instances.length.toString(), reset);
+        this.namePrefix = d.addProp(this, 'namePrefix', 'dsynrEnhancedSelect', reset);
+        this.optionPrefix = d.addProp(this, 'namePrefix', d.concatStr([this.namePrefix, 'option'], '-'), reset);
+        this.instanceClass = d.addProp(this, 'instanceClasses', d.concatStr([this.namePrefix, 'rounded bg-light shadow p-5']), reset);
+        this.showFinder = d.addProp(this, 'showFinder', false, reset);
+        this.autoExit = d.addProp(this, 'autoExit', true, reset);
+        this.isActive = d.addProp(this, 'isActive', false, reset);
+        this.triggerCls = d.addProp(this, 'btnCls', d.concatStr([this.namePrefix, 'trigger btn btn-link'], '-'), reset);
+        this.optCls = d.addProp(this, 'optCls', d.concatStr([this.optionPrefix, 'hand p-2']), reset);
+        this.optClsActive = d.addProp(this, 'optClsActive', 'active bg-warning rounded', reset);
     }
     setup() {
-        lfn('setup');
+        d.lfn('setup');
         if (this.content.id === '') {
             this.content.id = 'dsynrSelect-' + DsynrSelect.instances.length;
         }
         this.options = this.content.options;
         this.option = this.options[this.options.selectedIndex];
         this.setTrigger();
-        l('Select Trigger READY!');
+        d.l('Select Trigger READY!');
     }
     show() {
-        lfn('show triggered via : ' + this.trigger.id);
+        d.lfn('show triggered via : ' + this.trigger.id);
         if (this.isActive) {
             this.attention();
         }
         else {
-            this.instance = addDiv(this.setName('', this.content.id), this.instanceClass);
+            this.instance = d.addDiv(this.setName('', this.content.id), this.instanceClass);
             this.instance.tabIndex = 0;
             this.instance.style.outline = 'none';
             let self = this;
-            makeArray(this.options).forEach(function (o, index) {
+            d.makeArray(this.options).forEach(function (o, index) {
                 self.addESOption(o, index);
             });
-            this.modalPref = mergeObjs(this.preferences, { 'trigger': 'auto', 'parent': this.parent, 'adoptParent': this.adoptParent });
+            this.modalPref = d.mergeObjs(this.preferences, { 'trigger': 'auto', 'parent': this.parent, 'adoptParent': this.adoptParent });
             this.modal = new DsynrModal(this.instance, this.modalPref);
             this.setActive();
         }
@@ -363,61 +363,61 @@ class DsynrSelect extends DsynrUIIElement {
         this.modal.attention();
     }
     update(selectOption) {
-        lfn('update');
-        removeClass(this.esPrevOpt, this.optClsActive);
+        d.lfn('update');
+        d.removeClass(this.esPrevOpt, this.optClsActive);
         this.option = selectOption;
-        addClass(this.option, this.optClsActive);
-        this.esPrevOpt = getElementById(selectOption.id);
-        this.content.selectedIndex = parseInt(getData(selectOption, 'index'));
+        d.addClass(this.option, this.optClsActive);
+        this.esPrevOpt = d.getElementById(selectOption.id);
+        this.content.selectedIndex = parseInt(d.getData(selectOption, 'index'));
         this.trigger.textContent = this.option.innerText;
         if (this.autoExit) {
             this.destroy();
         }
     }
     addESOption(o, i) {
-        lfn('addESOption');
-        let oid = concatStr([this.optionPrefix, this.content.id, i], '-');
+        d.lfn('addESOption');
+        let oid = d.concatStr([this.optionPrefix, this.content.id, i], '-');
         let ocls;
-        l(this.esPrevOpt);
-        ocls = (i == this.content.selectedIndex) ? concatStr([this.optCls, this.optClsActive]) : ocls = this.optCls;
-        let eso = addDiv(oid, ocls, this.instance);
+        d.l(this.esPrevOpt);
+        ocls = (i == this.content.selectedIndex) ? d.concatStr([this.optCls, this.optClsActive]) : ocls = this.optCls;
+        let eso = d.addDiv(oid, ocls, this.instance);
         eso.tabIndex = i;
         eso.style.outline = 'none';
         if (i == this.option.index) {
             this.esPrevOpt = eso;
         }
-        let oe = getElementById(oid);
+        let oe = d.getElementById(oid);
         oe.textContent = o.text;
-        setData(oe, 'index', o.index.toString());
+        d.setData(oe, 'index', o.index.toString());
         let self = this;
-        addListener(oe.id, 'click', function () {
-            lclk(oe.id);
+        d.addListener(oe.id, 'click', function () {
+            d.lclk(oe.id);
             self.update(oe);
         });
-        addListener(oe.id, 'keydown', function (ev) {
+        d.addListener(oe.id, 'keydown', function (ev) {
             if (ev.key == 'Enter') {
                 self.update(oe);
             }
         });
     }
     setTrigger() {
-        lfn('addTrigger');
-        this.trigger = addDiv(this.setName('btn', this.content.id), this.triggerCls, this.content.parentElement);
-        addText(this.option.text, this.trigger);
+        d.lfn('addTrigger');
+        this.trigger = d.addDiv(this.setName('btn', this.content.id), this.triggerCls, this.content.parentElement);
+        d.addText(this.option.text, this.trigger);
         let self = this;
-        addListener(this.trigger.id, 'click', function (ev) {
+        d.addListener(this.trigger.id, 'click', function (ev) {
             ev.preventDefault();
             self.show();
         });
-        hide(this.content);
+        d.hide(this.content);
     }
     addListeners() {
-        lfn('addListeners...');
+        d.lfn('d.addListeners...');
         let self = this;
-        addListener(this.instance.id, 'focus', ev => {
-            l('focused!');
+        d.addListener(this.instance.id, 'focus', ev => {
+            d.l('focused!');
         });
-        addListener(this.instance.id, 'keydown', function (evnt) {
+        d.addListener(this.instance.id, 'keydown', function (evnt) {
             switch (evnt.key) {
                 case 'ArrowDown':
                 case 'ArrowRight':
@@ -435,297 +435,315 @@ class DsynrSelect extends DsynrUIIElement {
         });
     }
     next() {
-        lfn('next');
+        d.lfn('next');
     }
     prev() {
-        lfn('prev');
+        d.lfn('prev');
     }
     destroy() {
-        lfn('destroy');
+        d.lfn('destroy');
         this.modal.hide(true);
         this.isActive = false;
         DsynrSelect.activeInstance = false;
     }
     setActive() {
-        lfn('setActive');
+        d.lfn('setActive');
         this.isActive = true;
         DsynrSelect.activeInstance = this;
         this.addListeners();
         this.instance.focus();
     }
     static auto(selectClass = 'dsynrSelect') {
-        lfn('auto');
-        makeArray(getElementsByClass(selectClass)).forEach(function (instance) {
+        d.lfn('auto');
+        d.makeArray(d.getElementsByClass(selectClass)).forEach(function (instance) {
             new DsynrSelect(instance);
         });
     }
 }
 //# sourceMappingURL=DsynrSelect.js.map
-/**
- * @todo
- */
-function gtag(type, name, other) {
-}
-/**
- * @todo
- */
-function PING(type, name) {
-}
-//# sourceMappingURL=analytics.js.map
-/**
- * Get data attribute value of a DOM element
- * @param element e DOM element
- * @param string attrName Name of the data-attribute
- */
-function getData(e, attrName) {
-    return e.getAttribute('data-' + attrName);
-}
-/**
- * Set data attribute for a DOM element
- * @param element e DOM element
- * @param string attrName Name of the data-attribute
- * @param string attrVal Value to be set for the attribute, default ''
- */
-function setData(e, attrName, attrVal = '') {
-    e.setAttribute('data-' + attrName, attrVal);
-}
-// debounce so filtering doesn't happen every millisecond
-function debounce(fn, threshold) {
-    let timeout;
-    threshold = threshold || 100;
-    return function debounced() {
-        clearTimeout(timeout);
-        let args = arguments;
-        let _this = this;
-        function delayed() {
-            fn.apply(_this, args);
+class DsynrUtil {
+    constructor() {
+        this.transitionEvent = this.whichAnimationEvent();
+        this.updateViewportVars();
+    }
+    /**
+     * @todo
+     */
+    gtag(type, name, other) {
+    }
+    /**
+     * @todo
+     */
+    PING(type, name) {
+    }
+    /**
+     * Get data attribute value of a DOM element
+     * @param element e DOM element
+     * @param string attrName Name of the data-attribute
+     */
+    getData(e, attrName) {
+        return e.getAttribute('data-' + attrName);
+    }
+    /**
+     * Set data attribute for a DOM element
+     * @param element e DOM element
+     * @param string attrName Name of the data-attribute
+     * @param string attrVal Value to be set for the attribute, default ''
+     */
+    setData(e, attrName, attrVal = '') {
+        e.setAttribute('data-' + attrName, attrVal);
+    }
+    // debounce so filtering doesn't happen every millisecond
+    debounce(fn, threshold) {
+        let timeout;
+        threshold = threshold || 100;
+        return function debounced() {
+            clearTimeout(timeout);
+            let args = arguments;
+            let _this = this;
+            function delayed() {
+                fn.apply(_this, args);
+            }
+            timeout = setTimeout(delayed, threshold);
+        };
+    }
+    concatStr(strings, separator = ' ') {
+        return strings.join(separator);
+    }
+    getPercentage(x, percent) {
+        return (x * percent) / 100;
+    }
+    getRandFloor(min = 0, max = 255) {
+        return this.getRandDecimal(min, max, 0);
+    }
+    getRandNum(min = 0, max = 255) {
+        return Math.round(this.getRandDecimal(min, max, 0));
+    }
+    getRandDecimal(min = 0, max = 1, precision = 2) {
+        return parseFloat((Math.random() * (max - min) + min).toFixed(precision));
+    }
+    getRandomArbitrary(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+    makeArray(collection) {
+        return Array.from(collection);
+    }
+    get_rand_array_item(mixed_arr) {
+        return mixed_arr[Math.floor(Math.random() * mixed_arr.length)];
+    }
+    get_rand_obj_item(obj) {
+        let keys = Object.keys(obj);
+        return obj[keys[keys.length * Math.random() << 0]];
+    }
+    addProp(obj, propName, propVal = undefined, overwrite = false) {
+        if (overwrite || !obj.hasOwnProperty(propName)) {
+            Object.defineProperty(obj, propName, {
+                configurable: true,
+                enumerable: true,
+                writable: true,
+                value: propVal
+            });
         }
-        timeout = setTimeout(delayed, threshold);
-    };
-}
-//# sourceMappingURL=other.js.map
-function concatStr(strings, separator = ' ') {
-    return strings.join(separator);
-}
-//# sourceMappingURL=string.js.map
-function getPercentage(x, percent) {
-    return (x * percent) / 100;
-}
-function getRandFloor(min = 0, max = 255) {
-    return getRandDecimal(min, max, 0);
-}
-function getRandNum(min = 0, max = 255) {
-    return Math.round(getRandDecimal(min, max, 0));
-}
-function getRandDecimal(min = 0, max = 1, precision = 2) {
-    return parseFloat((Math.random() * (max - min) + min).toFixed(precision));
-}
-function getRandomArbitrary(min, max) {
-    return Math.random() * (max - min) + min;
-}
-//# sourceMappingURL=math.js.map
-function makeArray(collection) {
-    return Array.from(collection);
-}
-function get_rand_array_item(mixed_arr) {
-    return mixed_arr[Math.floor(Math.random() * mixed_arr.length)];
-}
-function get_rand_obj_item(obj) {
-    let keys = Object.keys(obj);
-    return obj[keys[keys.length * Math.random() << 0]];
-}
-function addProp(obj, propName, propVal = undefined, overwrite = false) {
-    if (overwrite || !obj.hasOwnProperty(propName)) {
-        Object.defineProperty(obj, propName, {
-            configurable: true,
-            enumerable: true,
-            writable: true,
-            value: propVal
+        return obj[propName];
+    }
+    updateProps(obj, propSet) {
+        this.lfn('updateProps...');
+        for (let prop in propSet) {
+            if (propSet.hasOwnProperty(prop)) {
+                obj[prop] = propSet[prop];
+            }
+            this.l(prop + ':' + obj[prop]);
+        }
+    }
+    mergeObjs(main, sub) {
+        for (let prop in sub) {
+            main[prop] = sub[prop];
+        }
+        return main;
+    }
+    hasInstance(objList, obj) {
+        this.lfn('hasInstance');
+        this.l(objList);
+        let hasIt = false;
+        objList.forEach((o, i) => {
+            if (o === obj) {
+                hasIt = true;
+                return;
+            }
+        });
+        this.l(hasIt);
+        return hasIt;
+    }
+    getRandColour() {
+        return '#' + ('00000' + (Math.random() * (1 << 24) | 0).toString(16)).slice(-6);
+    }
+    getRandColourRGBA(maxO = 1, maxR = 255, maxG = 255, maxB = 255) {
+        return 'rgba(' + this.getRandFloor(0, maxR) + ',' + this.getRandFloor(0, maxG) + ',' + this.getRandFloor(0, maxB) + ',' + this.getRandDecimal(0, maxO) + ')';
+    }
+    /**
+     *
+     * @param val
+     * @param unit
+     */
+    getCssDimension(val, unit = 'px') {
+        return val + unit;
+    }
+    randRadius() {
+        return this.getRandomArbitrary(5, 150);
+    }
+    randWidth() {
+        return this.getRandomArbitrary(2, 15);
+    }
+    /**
+     *
+     * @param e
+     */
+    getDimensions(e) {
+        return { w: e.clientWidth, h: e.clientHeight };
+    }
+    /**
+     *
+     * @param e
+     */
+    hide(e) {
+        e.style.display = 'none';
+    }
+    /**
+     *
+     * @param e
+     * @param classes
+     */
+    addClass(e, classes) {
+        e.classList.add(...classes.split(' '));
+    }
+    /**
+     *
+     * @param e
+     * @param classes
+     */
+    removeClass(e, classes) {
+        e.classList.remove(...classes.split(' '));
+    }
+    /**
+     *
+     * @param e
+     * @param classes
+     */
+    hasClass(e, classes) {
+        return e.classList.contains(classes);
+    }
+    addDiv(id = '', classes = '', parent = document.body) {
+        let div = document.createElement('DIV');
+        div.id = id;
+        div.className = classes;
+        parent.appendChild(div);
+        return div;
+    }
+    addText(txt = '', root) {
+        root.appendChild(document.createTextNode(txt));
+    }
+    getElementsBySelector(selector) {
+        return document.querySelectorAll(selector);
+    }
+    getElementsByTag(tagName) {
+        return document.querySelectorAll(tagName);
+    }
+    getElementsByClass(className) {
+        return document.getElementsByClassName(className);
+    }
+    getElementById(elementID) {
+        return window[elementID];
+    }
+    addJS(src, id = '') {
+        let js = document.createElement('script');
+        js.setAttribute('src', src);
+        js.id = id;
+        document.head.appendChild(js);
+    }
+    animateIn() {
+        this.makeArray(getElementsByClass('animated')).forEach((e) => {
+            if (this.getData(e, 'ani') !== null && this.getData(e, 'ani') != null && isInViewportSlightly(e)) {
+                e.classList.remove('o0');
+                e.classList.add(e.dataset.ani);
+            }
         });
     }
-    return obj[propName];
-}
-function updateProps(obj, propSet) {
-    lfn('updateProps...');
-    for (let prop in propSet) {
-        if (propSet.hasOwnProperty(prop)) {
-            obj[prop] = propSet[prop];
-        }
-        l(prop + ':' + obj[prop]);
-    }
-}
-function mergeObjs(main, sub) {
-    for (let prop in sub) {
-        main[prop] = sub[prop];
-    }
-    return main;
-}
-function hasInstance(objList, obj) {
-    lfn('hasInstance');
-    l(objList);
-    let hasIt = false;
-    objList.forEach(function (o, i) {
-        if (o === obj) {
-            hasIt = true;
-            return;
-        }
-    });
-    l(hasIt);
-    return hasIt;
-}
-//# sourceMappingURL=obj.js.map
-function getRandColour() {
-    return '#' + ('00000' + (Math.random() * (1 << 24) | 0).toString(16)).slice(-6);
-}
-function getRandColourRGBA(maxO = 1, maxR = 255, maxG = 255, maxB = 255) {
-    return 'rgba(' + getRandFloor(0, maxR) + ',' + getRandFloor(0, maxG) + ',' + getRandFloor(0, maxB) + ',' + getRandDecimal(0, maxO) + ')';
-}
-//# sourceMappingURL=graphics.js.map
-/**
- *
- * @param val
- * @param unit
- */
-function getCssDimension(val, unit = 'px') {
-    return val + unit;
-}
-function randRadius() {
-    return getRandomArbitrary(5, 150);
-}
-function randWidth() {
-    return getRandomArbitrary(2, 15);
-}
-/**
- *
- * @param e
- */
-function getDimensions(e) {
-    return { w: e.clientWidth, h: e.clientHeight };
-}
-/**
- *
- * @param e
- */
-function hide(e) {
-    e.style.display = 'none';
-}
-/**
- *
- * @param e
- * @param classes
- */
-function addClass(e, classes) {
-    e.classList.add(...classes.split(' '));
-}
-/**
- *
- * @param e
- * @param classes
- */
-function removeClass(e, classes) {
-    e.classList.remove(...classes.split(' '));
-}
-/**
- *
- * @param e
- * @param classes
- */
-function hasClass(e, classes) {
-    return e.classList.contains(classes);
-}
-//# sourceMappingURL=css.js.map
-function addDiv(id = '', classes = '', parent = document.body) {
-    let div = document.createElement('DIV');
-    div.id = id;
-    div.className = classes;
-    parent.appendChild(div);
-    return div;
-}
-function addText(txt = '', root) {
-    root.appendChild(document.createTextNode(txt));
-}
-function getElementsBySelector(selector) {
-    return document.querySelectorAll(selector);
-}
-function getElementsByTag(tagName) {
-    return document.querySelectorAll(tagName);
-}
-function getElementsByClass(className) {
-    return document.getElementsByClassName(className);
-}
-function getElementById(elementID) {
-    return window[elementID];
-}
-//# sourceMappingURL=dom.js.map
-let transitionEvent = whichAnimationEvent();
-function animateIn() {
-    makeArray(getElementsByClass('animated')).forEach((e) => {
-        if (getData(e, 'ani') !== null && getData(e, 'ani') != null && isInViewportSlightly(e)) {
-            e.classList.remove('o0');
-            e.classList.add(e.dataset.ani);
-        }
-    });
-}
-function whichAnimationEvent() {
-    let t, el = document.createElement("fakeelement");
-    let animations = {
-        "animation": "animationend",
-        "OAnimation": "oAnimationEnd",
-        "MozAnimation": "animationend",
-        "WebkitAnimation": "webkitAnimationEnd"
-    };
-    for (t in animations) {
-        if (el.style[t] !== undefined) {
-            return animations[t];
+    whichAnimationEvent() {
+        let t, el = document.createElement("fakeelement");
+        let animations = {
+            "animation": "animationend",
+            "OAnimation": "oAnimationEnd",
+            "MozAnimation": "animationend",
+            "WebkitAnimation": "webkitAnimationEnd"
+        };
+        for (t in animations) {
+            if (el.style[t] !== undefined) {
+                return animations[t];
+            }
         }
     }
-} //
-//# sourceMappingURL=animation.js.map
-function addListener(eID, event, fn) {
-    if (getElementById(eID) !== undefined) {
-        getElementById(eID).addEventListener(event, fn);
+    addListener(eID, event, fn) {
+        if (this.getElementById(eID) !== undefined) {
+            this.getElementById(eID).addEventListener(event, fn);
+        }
+    }
+    removeListener(eID, event, fn) {
+        this.getElementById(eID).removeEventListener(event, fn);
+    }
+    addEvent(e, listener, fn) {
+        this.makeArray(e).forEach((el) => {
+            el.addEventListener(listener, fn);
+            this.l(el);
+        });
+    }
+    centereStage(e) {
+        let dimensions = this.getDimensions(e);
+        e.style.marginTop = this.getCssDimension(-(dimensions.h) / 2);
+        e.style.marginLeft = this.getCssDimension(-(dimensions.w) / 2);
+        e.style.top = '50%';
+        e.style.left = '50%';
+    }
+    updateViewportVars() {
+        this.vw = window.innerWidth;
+        this.vh = window.innerHeight;
+    }
+    getBounds(e) {
+        return e.getBoundingClientRect();
+    }
+    isInViewportSlightly(e) {
+        let bounding = getBounds(e);
+        return (bounding.top >= 0 //&&
+        // bounding.left >= 0 &&
+        // bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        // bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+    isInViewportMostly(e) {
+        let bounding = getBounds(e);
+        return (bounding.top / 2 > -bounding.top);
+        // return (getPercentage((e.clientHeight + bounding.top), 50) > -bounding.top);
+    }
+    /**
+     * Log to the console
+     * @param any data
+     */
+    l(data) {
+        console.log(data);
+    }
+    /**
+     * Log active function name
+     * @param string functionName
+     */
+    lfn(functionName) {
+        this.l(' {} ' + functionName);
+    }
+    /**
+     * Log click
+     * @param e
+     */
+    lclk(element) {
+        this.l('* click ' + element);
     }
 }
-function removeListener(eID, event, fn) {
-    getElementById(eID).removeEventListener(event, fn);
-}
-function addEvent(e, listener, fn) {
-    makeArray(e).forEach((el) => {
-        el.addEventListener(listener, fn);
-        l(el);
-    });
-}
-//# sourceMappingURL=events.js.map
-function centereStage(e) {
-    let dimensions = getDimensions(e);
-    e.style.marginTop = getCssDimension(-(dimensions.h) / 2);
-    e.style.marginLeft = getCssDimension(-(dimensions.w) / 2);
-    e.style.top = '50%';
-    e.style.left = '50%';
-}
-function updateViewportVars() {
-    vw = window.innerWidth;
-    vh = window.innerHeight;
-}
-function getBounds(e) {
-    return e.getBoundingClientRect();
-}
-function isInViewportSlightly(e) {
-    let bounding = getBounds(e);
-    return (bounding.top >= 0 //&&
-    // bounding.left >= 0 &&
-    // bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-    // bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
-    );
-}
-function isInViewportMostly(e) {
-    let bounding = getBounds(e);
-    return (bounding.top / 2 > -bounding.top);
-    // return (getPercentage((e.clientHeight + bounding.top), 50) > -bounding.top);
-}
-let vw, vh;
-//# sourceMappingURL=viewport.js.map
-(function () {
-    updateViewportVars();
-})();
-//# sourceMappingURL=main.js.map
+let d = new DsynrUtil();
+//# sourceMappingURL=DsynrUtil.js.map

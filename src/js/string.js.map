@@ -1,1 +1,0 @@
-{"version":3,"file":"string.js","sourceRoot":"","sources":["../ts/string.ts"],"names":[],"mappings":"AAAA,SAAS,SAAS,CAAC,OAAmB,EAAE,YAAoB,GAAG;IAC3D,OAAO,OAAO,CAAC,IAAI,CAAC,SAAS,CAAC,CAAC;AACnC,CAAC","sourcesContent":["function concatStr(strings: Array<any>, separator: string = ' '): string {\n    return strings.join(separator);\n}\n"]}

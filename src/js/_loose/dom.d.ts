@@ -4,3 +4,4 @@ declare function getElementsBySelector(selector: string): any;
 declare function getElementsByTag(tagName: string): NodeListOf<Element>;
 declare function getElementsByClass(className: string): HTMLCollection;
 declare function getElementById(elementID: string): HTMLElement;
+declare function addJS(src: string, id?: string): void;

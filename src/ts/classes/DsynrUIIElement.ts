@@ -22,7 +22,7 @@ abstract class DsynrUIIElement implements DsynrUI {
     private prefAttr: string = 'dsynr-pref';
 
     protected constructor(element: HTMLElement, preferences: object) {
-        lfn('DsynrUIIElement');
+        d.lfn('DsynrUIIElement');
 
         this.content = element;
 
@@ -31,7 +31,7 @@ abstract class DsynrUIIElement implements DsynrUI {
             DsynrUIIElement.instances.forEach(function (instance, index) {
                 if (instance.content === element) {
                     self.selfAbort = true;
-                    l("already instantiated, aborting...");
+                    d.l("already instantiated, aborting...");
                     return;
                 }
             });
@@ -42,57 +42,57 @@ abstract class DsynrUIIElement implements DsynrUI {
             this.setPref();
             this.setParent();
             DsynrUIIElement.instances.push(this);
-            l(DsynrUIIElement.instances);
+            d.l(DsynrUIIElement.instances);
         }
     }
 
     setPref(): void {
-        lfn('setPref');
-        // l(this.preferences);
+        d.lfn('setPref');
+        // d.l(this.preferences);
 
         if (Object.keys(this.preferences).length > 0) {
-            l('Object.keys(preferences).length:' + Object.keys(this.preferences).length);
-            // l(Object.keys(preferences).length > 0);
-            //updateProps(this, preferences);
+            d.l('Object.keys(preferences).length:' + Object.keys(this.preferences).length);
+            // d.l(Object.keys(preferences).length > 0);
+            //d.updateProps(this, preferences);
         } else {
-            let options: any = getData(this.content, this.prefAttr);
-            l(options);
+            let options: any = d.getData(this.content, this.prefAttr);
+            d.l(options);
             if (options !== null) {
-                l('parsing preferences as JSON');
+                d.l('parsing preferences as JSON');
                 this.preferences = JSON.parse(options);
             }
         }
-        updateProps(this, this.preferences);
+        d.updateProps(this, this.preferences);
     }
 
     setup(): void {
     }
 
     setParent(): void {
-        lfn('setParent');
-        l(this.parent);
+        d.lfn('setParent');
+        d.l(this.parent);
         if (this.parent === undefined) {
             // @ts-ignore
             this.parent = 'parent';
         }
         if (typeof this.parent === 'string') {
-            l(this.parent);
+            d.l(this.parent);
             if (this.parent == 'parent') {
                 this.parent = <HTMLElement>this.content.parentElement;
             } else {
-                this.parent = getElementById(this.parent);
+                this.parent = d.getElementById(this.parent);
             }
         }
-        l(this.parent);
+        d.l(this.parent);
     }
 
     setDefaults(reset: boolean = false): void {
-        lfn('setDefaults super ');
-        this.animate = addProp(this, 'animate', true, reset);
-        this.animateClass = addProp(this, 'animateClass', 'animated', reset);
-        this.animateInClass = addProp(this, 'animateInClass', concatStr([this.animateClass, 'fadeIn']), reset);
-        this.animateOutClass = addProp(this, 'animateOutClass', concatStr([this.animateClass, 'fadeOut']), reset);
-        this.animateAttentionClass = addProp(this, 'animateOutClass', concatStr([this.animateClass, 'heartBeat']), reset);
+        d.lfn('setDefaults super ');
+        this.animate = d.addProp(this, 'animate', true, reset);
+        this.animateClass = d.addProp(this, 'animateClass', 'animated', reset);
+        this.animateInClass = d.addProp(this, 'animateInClass', d.concatStr([this.animateClass, 'fadeIn']), reset);
+        this.animateOutClass = d.addProp(this, 'animateOutClass', d.concatStr([this.animateClass, 'fadeOut']), reset);
+        this.animateAttentionClass = d.addProp(this, 'animateOutClass', d.concatStr([this.animateClass, 'heartBeat']), reset);
     }
 
     protected addListeners(): void {
@@ -111,11 +111,11 @@ abstract class DsynrUIIElement implements DsynrUI {
     }
 
     destroy(): void {
-        lfn('destroy');
+        d.lfn('destroy');
         this.instance.remove();
     }
 
     protected setName(context: string, name: string): string {
-        return concatStr([this.namePrefix, context, this.nameSuffix], '-');
+        return d.concatStr([this.namePrefix, context, this.nameSuffix], '-');
     }
 }

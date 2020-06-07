@@ -20,4 +20,10 @@ function getElementsByClass(className) {
 function getElementById(elementID) {
     return window[elementID];
 }
+function addJS(src, id = '') {
+    let js = document.createElement('script');
+    js.setAttribute('src', src);
+    js.id = id;
+    document.head.appendChild(js);
+}
 //# sourceMappingURL=dom.js.map

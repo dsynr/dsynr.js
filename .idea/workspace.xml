@@ -25,17 +25,83 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a40d500-3c83-4dd3-83d5-91876b3160f7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/ts/DsynrUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/util.js.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/util.js.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.tsBuildInfo" beforeDir="false" afterPath="$PROJECT_DIR$/.tsBuildInfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gulpfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/gulpfile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/demos/Select.html" beforeDir="false" afterPath="$PROJECT_DIR$/release/demos/Select.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/demos/modal.html" beforeDir="false" afterPath="$PROJECT_DIR$/release/demos/modal.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/dsynr.debug.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/dsynr.debug.min.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/release/dsynr.util.js" beforeDir="false" afterPath="$PROJECT_DIR$/release/dsynr.util.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/release/dsynr.util.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/release/dsynr.util.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/analytics.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/analytics.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/analytics.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/analytics.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/analytics.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/analytics.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/animation.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/animation.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/animation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/animation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/animation.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/animation.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/classes/DsynrUIIElement.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/components/DsynrModal.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrModal.d.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/components/DsynrModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrModal.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/components/DsynrModal.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrModal.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/components/DsynrSelect.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrSelect.d.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/components/DsynrSelect.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrSelect.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/components/DsynrSelect.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/DsynrSelect.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/css.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/css.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/css.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/css.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/css.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/css.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/debug.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/debug.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/debug.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/debug.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/debug.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/debug.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/dom.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/dom.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/dom.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/dom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/dom.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/dom.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/events.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/events.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/events.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/events.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/events.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/events.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/graphics.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/graphics.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/graphics.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/graphics.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/graphics.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/graphics.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/interfaces/DsynrUI.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/interfaces/DsynrUI.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/main.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/main.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/main.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/main.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/math.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/math.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/math.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/math.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/math.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/math.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/obj.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/obj.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/obj.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/obj.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/obj.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/obj.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/other.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/other.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/other.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/other.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/other.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/other.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/string.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/string.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/string.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/string.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/string.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/string.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/viewport.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/viewport.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/viewport.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/viewport.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/viewport.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/_loose/viewport.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ts/analytics.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/_loose/analytics.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ts/animation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/_loose/animation.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ts/classes/DsynrUIIElement.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/classes/DsynrUIIElement.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ts/components/DsynrModal.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/components/DsynrModal.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ts/components/DsynrSelect.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/components/DsynrSelect.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ts/css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/_loose/css.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ts/debug.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/_loose/debug.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ts/dom.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/_loose/dom.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ts/events.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/_loose/events.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ts/graphics.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/_loose/graphics.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ts/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/_loose/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ts/math.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/_loose/math.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ts/obj.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/_loose/obj.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ts/other.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/_loose/other.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ts/string.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/_loose/string.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ts/viewport.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/_loose/viewport.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,6 +165,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="TypeScript&#10;HTML" />
     <property name="js.buildTools.grunt.grunt-cli.package" value="" />
     <property name="js.buildTools.gulp.gulp_package_dir" value="$PROJECT_DIR$/node_modules/gulp" />
@@ -107,19 +174,20 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="watcher.settings" />
     <property name="settings.editor.splitter.proportion" value="0.27726808" />
-    <property name="ts.external.directory.path" value="C:\Users\AbhishekJain\Desktop\New folder\util.js\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\IntelliJ IDEA 2020.1.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="ts.rename.search.for.dynamic.occurrences" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\AbhishekJain\Desktop\New folder\util.js\src\ts\components" />
-      <recent name="C:\Users\AbhishekJain\Desktop\New folder\util.js\src\ts\classes" />
-      <recent name="C:\Users\AbhishekJain\Desktop\New folder\util.js\src\ts\interfaces" />
-      <recent name="C:\Users\AbhishekJain\Desktop\New folder\util.js" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\AbhishekJain\Desktop\New folder\util.js\src\ts" />
       <recent name="C:\Users\AbhishekJain\Desktop\New folder\util.js\release\demos" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\AbhishekJain\Desktop\New folder\util\src\js\_loose" />
+      <recent name="C:\Users\AbhishekJain\Desktop\New folder\util\src\ts\looseFn" />
+      <recent name="C:\Users\AbhishekJain\Desktop\New folder\util.js\src\ts\components" />
+      <recent name="C:\Users\AbhishekJain\Desktop\New folder\util.js\src\ts\classes" />
+      <recent name="C:\Users\AbhishekJain\Desktop\New folder\util.js\src\ts\interfaces" />
     </key>
   </component>
   <component name="RunManager">
@@ -177,6 +245,7 @@
       <workItem from="1588368525111" duration="651000" />
       <workItem from="1588378675258" duration="1983000" />
       <workItem from="1588713298272" duration="26965000" />
+      <workItem from="1591503292801" duration="3534000" />
     </task>
     <servers />
   </component>
@@ -238,30 +307,30 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="92" y="92" width="1736" height="896" maximized="true" key="DiffContextDialog/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1588803134918" />
-    <state x="633" y="340" width="670" height="672" key="EditFileWatcherDialog" timestamp="1587947167463">
+    <state x="633" y="340" width="717" height="672" key="EditFileWatcherDialog" timestamp="1591505875918">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="633" y="340" width="670" height="672" key="EditFileWatcherDialog/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1587947167463" />
+    <state x="633" y="340" width="717" height="672" key="EditFileWatcherDialog/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1591505875918" />
     <state x="740" y="298" key="FileChooserDialogImpl" timestamp="1587925519526">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="740" y="298" key="FileChooserDialogImpl/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1587925519526" />
-    <state width="1877" height="363" key="GridCell.Tab.0.bottom" timestamp="1587788145106">
+    <state width="1877" height="295" key="GridCell.Tab.0.bottom" timestamp="1591506649303">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="363" key="GridCell.Tab.0.bottom/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1587788145106" />
-    <state width="1877" height="363" key="GridCell.Tab.0.center" timestamp="1587788145106">
+    <state width="1877" height="295" key="GridCell.Tab.0.bottom/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1591506649303" />
+    <state width="1877" height="295" key="GridCell.Tab.0.center" timestamp="1591506649303">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="363" key="GridCell.Tab.0.center/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1587788145106" />
-    <state width="1877" height="363" key="GridCell.Tab.0.left" timestamp="1587788145105">
+    <state width="1877" height="295" key="GridCell.Tab.0.center/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1591506649303" />
+    <state width="1877" height="295" key="GridCell.Tab.0.left" timestamp="1591506649303">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="363" key="GridCell.Tab.0.left/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1587788145105" />
-    <state width="1877" height="363" key="GridCell.Tab.0.right" timestamp="1587788145106">
+    <state width="1877" height="295" key="GridCell.Tab.0.left/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1591506649303" />
+    <state width="1877" height="295" key="GridCell.Tab.0.right" timestamp="1591506649303">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="363" key="GridCell.Tab.0.right/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1587788145106" />
+    <state width="1877" height="295" key="GridCell.Tab.0.right/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1591506649303" />
     <state width="1877" height="363" key="GridCell.Tab.1.bottom" timestamp="1587788145106">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -314,10 +383,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="732" y="242" key="RollbackChangesDialog/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1588803733268" />
-    <state x="917" y="241" width="998" height="708" key="SettingsEditor" timestamp="1588041314201">
+    <state x="917" y="241" width="998" height="708" key="SettingsEditor" timestamp="1591505877655">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="917" y="241" width="998" height="708" key="SettingsEditor/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1588041314201" />
+    <state x="917" y="241" width="998" height="708" key="SettingsEditor/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1591505877655" />
     <state x="552" y="272" key="Vcs.Push.Dialog.v2" timestamp="1587961960042">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -338,10 +407,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="0" y="13" width="1447" height="1067" maximized="true" key="dock-window-1/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1588815632079" />
-    <state x="667" y="296" width="586" height="520" key="find.popup" timestamp="1588723797062">
+    <state x="667" y="296" width="586" height="534" key="find.popup" timestamp="1591506476004">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="667" y="296" width="586" height="520" key="find.popup/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1588723797062" />
+    <state x="667" y="296" width="586" height="534" key="find.popup/-1920.292.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1591506476004" />
     <state x="712" y="329" key="git4idea.merge.GitPullDialog" timestamp="1587963938875">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -374,13 +443,11 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/js/components/DsynrSelect.js</url>
           <line>29</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/ts/components/DsynrModal.ts</url>
           <line>253</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>

@@ -21,7 +21,7 @@
       <option name="workingDir" value="$FileDir$" />
       <envs />
     </TaskOptions>
-    <TaskOptions isEnabled="false">
+    <TaskOptions isEnabled="true">
       <option name="arguments" value="" />
       <option name="checkSyntaxErrors" value="true" />
       <option name="description" />
@@ -41,8 +41,5 @@
       <option name="workingDir" value="" />
       <envs />
     </TaskOptions>
-    <enabled-global>
-      <option value="ts" />
-    </enabled-global>
   </component>
 </project>
