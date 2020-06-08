@@ -14,14 +14,16 @@ class DsynrUtilWp {
         }
     }
 
-    getTemplatePart(registeredActionName: string): void {
-        d.lfn('getTemplatePart / ' + registeredActionName);
-        let formData = new FormData();
-        formData.append('action', registeredActionName);
-        formData.append('extra', 'XXXXXXXXX');
-        d.l(formData, true);
+    getTemplate(name: string, params = {}): void {
+        d.lfn('getTemplate / ' + name);
+        let formData: object = {
+            action: 'getTemplate',
+            name: name
+        };
+        formData = d.mergeObjs(formData, params);
+        d.l(formData);
         // @ts-ignore
-        d.ajax(dwpRequest.ajaxurl, false, formData);
+        d.ajax(dwpRequest.ajaxurl, false, formData, true, 'POST');
     }
 }
 

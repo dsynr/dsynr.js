@@ -101,7 +101,8 @@ declare class DsynrUtil {
     getBounds(e: HTMLElement): ClientRect;
     isInViewportSlightly(e: HTMLElement): boolean;
     isInViewportMostly(e: any): boolean;
-    ajax(url: string, saveAs?: string | boolean, formData?: FormData | boolean, add2dom?: boolean): void;
+    serialize(obj: object): string;
+    ajax(url: string, saveAs?: string | boolean, params?: any, add2dom?: boolean, method?: string): void;
     private setHeaders;
     private stateChanged;
     private failed;

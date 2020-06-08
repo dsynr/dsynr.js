@@ -326,18 +326,20 @@ class DsynrUtil {
         // return (getPercentage((e.clientHeight + bounding.top), 50) > -bounding.top);
     }
 
-    ajax(url: string, saveAs: string | boolean = false, formData: FormData | boolean = false, add2dom: boolean = true) {
+    serialize(obj: object): string {
+        return Object.keys(obj).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(obj[k])}`).join('&');
+    }
+
+    ajax(url: string, saveAs: string | boolean = false, params: any = false, add2dom: boolean = true, method: string = 'GET') {
         this.lfn('ajax ' + url);
         this.curReq = new XMLHttpRequest();
         if (this.curReq) {
-            let isPost = typeof formData !== 'boolean';
-            this.curReq.open(isPost ? 'POST' : 'GET', url, true);
-            this.setHeaders(isPost);
-            this.l(formData);
-            this.curReq.send(isPost ? <FormData>formData : '');
+            this.curReq.open(method, url, true);
+            this.setHeaders(method == 'POST');
+            this.curReq.send(this.serialize(params));
             let ths = this;
             this.curReq.addEventListener('readystatechange', function () {
-                return ths.stateChanged(ths, !isPost, add2dom);
+                return ths.stateChanged(ths, saveAs, add2dom);
             });
         } else {
             this.failed();

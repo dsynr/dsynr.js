@@ -12,14 +12,16 @@ class DsynrUtilWp {
             d.ajax(d.domain + 'form/' + formName + '?min', formName);
         }
     }
-    getTemplatePart(registeredActionName) {
-        d.lfn('getTemplatePart / ' + registeredActionName);
-        let formData = new FormData();
-        formData.append('action', registeredActionName);
-        formData.append('extra', 'XXXXXXXXX');
-        d.l(formData, true);
+    getTemplate(name, params = {}) {
+        d.lfn('getTemplate / ' + name);
+        let formData = {
+            action: 'getTemplate',
+            name: name
+        };
+        formData = d.mergeObjs(formData, params);
+        d.l(formData);
         // @ts-ignore
-        d.ajax(dwpRequest.ajaxurl, false, formData);
+        d.ajax(dwpRequest.ajaxurl, false, formData, true, 'POST');
     }
 }
 let dw = new DsynrUtilWp();

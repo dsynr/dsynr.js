@@ -731,18 +731,19 @@ class DsynrUtil {
         return (bounding.top / 2 > -bounding.top);
         // return (getPercentage((e.clientHeight + bounding.top), 50) > -bounding.top);
     }
-    ajax(url, saveAs = false, formData = false, add2dom = true) {
+    serialize(obj) {
+        return Object.keys(obj).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(obj[k])}`).join('&');
+    }
+    ajax(url, saveAs = false, params = false, add2dom = true, method = 'GET') {
         this.lfn('ajax ' + url);
         this.curReq = new XMLHttpRequest();
         if (this.curReq) {
-            let isPost = typeof formData !== 'boolean';
-            this.curReq.open(isPost ? 'POST' : 'GET', url, true);
-            this.setHeaders(isPost);
-            this.l(formData);
-            this.curReq.send(isPost ? formData : '');
+            this.curReq.open(method, url, true);
+            this.setHeaders(method == 'POST');
+            this.curReq.send(this.serialize(params));
             let ths = this;
             this.curReq.addEventListener('readystatechange', function () {
-                return ths.stateChanged(ths, !isPost, add2dom);
+                return ths.stateChanged(ths, saveAs, add2dom);
             });
         }
         else {
