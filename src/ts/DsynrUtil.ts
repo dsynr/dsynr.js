@@ -327,38 +327,21 @@ class DsynrUtil {
     }
 
     ajax(url: string, saveAs: string | boolean = false, formData: FormData | boolean = false, add2dom: boolean = true) {
-        this.lfn('ajax');
+        this.lfn('ajax ' + url);
         this.curReq = new XMLHttpRequest();
         if (this.curReq) {
-            return (typeof formData !== "boolean") ? this.post(url, formData, add2dom) : this.request(url, saveAs, add2dom);
+            let isPost = typeof formData !== 'boolean';
+            this.curReq.open(isPost ? 'POST' : 'GET', url, true);
+            this.setHeaders(isPost);
+            this.l(formData);
+            this.curReq.send(isPost ? <FormData>formData : '');
+            let ths = this;
+            this.curReq.addEventListener('readystatechange', function () {
+                return ths.stateChanged(ths, !isPost, add2dom);
+            });
         } else {
             this.failed();
         }
-    }
-
-    private request(url: string, saveAs: string | boolean = false, add2dom: boolean): void {
-        this.lfn('request');
-        this.curReq.open('GET', url, true);
-        this.setHeaders();
-        this.curReq.send();
-        let ths = this;
-        this.curReq.addEventListener('readystatechange', function () {
-            return ths.stateChanged(ths, saveAs, add2dom);
-        });
-        this.l('GETTING: ' + url);
-    }
-
-    private post(url: string, formData: FormData, add2dom: boolean = false) {
-        this.lfn('post');
-        this.curReq.open('POST', url, true);
-        this.setHeaders(true);
-        this.curReq.send(formData);
-        let ths = this;
-        this.curReq.addEventListener('readystatechange', function () {
-            return ths.stateChanged(ths, false, add2dom);
-        });
-        this.l('POSTING: ' + url);
-
     }
 
     private setHeaders(isPost: boolean = false) {
@@ -443,8 +426,15 @@ class DsynrUtil {
      * Log to the console
      * @param data
      */
-    l(data: any): void {
-        console.log(data);
+    l(data: any, isFormData: boolean = false): void {
+        if (isFormData) {
+            this.l('Logging FormData:');
+            for (let key of data.entries()) {
+                this.l(key[0] + ' : ' + key[1]);
+            }
+        } else {
+            console.log(data);
+        }
     }
 
     /**

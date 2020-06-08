@@ -1,6 +1,6 @@
 declare class DsynrUtilWp {
     ready(): void;
-    getWpForm(formName: string): void;
-    postForm(form: HTMLFormElement): void;
+    getForm(formName: string): void;
+    getTemplatePart(registeredActionName: string): void;
 }
 declare let dw: DsynrUtilWp;

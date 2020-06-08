@@ -4,20 +4,24 @@ class DsynrUtilWp {
         d.getPageScripts(d);
     }
 
-    getWpForm(formName: string): void {
-        d.lfn('getWpForm');
+    getForm(formName: string): void {
+        d.lfn('getForm');
         if (d.requestDataset[formName] != undefined) {
-            d.l(formName + ' Previously loaded / Reinstantiating from memory...')
+            d.l(formName + ' Previously loaded / Reinstantiating from memory...');
             d.addFetchedData(d.requestDataset[formName]);
         } else {
             d.ajax(d.domain + 'form/' + formName + '?min', formName);
         }
     }
 
-    postForm(form: HTMLFormElement): void {
-        d.lfn('postForm');
-        let formData = new FormData(form);
-        d.ajax('', false, formData, false);
+    getTemplatePart(registeredActionName: string): void {
+        d.lfn('getTemplatePart / ' + registeredActionName);
+        let formData = new FormData();
+        formData.append('action', registeredActionName);
+        formData.append('extra', 'XXXXXXXXX');
+        d.l(formData, true);
+        // @ts-ignore
+        d.ajax(dwpRequest.ajaxurl, false, formData);
     }
 }
 

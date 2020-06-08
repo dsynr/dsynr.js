@@ -74,12 +74,12 @@
         "signature": "c917f017723c653fc11a7cc33aa62c955b00b90c11dc88767cc69856db7665e3"
       },
       "./src/ts/dsynrutil.ts": {
-        "version": "c2e12c7078f3d8e2fb08c19e40f80d05dc52b6170abac81e0c37f5189570b010",
-        "signature": "a021285f227c30b97036f34b8d4478800e626c1f61cb327186c7112d8bcca206"
+        "version": "90ab9b0217f27f0c8a1bd1cb5a231d70b00f24f8a857899181fd95e2d4bdb830",
+        "signature": "9cdef2b51864f5c74a92b20ed06897cbd259ea696cbb7f56a20c661460569e46"
       },
       "./src/ts/dsynrutilwp.ts": {
-        "version": "d0d05667bbb6cd5a49917a4dfa5950998d3ba6a7c2538e53b33befc761a80372",
-        "signature": "879003cc7e5338a7130d39ea747fdc63541b36156005312e2a2d2de69666b295"
+        "version": "4451c73e1440a2d6a27df80e3d7b992d729168a15502b3e8d68e6e31d9c73fa6",
+        "signature": "2e3da5b5a3b893eb77d81192e009a6cc8437eecae7f8aad08fa2e9f7e1ccaac6"
       },
       "./src/ts/_loose/analytics.ts": {
         "version": "0398552049c8886fba7d153cbaf6988b0ad047d96849f949d0d9bc3019488998",
@@ -187,7 +187,6 @@
       "../../../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.reflect.d.ts",
       "../../../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.symbol.d.ts",
       "../../../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts",
-      "./src/ts/dsynrutilwp.ts",
       "./src/ts/components/dsynrselect.ts",
       "./src/ts/components/dsynrmodal.ts",
       "./src/ts/dsynrutil.ts",
@@ -205,7 +204,8 @@
       "./src/ts/_loose/string.ts",
       "./src/ts/_loose/viewport.ts",
       "./src/ts/classes/dsynruiielement.ts",
-      "./src/ts/interfaces/dsynrui.ts"
+      "./src/ts/interfaces/dsynrui.ts",
+      "./src/ts/dsynrutilwp.ts"
     ]
   },
   "version": "3.8.3"

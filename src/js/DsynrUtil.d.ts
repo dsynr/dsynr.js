@@ -102,8 +102,6 @@ declare class DsynrUtil {
     isInViewportSlightly(e: HTMLElement): boolean;
     isInViewportMostly(e: any): boolean;
     ajax(url: string, saveAs?: string | boolean, formData?: FormData | boolean, add2dom?: boolean): void;
-    private request;
-    private post;
     private setHeaders;
     private stateChanged;
     private failed;
@@ -115,7 +113,7 @@ declare class DsynrUtil {
      * Log to the console
      * @param data
      */
-    l(data: any): void;
+    l(data: any, isFormData?: boolean): void;
     /**
      * Log active function name
      * @param functionName
