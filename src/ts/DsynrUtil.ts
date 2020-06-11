@@ -16,6 +16,12 @@ class DsynrUtil {
         this.reqDataReady = new Event('reqDataReady');
     }
 
+    docReady(fn: Function): void {
+        if (document.readyState == 'complete') {
+            fn();
+        }
+    }
+
     /**
      * @todo
      */
@@ -330,13 +336,13 @@ class DsynrUtil {
         return Object.keys(obj).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(obj[k])}`).join('&');
     }
 
-    ajax(url: string, saveAs: string | boolean = false, params: any = false, add2dom: boolean = true, method: string = 'GET') {
+    ajax(url: string, saveAs: string | boolean = false, data: any = false, add2dom: boolean = true, method: string = 'GET') {
         this.lfn('ajax ' + url);
         this.curReq = new XMLHttpRequest();
         if (this.curReq) {
             this.curReq.open(method, url, true);
             this.setHeaders(method == 'POST');
-            this.curReq.send(this.serialize(params));
+            this.curReq.send(this.serialize(data));
             let ths = this;
             this.curReq.addEventListener('readystatechange', function () {
                 return ths.stateChanged(ths, saveAs, add2dom);
@@ -427,6 +433,7 @@ class DsynrUtil {
     /**
      * Log to the console
      * @param data
+     * @param isFormData
      */
     l(data: any, isFormData: boolean = false): void {
         if (isFormData) {

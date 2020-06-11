@@ -12,10 +12,10 @@ class DsynrUtilWp {
             d.ajax(d.domain + 'form/' + formName + '?min', formName);
         }
     }
-    getTemplate(name, params = {}) {
-        d.lfn('getTemplate / ' + name);
+    getSnippet(name, params = {}) {
+        d.lfn('getSnippet / ' + name);
         let formData = {
-            action: 'getTemplate',
+            action: 'getSnippet',
             name: name
         };
         formData = d.mergeObjs(formData, params);
@@ -25,5 +25,5 @@ class DsynrUtilWp {
     }
 }
 let dw = new DsynrUtilWp();
-dw.ready();
+// dw.ready();
 //# sourceMappingURL=DsynrUtilWp.js.map

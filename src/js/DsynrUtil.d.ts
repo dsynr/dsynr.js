@@ -11,6 +11,7 @@ declare class DsynrUtil {
     private curReq;
     private readonly reqDataReady;
     constructor();
+    docReady(fn: Function): void;
     /**
      * @todo
      */
@@ -102,7 +103,7 @@ declare class DsynrUtil {
     isInViewportSlightly(e: HTMLElement): boolean;
     isInViewportMostly(e: any): boolean;
     serialize(obj: object): string;
-    ajax(url: string, saveAs?: string | boolean, params?: any, add2dom?: boolean, method?: string): void;
+    ajax(url: string, saveAs?: string | boolean, data?: any, add2dom?: boolean, method?: string): void;
     private setHeaders;
     private stateChanged;
     private failed;
@@ -113,6 +114,7 @@ declare class DsynrUtil {
     /**
      * Log to the console
      * @param data
+     * @param isFormData
      */
     l(data: any, isFormData?: boolean): void;
     /**

@@ -14,10 +14,10 @@ class DsynrUtilWp {
         }
     }
 
-    getTemplate(name: string, params = {}): void {
-        d.lfn('getTemplate / ' + name);
+    getSnippet(name: string, params = {}): void {
+        d.lfn('getSnippet / ' + name);
         let formData: object = {
-            action: 'getTemplate',
+            action: 'getSnippet',
             name: name
         };
         formData = d.mergeObjs(formData, params);
@@ -28,4 +28,4 @@ class DsynrUtilWp {
 }
 
 let dw = new DsynrUtilWp();
-dw.ready();
+// dw.ready();

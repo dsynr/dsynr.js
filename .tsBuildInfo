@@ -74,12 +74,12 @@
         "signature": "c917f017723c653fc11a7cc33aa62c955b00b90c11dc88767cc69856db7665e3"
       },
       "./src/ts/dsynrutil.ts": {
-        "version": "d6cf3513deb2fb5cc5a85ff5a95a496487831c25fee76f70c35bd3916bdd4e64",
-        "signature": "3fd34f6a411a7d06d20ef45424f1371026a94fe55e0f817416e52b50e937053e"
+        "version": "156341dd0e102d4aa0068364c5cc9f7f1da8e3bb705b9dbfcbfa18eb86d3203e",
+        "signature": "c862d87a3f06906ea6076b1ce89fd324ffa141a1e69cd080c4d06fb89702eeed"
       },
       "./src/ts/dsynrutilwp.ts": {
-        "version": "d3930355d63e62ded49d6e6a62be626c11ace92afeac70c890e32816b1029087",
-        "signature": "56bd0fe58c79a8ec1f82b9bd6d77db361a8937b2dc9567082982d0652645ee2d"
+        "version": "b2468157323c2badf1b871481c4e9d8b0ba0a5096bfdaf9cc76f8d93ea2af61a",
+        "signature": "e1941435b58509f7899a39be6509f6268568546a12d1fc9729a62ec03cf19ad4"
       },
       "./src/ts/_loose/analytics.ts": {
         "version": "0398552049c8886fba7d153cbaf6988b0ad047d96849f949d0d9bc3019488998",
