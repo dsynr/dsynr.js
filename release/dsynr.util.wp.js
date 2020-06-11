@@ -21,7 +21,7 @@ class DsynrUtilWp {
         formData = d.mergeObjs(formData, params);
         d.l(formData);
         // @ts-ignore
-        d.ajax(dwpRequest.ajaxurl, false, formData, true, 'POST');
+        d.ajax(ajxRequest.ajaxurl, false, formData, true, 'POST');
     }
 }
 let dw = new DsynrUtilWp();
