@@ -21,7 +21,7 @@
   },
   "exclude": [
     "node_modules",
-    "release",
+    "build",
     "src/js"
   ],
   "compileOnSave": true

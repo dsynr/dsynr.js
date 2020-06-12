@@ -12,7 +12,7 @@ const rootPath = 'src/';
 const jsPath = rootPath + 'js/';
 const tsPath = rootPath + 'ts/';
 const sassPath = rootPath + 'sass/';
-const releasePath = 'release/';
+const releasePath = 'build/';
 
 function getScript(fileName, fType = 'ts') {
 
@@ -26,11 +26,12 @@ function getCls(fileName) {
 
 function getInt(fileName) {
 
-    return jsPath +'interfaces/' +fileName + '.js';
+    return jsPath + 'interfaces/' + fileName + '.js';
 }
+
 function getComp(fileName) {
 
-    return jsPath +'components/' +fileName + '.js';
+    return jsPath + 'components/' + fileName + '.js';
 }
 
 function concatTS() {
