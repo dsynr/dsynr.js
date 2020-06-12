@@ -12,13 +12,9 @@ class DsynrUtilWp {
             d.ajax(d.domain + 'form/' + formName + '?min', formName);
         }
     }
-    getSnippet(name, params = {}) {
-        d.lfn('getSnippet / ' + name);
-        let formData = {
-            action: 'getSnippet',
-            name: name
-        };
-        formData = d.mergeObjs(formData, params);
+    ajax(params = {}) {
+        d.lfn('ajax / ' + name);
+        let formData = d.mergeObjs({ action: 'dwt_ajax' }, params);
         d.l(formData);
         // @ts-ignore
         d.ajax(ajxRequest.ajaxurl, false, formData, true, 'POST');

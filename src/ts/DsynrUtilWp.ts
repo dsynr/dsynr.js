@@ -14,13 +14,9 @@ class DsynrUtilWp {
         }
     }
 
-    getSnippet(name: string, params = {}): void {
-        d.lfn('getSnippet / ' + name);
-        let formData: object = {
-            action: 'getSnippet',
-            name: name
-        };
-        formData = d.mergeObjs(formData, params);
+    ajax(params = {}): void {
+        d.lfn('ajax / ' + name);
+        let formData: object = d.mergeObjs({action: 'dwt_ajax'}, params);
         d.l(formData);
         // @ts-ignore
         d.ajax(ajxRequest.ajaxurl, false, formData, true, 'POST');
