@@ -70,7 +70,7 @@
         "signature": "209986344f36b0fa6249e9fd9b6c06331f8a103133451930c7d22e4c4a141c75"
       },
       "./src/ts/components/dsynrmodal.ts": {
-        "version": "af0e3805b7d53f06c24c6546126b2d7056d44aa8929286e77f74d74e88eea3a5",
+        "version": "23b7656f5a6656cbbbfbb3e8cafc73ab4d8b3d02b6a9a9c4107dd4a41c748807",
         "signature": "c917f017723c653fc11a7cc33aa62c955b00b90c11dc88767cc69856db7665e3"
       },
       "./src/ts/dsynrutil.ts": {
@@ -78,60 +78,8 @@
         "signature": "c862d87a3f06906ea6076b1ce89fd324ffa141a1e69cd080c4d06fb89702eeed"
       },
       "./src/ts/dsynrutilwp.ts": {
-        "version": "2cf53d348b1ce4831470dfdfb0a271eb830e6313531e65bae7f0763f3847e89a",
+        "version": "951dc1779f757ad213abbe7b31b7aa83a6ab6f5cc3e2b0a7ef3a1ed841e96ea7",
         "signature": "0f6d284e4af6b77aaabb8bc07685181f2e572672b57b5dbcc50832761018dbde"
-      },
-      "./src/ts/_loose/analytics.ts": {
-        "version": "0398552049c8886fba7d153cbaf6988b0ad047d96849f949d0d9bc3019488998",
-        "signature": "b00865f44439ac257382bb6df50b801e6a7e8dbe3e1011ccdd50b262de9101fc"
-      },
-      "./src/ts/_loose/animation.ts": {
-        "version": "6db658ac4dd713cab591b1f3a3e60be4a15b9f0a0c071d72d1308d2de779227c",
-        "signature": "d0af34d51d5868a6bf164c2077d123a25431fb9019089dd437bfa55737f7db97"
-      },
-      "./src/ts/_loose/css.ts": {
-        "version": "fe269e192eef99104074ea032edede46fdf2b96b3a956f5535530dad04545663",
-        "signature": "18da0d453ada7f25a4b89544ac3daaca8e5d01cb798d856bbb3e86fd02db4476"
-      },
-      "./src/ts/_loose/debug.ts": {
-        "version": "079c59fefc92d8b14b792327affb079c6869f5d7ebcd04c9690ffc3b0c89a94b",
-        "signature": "6afbf0617aeb9a23887a437d2c2be5c16b61650d1e6206fd6b663149aa9553db"
-      },
-      "./src/ts/_loose/dom.ts": {
-        "version": "f6a2913faf0920c43cb9bd343726cc3b68f3f6a0882862f876da5abcdad43097",
-        "signature": "7ac5399a5e0a6971738e5fb3c2c394181704ba184fc65aa04267acc95478e2a5"
-      },
-      "./src/ts/_loose/events.ts": {
-        "version": "757792e0da60b0d6de7a5390be9da08d0f13e13eef0654bd5feab971c644c8e0",
-        "signature": "077994e0934746de161903b3d8056a43f26e80e7e1667efc2dd70cc4f1180f08"
-      },
-      "./src/ts/_loose/graphics.ts": {
-        "version": "868204b6f3a2155acca71e0881db0d2da6058cae518e39c0e6094cdad668b108",
-        "signature": "6b8b440b5a155721c1ee1222355e3222457035633c24859d297c2ea4425d8624"
-      },
-      "./src/ts/_loose/main.ts": {
-        "version": "f4ae1c63ee9c0e7ef267755a7aa71982404c4d4b63c3d9aae07c45e276dbee7f",
-        "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-      },
-      "./src/ts/_loose/math.ts": {
-        "version": "4cd4224d39ff4bd453ac54393fd317d698ae7a48df53da62078e724b3f8576dd",
-        "signature": "2077ea7b8a1c12eb67da407a1f4d5804e5e04cca8c14e35e1a41c3b8ee1fce5d"
-      },
-      "./src/ts/_loose/obj.ts": {
-        "version": "14b065afab8af69f42d5dee3f5592dcd5a07f051f1d934f12115ae27e1d96810",
-        "signature": "d907a7c663db0728446f4193d0fa68944565de36f097c78bc0264fb7fef560a6"
-      },
-      "./src/ts/_loose/other.ts": {
-        "version": "a63349c780a337c1f0a101c93075533b667b54ad09edc72b8a3ba1f396dee1bd",
-        "signature": "94f26a9c936a8804339f9c71b1776f769b1efcdd40b70aaeed92942ae6f0862f"
-      },
-      "./src/ts/_loose/string.ts": {
-        "version": "70379d61470eb39b209a7433082d27ab65f293025756dd72e09d37915edd74e0",
-        "signature": "8787ff2e43f45a0631c017ae12516d8122cc60239b43a9d83a3dd7bd9c0e8c2b"
-      },
-      "./src/ts/_loose/viewport.ts": {
-        "version": "69b49f7dfca5c82b6068f9ac56ef5d9ace80b18fee7cfd5ab9158ecd3d327791",
-        "signature": "aa2b730558c73fe15612fe76f870d5d629f436f015a15b4722f7f812493dbba5"
       },
       "./src/ts/classes/dsynruiielement.ts": {
         "version": "aaa81b64354b2169a95fe9ce7eee28be7af34eb1f7a5673dabd60bd08c525db7",
@@ -188,24 +136,11 @@
       "../../../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.symbol.d.ts",
       "../../../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts",
       "./src/ts/components/dsynrselect.ts",
-      "./src/ts/components/dsynrmodal.ts",
       "./src/ts/dsynrutil.ts",
-      "./src/ts/_loose/analytics.ts",
-      "./src/ts/_loose/animation.ts",
-      "./src/ts/_loose/css.ts",
-      "./src/ts/_loose/debug.ts",
-      "./src/ts/_loose/dom.ts",
-      "./src/ts/_loose/events.ts",
-      "./src/ts/_loose/graphics.ts",
-      "./src/ts/_loose/main.ts",
-      "./src/ts/_loose/math.ts",
-      "./src/ts/_loose/obj.ts",
-      "./src/ts/_loose/other.ts",
-      "./src/ts/_loose/string.ts",
-      "./src/ts/_loose/viewport.ts",
+      "./src/ts/dsynrutilwp.ts",
       "./src/ts/classes/dsynruiielement.ts",
       "./src/ts/interfaces/dsynrui.ts",
-      "./src/ts/dsynrutilwp.ts"
+      "./src/ts/components/dsynrmodal.ts"
     ]
   },
   "version": "3.8.3"

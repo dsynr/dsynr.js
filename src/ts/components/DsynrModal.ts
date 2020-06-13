@@ -61,7 +61,7 @@ class DsynrModal extends DsynrUIIElement {
         this.parentSizingClass = d.addProp(this, 'sizingClass', 'wmax hmax', reset);
         this.windowSizingClass = d.addProp(this, 'windowSizingClass', 'vw vh', reset);
 
-        this.underlayClass = d.addProp(this, 'underlayClass', d.concatStr([positionClass, alignmentClass, this.parentSizingClass, 'z1']), reset);
+        this.underlayClass = d.addProp(this, 'underlayClass', d.concatStr([positionClass, alignmentClass, this.parentSizingClass, 'z1', 'dsynrModalUnderlay']), reset);
 
         this.instanceClass = d.addProp(this, 'instanceClass', d.concatStr([positionClass, 'z2 o0']), reset);
         this.instanceRootClass = d.addProp(this, 'instanceRootClass', d.concatStr([positionClass, alignmentClass, this.parentSizingClass, 'z3 o0 d-none']), reset);
@@ -225,13 +225,17 @@ class DsynrModal extends DsynrUIIElement {
             this.instance.addEventListener(d.transitionEvent, self.modalHidden);
             // this.instance.addEventListener(d.transitionEvent, self.modalHidden);
         }
-        d.addListener(this.instanceRoot.id, 'keydown', function (evnt: KeyboardEvent) {
-            if (evnt.key == 'Escape') {
+        d.addListener(this.instanceRoot.id, 'keydown', function (ev: KeyboardEvent) {
+            if (ev.key == 'Escape') {
                 self.hide(true);
             }
         });
-        d.addListener(this.instanceRoot.id, 'click', function (evnt: MouseEvent) {
-            self.hide(true);
+        let ths = this;
+        d.addListener(this.instanceRoot.id, 'click', function (ev: MouseEvent) {
+            // @ts-ignore
+            if ((ev.target.classList.value == ths.underlayClass)) {
+                self.hide(true);
+            }
         });
     }
 

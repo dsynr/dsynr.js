@@ -28,7 +28,7 @@ class DsynrModal extends DsynrUIIElement {
         this.overlayClass = d.addProp(this, 'overlayClass', 'o50 bg-dark', reset);
         this.parentSizingClass = d.addProp(this, 'sizingClass', 'wmax hmax', reset);
         this.windowSizingClass = d.addProp(this, 'windowSizingClass', 'vw vh', reset);
-        this.underlayClass = d.addProp(this, 'underlayClass', d.concatStr([positionClass, alignmentClass, this.parentSizingClass, 'z1']), reset);
+        this.underlayClass = d.addProp(this, 'underlayClass', d.concatStr([positionClass, alignmentClass, this.parentSizingClass, 'z1', 'dsynrModalUnderlay']), reset);
         this.instanceClass = d.addProp(this, 'instanceClass', d.concatStr([positionClass, 'z2 o0']), reset);
         this.instanceRootClass = d.addProp(this, 'instanceRootClass', d.concatStr([positionClass, alignmentClass, this.parentSizingClass, 'z3 o0 d-none']), reset);
         this.trigger = d.addProp(this, 'trigger', 'auto', reset);
@@ -171,13 +171,17 @@ class DsynrModal extends DsynrUIIElement {
             this.instance.addEventListener(d.transitionEvent, self.modalHidden);
             // this.instance.addEventListener(d.transitionEvent, self.modalHidden);
         }
-        d.addListener(this.instanceRoot.id, 'keydown', function (evnt) {
-            if (evnt.key == 'Escape') {
+        d.addListener(this.instanceRoot.id, 'keydown', function (ev) {
+            if (ev.key == 'Escape') {
                 self.hide(true);
             }
         });
-        d.addListener(this.instanceRoot.id, 'click', function (evnt) {
-            self.hide(true);
+        let ths = this;
+        d.addListener(this.instanceRoot.id, 'click', function (ev) {
+            // @ts-ignore
+            if ((ev.target.classList.value == ths.underlayClass)) {
+                self.hide(true);
+            }
         });
     }
     blanketHidden(event) {
