@@ -14,7 +14,7 @@ class DsynrUtilWp {
     }
     ajax(params = {}) {
         d.lfn('ajax / ' + name);
-        let formData = d.mergeObjs({ action: 'dwt_ajax' }, params);
+        let formData = d.mergeObjs({ action: 'dw_ajax' }, params);
         d.l(formData);
         // @ts-ignore
         d.ajax(ajxRequest.ajaxurl, false, formData, true, 'POST');
