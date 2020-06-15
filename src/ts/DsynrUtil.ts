@@ -1,6 +1,7 @@
 ///<reference path="components/DsynrSelect.ts"/>
 ///<reference path="components/DsynrModal.ts"/>
 class DsynrUtil {
+    conf: object = {};
     vw: number;
     vh: number;
     transitionEvent = this.whichAnimationEvent();
@@ -430,6 +431,15 @@ class DsynrUtil {
         _(document.body);
     }
 
+    IsJson(str: string) {
+        try {
+            JSON.parse(str);
+        } catch (e) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * Log to the console
      * @param data
@@ -464,3 +474,4 @@ class DsynrUtil {
 }
 
 let d = new DsynrUtil();
+// window['d'] = d;

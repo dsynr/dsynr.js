@@ -58,8 +58,8 @@ abstract class DsynrUIIElement implements DsynrUI {
             let options: any = d.getData(this.content, this.prefAttr);
             d.l(options);
             if (options !== null) {
-                d.l('parsing preferences as JSON');
-                this.preferences = JSON.parse(options);
+                d.l('parsing preferences : ' + options);
+                this.preferences = d.IsJson(options) ? JSON.parse(options) : d.conf[options];
             }
         }
         d.updateProps(this, this.preferences);

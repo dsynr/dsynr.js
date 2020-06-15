@@ -1,4 +1,4 @@
-class DsynrUtilWp {
+class DsynrUtilWp{
 
     ready(): void {
         d.getPageScripts(d);
@@ -24,4 +24,4 @@ class DsynrUtilWp {
 }
 
 let dw = new DsynrUtilWp();
-// dw.ready();
+// window['dw'] = dw;

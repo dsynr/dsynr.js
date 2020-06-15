@@ -21,5 +21,5 @@ class DsynrUtilWp {
     }
 }
 let dw = new DsynrUtilWp();
-// dw.ready();
+// window['dw'] = dw;
 //# sourceMappingURL=DsynrUtilWp.js.map

@@ -4,6 +4,8 @@ class DsynrModal extends DsynrUIIElement {
     private instanceRoot: HTMLElement;
     private underlay: HTMLElement;
 
+    private onModalDestroy: Function;
+
     private trigger: string; //"auto" => automatically shows as soon as instantiated
     private instanceRootClass: string;
 
@@ -16,6 +18,7 @@ class DsynrModal extends DsynrUIIElement {
 
     private adoptParent: boolean;
     private autoDestroy: boolean;
+    private respectBounds: boolean;
 
     private animateUnderlay: boolean;
     private displayTogether: boolean;
@@ -48,6 +51,8 @@ class DsynrModal extends DsynrUIIElement {
         this.useOverlay = d.addProp(this, 'useOverlay', true, reset);
         this.disableUnderlay = d.addProp(this, 'disableUnderlay', true, reset);
 
+        this.respectBounds = d.addProp(this, 'respectBounds', true, reset);
+
         this.animateUnderlay = d.addProp(this, 'animateUnderlay', true, reset);
 
         this.nameSuffix = d.addProp(this, 'nameSuffix', DsynrModal.instances.length.toString(), reset);
@@ -63,10 +68,13 @@ class DsynrModal extends DsynrUIIElement {
 
         this.underlayClass = d.addProp(this, 'underlayClass', d.concatStr([positionClass, alignmentClass, this.parentSizingClass, 'z1', 'dsynrModalUnderlay']), reset);
 
-        this.instanceClass = d.addProp(this, 'instanceClass', d.concatStr([positionClass, 'z2 o0']), reset);
+        this.instanceClass = d.addProp(this, 'instanceClass', d.concatStr([positionClass, 'z2 o0 rounded nooverflow']), reset);
         this.instanceRootClass = d.addProp(this, 'instanceRootClass', d.concatStr([positionClass, alignmentClass, this.parentSizingClass, 'z3 o0 d-none']), reset);
 
         this.trigger = d.addProp(this, 'trigger', 'auto', reset);
+        this.onModalDestroy = d.addProp(this, 'onModalDestroy', () => {
+            this.hide(this.autoDestroy);
+        }, reset);
     }
 
     setup(): void {
@@ -131,6 +139,19 @@ class DsynrModal extends DsynrUIIElement {
             d.removeClass(this.content, 'o0');
 
             d.l(this.parent.id);
+
+
+            if (this.respectBounds) {
+                if (this.content.clientHeight > this.parent.clientHeight) {
+                    this.instance.style.height = d.getCssDimension(this.parent.clientHeight - 50);
+                    this.instance.style.overflowY = 'auto';
+                }
+                if (this.content.clientWidth > this.parent.clientWidth) {
+                    this.instance.style.width = d.getCssDimension(this.parent.clientWidth - 50);
+                    this.instance.style.overflowX = 'auto';
+                }
+            }
+
             if (this.adoptParent && (this.content.clientHeight > this.parent.clientHeight || this.content.clientWidth > this.parent.clientWidth)) {
                 d.lfn('adoptParent');
                 d.l('parent cannot accommodate child, adopting body as parent!');
@@ -219,22 +240,30 @@ class DsynrModal extends DsynrUIIElement {
 
     addListeners() {
         d.lfn('addListeners');
-        let self: DsynrModal = this;
+        let ths = this;
         if (this.animate) {
             d.l('enabling animation');
-            this.instance.addEventListener(d.transitionEvent, self.modalHidden);
-            // this.instance.addEventListener(d.transitionEvent, self.modalHidden);
+            this.instance.addEventListener(d.transitionEvent, ths.modalHidden);
+            // this.instance.addEventListener(d.transitionEvent, ths.modalHidden);
         }
         d.addListener(this.instanceRoot.id, 'keydown', function (ev: KeyboardEvent) {
             if (ev.key == 'Escape') {
-                self.hide(true);
+                ths.hide(ths.autoDestroy);
             }
         });
-        let ths = this;
         d.addListener(this.instanceRoot.id, 'click', function (ev: MouseEvent) {
+            d.l(ev.target);
             // @ts-ignore
-            if ((ev.target.classList.value == ths.underlayClass)) {
-                self.hide(true);
+            d.l(ev.target.offsetParent);
+            // @ts-ignore
+            d.l(ev.target.classList.value);
+            // @ts-ignore
+            if (ev.target.classList.value == ths.underlayClass) {
+                ths.onModalDestroy();
+                // if (this.onModalDestroy !== undefined) {
+                // } else {
+                //     ths.hide(true);
+                // }
             }
         });
     }

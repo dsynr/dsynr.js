@@ -2,6 +2,7 @@
 declare class DsynrModal extends DsynrUIIElement {
     private instanceRoot;
     private underlay;
+    private onModalDestroy;
     private trigger;
     private instanceRootClass;
     private parentSizingClass;
@@ -12,6 +13,7 @@ declare class DsynrModal extends DsynrUIIElement {
     private useOverlay;
     private adoptParent;
     private autoDestroy;
+    private respectBounds;
     private animateUnderlay;
     private displayTogether;
     private animateModal;

@@ -35,8 +35,8 @@ class DsynrUIIElement {
             let options = d.getData(this.content, this.prefAttr);
             d.l(options);
             if (options !== null) {
-                d.l('parsing preferences as JSON');
-                this.preferences = JSON.parse(options);
+                d.l('parsing preferences : ' + options);
+                this.preferences = d.IsJson(options) ? JSON.parse(options) : d.conf[options];
             }
         }
         d.updateProps(this, this.preferences);
@@ -110,6 +110,7 @@ class DsynrModal extends DsynrUIIElement {
         this.displayTogether = d.addProp(this, 'displayTogether', true, reset);
         this.useOverlay = d.addProp(this, 'useOverlay', true, reset);
         this.disableUnderlay = d.addProp(this, 'disableUnderlay', true, reset);
+        this.respectBounds = d.addProp(this, 'respectBounds', true, reset);
         this.animateUnderlay = d.addProp(this, 'animateUnderlay', true, reset);
         this.nameSuffix = d.addProp(this, 'nameSuffix', DsynrModal.instances.length.toString(), reset);
         this.namePrefix = d.addProp(this, 'namePrefix', 'dsynrModal', reset);
@@ -120,9 +121,12 @@ class DsynrModal extends DsynrUIIElement {
         this.parentSizingClass = d.addProp(this, 'sizingClass', 'wmax hmax', reset);
         this.windowSizingClass = d.addProp(this, 'windowSizingClass', 'vw vh', reset);
         this.underlayClass = d.addProp(this, 'underlayClass', d.concatStr([positionClass, alignmentClass, this.parentSizingClass, 'z1', 'dsynrModalUnderlay']), reset);
-        this.instanceClass = d.addProp(this, 'instanceClass', d.concatStr([positionClass, 'z2 o0']), reset);
+        this.instanceClass = d.addProp(this, 'instanceClass', d.concatStr([positionClass, 'z2 o0 rounded nooverflow']), reset);
         this.instanceRootClass = d.addProp(this, 'instanceRootClass', d.concatStr([positionClass, alignmentClass, this.parentSizingClass, 'z3 o0 d-none']), reset);
         this.trigger = d.addProp(this, 'trigger', 'auto', reset);
+        this.onModalDestroy = d.addProp(this, 'onModalDestroy', () => {
+            this.hide(this.autoDestroy);
+        }, reset);
     }
     setup() {
         d.lfn('setup');
@@ -176,6 +180,16 @@ class DsynrModal extends DsynrUIIElement {
             d.removeClass(this.instance, 'o0');
             d.removeClass(this.content, 'o0');
             d.l(this.parent.id);
+            if (this.respectBounds) {
+                if (this.content.clientHeight > this.parent.clientHeight) {
+                    this.instance.style.height = d.getCssDimension(this.parent.clientHeight - 50);
+                    this.instance.style.overflowY = 'auto';
+                }
+                if (this.content.clientWidth > this.parent.clientWidth) {
+                    this.instance.style.width = d.getCssDimension(this.parent.clientWidth - 50);
+                    this.instance.style.overflowX = 'auto';
+                }
+            }
             if (this.adoptParent && (this.content.clientHeight > this.parent.clientHeight || this.content.clientWidth > this.parent.clientWidth)) {
                 d.lfn('adoptParent');
                 d.l('parent cannot accommodate child, adopting body as parent!');
@@ -256,22 +270,30 @@ class DsynrModal extends DsynrUIIElement {
     }
     addListeners() {
         d.lfn('addListeners');
-        let self = this;
+        let ths = this;
         if (this.animate) {
             d.l('enabling animation');
-            this.instance.addEventListener(d.transitionEvent, self.modalHidden);
-            // this.instance.addEventListener(d.transitionEvent, self.modalHidden);
+            this.instance.addEventListener(d.transitionEvent, ths.modalHidden);
+            // this.instance.addEventListener(d.transitionEvent, ths.modalHidden);
         }
         d.addListener(this.instanceRoot.id, 'keydown', function (ev) {
             if (ev.key == 'Escape') {
-                self.hide(true);
+                ths.hide(ths.autoDestroy);
             }
         });
-        let ths = this;
         d.addListener(this.instanceRoot.id, 'click', function (ev) {
+            d.l(ev.target);
             // @ts-ignore
-            if ((ev.target.classList.value == ths.underlayClass)) {
-                self.hide(true);
+            d.l(ev.target.offsetParent);
+            // @ts-ignore
+            d.l(ev.target.classList.value);
+            // @ts-ignore
+            if (ev.target.classList.value == ths.underlayClass) {
+                ths.onModalDestroy();
+                // if (this.onModalDestroy !== undefined) {
+                // } else {
+                //     ths.hide(true);
+                // }
             }
         });
     }
@@ -358,7 +380,12 @@ class DsynrSelect extends DsynrUIIElement {
             d.makeArray(this.options).forEach(function (o, index) {
                 self.addESOption(o, index);
             });
-            this.modalPref = d.mergeObjs(this.preferences, { 'trigger': 'auto', 'parent': this.parent, 'adoptParent': this.adoptParent });
+            let ths = this;
+            this.modalPref = d.mergeObjs(this.preferences, {
+                'trigger': 'auto', 'parent': this.parent, 'adoptParent': this.adoptParent, 'onModalDestroy': () => {
+                    ths.destroy();
+                }
+            });
             this.modal = new DsynrModal(this.instance, this.modalPref);
             this.setActive();
         }
@@ -418,7 +445,7 @@ class DsynrSelect extends DsynrUIIElement {
     }
     addListeners() {
         d.lfn('d.addListeners...');
-        let self = this;
+        let ths = this;
         d.addListener(this.instance.id, 'focus', ev => {
             d.l('focused!');
         });
@@ -427,14 +454,14 @@ class DsynrSelect extends DsynrUIIElement {
                 case 'ArrowDown':
                 case 'ArrowRight':
                 case 'Tab':
-                    self.next();
+                    ths.next();
                     break;
                 case 'ArrowUp':
                 case 'ArrowLeft':
-                    self.prev();
+                    ths.prev();
                     break;
                 case 'Escape':
-                    self.destroy();
+                    ths.destroy();
                     break;
             }
         });
@@ -470,6 +497,7 @@ class DsynrSelect extends DsynrUIIElement {
 ///<reference path="components/DsynrModal.ts"/>
 class DsynrUtil {
     constructor() {
+        this.conf = {};
         this.transitionEvent = this.whichAnimationEvent();
         this.domain = document.baseURI;
         this.requestDataset = {};
@@ -830,6 +858,15 @@ class DsynrUtil {
         _(document.head);
         _(document.body);
     }
+    IsJson(str) {
+        try {
+            JSON.parse(str);
+        }
+        catch (e) {
+            return false;
+        }
+        return true;
+    }
     /**
      * Log to the console
      * @param data
@@ -862,4 +899,5 @@ class DsynrUtil {
     }
 }
 let d = new DsynrUtil();
+// window['d'] = d;
 //# sourceMappingURL=DsynrUtil.js.map

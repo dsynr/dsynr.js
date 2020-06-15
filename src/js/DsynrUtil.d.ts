@@ -1,6 +1,7 @@
 /// <reference path="components/DsynrSelect.d.ts" />
 /// <reference path="components/DsynrModal.d.ts" />
 declare class DsynrUtil {
+    conf: object;
     vw: number;
     vh: number;
     transitionEvent: any;
@@ -111,6 +112,7 @@ declare class DsynrUtil {
     addFetchedData(requestResponse: string, parent?: HTMLElement): void;
     private showFetchedData;
     getPageScripts(dsynrUtil: DsynrUtil): void;
+    IsJson(str: string): boolean;
     /**
      * Log to the console
      * @param data

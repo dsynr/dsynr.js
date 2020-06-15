@@ -45,7 +45,12 @@ class DsynrSelect extends DsynrUIIElement {
             d.makeArray(this.options).forEach(function (o, index) {
                 self.addESOption(o, index);
             });
-            this.modalPref = d.mergeObjs(this.preferences, { 'trigger': 'auto', 'parent': this.parent, 'adoptParent': this.adoptParent });
+            let ths = this;
+            this.modalPref = d.mergeObjs(this.preferences, {
+                'trigger': 'auto', 'parent': this.parent, 'adoptParent': this.adoptParent, 'onModalDestroy': () => {
+                    ths.destroy();
+                }
+            });
             this.modal = new DsynrModal(this.instance, this.modalPref);
             this.setActive();
         }
@@ -105,7 +110,7 @@ class DsynrSelect extends DsynrUIIElement {
     }
     addListeners() {
         d.lfn('d.addListeners...');
-        let self = this;
+        let ths = this;
         d.addListener(this.instance.id, 'focus', ev => {
             d.l('focused!');
         });
@@ -114,14 +119,14 @@ class DsynrSelect extends DsynrUIIElement {
                 case 'ArrowDown':
                 case 'ArrowRight':
                 case 'Tab':
-                    self.next();
+                    ths.next();
                     break;
                 case 'ArrowUp':
                 case 'ArrowLeft':
-                    self.prev();
+                    ths.prev();
                     break;
                 case 'Escape':
-                    self.destroy();
+                    ths.destroy();
                     break;
             }
         });

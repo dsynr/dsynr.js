@@ -2,6 +2,7 @@
 ///<reference path="components/DsynrModal.ts"/>
 class DsynrUtil {
     constructor() {
+        this.conf = {};
         this.transitionEvent = this.whichAnimationEvent();
         this.domain = document.baseURI;
         this.requestDataset = {};
@@ -362,6 +363,15 @@ class DsynrUtil {
         _(document.head);
         _(document.body);
     }
+    IsJson(str) {
+        try {
+            JSON.parse(str);
+        }
+        catch (e) {
+            return false;
+        }
+        return true;
+    }
     /**
      * Log to the console
      * @param data
@@ -394,4 +404,5 @@ class DsynrUtil {
     }
 }
 let d = new DsynrUtil();
+// window['d'] = d;
 //# sourceMappingURL=DsynrUtil.js.map
