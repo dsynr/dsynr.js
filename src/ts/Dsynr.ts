@@ -1,6 +1,6 @@
-///<reference path="components/DsynrSelect.ts"/>
 ///<reference path="components/DsynrModal.ts"/>
-class DsynrUtil {
+///<reference path="components/DsynrSelect.ts"/>
+class Dsynr {
     conf: object = {};
     vw: number;
     vh: number;
@@ -361,7 +361,7 @@ class DsynrUtil {
         this.curReq.setRequestHeader('Powered-by', 'Dsynr.com');
     }
 
-    private stateChanged(ths: DsynrUtil, saveAs: string | boolean, add2dom: boolean) {
+    private stateChanged(ths: Dsynr, saveAs: string | boolean, add2dom: boolean) {
         this.lfn('stateChanged');
         let req = ths.curReq;
         if (req.readyState === XMLHttpRequest.DONE) {
@@ -417,7 +417,7 @@ class DsynrUtil {
         new DsynrModal(fdp);
     }
 
-    getPageScripts(dsynrUtil: DsynrUtil): void {
+    getPageScripts(dsynrUtil: Dsynr): void {
         function _(parentNode: HTMLElement): void {
             for (let node of parentNode.children) {
                 if (node.hasAttribute('src') && node.getAttribute('src') != null) {
@@ -473,5 +473,4 @@ class DsynrUtil {
     }
 }
 
-let d = new DsynrUtil();
-// window['d'] = d;
+let d = new Dsynr();

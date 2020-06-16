@@ -1,4 +1,4 @@
-/// <reference path="../DsynrUtil.d.ts" />
+/// <reference path="../Dsynr.d.ts" />
 declare class DsynrModal extends DsynrUIIElement {
     private instanceRoot;
     private underlay;

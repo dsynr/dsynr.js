@@ -1,4 +1,4 @@
-///<reference path="../DsynrUtil.ts"/>
+///<reference path="../Dsynr.ts"/>
 class DsynrModal extends DsynrUIIElement {
 
     private instanceRoot: HTMLElement;

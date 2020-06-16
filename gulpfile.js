@@ -7,7 +7,7 @@ const sourcemaps = require('gulp-sourcemaps');
 // const clean = require('gulp-clean');
 const pipeline = require('readable-stream').pipeline;
 
-const concatFileName = 'dsynr.util';
+const concatFileName = 'dsynr';
 const rootPath = 'src/';
 const jsPath = rootPath + 'js/';
 const tsPath = rootPath + 'ts/';
@@ -34,34 +34,13 @@ function getComp(fileName) {
     return jsPath + 'components/' + fileName + '.js';
 }
 
-function concatTS() {
-    return pipeline(
-        gulp.src([
-            getScript('analytics'),
-            getScript('other'),
-            getScript('math'),
-            getScript('obj'),
-            getScript('graphics'),
-            getScript('css'),
-            getScript('dom'),
-            getScript('animation'),
-            getScript('events'),
-            getScript('viewport'),
-            getScript('modal'),
-            getScript('main'),
-        ]),
-        (concat(concatFileName + '.ts')),
-        (gulp.dest(releasePath))
-    );
-}
-
 function concatJS() {
     return pipeline(
         gulp.src([
             getInt('*'),
             getCls('*'),
             getComp('*'),
-            getScript('DsynrUtil', 'js')
+            getScript('Dsynr', 'js')
         ]),
         (concat(concatFileName + '.js')),
         minify({
@@ -76,9 +55,9 @@ function concatJS() {
 function concatWPJS() {
     return pipeline(
         gulp.src([
-            getScript('DsynrUtilWp', 'js')
+            getScript('DsynrWp', 'js')
         ]),
-        (concat('dsynr.util.wp.js')),
+        (concat('dsynr.wp.js')),
         minify({
             ext: {
                 min: '.min.js'
