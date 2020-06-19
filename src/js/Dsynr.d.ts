@@ -1,5 +1,3 @@
-/// <reference path="components/DsynrModal.d.ts" />
-/// <reference path="components/DsynrSelect.d.ts" />
 declare class Dsynr {
     conf: object;
     vw: number;
@@ -42,9 +40,19 @@ declare class Dsynr {
     getRandDecimal(min?: number, max?: number, precision?: number): number;
     getRandomArbitrary(min: number, max: number): number;
     makeArray(collection: any): Array<any>;
-    get_rand_array_item(mixed_arr: any): any;
-    get_rand_obj_item(obj: object): any;
+    getRandArrayItem(mixed_arr: any): any;
+    /**
+     *
+     * @param obj
+     * @return {any}
+     */
+    getRandObjItem(obj: object): any;
     addProp(obj: object, propName: string, propVal?: any, overwrite?: boolean): any;
+    /**
+     *
+     * @param obj
+     * @param propSet
+     */
     updateProps(obj: object, propSet: object): void;
     mergeObjs(main: object, sub: object): object;
     hasInstance(objList: Array<object>, obj: object): boolean;
@@ -86,10 +94,20 @@ declare class Dsynr {
      * @param classes
      */
     hasClass(e: HTMLElement, classes: string): boolean;
+    /**
+     *
+     * @param id
+     * @param classes
+     * @param parent
+     */
     addDiv(id?: string, classes?: string, parent?: HTMLElement): HTMLElement;
     addText(txt: string | undefined, root: HTMLElement): void;
     getElementsBySelector(selector: string): any;
     getElementsByTag(tagName: string): NodeListOf<Element>;
+    /**
+     *
+     * @param className
+     */
     getElementsByClass(className: string): HTMLCollection;
     getElementById(elementID: string): HTMLElement;
     addJS(src: string, id?: string): void;
@@ -104,7 +122,7 @@ declare class Dsynr {
     isInViewportSlightly(e: HTMLElement): boolean;
     isInViewportMostly(e: any): boolean;
     serialize(obj: object): string;
-    ajax(url: string, saveAs?: string | boolean, data?: any, add2dom?: boolean, method?: string): void;
+    ajax(url: string, saveAs?: string | boolean, data?: any, add2dom?: boolean, parent?: HTMLElement, method?: string): void;
     private setHeaders;
     private stateChanged;
     private failed;

@@ -494,8 +494,6 @@ class DsynrSelect extends DsynrUIIElement {
     }
 }
 //# sourceMappingURL=DsynrSelect.js.map
-///<reference path="components/DsynrModal.ts"/>
-///<reference path="components/DsynrSelect.ts"/>
 class Dsynr {
     constructor() {
         this.conf = {};
@@ -574,10 +572,15 @@ class Dsynr {
     makeArray(collection) {
         return Array.from(collection);
     }
-    get_rand_array_item(mixed_arr) {
+    getRandArrayItem(mixed_arr) {
         return mixed_arr[Math.floor(Math.random() * mixed_arr.length)];
     }
-    get_rand_obj_item(obj) {
+    /**
+     *
+     * @param obj
+     * @return {any}
+     */
+    getRandObjItem(obj) {
         let keys = Object.keys(obj);
         return obj[keys[keys.length * Math.random() << 0]];
     }
@@ -592,6 +595,11 @@ class Dsynr {
         }
         return obj[propName];
     }
+    /**
+     *
+     * @param obj
+     * @param propSet
+     */
     updateProps(obj, propSet) {
         this.lfn('updateProps...');
         for (let prop in propSet) {
@@ -678,6 +686,12 @@ class Dsynr {
     hasClass(e, classes) {
         return e.classList.contains(classes);
     }
+    /**
+     *
+     * @param id
+     * @param classes
+     * @param parent
+     */
     addDiv(id = '', classes = '', parent = document.body) {
         let div = document.createElement('DIV');
         div.id = id;
@@ -694,6 +708,10 @@ class Dsynr {
     getElementsByTag(tagName) {
         return document.querySelectorAll(tagName);
     }
+    /**
+     *
+     * @param className
+     */
     getElementsByClass(className) {
         return document.getElementsByClassName(className);
     }
@@ -772,7 +790,7 @@ class Dsynr {
     serialize(obj) {
         return Object.keys(obj).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(obj[k])}`).join('&');
     }
-    ajax(url, saveAs = false, data = false, add2dom = true, method = 'GET') {
+    ajax(url, saveAs = false, data = false, add2dom = true, parent = document.body, method = 'GET') {
         this.lfn('ajax ' + url);
         this.curReq = new XMLHttpRequest();
         if (this.curReq) {
@@ -781,7 +799,7 @@ class Dsynr {
             this.curReq.send(this.serialize(data));
             let ths = this;
             this.curReq.addEventListener('readystatechange', function () {
-                return ths.stateChanged(ths, saveAs, add2dom);
+                return ths.stateChanged(ths, saveAs, add2dom, parent);
             });
         }
         else {
@@ -795,12 +813,12 @@ class Dsynr {
         this.curReq.setRequestHeader('Cache-Control', 'no-cache');
         this.curReq.setRequestHeader('Powered-by', 'Dsynr.com');
     }
-    stateChanged(ths, saveAs, add2dom) {
+    stateChanged(ths, saveAs, add2dom, parent = document.body) {
         this.lfn('stateChanged');
         let req = ths.curReq;
         if (req.readyState === XMLHttpRequest.DONE) {
             if (req.status === 200) {
-                return ths.succeeded(saveAs, add2dom);
+                return ths.succeeded(saveAs, add2dom, parent);
             }
             else {
                 this.l('Not ready yet :: ' + req.status + ' / ' + req.readyState);
@@ -814,7 +832,7 @@ class Dsynr {
         this.l('Cannot create an XMLHTTP instance');
         return false;
     }
-    succeeded(saveAs, add2dom) {
+    succeeded(saveAs, add2dom, parent = document.body) {
         this.lfn('succeeded');
         this.totalRequestDatasets++;
         if (typeof saveAs === 'string') {
@@ -822,7 +840,7 @@ class Dsynr {
             // this.requestDataset[saveAs] = this.htmlToElements(this.curReq.response);
             this.requestDataset[saveAs] = this.curReq.response;
         }
-        add2dom ? this.addFetchedData(this.curReq.response) : false;
+        add2dom ? this.addFetchedData(this.curReq.response, parent) : false;
         return this.curReq.response;
     }
     addFetchedData(requestResponse, parent = document.body) {
@@ -832,7 +850,7 @@ class Dsynr {
             ths.showFetchedData(fdp);
         });
         fdp.innerHTML = requestResponse;
-        DsynrSelect.auto();
+        // DsynrSelect.auto();
         let fetchedScriptTags = fdp.getElementsByTagName('script');
         for (let i = 0; i < fetchedScriptTags.length; ++i) {
             let scriptSRC = fetchedScriptTags[i].getAttribute('src');

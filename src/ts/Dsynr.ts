@@ -1,5 +1,3 @@
-///<reference path="components/DsynrModal.ts"/>
-///<reference path="components/DsynrSelect.ts"/>
 class Dsynr {
     conf: object = {};
     vw: number;
@@ -100,11 +98,16 @@ class Dsynr {
         return Array.from(collection);
     }
 
-    get_rand_array_item(mixed_arr: any): any {
+    getRandArrayItem(mixed_arr: any): any {
         return mixed_arr[Math.floor(Math.random() * mixed_arr.length)];
     }
 
-    get_rand_obj_item(obj: object) {
+    /**
+     *
+     * @param obj
+     * @return {any}
+     */
+    getRandObjItem(obj: object) {
         let keys: Array<any> = Object.keys(obj);
         return obj[keys[keys.length * Math.random() << 0]];
     }
@@ -121,6 +124,11 @@ class Dsynr {
         return obj[propName];
     }
 
+    /**
+     *
+     * @param obj
+     * @param propSet
+     */
     updateProps(obj: object, propSet: object): void {
         this.lfn('updateProps...');
         for (let prop in propSet) {
@@ -221,6 +229,12 @@ class Dsynr {
         return e.classList.contains(classes);
     }
 
+    /**
+     *
+     * @param id
+     * @param classes
+     * @param parent
+     */
     addDiv(id: string = '', classes: string = '', parent: HTMLElement = document.body): HTMLElement {
         let div: HTMLElement = document.createElement('DIV');
         div.id = id;
@@ -241,6 +255,10 @@ class Dsynr {
         return document.querySelectorAll(tagName);
     }
 
+    /**
+     *
+     * @param className
+     */
     getElementsByClass(className: string): HTMLCollection {
         return document.getElementsByClassName(className);
     }
@@ -337,7 +355,7 @@ class Dsynr {
         return Object.keys(obj).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(obj[k])}`).join('&');
     }
 
-    ajax(url: string, saveAs: string | boolean = false, data: any = false, add2dom: boolean = true, method: string = 'GET') {
+    ajax(url: string, saveAs: string | boolean = false, data: any = false, add2dom: boolean = true, parent: HTMLElement = document.body, method: string = 'GET') {
         this.lfn('ajax ' + url);
         this.curReq = new XMLHttpRequest();
         if (this.curReq) {
@@ -346,7 +364,7 @@ class Dsynr {
             this.curReq.send(this.serialize(data));
             let ths = this;
             this.curReq.addEventListener('readystatechange', function () {
-                return ths.stateChanged(ths, saveAs, add2dom);
+                return ths.stateChanged(ths, saveAs, add2dom, parent);
             });
         } else {
             this.failed();
@@ -361,12 +379,12 @@ class Dsynr {
         this.curReq.setRequestHeader('Powered-by', 'Dsynr.com');
     }
 
-    private stateChanged(ths: Dsynr, saveAs: string | boolean, add2dom: boolean) {
+    private stateChanged(ths: Dsynr, saveAs: string | boolean, add2dom: boolean, parent: HTMLElement = document.body) {
         this.lfn('stateChanged');
         let req = ths.curReq;
         if (req.readyState === XMLHttpRequest.DONE) {
             if (req.status === 200) {
-                return ths.succeeded(saveAs, add2dom);
+                return ths.succeeded(saveAs, add2dom, parent);
             } else {
                 this.l('Not ready yet :: ' + req.status + ' / ' + req.readyState);
             }
@@ -380,7 +398,7 @@ class Dsynr {
         return false;
     }
 
-    private succeeded(saveAs: string | boolean, add2dom: boolean) {
+    private succeeded(saveAs: string | boolean, add2dom: boolean, parent: HTMLElement = document.body) {
         this.lfn('succeeded');
         this.totalRequestDatasets++;
         if (typeof saveAs === 'string') {
@@ -388,7 +406,7 @@ class Dsynr {
             // this.requestDataset[saveAs] = this.htmlToElements(this.curReq.response);
             this.requestDataset[saveAs] = this.curReq.response;
         }
-        add2dom ? this.addFetchedData(this.curReq.response) : false;
+        add2dom ? this.addFetchedData(this.curReq.response, parent) : false;
         return this.curReq.response;
     }
 
@@ -399,7 +417,7 @@ class Dsynr {
             ths.showFetchedData(fdp);
         });
         fdp.innerHTML = requestResponse;
-        DsynrSelect.auto();
+        // DsynrSelect.auto();
         let fetchedScriptTags = fdp.getElementsByTagName('script');
         for (let i = 0; i < fetchedScriptTags.length; ++i) {
             let scriptSRC = fetchedScriptTags[i].getAttribute('src');
