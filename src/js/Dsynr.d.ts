@@ -1,15 +1,35 @@
 declare class Dsynr {
-    conf: object;
+    conf: {
+        domain: string;
+        defaultParent: HTMLElement;
+        ani: {
+            prefix: string;
+            speed: {
+                faster: string;
+                default: string;
+            };
+            styles: {
+                fadeIn: string;
+                slideInDown: string;
+                slideOutUp: string;
+            };
+        };
+    };
     vw: number;
     vh: number;
     transitionEvent: any;
-    domain: string;
     requestDataset: {};
     totalRequestDatasets: number;
     documentScripts: Array<string>;
     private curReq;
     private readonly reqDataReady;
-    constructor();
+    /**
+     * @todo
+     * @param params
+     */
+    updateConfig(params: {}): void;
+    constructor(conf?: {});
+    protected defaultConf(): void;
     docReady(fn: Function): void;
     /**
      * @todo
@@ -131,6 +151,8 @@ declare class Dsynr {
     private showFetchedData;
     getPageScripts(dsynrUtil: Dsynr): void;
     IsJson(str: string): boolean;
+    private getAniClass;
+    private prefixAniClasses;
     /**
      * Log to the console
      * @param data

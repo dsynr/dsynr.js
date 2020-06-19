@@ -1,13 +1,40 @@
 class Dsynr {
-    constructor() {
-        this.conf = {};
+    constructor(conf = {}) {
+        this.conf = {
+            domain: document.baseURI,
+            defaultParent: document.body,
+            ani: {
+                prefix: 'animate__animated animate__',
+                speed: {
+                    faster: 'animate__faster',
+                    default: '',
+                },
+                styles: {
+                    fadeIn: 'fadeIn',
+                    slideInDown: 'slideInDown',
+                    slideOutUp: 'slideOutUp',
+                }
+            },
+        };
         this.transitionEvent = this.whichAnimationEvent();
-        this.domain = document.baseURI;
         this.requestDataset = {};
         this.totalRequestDatasets = 0;
         this.documentScripts = [];
+        this.updateConfig(conf);
         this.updateViewportVars();
         this.reqDataReady = new Event('reqDataReady');
+    }
+    /**
+     * @todo
+     * @param params
+     */
+    updateConfig(params) {
+        this.lfn('updateConfig Dsynr....');
+        this.defaultConf();
+    }
+    defaultConf() {
+        this.lfn('defaultConf');
+        this.conf.ani.speed.default = this.conf.ani.speed.faster;
     }
     docReady(fn) {
         if (document.readyState == 'complete') {
@@ -389,6 +416,17 @@ class Dsynr {
             return false;
         }
         return true;
+    }
+    getAniClass(styleName) {
+        return ' ' + this.conf.ani.prefix + styleName;
+    }
+    prefixAniClasses(speed = this.conf.ani.speed.default) {
+        for (const style in this.conf.ani.styles) {
+            this.makeArray(this.getElementsByClass(style)).forEach((e) => {
+                this.removeClass(e, style);
+                this.addClass(e, this.conf.ani.prefix + style + ' ' + speed);
+            });
+        }
     }
     /**
      * Log to the console

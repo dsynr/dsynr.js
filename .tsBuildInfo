@@ -66,12 +66,12 @@
         "signature": "3e0a459888f32b42138d5a39f706ff2d55d500ab1031e0988b5568b0f67c2303"
       },
       "./src/ts/dsynr.ts": {
-        "version": "723469d543a98f99e8ccef47197f43528df53ee4ca0fb2dfd50c2ab18b0d9d43",
-        "signature": "ac36a138387eae6f8ecb7dd1b14e0cc03822e81c618a8d7fe584f647bffe70b2"
+        "version": "a860b8f364f7fd73661e9bded1067c01f45bbeaa3d4ab81a5f9c5f442dc039d3",
+        "signature": "6e93d9e886521fe4aabe4fa58baee6c1853b40d63b1c377a87f1adeec6efc0b3"
       },
       "./src/ts/dsynrwp.ts": {
-        "version": "9fa9afa62d503ae3bc8c32268c7284c51ef09fb171c7e820aa5bbdb481e50f85",
-        "signature": "e8350649221a07d73fecde1fdebf30b26f3b1100470a7be6747ae4913b7867b7"
+        "version": "e7ba405af43afa2b8842134f4e4c9115b9e2753a1c0f3e89c0d6a19bf74f0c9c",
+        "signature": "548f89a4c2f4b5976bb00f237e2386958f7ab02cfa0e47dcb2df3f04ec62e835"
       },
       "./src/ts/classes/dsynruiielement.ts": {
         "version": "a765b4b640ca870add51f97fbff3081c32a153aaacf13fe51deeb6acd9ed8e8a",

@@ -1,18 +1,47 @@
 class Dsynr {
-    conf: object = {};
+    conf = {
+        domain: document.baseURI,
+        defaultParent: document.body,
+        ani: {
+            prefix: 'animate__animated animate__',
+            speed: {
+                faster: 'animate__faster',
+                default: '',
+            },
+            styles: {
+                fadeIn: 'fadeIn',
+                slideInDown: 'slideInDown',
+                slideOutUp: 'slideOutUp',
+            }
+        },
+    };
     vw: number;
     vh: number;
     transitionEvent = this.whichAnimationEvent();
-    domain: string = document.baseURI;
     requestDataset = {};
     totalRequestDatasets = 0;
     documentScripts: Array<string> = [];
     private curReq: XMLHttpRequest;
     private readonly reqDataReady: Event;
 
-    constructor() {
+    /**
+     * @todo
+     * @param params
+     */
+    updateConfig(params: {}): void {
+        this.lfn('updateConfig Dsynr....');
+        this.defaultConf();
+    }
+
+    constructor(conf = {}) {
+        this.updateConfig(conf);
         this.updateViewportVars();
         this.reqDataReady = new Event('reqDataReady');
+    }
+
+    protected defaultConf(): void {
+        this.lfn('defaultConf');
+        this.conf.ani.speed.default = this.conf.ani.speed.faster;
     }
 
     docReady(fn: Function): void {
@@ -456,6 +485,19 @@ class Dsynr {
             return false;
         }
         return true;
+    }
+
+    private getAniClass(styleName: string): string {
+        return ' ' + this.conf.ani.prefix + styleName;
+    }
+
+    private prefixAniClasses(speed: string = this.conf.ani.speed.default): void {
+        for (const style in this.conf.ani.styles) {
+            this.makeArray(this.getElementsByClass(style)).forEach((e: HTMLElement) => {
+                this.removeClass(e, style);
+                this.addClass(e, this.conf.ani.prefix + style + ' ' + speed);
+            });
+        }
     }
 
     /**

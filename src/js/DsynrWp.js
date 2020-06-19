@@ -1,19 +1,24 @@
 class DsynrWp {
+    constructor() {
+        this.conf = {
+            formURL: 'form/',
+        };
+    }
     ready() {
         d.lfn('DsynrUtilWp');
         d.getPageScripts(d);
     }
-    getForm(formName, parent = document.body) {
+    getForm(formName, parent = d.conf.defaultParent) {
         d.lfn('getForm');
         if (d.requestDataset[formName] != undefined) {
             d.l(formName + ' Previously loaded / Reinstantiating from memory...');
             d.addFetchedData(d.requestDataset[formName], parent);
         }
         else {
-            d.ajax(d.domain + 'form/' + formName + '?min', formName);
+            d.ajax(d.conf.domain + this.conf.formURL + formName + '?min', formName);
         }
     }
-    ajax(params = {}, parent = document.body) {
+    ajax(params = {}, parent = d.conf.defaultParent) {
         d.lfn('ajax / ' + name);
         let formData = d.mergeObjs({ action: 'dw_ajax' }, params);
         d.l(formData);
