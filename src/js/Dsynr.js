@@ -420,7 +420,7 @@ class Dsynr {
     getAniClass(styleName) {
         return ' ' + this.conf.ani.prefix + styleName;
     }
-    prefixAniClasses(speed = this.conf.ani.speed.default) {
+    autoPrefixAniClasses(speed = this.conf.ani.speed.default) {
         for (const style in this.conf.ani.styles) {
             this.makeArray(this.getElementsByClass(style)).forEach((e) => {
                 this.removeClass(e, style);

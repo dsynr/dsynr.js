@@ -151,8 +151,8 @@ declare class Dsynr {
     private showFetchedData;
     getPageScripts(dsynrUtil: Dsynr): void;
     IsJson(str: string): boolean;
-    private getAniClass;
-    private prefixAniClasses;
+    getAniClass(styleName: string): string;
+    autoPrefixAniClasses(speed?: string): void;
     /**
      * Log to the console
      * @param data

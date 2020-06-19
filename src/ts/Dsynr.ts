@@ -487,11 +487,11 @@ class Dsynr {
         return true;
     }
 
-    private getAniClass(styleName: string): string {
+    getAniClass(styleName: string): string {
         return ' ' + this.conf.ani.prefix + styleName;
     }
 
-    private prefixAniClasses(speed: string = this.conf.ani.speed.default): void {
+    autoPrefixAniClasses(speed: string = this.conf.ani.speed.default): void {
         for (const style in this.conf.ani.styles) {
             this.makeArray(this.getElementsByClass(style)).forEach((e: HTMLElement) => {
                 this.removeClass(e, style);
