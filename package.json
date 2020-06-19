@@ -1,8 +1,7 @@
 {
   "name": "DsynrUtil",
   "version": "1.0.0",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "animate.css": "^4.1.0",
     "bootstrap": "^4.5.0",
