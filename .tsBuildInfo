@@ -66,11 +66,11 @@
         "signature": "3e0a459888f32b42138d5a39f706ff2d55d500ab1031e0988b5568b0f67c2303"
       },
       "./src/ts/dsynr.ts": {
-        "version": "8837aa96b766e50c24de85865c11872726cd5802ad1c2c5842f5888cc9aa1432",
+        "version": "5a338cf5c5be6b2e3bf89458aa82ed3481eb7f11705df6f04a079bffbff98011",
         "signature": "5194332783338bad475c4f29a4462aef87868e5ce3e3392805bb8cf599a73c8b"
       },
       "./src/ts/dsynrwp.ts": {
-        "version": "e7ba405af43afa2b8842134f4e4c9115b9e2753a1c0f3e89c0d6a19bf74f0c9c",
+        "version": "f21c0415b1b030212cbe1986dd11504b6ee61ef89518c2dc5bed58992d1f7b78",
         "signature": "548f89a4c2f4b5976bb00f237e2386958f7ab02cfa0e47dcb2df3f04ec62e835"
       },
       "./src/ts/classes/dsynruiielement.ts": {
@@ -159,21 +159,8 @@
     },
     "semanticDiagnosticsPerFile": [
       "../../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es6.d.ts",
-      "./src/ts/dsynr.ts",
-      "./src/ts/dsynrwp.ts",
-      "./src/ts/classes/dsynruiielement.ts",
-      "./src/ts/components/dsynrmodal.ts",
-      "./src/ts/components/dsynrselect.ts",
-      "./src/ts/interfaces/dsynrsite.ts",
-      "./src/ts/interfaces/dsynrui.ts",
-      "../../node_modules/@types/jquery/jquerystatic.d.ts",
-      "../../node_modules/@types/jquery/jquery.d.ts",
-      "../../node_modules/@types/jquery/misc.d.ts",
-      "../../node_modules/@types/jquery/legacy.d.ts",
-      "../../node_modules/@types/sizzle/index.d.ts",
-      "../../node_modules/@types/jquery/index.d.ts",
-      "../../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.d.ts",
       "../../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es5.d.ts",
+      "../../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.d.ts",
       "../../../../appdata/roaming/npm/node_modules/typescript/lib/lib.dom.d.ts",
       "../../../../appdata/roaming/npm/node_modules/typescript/lib/lib.dom.iterable.d.ts",
       "../../../../appdata/roaming/npm/node_modules/typescript/lib/lib.webworker.importscripts.d.ts",
@@ -186,7 +173,20 @@
       "../../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.proxy.d.ts",
       "../../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.reflect.d.ts",
       "../../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.symbol.d.ts",
-      "../../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts"
+      "../../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts",
+      "./src/ts/classes/dsynruiielement.ts",
+      "./src/ts/components/dsynrmodal.ts",
+      "./src/ts/components/dsynrselect.ts",
+      "./src/ts/interfaces/dsynrsite.ts",
+      "./src/ts/interfaces/dsynrui.ts",
+      "../../node_modules/@types/jquery/jquerystatic.d.ts",
+      "../../node_modules/@types/jquery/jquery.d.ts",
+      "../../node_modules/@types/jquery/misc.d.ts",
+      "../../node_modules/@types/jquery/legacy.d.ts",
+      "../../node_modules/@types/sizzle/index.d.ts",
+      "../../node_modules/@types/jquery/index.d.ts",
+      "./src/ts/dsynr.ts",
+      "./src/ts/dsynrwp.ts"
     ]
   },
   "version": "3.8.3"
