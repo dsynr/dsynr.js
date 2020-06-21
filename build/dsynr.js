@@ -388,11 +388,10 @@ class DsynrSelect extends DsynrUIIElement {
             this.instance = d.addDiv(this.setName('', this.content.id), this.instanceClass);
             this.instance.tabIndex = 0;
             this.instance.style.outline = 'none';
-            let self = this;
-            d.makeArray(this.options).forEach(function (o, index) {
-                self.addESOption(o, index);
-            });
             let ths = this;
+            d.makeArray(this.options).forEach(function (o, index) {
+                ths.addESOption(o, index);
+            });
             this.modalPref = d.mergeObjs(this.preferences, {
                 'trigger': 'auto', 'parent': this.parent, 'adoptParent': this.adoptParent, 'onModalDestroy': () => {
                     ths.destroy();
@@ -433,14 +432,14 @@ class DsynrSelect extends DsynrUIIElement {
         let oe = d.getElementById(oid);
         oe.textContent = o.text;
         d.setData(oe, 'index', o.index.toString());
-        let self = this;
+        let ths = this;
         d.addListener(oe.id, 'click', function () {
             d.lclk(oe.id);
-            self.update(oe);
+            ths.update(oe);
         });
         d.addListener(oe.id, 'keydown', function (ev) {
             if (ev.key == 'Enter') {
-                self.update(oe);
+                ths.update(oe);
             }
         });
     }
@@ -448,10 +447,10 @@ class DsynrSelect extends DsynrUIIElement {
         d.lfn('addTrigger');
         this.trigger = d.addDiv(this.setName('btn', this.content.id), this.triggerCls, this.content.parentElement);
         d.addText(this.option.text, this.trigger);
-        let self = this;
+        let ths = this;
         d.addListener(this.trigger.id, 'click', function (ev) {
             ev.preventDefault();
-            self.show();
+            ths.show();
         });
         d.hide(this.content);
     }
@@ -828,7 +827,7 @@ class Dsynr {
     serialize(obj) {
         return Object.keys(obj).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(obj[k])}`).join('&');
     }
-    ajax(url, saveAs = false, data = false, add2dom = true, parent = document.body, method = 'GET') {
+    ajax(url, saveAs = false, data = false, add2dom = true, parent = document.body, enableDsynrSelect = false, method = 'GET') {
         this.lfn('ajax ' + url);
         this.curReq = new XMLHttpRequest();
         if (this.curReq) {
@@ -837,7 +836,7 @@ class Dsynr {
             this.curReq.send(this.serialize(data));
             let ths = this;
             this.curReq.addEventListener('readystatechange', function () {
-                return ths.stateChanged(ths, saveAs, add2dom, parent);
+                return ths.stateChanged(ths, saveAs, add2dom, parent, enableDsynrSelect);
             });
         }
         else {
@@ -851,12 +850,12 @@ class Dsynr {
         this.curReq.setRequestHeader('Cache-Control', 'no-cache');
         this.curReq.setRequestHeader('Powered-by', 'Dsynr.com');
     }
-    stateChanged(ths, saveAs, add2dom, parent = document.body) {
+    stateChanged(ths, saveAs, add2dom, parent = document.body, enableDsynrSelect = false) {
         this.lfn('stateChanged');
         let req = ths.curReq;
         if (req.readyState === XMLHttpRequest.DONE) {
             if (req.status === 200) {
-                return ths.succeeded(saveAs, add2dom, parent);
+                return ths.succeeded(saveAs, add2dom, parent, enableDsynrSelect);
             }
             else {
                 this.l('Not ready yet :: ' + req.status + ' / ' + req.readyState);
@@ -870,7 +869,7 @@ class Dsynr {
         this.l('Cannot create an XMLHTTP instance');
         return false;
     }
-    succeeded(saveAs, add2dom, parent = document.body) {
+    succeeded(saveAs, add2dom, parent = document.body, enableDsynrSelect = false) {
         this.lfn('succeeded');
         this.totalRequestDatasets++;
         if (typeof saveAs === 'string') {
@@ -878,17 +877,19 @@ class Dsynr {
             // this.requestDataset[saveAs] = this.htmlToElements(this.curReq.response);
             this.requestDataset[saveAs] = this.curReq.response;
         }
-        add2dom ? this.addFetchedData(this.curReq.response, parent) : false;
+        add2dom ? this.addFetchedData(this.curReq.response, parent, enableDsynrSelect) : false;
         return this.curReq.response;
     }
-    addFetchedData(requestResponse, parent = document.body) {
+    addFetchedData(requestResponse, parent = document.body, enableDsynrSelect = false) {
+        d.lfn('addFetchedData..');
         let fdp = this.addDiv('dsynrFetchedData-' + this.totalRequestDatasets, 'd-none', parent);
         let ths = this;
         this.addListener(fdp.id, 'reqDataReady', function () {
             ths.showFetchedData(fdp);
         });
         fdp.innerHTML = requestResponse;
-        // DsynrSelect.auto();
+        d.l('enableDsynrSelect:' + enableDsynrSelect);
+        enableDsynrSelect ? DsynrSelect.auto() : null;
         let fetchedScriptTags = fdp.getElementsByTagName('script');
         for (let i = 0; i < fetchedScriptTags.length; ++i) {
             let scriptSRC = fetchedScriptTags[i].getAttribute('src');
@@ -993,14 +994,14 @@ class DsynrWp {
         d.lfn('DsynrUtilWp');
         d.getPageScripts(d);
     }
-    getForm(formName, parent = d.conf.defaultParent) {
+    getForm(formName, parent = d.conf.defaultParent, enableDsynrSelect = false) {
         d.lfn('getForm');
         if (d.requestDataset[formName] != undefined) {
             d.l(formName + ' Previously loaded / Reinstantiating from memory...');
-            d.addFetchedData(d.requestDataset[formName], parent);
+            d.addFetchedData(d.requestDataset[formName], parent, enableDsynrSelect);
         }
         else {
-            d.ajax(d.conf.domain + this.conf.formURL + formName + '?min', formName);
+            d.ajax(d.conf.domain + this.conf.formURL + formName + '?min', formName, false, true, parent, true);
         }
     }
     ajax(params = {}, parent = d.conf.defaultParent) {

@@ -8,14 +8,14 @@ class DsynrWp {
         d.lfn('DsynrUtilWp');
         d.getPageScripts(d);
     }
-    getForm(formName, parent = d.conf.defaultParent) {
+    getForm(formName, parent = d.conf.defaultParent, enableDsynrSelect = false) {
         d.lfn('getForm');
         if (d.requestDataset[formName] != undefined) {
             d.l(formName + ' Previously loaded / Reinstantiating from memory...');
-            d.addFetchedData(d.requestDataset[formName], parent);
+            d.addFetchedData(d.requestDataset[formName], parent, enableDsynrSelect);
         }
         else {
-            d.ajax(d.conf.domain + this.conf.formURL + formName + '?min', formName);
+            d.ajax(d.conf.domain + this.conf.formURL + formName + '?min', formName, false, true, parent, true);
         }
     }
     ajax(params = {}, parent = d.conf.defaultParent) {

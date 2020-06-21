@@ -142,12 +142,12 @@ declare class Dsynr {
     isInViewportSlightly(e: HTMLElement): boolean;
     isInViewportMostly(e: any): boolean;
     serialize(obj: object): string;
-    ajax(url: string, saveAs?: string | boolean, data?: any, add2dom?: boolean, parent?: HTMLElement, method?: string): void;
+    ajax(url: string, saveAs?: string | boolean, data?: any, add2dom?: boolean, parent?: HTMLElement, enableDsynrSelect?: boolean, method?: string): void;
     private setHeaders;
     private stateChanged;
     private failed;
     private succeeded;
-    addFetchedData(requestResponse: string, parent?: HTMLElement): void;
+    addFetchedData(requestResponse: string, parent?: HTMLElement, enableDsynrSelect?: boolean): void;
     private showFetchedData;
     getPageScripts(dsynrUtil: Dsynr): void;
     IsJson(str: string): boolean;

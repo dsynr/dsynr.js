@@ -384,7 +384,7 @@ class Dsynr {
         return Object.keys(obj).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(obj[k])}`).join('&');
     }
 
-    ajax(url: string, saveAs: string | boolean = false, data: any = false, add2dom: boolean = true, parent: HTMLElement = document.body, method: string = 'GET') {
+    ajax(url: string, saveAs: string | boolean = false, data: any = false, add2dom: boolean = true, parent: HTMLElement = document.body, enableDsynrSelect: boolean = false, method: string = 'GET') {
         this.lfn('ajax ' + url);
         this.curReq = new XMLHttpRequest();
         if (this.curReq) {
@@ -393,7 +393,7 @@ class Dsynr {
             this.curReq.send(this.serialize(data));
             let ths = this;
             this.curReq.addEventListener('readystatechange', function () {
-                return ths.stateChanged(ths, saveAs, add2dom, parent);
+                return ths.stateChanged(ths, saveAs, add2dom, parent, enableDsynrSelect);
             });
         } else {
             this.failed();
@@ -408,12 +408,12 @@ class Dsynr {
         this.curReq.setRequestHeader('Powered-by', 'Dsynr.com');
     }
 
-    private stateChanged(ths: Dsynr, saveAs: string | boolean, add2dom: boolean, parent: HTMLElement = document.body) {
+    private stateChanged(ths: Dsynr, saveAs: string | boolean, add2dom: boolean, parent: HTMLElement = document.body, enableDsynrSelect: boolean = false) {
         this.lfn('stateChanged');
         let req = ths.curReq;
         if (req.readyState === XMLHttpRequest.DONE) {
             if (req.status === 200) {
-                return ths.succeeded(saveAs, add2dom, parent);
+                return ths.succeeded(saveAs, add2dom, parent, enableDsynrSelect);
             } else {
                 this.l('Not ready yet :: ' + req.status + ' / ' + req.readyState);
             }
@@ -427,7 +427,7 @@ class Dsynr {
         return false;
     }
 
-    private succeeded(saveAs: string | boolean, add2dom: boolean, parent: HTMLElement = document.body) {
+    private succeeded(saveAs: string | boolean, add2dom: boolean, parent: HTMLElement = document.body, enableDsynrSelect: boolean = false) {
         this.lfn('succeeded');
         this.totalRequestDatasets++;
         if (typeof saveAs === 'string') {
@@ -435,18 +435,20 @@ class Dsynr {
             // this.requestDataset[saveAs] = this.htmlToElements(this.curReq.response);
             this.requestDataset[saveAs] = this.curReq.response;
         }
-        add2dom ? this.addFetchedData(this.curReq.response, parent) : false;
+        add2dom ? this.addFetchedData(this.curReq.response, parent, enableDsynrSelect) : false;
         return this.curReq.response;
     }
 
-    addFetchedData(requestResponse: string, parent: HTMLElement = document.body): void {
+    addFetchedData(requestResponse: string, parent: HTMLElement = document.body, enableDsynrSelect: boolean = false): void {
+        d.lfn('addFetchedData..');
         let fdp = this.addDiv('dsynrFetchedData-' + this.totalRequestDatasets, 'd-none', parent);
         let ths = this;
         this.addListener(fdp.id, 'reqDataReady', function () {
             ths.showFetchedData(fdp);
         });
         fdp.innerHTML = requestResponse;
-        // DsynrSelect.auto();
+        d.l('enableDsynrSelect:' + enableDsynrSelect);
+        enableDsynrSelect ? DsynrSelect.auto() : null;
         let fetchedScriptTags = fdp.getElementsByTagName('script');
         for (let i = 0; i < fetchedScriptTags.length; ++i) {
             let scriptSRC = fetchedScriptTags[i].getAttribute('src');

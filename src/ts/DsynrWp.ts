@@ -8,13 +8,13 @@ class DsynrWp {
         d.getPageScripts(d);
     }
 
-    getForm(formName: string, parent: HTMLElement = d.conf.defaultParent): void {
+    getForm(formName: string, parent: HTMLElement = d.conf.defaultParent, enableDsynrSelect: boolean = false): void {
         d.lfn('getForm');
         if (d.requestDataset[formName] != undefined) {
             d.l(formName + ' Previously loaded / Reinstantiating from memory...');
-            d.addFetchedData(d.requestDataset[formName], parent);
+            d.addFetchedData(d.requestDataset[formName], parent, enableDsynrSelect);
         } else {
-            d.ajax(d.conf.domain + this.conf.formURL + formName + '?min', formName);
+            d.ajax(d.conf.domain + this.conf.formURL + formName + '?min', formName, false, true, parent,true);
         }
     }
 
