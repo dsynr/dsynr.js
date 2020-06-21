@@ -65,9 +65,9 @@ class DsynrUIIElement {
     setDefaults(reset = false) {
         d.lfn('setDefaults super ');
         this.animate = d.addProp(this, 'animate', true, reset);
-        this.animateClass = d.addProp(this, 'animateClass', 'animated', reset);
-        this.animateInClass = d.addProp(this, 'animateInClass', d.concatStr([this.animateClass, 'fadeIn']), reset);
-        this.animateOutClass = d.addProp(this, 'animateOutClass', d.concatStr([this.animateClass, 'fadeOut']), reset);
+        this.animateClass = d.addProp(this, 'animateClass', d.conf.ani.prefix, reset);
+        this.animateInClass = d.addProp(this, 'animateInClass', d.concatStr([this.animateClass, d.conf.ani.styles.fadeIn]), reset);
+        this.animateOutClass = d.addProp(this, 'animateOutClass', d.concatStr([this.animateClass, d.conf.ani.styles.slideOutUp]), reset);
         this.animateAttentionClass = d.addProp(this, 'animateOutClass', d.concatStr([this.animateClass, 'heartBeat']), reset);
     }
     addListeners() {
@@ -121,9 +121,9 @@ class DsynrModal extends DsynrUIIElement {
         this.overlayClass = d.addProp(this, 'overlayClass', 'o50 bg-dark', reset);
         this.parentSizingClass = d.addProp(this, 'sizingClass', 'wmax hmax', reset);
         this.windowSizingClass = d.addProp(this, 'windowSizingClass', 'vw vh', reset);
-        this.underlayClass = d.addProp(this, 'underlayClass', d.concatStr([positionClass, alignmentClass, this.parentSizingClass, 'z1', 'dsynrModalUnderlay']), reset);
-        this.instanceClass = d.addProp(this, 'instanceClass', d.concatStr([positionClass, 'z2 o0 rounded nooverflow']), reset);
-        this.instanceRootClass = d.addProp(this, 'instanceRootClass', d.concatStr([positionClass, alignmentClass, this.parentSizingClass, 'z3 o0 d-none']), reset);
+        this.underlayClass = d.addProp(this, 'underlayClass', d.concatStr([positionClass, alignmentClass, this.parentSizingClass, 'dsynrModalUnderlay']), reset);
+        this.instanceClass = d.addProp(this, 'instanceClass', d.concatStr([positionClass, 'o0 rounded nooverflow', 'dsynrModalContentRoot']), reset);
+        this.instanceRootClass = d.addProp(this, 'instanceRootClass', d.concatStr([positionClass, alignmentClass, this.parentSizingClass, 'o0 d-none', 'dsynrModal']), reset);
         this.trigger = d.addProp(this, 'trigger', 'auto', reset);
         this.onModalDestroy = d.addProp(this, 'onModalDestroy', () => {
             this.hide(this.autoDestroy);
@@ -160,17 +160,20 @@ class DsynrModal extends DsynrUIIElement {
                 this.parent = document.body;
             }
             this.instanceRoot = d.addDiv(this.setName('root', this.content.id), this.instanceRootClass, this.parent);
+            d.setHighestZindex(this.instanceRoot);
+            this.instance = d.addDiv(this.setName('modal', this.parent.id), this.instanceClass, this.instanceRoot);
+            this.instance.style.zIndex = (parseInt(this.instanceRoot.style.zIndex) - 1).toString();
             if (this.disableUnderlay) {
                 // this.resizeRoot();
                 if (this.useOverlay) {
                     this.underlayClass = d.concatStr([this.underlayClass, this.overlayClass]);
                 }
                 this.underlay = d.addDiv(this.setName('underlay', this.content.id), this.underlayClass, this.instanceRoot);
+                this.underlay.style.zIndex = (parseInt(this.instance.style.zIndex) - 1).toString();
             }
             else {
                 d.removeClass(this.instanceRoot, this.parentSizingClass);
             }
-            this.instance = d.addDiv(this.setName('modal', this.parent.id), this.instanceClass, this.instanceRoot);
             this.addListeners();
             //update to detect parent (parent) resizing opposed to just window
             this.instance.appendChild(this.content);
@@ -210,21 +213,28 @@ class DsynrModal extends DsynrUIIElement {
     animateDisplay(getAttention = false) {
         d.lfn('animateDisplay');
         if (this.displayTogether) {
+            d.l('displayTogether...');
             if (this.animate && this.animateUnderlay) {
+                d.l('this.animate && this.animateUnderlay....');
                 if (getAttention) {
+                    d.l('getAttention..');
                     d.removeClass(this.instanceRoot, this.animateInClass);
                     d.addClass(this.instanceRoot, this.animateAttentionClass);
                     d.removeClass(this.instance, this.modalAnimateInClass);
                     d.addClass(this.instance, this.modalAnimateAttentionClass);
                 }
                 else {
-                    d.addClass(this.instanceRoot, this.animateInClass);
-                    d.addClass(this.instance, this.modalAnimateInClass);
+                    d.l('NOT getAttention..');
+                    d.addClass(this.instanceRoot, this.animateClass + d.conf.ani.styles.fadeIn);
+                    d.addClass(this.instance, this.animateClass + d.conf.ani.styles.fadeIn);
+                    // d.removeClass(this.instanceRoot, 'o0');
+                    // d.removeClass(this.instance, 'o0');
                 }
             }
             else {
                 if (getAttention) {
                     //@todo
+                    d.l('getting Attention.....');
                 }
                 else {
                     d.removeClass(this.instanceRoot, 'o0');
@@ -234,6 +244,7 @@ class DsynrModal extends DsynrUIIElement {
         }
         else {
             //@todo animate one after other
+            d.l('animate one after other...');
         }
     }
     hide(destroy = this.autoDestroy) {
@@ -923,6 +934,21 @@ class Dsynr {
                 this.addClass(e, this.conf.ani.prefix + style + ' ' + speed);
             });
         }
+    }
+    setHighestZindex(el) {
+        let highestZindex = this.getHighestZindex();
+        let delta = 3;
+        highestZindex = highestZindex == undefined ? delta : highestZindex + delta;
+        el.style.zIndex = highestZindex;
+    }
+    getHighestZindex(el = document.body) {
+        return Array.from(el.querySelectorAll('*'))
+            .map(a => parseFloat(window.getComputedStyle(a).zIndex))
+            .filter(a => !isNaN(a))
+            .sort((n1, n2) => {
+            return n1 - n2;
+        })
+            .pop();
     }
     /**
      * Log to the console

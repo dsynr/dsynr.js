@@ -66,10 +66,10 @@ class DsynrModal extends DsynrUIIElement {
         this.parentSizingClass = d.addProp(this, 'sizingClass', 'wmax hmax', reset);
         this.windowSizingClass = d.addProp(this, 'windowSizingClass', 'vw vh', reset);
 
-        this.underlayClass = d.addProp(this, 'underlayClass', d.concatStr([positionClass, alignmentClass, this.parentSizingClass, 'z1', 'dsynrModalUnderlay']), reset);
+        this.underlayClass = d.addProp(this, 'underlayClass', d.concatStr([positionClass, alignmentClass, this.parentSizingClass, 'dsynrModalUnderlay']), reset);
 
-        this.instanceClass = d.addProp(this, 'instanceClass', d.concatStr([positionClass, 'z2 o0 rounded nooverflow']), reset);
-        this.instanceRootClass = d.addProp(this, 'instanceRootClass', d.concatStr([positionClass, alignmentClass, this.parentSizingClass, 'z3 o0 d-none']), reset);
+        this.instanceClass = d.addProp(this, 'instanceClass', d.concatStr([positionClass, 'o0 rounded nooverflow', 'dsynrModalContentRoot']), reset);
+        this.instanceRootClass = d.addProp(this, 'instanceRootClass', d.concatStr([positionClass, alignmentClass, this.parentSizingClass, 'o0 d-none', 'dsynrModal']), reset);
 
         this.trigger = d.addProp(this, 'trigger', 'auto', reset);
         this.onModalDestroy = d.addProp(this, 'onModalDestroy', () => {
@@ -111,6 +111,10 @@ class DsynrModal extends DsynrUIIElement {
                 this.parent = document.body;
             }
             this.instanceRoot = d.addDiv(this.setName('root', this.content.id), this.instanceRootClass, this.parent);
+            d.setHighestZindex(this.instanceRoot);
+
+            this.instance = d.addDiv(this.setName('modal', this.parent.id), this.instanceClass, this.instanceRoot);
+            this.instance.style.zIndex = (parseInt(this.instanceRoot.style.zIndex) - 1).toString();
 
             if (this.disableUnderlay) {
                 // this.resizeRoot();
@@ -120,11 +124,10 @@ class DsynrModal extends DsynrUIIElement {
                 }
 
                 this.underlay = d.addDiv(this.setName('underlay', this.content.id), this.underlayClass, this.instanceRoot);
+                this.underlay.style.zIndex = (parseInt(this.instance.style.zIndex) - 1).toString();
             } else {
                 d.removeClass(this.instanceRoot, this.parentSizingClass);
             }
-
-            this.instance = d.addDiv(this.setName('modal', this.parent.id), this.instanceClass, this.instanceRoot);
 
             this.addListeners();
             //update to detect parent (parent) resizing opposed to just window
@@ -175,22 +178,31 @@ class DsynrModal extends DsynrUIIElement {
         d.lfn('animateDisplay');
 
         if (this.displayTogether) {
+            d.l('displayTogether...');
 
             if (this.animate && this.animateUnderlay) {
+                d.l('this.animate && this.animateUnderlay....');
                 if (getAttention) {
+                    d.l('getAttention..');
                     d.removeClass(this.instanceRoot, this.animateInClass);
                     d.addClass(this.instanceRoot, this.animateAttentionClass);
 
                     d.removeClass(this.instance, this.modalAnimateInClass);
                     d.addClass(this.instance, this.modalAnimateAttentionClass);
                 } else {
-                    d.addClass(this.instanceRoot, this.animateInClass);
-                    d.addClass(this.instance, this.modalAnimateInClass);
+                    d.l('NOT getAttention..');
+                    d.addClass(this.instanceRoot, this.animateClass + d.conf.ani.styles.fadeIn);
+                    d.addClass(this.instance, this.animateClass + d.conf.ani.styles.fadeIn);
+
+
+                    // d.removeClass(this.instanceRoot, 'o0');
+                    // d.removeClass(this.instance, 'o0');
                 }
 
             } else {
                 if (getAttention) {
                     //@todo
+                    d.l('getting Attention.....');
                 } else {
                     d.removeClass(this.instanceRoot, 'o0');
                     d.removeClass(this.instance, 'o0');
@@ -199,6 +211,7 @@ class DsynrModal extends DsynrUIIElement {
 
         } else {
             //@todo animate one after other
+            d.l('animate one after other...');
         }
     }
 

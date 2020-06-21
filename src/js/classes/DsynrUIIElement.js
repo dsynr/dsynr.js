@@ -63,9 +63,9 @@ class DsynrUIIElement {
     setDefaults(reset = false) {
         d.lfn('setDefaults super ');
         this.animate = d.addProp(this, 'animate', true, reset);
-        this.animateClass = d.addProp(this, 'animateClass', 'animated', reset);
-        this.animateInClass = d.addProp(this, 'animateInClass', d.concatStr([this.animateClass, 'fadeIn']), reset);
-        this.animateOutClass = d.addProp(this, 'animateOutClass', d.concatStr([this.animateClass, 'fadeOut']), reset);
+        this.animateClass = d.addProp(this, 'animateClass', d.conf.ani.prefix, reset);
+        this.animateInClass = d.addProp(this, 'animateInClass', d.concatStr([this.animateClass, d.conf.ani.styles.fadeIn]), reset);
+        this.animateOutClass = d.addProp(this, 'animateOutClass', d.concatStr([this.animateClass, d.conf.ani.styles.slideOutUp]), reset);
         this.animateAttentionClass = d.addProp(this, 'animateOutClass', d.concatStr([this.animateClass, 'heartBeat']), reset);
     }
     addListeners() {

@@ -500,6 +500,23 @@ class Dsynr {
         }
     }
 
+    setHighestZindex(el: HTMLElement): void {
+        let highestZindex: any = this.getHighestZindex();
+        let delta: number = 3;
+        highestZindex = highestZindex == undefined ? delta : highestZindex + delta;
+        el.style.zIndex = highestZindex;
+    }
+
+    getHighestZindex(el: HTMLElement = document.body) {
+        return Array.from(el.querySelectorAll('*'))
+            .map(a => parseFloat(window.getComputedStyle(a).zIndex))
+            .filter(a => !isNaN(a))
+            .sort((n1, n2) => {
+                return n1 - n2
+            })
+            .pop();
+    }
+
     /**
      * Log to the console
      * @param data

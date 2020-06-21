@@ -428,6 +428,21 @@ class Dsynr {
             });
         }
     }
+    setHighestZindex(el) {
+        let highestZindex = this.getHighestZindex();
+        let delta = 3;
+        highestZindex = highestZindex == undefined ? delta : highestZindex + delta;
+        el.style.zIndex = highestZindex;
+    }
+    getHighestZindex(el = document.body) {
+        return Array.from(el.querySelectorAll('*'))
+            .map(a => parseFloat(window.getComputedStyle(a).zIndex))
+            .filter(a => !isNaN(a))
+            .sort((n1, n2) => {
+            return n1 - n2;
+        })
+            .pop();
+    }
     /**
      * Log to the console
      * @param data

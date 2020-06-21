@@ -153,6 +153,8 @@ declare class Dsynr {
     IsJson(str: string): boolean;
     getAniClass(styleName: string): string;
     autoPrefixAniClasses(speed?: string): void;
+    setHighestZindex(el: HTMLElement): void;
+    getHighestZindex(el?: HTMLElement): number | undefined;
     /**
      * Log to the console
      * @param data
