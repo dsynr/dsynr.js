@@ -9,9 +9,15 @@ class Dsynr {
                 default: '',
             },
             styles: {
+                zoomIn: 'zoomIn',
                 fadeIn: 'fadeIn',
+                fadeInUp: 'fadeInUp',
                 slideInDown: 'slideInDown',
+                slideInUp: 'slideInUp',
+                slideInLeft: 'slideInLeft',
+                slideInRight: 'slideInRight',
                 slideOutUp: 'slideOutUp',
+                heartBeat: 'heartBeat',
             }
         },
     };
@@ -164,7 +170,7 @@ class Dsynr {
             if (propSet.hasOwnProperty(prop)) {
                 obj[prop] = propSet[prop];
             }
-            this.l(prop + ':' + obj[prop]);
+            console.log(prop + ':' + obj[prop]);
         }
     }
 
@@ -177,7 +183,7 @@ class Dsynr {
 
     hasInstance(objList: Array<object>, obj: object): boolean {
         this.lfn('hasInstance');
-        this.l(objList);
+        console.log(objList);
         let hasIt: boolean = false;
         objList.forEach((o, i) => {
                 if (o === obj) {
@@ -186,7 +192,7 @@ class Dsynr {
                 }
             }
         );
-        this.l(hasIt);
+        console.log(hasIt);
         return hasIt;
     }
 
@@ -343,7 +349,7 @@ class Dsynr {
     addEvent(e: HTMLCollection, listener: string, fn: VoidFunction): void {
         this.makeArray(e).forEach((el) => {
             el.addEventListener(listener, fn);
-            this.l(el);
+            console.log(el);
         });
     }
 
@@ -415,23 +421,23 @@ class Dsynr {
             if (req.status === 200) {
                 return ths.succeeded(saveAs, add2dom, parent, enableDsynrSelect);
             } else {
-                this.l('Not ready yet :: ' + req.status + ' / ' + req.readyState);
+                console.log('Not ready yet :: ' + req.status + ' / ' + req.readyState);
             }
         } else {
-            this.l(req);
+            console.log(req);
         }
     }
 
     private failed(): boolean {
-        this.l('Cannot create an XMLHTTP instance');
+        console.log('Cannot create an XMLHTTP instance');
         return false;
     }
 
     private succeeded(saveAs: string | boolean, add2dom: boolean, parent: HTMLElement = document.body, enableDsynrSelect: boolean = false) {
-        this.lfn('succeeded');
+        this.lfn('succeeded!');
         this.totalRequestDatasets++;
         if (typeof saveAs === 'string') {
-            this.l('Saving to dataset; Reference key: ' + saveAs);
+            console.log('Saving to dataset; Reference key: ' + saveAs);
             // this.requestDataset[saveAs] = this.htmlToElements(this.curReq.response);
             this.requestDataset[saveAs] = this.curReq.response;
         }
@@ -447,7 +453,7 @@ class Dsynr {
             ths.showFetchedData(fdp);
         });
         fdp.innerHTML = requestResponse;
-        d.l('enableDsynrSelect:' + enableDsynrSelect);
+        console.log('enableDsynrSelect:' + enableDsynrSelect);
         enableDsynrSelect ? DsynrSelect.auto() : null;
         let fetchedScriptTags = fdp.getElementsByTagName('script');
         for (let i = 0; i < fetchedScriptTags.length; ++i) {
@@ -524,11 +530,11 @@ class Dsynr {
      * @param data
      * @param isFormData
      */
-    l(data: any, isFormData: boolean = false): void {
+    xxxl(data: any, isFormData: boolean = false): void {
         if (isFormData) {
-            this.l('Logging FormData:');
+            console.log('Logging FormData:');
             for (let key of data.entries()) {
-                this.l(key[0] + ' : ' + key[1]);
+                console.log(key[0] + ' : ' + key[1]);
             }
         } else {
             console.log(data);
@@ -540,7 +546,7 @@ class Dsynr {
      * @param functionName
      */
     lfn(functionName: string): void {
-        this.l(' {} ' + functionName);
+        console.log(' {} ' + functionName);
     }
 
     /**
@@ -548,7 +554,7 @@ class Dsynr {
      * @param element
      */
     lclk(element: string) {
-        this.l('* click ' + element);
+        console.log('* click ' + element);
     }
 }
 

@@ -11,7 +11,7 @@ class DsynrUIIElement {
             DsynrUIIElement.instances.forEach(function (instance, index) {
                 if (instance.content === element) {
                     self.selfAbort = true;
-                    d.l("already instantiated, aborting...");
+                    console.log("already instantiated, aborting...");
                     return;
                 }
             });
@@ -21,22 +21,22 @@ class DsynrUIIElement {
             this.setPref();
             this.setParent();
             DsynrUIIElement.instances.push(this);
-            d.l(DsynrUIIElement.instances);
+            console.log(DsynrUIIElement.instances);
         }
     }
     setPref() {
         d.lfn('setPref');
-        // d.l(this.preferences);
+        // console.log(this.preferences);
         if (Object.keys(this.preferences).length > 0) {
-            d.l('Object.keys(preferences).length:' + Object.keys(this.preferences).length);
-            // d.l(Object.keys(preferences).length > 0);
+            console.log('Object.keys(preferences).length:' + Object.keys(this.preferences).length);
+            // console.log(Object.keys(preferences).length > 0);
             //d.updateProps(this, preferences);
         }
         else {
             let options = d.getData(this.content, this.prefAttr);
-            d.l(options);
+            console.log(options);
             if (options !== null) {
-                d.l('parsing preferences : ' + options);
+                console.log('parsing preferences : ' + options);
                 this.preferences = d.IsJson(options) ? JSON.parse(options) : d.conf[options];
             }
         }
@@ -46,13 +46,13 @@ class DsynrUIIElement {
     }
     setParent() {
         d.lfn('setParent');
-        d.l(this.parent);
+        console.log(this.parent);
         if (this.parent === undefined) {
             // @ts-ignore
             this.parent = 'parent';
         }
         if (typeof this.parent === 'string') {
-            d.l(this.parent);
+            console.log(this.parent);
             if (this.parent == 'parent') {
                 this.parent = this.content.parentElement;
             }
@@ -60,7 +60,7 @@ class DsynrUIIElement {
                 this.parent = d.getElementById(this.parent);
             }
         }
-        d.l(this.parent);
+        console.log(this.parent);
     }
     setDefaults(reset = false) {
         d.lfn('setDefaults super ');
@@ -134,14 +134,14 @@ class DsynrModal extends DsynrUIIElement {
         let self = this;
         d.addClass(this.content, 'd-none');
         if (this.trigger != 'auto') {
-            d.l('setting trigger to : ' + this.trigger);
+            console.log('setting trigger to : ' + this.trigger);
             d.addListener(this.trigger, 'click', function () {
                 self.show();
             });
-            d.l('Modal Trigger READY!');
+            console.log('Modal Trigger READY!');
         }
         else {
-            d.l('Triggering Automatically...');
+            console.log('Triggering Automatically...');
             this.show();
         }
     }
@@ -156,7 +156,7 @@ class DsynrModal extends DsynrUIIElement {
             d.addClass(this.content, 'o0');
             d.removeClass(this.content, 'd-none');
             if (this.parent === undefined) {
-                d.l('parent unavailable, adding modal to body');
+                console.log('parent unavailable, adding modal to body');
                 this.parent = document.body;
             }
             this.instanceRoot = d.addDiv(this.setName('root', this.content.id), this.instanceRootClass, this.parent);
@@ -183,7 +183,7 @@ class DsynrModal extends DsynrUIIElement {
             d.removeClass(this.instanceRoot, 'd-none');
             d.removeClass(this.instance, 'o0');
             d.removeClass(this.content, 'o0');
-            d.l(this.parent.id);
+            console.log(this.parent.id);
             if (this.respectBounds) {
                 if (this.content.clientHeight > this.parent.clientHeight) {
                     this.instance.style.height = d.getCssDimension(this.parent.clientHeight - 50);
@@ -196,7 +196,7 @@ class DsynrModal extends DsynrUIIElement {
             }
             if (this.adoptParent && (this.content.clientHeight > this.parent.clientHeight || this.content.clientWidth > this.parent.clientWidth)) {
                 d.lfn('adoptParent');
-                d.l('parent cannot accommodate child, adopting body as parent!');
+                console.log('parent cannot accommodate child, adopting body as parent!');
                 this.parent = document.body;
                 this.parent.append(this.instanceRoot);
                 this.resizeRoot();
@@ -213,18 +213,18 @@ class DsynrModal extends DsynrUIIElement {
     animateDisplay(getAttention = false) {
         d.lfn('animateDisplay');
         if (this.displayTogether) {
-            d.l('displayTogether...');
+            console.log('displayTogether...');
             if (this.animate && this.animateUnderlay) {
-                d.l('this.animate && this.animateUnderlay....');
+                console.log('this.animate && this.animateUnderlay....');
                 if (getAttention) {
-                    d.l('getAttention..');
+                    console.log('getAttention..');
                     d.removeClass(this.instanceRoot, this.animateInClass);
                     d.addClass(this.instanceRoot, this.animateAttentionClass);
                     d.removeClass(this.instance, this.modalAnimateInClass);
                     d.addClass(this.instance, this.modalAnimateAttentionClass);
                 }
                 else {
-                    d.l('NOT getAttention..');
+                    console.log('NOT getAttention..');
                     d.addClass(this.instanceRoot, this.animateClass + d.conf.ani.styles.fadeIn);
                     d.addClass(this.instance, this.animateClass + d.conf.ani.styles.fadeIn);
                     // d.removeClass(this.instanceRoot, 'o0');
@@ -234,7 +234,7 @@ class DsynrModal extends DsynrUIIElement {
             else {
                 if (getAttention) {
                     //@todo
-                    d.l('getting Attention.....');
+                    console.log('getting Attention.....');
                 }
                 else {
                     d.removeClass(this.instanceRoot, 'o0');
@@ -244,7 +244,7 @@ class DsynrModal extends DsynrUIIElement {
         }
         else {
             //@todo animate one after other
-            d.l('animate one after other...');
+            console.log('animate one after other...');
         }
     }
     hide(destroy = this.autoDestroy) {
@@ -254,7 +254,7 @@ class DsynrModal extends DsynrUIIElement {
             d.addClass(this.instanceRoot, this.modalAnimateOutClass);
         }
         if (destroy) {
-            d.l('TODO ONANIMATIONEND LISTENER...');
+            console.log('TODO ONANIMATIONEND LISTENER...');
             this.destroy();
         }
         DsynrModal.activeInstance = false;
@@ -284,7 +284,7 @@ class DsynrModal extends DsynrUIIElement {
         d.lfn('addListeners');
         let ths = this;
         if (this.animate) {
-            d.l('enabling animation');
+            console.log('enabling animation');
             this.instance.addEventListener(d.transitionEvent, ths.modalHidden);
             // this.instance.addEventListener(d.transitionEvent, ths.modalHidden);
         }
@@ -294,11 +294,11 @@ class DsynrModal extends DsynrUIIElement {
             }
         });
         d.addListener(this.instanceRoot.id, 'click', function (ev) {
-            d.l(ev.target);
+            console.log(ev.target);
             // @ts-ignore
-            d.l(ev.target.offsetParent);
+            console.log(ev.target.offsetParent);
             // @ts-ignore
-            d.l(ev.target.classList.value);
+            console.log(ev.target.classList.value);
             // @ts-ignore
             if (ev.target.classList.value == ths.underlayClass) {
                 ths.onModalDestroy();
@@ -377,7 +377,7 @@ class DsynrSelect extends DsynrUIIElement {
         this.options = this.content.options;
         this.option = this.options[this.options.selectedIndex];
         this.setTrigger();
-        d.l('Select Trigger READY!');
+        console.log('Select Trigger READY!');
     }
     show() {
         d.lfn('show triggered via : ' + this.trigger.id);
@@ -421,7 +421,7 @@ class DsynrSelect extends DsynrUIIElement {
         d.lfn('addESOption');
         let oid = d.concatStr([this.optionPrefix, this.content.id, i], '-');
         let ocls;
-        d.l(this.esPrevOpt);
+        console.log(this.esPrevOpt);
         ocls = (i == this.content.selectedIndex) ? d.concatStr([this.optCls, this.optClsActive]) : ocls = this.optCls;
         let eso = d.addDiv(oid, ocls, this.instance);
         eso.tabIndex = i;
@@ -458,7 +458,7 @@ class DsynrSelect extends DsynrUIIElement {
         d.lfn('d.addListeners...');
         let ths = this;
         d.addListener(this.instance.id, 'focus', ev => {
-            d.l('focused!');
+            console.log('focused!');
         });
         d.addListener(this.instance.id, 'keydown', function (evnt) {
             switch (evnt.key) {
@@ -516,9 +516,15 @@ class Dsynr {
                     default: '',
                 },
                 styles: {
+                    zoomIn: 'zoomIn',
                     fadeIn: 'fadeIn',
+                    fadeInUp: 'fadeInUp',
                     slideInDown: 'slideInDown',
+                    slideInUp: 'slideInUp',
+                    slideInLeft: 'slideInLeft',
+                    slideInRight: 'slideInRight',
                     slideOutUp: 'slideOutUp',
+                    heartBeat: 'heartBeat',
                 }
             },
         };
@@ -643,7 +649,7 @@ class Dsynr {
             if (propSet.hasOwnProperty(prop)) {
                 obj[prop] = propSet[prop];
             }
-            this.l(prop + ':' + obj[prop]);
+            console.log(prop + ':' + obj[prop]);
         }
     }
     mergeObjs(main, sub) {
@@ -654,7 +660,7 @@ class Dsynr {
     }
     hasInstance(objList, obj) {
         this.lfn('hasInstance');
-        this.l(objList);
+        console.log(objList);
         let hasIt = false;
         objList.forEach((o, i) => {
             if (o === obj) {
@@ -662,7 +668,7 @@ class Dsynr {
                 return;
             }
         });
-        this.l(hasIt);
+        console.log(hasIt);
         return hasIt;
     }
     getRandColour() {
@@ -794,7 +800,7 @@ class Dsynr {
     addEvent(e, listener, fn) {
         this.makeArray(e).forEach((el) => {
             el.addEventListener(listener, fn);
-            this.l(el);
+            console.log(el);
         });
     }
     centereStage(e) {
@@ -858,22 +864,22 @@ class Dsynr {
                 return ths.succeeded(saveAs, add2dom, parent, enableDsynrSelect);
             }
             else {
-                this.l('Not ready yet :: ' + req.status + ' / ' + req.readyState);
+                console.log('Not ready yet :: ' + req.status + ' / ' + req.readyState);
             }
         }
         else {
-            this.l(req);
+            console.log(req);
         }
     }
     failed() {
-        this.l('Cannot create an XMLHTTP instance');
+        console.log('Cannot create an XMLHTTP instance');
         return false;
     }
     succeeded(saveAs, add2dom, parent = document.body, enableDsynrSelect = false) {
-        this.lfn('succeeded');
+        this.lfn('succeeded!');
         this.totalRequestDatasets++;
         if (typeof saveAs === 'string') {
-            this.l('Saving to dataset; Reference key: ' + saveAs);
+            console.log('Saving to dataset; Reference key: ' + saveAs);
             // this.requestDataset[saveAs] = this.htmlToElements(this.curReq.response);
             this.requestDataset[saveAs] = this.curReq.response;
         }
@@ -888,7 +894,7 @@ class Dsynr {
             ths.showFetchedData(fdp);
         });
         fdp.innerHTML = requestResponse;
-        d.l('enableDsynrSelect:' + enableDsynrSelect);
+        console.log('enableDsynrSelect:' + enableDsynrSelect);
         enableDsynrSelect ? DsynrSelect.auto() : null;
         let fetchedScriptTags = fdp.getElementsByTagName('script');
         for (let i = 0; i < fetchedScriptTags.length; ++i) {
@@ -956,11 +962,11 @@ class Dsynr {
      * @param data
      * @param isFormData
      */
-    l(data, isFormData = false) {
+    xxxl(data, isFormData = false) {
         if (isFormData) {
-            this.l('Logging FormData:');
+            console.log('Logging FormData:');
             for (let key of data.entries()) {
-                this.l(key[0] + ' : ' + key[1]);
+                console.log(key[0] + ' : ' + key[1]);
             }
         }
         else {
@@ -972,14 +978,14 @@ class Dsynr {
      * @param functionName
      */
     lfn(functionName) {
-        this.l(' {} ' + functionName);
+        console.log(' {} ' + functionName);
     }
     /**
      * Log click
      * @param element
      */
     lclk(element) {
-        this.l('* click ' + element);
+        console.log('* click ' + element);
     }
 }
 let d = new Dsynr();
@@ -996,18 +1002,19 @@ class DsynrWp {
     }
     getForm(formName, parent = d.conf.defaultParent, enableDsynrSelect = false) {
         d.lfn('getForm');
+        d.lfn('form parent::' + parent);
         if (d.requestDataset[formName] != undefined) {
-            d.l(formName + ' Previously loaded / Reinstantiating from memory...');
+            console.log(formName + ' Previously loaded / Reinstantiating from memory...');
             d.addFetchedData(d.requestDataset[formName], parent, enableDsynrSelect);
         }
         else {
-            d.ajax(d.conf.domain + this.conf.formURL + formName + '?min', formName, false, true, parent, true);
+            d.ajax(d.conf.domain + this.conf.formURL + formName + '?min', formName, false, true, parent, enableDsynrSelect);
         }
     }
     ajax(params = {}, parent = d.conf.defaultParent) {
         d.lfn('ajax / ' + name);
         let formData = d.mergeObjs({ action: 'dw_ajax' }, params);
-        d.l(formData);
+        console.log(formData);
         // @ts-ignore
         d.ajax(ajxRequest.ajaxurl, false, formData, true, parent, 'POST');
     }

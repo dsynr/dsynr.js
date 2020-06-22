@@ -92,6 +92,10 @@ body {
   opacity: 0.5;
 }
 
+.o10 {
+  opacity: 0.1;
+}
+
 .o1 {
   opacity: 1;
 }
@@ -106,6 +110,10 @@ body {
 
 .aniFast {
   transition-duration: 0.5s;
+}
+
+.aniMed {
+  transition-duration: 1s;
 }
 
 .text-caps {

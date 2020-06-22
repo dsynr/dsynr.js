@@ -30,7 +30,7 @@ class DsynrSelect extends DsynrUIIElement {
         this.options = this.content.options;
         this.option = this.options[this.options.selectedIndex];
         this.setTrigger();
-        d.l('Select Trigger READY!');
+        console.log('Select Trigger READY!');
     }
     show() {
         d.lfn('show triggered via : ' + this.trigger.id);
@@ -74,7 +74,7 @@ class DsynrSelect extends DsynrUIIElement {
         d.lfn('addESOption');
         let oid = d.concatStr([this.optionPrefix, this.content.id, i], '-');
         let ocls;
-        d.l(this.esPrevOpt);
+        console.log(this.esPrevOpt);
         ocls = (i == this.content.selectedIndex) ? d.concatStr([this.optCls, this.optClsActive]) : ocls = this.optCls;
         let eso = d.addDiv(oid, ocls, this.instance);
         eso.tabIndex = i;
@@ -111,7 +111,7 @@ class DsynrSelect extends DsynrUIIElement {
         d.lfn('d.addListeners...');
         let ths = this;
         d.addListener(this.instance.id, 'focus', ev => {
-            d.l('focused!');
+            console.log('focused!');
         });
         d.addListener(this.instance.id, 'keydown', function (evnt) {
             switch (evnt.key) {

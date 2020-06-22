@@ -42,14 +42,14 @@ class DsynrModal extends DsynrUIIElement {
         let self = this;
         d.addClass(this.content, 'd-none');
         if (this.trigger != 'auto') {
-            d.l('setting trigger to : ' + this.trigger);
+            console.log('setting trigger to : ' + this.trigger);
             d.addListener(this.trigger, 'click', function () {
                 self.show();
             });
-            d.l('Modal Trigger READY!');
+            console.log('Modal Trigger READY!');
         }
         else {
-            d.l('Triggering Automatically...');
+            console.log('Triggering Automatically...');
             this.show();
         }
     }
@@ -64,7 +64,7 @@ class DsynrModal extends DsynrUIIElement {
             d.addClass(this.content, 'o0');
             d.removeClass(this.content, 'd-none');
             if (this.parent === undefined) {
-                d.l('parent unavailable, adding modal to body');
+                console.log('parent unavailable, adding modal to body');
                 this.parent = document.body;
             }
             this.instanceRoot = d.addDiv(this.setName('root', this.content.id), this.instanceRootClass, this.parent);
@@ -91,7 +91,7 @@ class DsynrModal extends DsynrUIIElement {
             d.removeClass(this.instanceRoot, 'd-none');
             d.removeClass(this.instance, 'o0');
             d.removeClass(this.content, 'o0');
-            d.l(this.parent.id);
+            console.log(this.parent.id);
             if (this.respectBounds) {
                 if (this.content.clientHeight > this.parent.clientHeight) {
                     this.instance.style.height = d.getCssDimension(this.parent.clientHeight - 50);
@@ -104,7 +104,7 @@ class DsynrModal extends DsynrUIIElement {
             }
             if (this.adoptParent && (this.content.clientHeight > this.parent.clientHeight || this.content.clientWidth > this.parent.clientWidth)) {
                 d.lfn('adoptParent');
-                d.l('parent cannot accommodate child, adopting body as parent!');
+                console.log('parent cannot accommodate child, adopting body as parent!');
                 this.parent = document.body;
                 this.parent.append(this.instanceRoot);
                 this.resizeRoot();
@@ -121,18 +121,18 @@ class DsynrModal extends DsynrUIIElement {
     animateDisplay(getAttention = false) {
         d.lfn('animateDisplay');
         if (this.displayTogether) {
-            d.l('displayTogether...');
+            console.log('displayTogether...');
             if (this.animate && this.animateUnderlay) {
-                d.l('this.animate && this.animateUnderlay....');
+                console.log('this.animate && this.animateUnderlay....');
                 if (getAttention) {
-                    d.l('getAttention..');
+                    console.log('getAttention..');
                     d.removeClass(this.instanceRoot, this.animateInClass);
                     d.addClass(this.instanceRoot, this.animateAttentionClass);
                     d.removeClass(this.instance, this.modalAnimateInClass);
                     d.addClass(this.instance, this.modalAnimateAttentionClass);
                 }
                 else {
-                    d.l('NOT getAttention..');
+                    console.log('NOT getAttention..');
                     d.addClass(this.instanceRoot, this.animateClass + d.conf.ani.styles.fadeIn);
                     d.addClass(this.instance, this.animateClass + d.conf.ani.styles.fadeIn);
                     // d.removeClass(this.instanceRoot, 'o0');
@@ -142,7 +142,7 @@ class DsynrModal extends DsynrUIIElement {
             else {
                 if (getAttention) {
                     //@todo
-                    d.l('getting Attention.....');
+                    console.log('getting Attention.....');
                 }
                 else {
                     d.removeClass(this.instanceRoot, 'o0');
@@ -152,7 +152,7 @@ class DsynrModal extends DsynrUIIElement {
         }
         else {
             //@todo animate one after other
-            d.l('animate one after other...');
+            console.log('animate one after other...');
         }
     }
     hide(destroy = this.autoDestroy) {
@@ -162,7 +162,7 @@ class DsynrModal extends DsynrUIIElement {
             d.addClass(this.instanceRoot, this.modalAnimateOutClass);
         }
         if (destroy) {
-            d.l('TODO ONANIMATIONEND LISTENER...');
+            console.log('TODO ONANIMATIONEND LISTENER...');
             this.destroy();
         }
         DsynrModal.activeInstance = false;
@@ -192,7 +192,7 @@ class DsynrModal extends DsynrUIIElement {
         d.lfn('addListeners');
         let ths = this;
         if (this.animate) {
-            d.l('enabling animation');
+            console.log('enabling animation');
             this.instance.addEventListener(d.transitionEvent, ths.modalHidden);
             // this.instance.addEventListener(d.transitionEvent, ths.modalHidden);
         }
@@ -202,11 +202,11 @@ class DsynrModal extends DsynrUIIElement {
             }
         });
         d.addListener(this.instanceRoot.id, 'click', function (ev) {
-            d.l(ev.target);
+            console.log(ev.target);
             // @ts-ignore
-            d.l(ev.target.offsetParent);
+            console.log(ev.target.offsetParent);
             // @ts-ignore
-            d.l(ev.target.classList.value);
+            console.log(ev.target.classList.value);
             // @ts-ignore
             if (ev.target.classList.value == ths.underlayClass) {
                 ths.onModalDestroy();

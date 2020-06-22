@@ -9,9 +9,15 @@ declare class Dsynr {
                 default: string;
             };
             styles: {
+                zoomIn: string;
                 fadeIn: string;
+                fadeInUp: string;
                 slideInDown: string;
+                slideInUp: string;
+                slideInLeft: string;
+                slideInRight: string;
                 slideOutUp: string;
+                heartBeat: string;
             };
         };
     };
@@ -160,7 +166,7 @@ declare class Dsynr {
      * @param data
      * @param isFormData
      */
-    l(data: any, isFormData?: boolean): void;
+    xxxl(data: any, isFormData?: boolean): void;
     /**
      * Log active function name
      * @param functionName
