@@ -3,7 +3,8 @@ class Dsynr {
         domain: document.baseURI,
         defaultParent: document.body,
         ani: {
-            prefix: 'animate__animated animate__',
+            superfix: 'animate__animated',
+            prefix: 'animate__',
             speed: {
                 faster: 'animate__faster',
                 default: '',
@@ -27,6 +28,7 @@ class Dsynr {
     requestDataset = {};
     totalRequestDatasets = 0;
     documentScripts: Array<string> = [];
+
     private curReq: XMLHttpRequest;
     private readonly reqDataReady: Event;
 
@@ -47,6 +49,7 @@ class Dsynr {
 
     protected defaultConf(): void {
         this.lfn('defaultConf');
+        this.conf.ani.prefix = this.conf.ani.superfix + ' ' + this.conf.ani.prefix;
         this.conf.ani.speed.default = this.conf.ani.speed.faster;
     }
 
@@ -282,20 +285,23 @@ class Dsynr {
         root.appendChild(document.createTextNode(txt));
     }
 
-    getElementsBySelector(selector: string): any {
-        return document.querySelectorAll(selector);
+    getFirstElement(list: HTMLCollection | NodeList): Element | Node {
+        return list[0];
     }
 
-    getElementsByTag(tagName: string) {
-        return document.querySelectorAll(tagName);
+    getElementsBySelector(selector: string, parent: Element = document.body, getFirst: boolean = false): NodeList | Node {
+        let list = parent.querySelectorAll(selector);
+        return getFirst ? this.getFirstElement(list) : list;
     }
 
-    /**
-     *
-     * @param className
-     */
-    getElementsByClass(className: string): HTMLCollection {
-        return document.getElementsByClassName(className);
+    getElementsByTag(tagName: string, parent: Element = document.body, getFirst: boolean = false): NodeList | Node {
+        let list = parent.querySelectorAll(tagName);
+        return getFirst ? this.getFirstElement(list) : list;
+    }
+
+    getElementsByClass(className: string, parent: Element = document.body, getFirst: boolean = false): HTMLCollection | Node {
+        let list = parent.getElementsByClassName(className);
+        return getFirst ? this.getFirstElement(list) : list;
     }
 
     getElementById(elementID: string): HTMLElement {
@@ -310,10 +316,9 @@ class Dsynr {
     }
 
     animateIn(): void {
-        this.makeArray(this.getElementsByClass('animated')).forEach((e) => {
-            if (this.getData(e, 'ani') !== null && this.getData(e, 'ani') != null && this.isInViewportSlightly(e)) {
-                e.classList.remove('o0');
-                e.classList.add(e.dataset.ani);
+        this.makeArray(this.getElementsByClass(d.conf.ani.superfix)).forEach((e) => {
+            if (this.isInViewportSlightly(e)) {
+                this.removeClass(e, 'o0');
             }
         });
     }
@@ -336,21 +341,20 @@ class Dsynr {
         }
     }
 
-    addListener(eID, event, fn): void {
-        if (this.getElementById(eID) !== undefined) {
-            this.getElementById(eID).addEventListener(event, fn);
+    addListener(el, ev, fn): void {
+        this._event(el, ev, fn);
+    }
+
+    removeListener(el, ev, fn): void {
+        this._event(el, ev, fn, false);
+    }
+
+    toggleClass(e: any, remove: string, add: string): void {
+        if (typeof e === "object") {
+            e = e.target;
         }
-    }
-
-    removeListener(eID, event, fn) {
-        this.getElementById(eID).removeEventListener(event, fn);
-    }
-
-    addEvent(e: HTMLCollection, listener: string, fn: VoidFunction): void {
-        this.makeArray(e).forEach((el) => {
-            el.addEventListener(listener, fn);
-            console.log(el);
-        });
+        this.removeClass(e, remove);
+        this.addClass(e, add);
     }
 
     centereStage(e: HTMLElement): void {
@@ -395,18 +399,47 @@ class Dsynr {
         this.curReq = new XMLHttpRequest();
         if (this.curReq) {
             this.curReq.open(method, url, true);
-            this.setHeaders(method == 'POST');
+            this._setHeaders(method == 'POST');
             this.curReq.send(this.serialize(data));
             let ths = this;
             this.curReq.addEventListener('readystatechange', function () {
-                return ths.stateChanged(ths, saveAs, add2dom, parent, enableDsynrSelect);
+                return ths._stateChanged(ths, saveAs, add2dom, parent, enableDsynrSelect);
             });
         } else {
-            this.failed();
+            this._failed();
         }
     }
 
-    private setHeaders(isPost: boolean = false) {
+    private _failed(): boolean {
+        console.log('Cannot create an XMLHTTP instance');
+        return false;
+    }
+
+    private _event(el, ev, fn, add = true): void {
+        let ths = this;
+
+        function _(e) {
+            if (add) {
+                e.addEventListener(ev, fn);
+            } else {
+                e.removeEventListener(ev, fn);
+            }
+        }
+
+        if (typeof el === "string" && this.getElementById(el) !== undefined) {
+            _(ths.getElementById(el));
+        } else {
+            if (el.length === undefined) {
+                _(el);
+            } else {
+                ths.makeArray(el).forEach((e) => {
+                    _(e);
+                });
+            }
+        }
+    }
+
+    private _setHeaders(isPost: boolean = false) {
         if (isPost) {
             this.curReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         }
@@ -414,12 +447,12 @@ class Dsynr {
         this.curReq.setRequestHeader('Powered-by', 'Dsynr.com');
     }
 
-    private stateChanged(ths: Dsynr, saveAs: string | boolean, add2dom: boolean, parent: HTMLElement = document.body, enableDsynrSelect: boolean = false) {
-        this.lfn('stateChanged');
+    private _stateChanged(ths: Dsynr, saveAs: string | boolean, add2dom: boolean, parent: HTMLElement = document.body, enableDsynrSelect: boolean = false) {
+        this.lfn('_stateChanged');
         let req = ths.curReq;
         if (req.readyState === XMLHttpRequest.DONE) {
             if (req.status === 200) {
-                return ths.succeeded(saveAs, add2dom, parent, enableDsynrSelect);
+                return ths._succeeded(saveAs, add2dom, parent, enableDsynrSelect);
             } else {
                 console.log('Not ready yet :: ' + req.status + ' / ' + req.readyState);
             }
@@ -428,13 +461,8 @@ class Dsynr {
         }
     }
 
-    private failed(): boolean {
-        console.log('Cannot create an XMLHTTP instance');
-        return false;
-    }
-
-    private succeeded(saveAs: string | boolean, add2dom: boolean, parent: HTMLElement = document.body, enableDsynrSelect: boolean = false) {
-        this.lfn('succeeded!');
+    private _succeeded(saveAs: string | boolean, add2dom: boolean, parent: HTMLElement = document.body, enableDsynrSelect: boolean = false) {
+        this.lfn('_succeeded!');
         this.totalRequestDatasets++;
         if (typeof saveAs === 'string') {
             console.log('Saving to dataset; Reference key: ' + saveAs);
@@ -445,12 +473,18 @@ class Dsynr {
         return this.curReq.response;
     }
 
+    private _showFetchedData(fdp: HTMLElement): void {
+        this.lfn('_showFetchedData');
+        this.removeClass(fdp, 'd-none');
+        new DsynrModal(fdp);
+    }
+
     addFetchedData(requestResponse: string, parent: HTMLElement = document.body, enableDsynrSelect: boolean = false): void {
         d.lfn('addFetchedData..');
         let fdp = this.addDiv('dsynrFetchedData-' + this.totalRequestDatasets, 'd-none', parent);
         let ths = this;
         this.addListener(fdp.id, 'reqDataReady', function () {
-            ths.showFetchedData(fdp);
+            ths._showFetchedData(fdp);
         });
         fdp.innerHTML = requestResponse;
         console.log('enableDsynrSelect:' + enableDsynrSelect);
@@ -464,12 +498,6 @@ class Dsynr {
             }
         }
         fdp.dispatchEvent(this.reqDataReady);
-    }
-
-    private showFetchedData(fdp: HTMLElement): void {
-        this.lfn('showFetchedData');
-        this.removeClass(fdp, 'd-none');
-        new DsynrModal(fdp);
     }
 
     getPageScripts(dsynrUtil: Dsynr): void {

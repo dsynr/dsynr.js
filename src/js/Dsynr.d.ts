@@ -3,6 +3,7 @@ declare class Dsynr {
         domain: string;
         defaultParent: HTMLElement;
         ani: {
+            superfix: string;
             prefix: string;
             speed: {
                 faster: string;
@@ -128,20 +129,17 @@ declare class Dsynr {
      */
     addDiv(id?: string, classes?: string, parent?: HTMLElement): HTMLElement;
     addText(txt: string | undefined, root: HTMLElement): void;
-    getElementsBySelector(selector: string): any;
-    getElementsByTag(tagName: string): NodeListOf<Element>;
-    /**
-     *
-     * @param className
-     */
-    getElementsByClass(className: string): HTMLCollection;
+    getFirstElement(list: HTMLCollection | NodeList): Element | Node;
+    getElementsBySelector(selector: string, parent?: Element, getFirst?: boolean): NodeList | Node;
+    getElementsByTag(tagName: string, parent?: Element, getFirst?: boolean): NodeList | Node;
+    getElementsByClass(className: string, parent?: Element, getFirst?: boolean): HTMLCollection | Node;
     getElementById(elementID: string): HTMLElement;
     addJS(src: string, id?: string): void;
     animateIn(): void;
     whichAnimationEvent(): any;
-    addListener(eID: any, event: any, fn: any): void;
-    removeListener(eID: any, event: any, fn: any): void;
-    addEvent(e: HTMLCollection, listener: string, fn: VoidFunction): void;
+    addListener(el: any, ev: any, fn: any): void;
+    removeListener(el: any, ev: any, fn: any): void;
+    toggleClass(e: any, remove: string, add: string): void;
     centereStage(e: HTMLElement): void;
     updateViewportVars(): void;
     getBounds(e: HTMLElement): ClientRect;
@@ -149,12 +147,13 @@ declare class Dsynr {
     isInViewportMostly(e: any): boolean;
     serialize(obj: object): string;
     ajax(url: string, saveAs?: string | boolean, data?: any, add2dom?: boolean, parent?: HTMLElement, enableDsynrSelect?: boolean, method?: string): void;
-    private setHeaders;
-    private stateChanged;
-    private failed;
-    private succeeded;
+    private _failed;
+    private _event;
+    private _setHeaders;
+    private _stateChanged;
+    private _succeeded;
+    private _showFetchedData;
     addFetchedData(requestResponse: string, parent?: HTMLElement, enableDsynrSelect?: boolean): void;
-    private showFetchedData;
     getPageScripts(dsynrUtil: Dsynr): void;
     IsJson(str: string): boolean;
     getAniClass(styleName: string): string;
