@@ -299,7 +299,7 @@ class Dsynr {
         return getFirst ? this.getFirstElement(list) : list;
     }
 
-    getElementsByClass(className: string, parent: Element = document.body, getFirst: boolean = false): HTMLCollection | Node {
+    getElementsByClass(className: string, parent:any = document.body, getFirst: boolean = false): HTMLCollection | Node {
         let list = parent.getElementsByClassName(className);
         return getFirst ? this.getFirstElement(list) : list;
     }

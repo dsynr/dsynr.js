@@ -132,7 +132,7 @@ declare class Dsynr {
     getFirstElement(list: HTMLCollection | NodeList): Element | Node;
     getElementsBySelector(selector: string, parent?: Element, getFirst?: boolean): NodeList | Node;
     getElementsByTag(tagName: string, parent?: Element, getFirst?: boolean): NodeList | Node;
-    getElementsByClass(className: string, parent?: Element, getFirst?: boolean): HTMLCollection | Node;
+    getElementsByClass(className: string, parent?: any, getFirst?: boolean): HTMLCollection | Node;
     getElementById(elementID: string): HTMLElement;
     addJS(src: string, id?: string): void;
     animateIn(): void;
