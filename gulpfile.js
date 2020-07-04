@@ -40,7 +40,8 @@ function concatJS() {
             getInt('*'),
             getCls('*'),
             getComp('*'),
-            getScript('Dsynr', 'js')
+            getScript('Dsynr', 'js'),
+            getScript('DsynrWp', 'js'),
         ]),
         (concat(concatFileName + '.js')),
         minify({
@@ -82,5 +83,5 @@ function pushToLive() {
 
 }
 
-// exports.default = series(concatJS, compileCSS);
-exports.default = series(concatJS, concatWPJS);
+exports.default = series(concatJS, compileCSS);
+// exports.default = series(concatJS, concatWPJS, compileCSS);

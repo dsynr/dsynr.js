@@ -31,7 +31,7 @@ abstract class DsynrUIIElement implements DsynrUI {
             DsynrUIIElement.instances.forEach(function (instance, index) {
                 if (instance.content === element) {
                     self.selfAbort = true;
-                    d.l("already instantiated, aborting...");
+                    console.log("already instantiated, aborting...");
                     return;
                 }
             });
@@ -42,23 +42,23 @@ abstract class DsynrUIIElement implements DsynrUI {
             this.setPref();
             this.setParent();
             DsynrUIIElement.instances.push(this);
-            d.l(DsynrUIIElement.instances);
+            console.log(DsynrUIIElement.instances);
         }
     }
 
     setPref(): void {
         d.lfn('setPref');
-        // d.l(this.preferences);
+        // console.log(this.preferences);
 
         if (Object.keys(this.preferences).length > 0) {
-            d.l('Object.keys(preferences).length:' + Object.keys(this.preferences).length);
-            // d.l(Object.keys(preferences).length > 0);
+            console.log('Object.keys(preferences).length:' + Object.keys(this.preferences).length);
+            // console.log(Object.keys(preferences).length > 0);
             //d.updateProps(this, preferences);
         } else {
             let options: any = d.getData(this.content, this.prefAttr);
-            d.l(options);
+            console.log(options);
             if (options !== null) {
-                d.l('parsing preferences : ' + options);
+                console.log('parsing preferences : ' + options);
                 this.preferences = d.IsJson(options) ? JSON.parse(options) : d.conf[options];
             }
         }
@@ -70,28 +70,28 @@ abstract class DsynrUIIElement implements DsynrUI {
 
     setParent(): void {
         d.lfn('setParent');
-        d.l(this.parent);
+        console.log(this.parent);
         if (this.parent === undefined) {
             // @ts-ignore
             this.parent = 'parent';
         }
         if (typeof this.parent === 'string') {
-            d.l(this.parent);
+            console.log(this.parent);
             if (this.parent == 'parent') {
                 this.parent = <HTMLElement>this.content.parentElement;
             } else {
                 this.parent = d.getElementById(this.parent);
             }
         }
-        d.l(this.parent);
+        console.log(this.parent);
     }
 
     setDefaults(reset: boolean = false): void {
         d.lfn('setDefaults super ');
         this.animate = d.addProp(this, 'animate', true, reset);
-        this.animateClass = d.addProp(this, 'animateClass', 'animated', reset);
-        this.animateInClass = d.addProp(this, 'animateInClass', d.concatStr([this.animateClass, 'fadeIn']), reset);
-        this.animateOutClass = d.addProp(this, 'animateOutClass', d.concatStr([this.animateClass, 'fadeOut']), reset);
+        this.animateClass = d.addProp(this, 'animateClass', d.conf.ani.prefix, reset);
+        this.animateInClass = d.addProp(this, 'animateInClass', d.concatStr([this.animateClass, d.conf.ani.styles.fadeIn]), reset);
+        this.animateOutClass = d.addProp(this, 'animateOutClass', d.concatStr([this.animateClass, d.conf.ani.styles.slideOutUp]), reset);
         this.animateAttentionClass = d.addProp(this, 'animateOutClass', d.concatStr([this.animateClass, 'heartBeat']), reset);
     }
 

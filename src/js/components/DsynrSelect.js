@@ -30,7 +30,7 @@ class DsynrSelect extends DsynrUIIElement {
         this.options = this.content.options;
         this.option = this.options[this.options.selectedIndex];
         this.setTrigger();
-        d.l('Select Trigger READY!');
+        console.log('Select Trigger READY!');
     }
     show() {
         d.lfn('show triggered via : ' + this.trigger.id);
@@ -41,11 +41,10 @@ class DsynrSelect extends DsynrUIIElement {
             this.instance = d.addDiv(this.setName('', this.content.id), this.instanceClass);
             this.instance.tabIndex = 0;
             this.instance.style.outline = 'none';
-            let self = this;
-            d.makeArray(this.options).forEach(function (o, index) {
-                self.addESOption(o, index);
-            });
             let ths = this;
+            d.makeArray(this.options).forEach(function (o, index) {
+                ths.addESOption(o, index);
+            });
             this.modalPref = d.mergeObjs(this.preferences, {
                 'trigger': 'auto', 'parent': this.parent, 'adoptParent': this.adoptParent, 'onModalDestroy': () => {
                     ths.destroy();
@@ -75,7 +74,7 @@ class DsynrSelect extends DsynrUIIElement {
         d.lfn('addESOption');
         let oid = d.concatStr([this.optionPrefix, this.content.id, i], '-');
         let ocls;
-        d.l(this.esPrevOpt);
+        console.log(this.esPrevOpt);
         ocls = (i == this.content.selectedIndex) ? d.concatStr([this.optCls, this.optClsActive]) : ocls = this.optCls;
         let eso = d.addDiv(oid, ocls, this.instance);
         eso.tabIndex = i;
@@ -86,14 +85,14 @@ class DsynrSelect extends DsynrUIIElement {
         let oe = d.getElementById(oid);
         oe.textContent = o.text;
         d.setData(oe, 'index', o.index.toString());
-        let self = this;
+        let ths = this;
         d.addListener(oe.id, 'click', function () {
             d.lclk(oe.id);
-            self.update(oe);
+            ths.update(oe);
         });
         d.addListener(oe.id, 'keydown', function (ev) {
             if (ev.key == 'Enter') {
-                self.update(oe);
+                ths.update(oe);
             }
         });
     }
@@ -101,10 +100,10 @@ class DsynrSelect extends DsynrUIIElement {
         d.lfn('addTrigger');
         this.trigger = d.addDiv(this.setName('btn', this.content.id), this.triggerCls, this.content.parentElement);
         d.addText(this.option.text, this.trigger);
-        let self = this;
+        let ths = this;
         d.addListener(this.trigger.id, 'click', function (ev) {
             ev.preventDefault();
-            self.show();
+            ths.show();
         });
         d.hide(this.content);
     }
@@ -112,7 +111,7 @@ class DsynrSelect extends DsynrUIIElement {
         d.lfn('d.addListeners...');
         let ths = this;
         d.addListener(this.instance.id, 'focus', ev => {
-            d.l('focused!');
+            console.log('focused!');
         });
         d.addListener(this.instance.id, 'keydown', function (evnt) {
             switch (evnt.key) {

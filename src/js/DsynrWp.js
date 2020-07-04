@@ -8,20 +8,21 @@ class DsynrWp {
         d.lfn('DsynrUtilWp');
         d.getPageScripts(d);
     }
-    getForm(formName, parent = d.conf.defaultParent) {
+    getForm(formName, parent = d.conf.defaultParent, enableDsynrSelect = false) {
         d.lfn('getForm');
+        d.lfn('form parent::' + parent);
         if (d.requestDataset[formName] != undefined) {
-            d.l(formName + ' Previously loaded / Reinstantiating from memory...');
-            d.addFetchedData(d.requestDataset[formName], parent);
+            console.log(formName + ' Previously loaded / Reinstantiating from memory...');
+            d.addFetchedData(d.requestDataset[formName], parent, enableDsynrSelect);
         }
         else {
-            d.ajax(d.conf.domain + this.conf.formURL + formName + '?min', formName);
+            d.ajax(d.conf.domain + this.conf.formURL + formName + '?min', formName, false, true, parent, enableDsynrSelect);
         }
     }
     ajax(params = {}, parent = d.conf.defaultParent) {
         d.lfn('ajax / ' + name);
         let formData = d.mergeObjs({ action: 'dw_ajax' }, params);
-        d.l(formData);
+        console.log(formData);
         // @ts-ignore
         d.ajax(ajxRequest.ajaxurl, false, formData, true, parent, 'POST');
     }

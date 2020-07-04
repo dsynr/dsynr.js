@@ -11,7 +11,7 @@ class DsynrUIIElement {
             DsynrUIIElement.instances.forEach(function (instance, index) {
                 if (instance.content === element) {
                     self.selfAbort = true;
-                    d.l("already instantiated, aborting...");
+                    console.log("already instantiated, aborting...");
                     return;
                 }
             });
@@ -21,22 +21,22 @@ class DsynrUIIElement {
             this.setPref();
             this.setParent();
             DsynrUIIElement.instances.push(this);
-            d.l(DsynrUIIElement.instances);
+            console.log(DsynrUIIElement.instances);
         }
     }
     setPref() {
         d.lfn('setPref');
-        // d.l(this.preferences);
+        // console.log(this.preferences);
         if (Object.keys(this.preferences).length > 0) {
-            d.l('Object.keys(preferences).length:' + Object.keys(this.preferences).length);
-            // d.l(Object.keys(preferences).length > 0);
+            console.log('Object.keys(preferences).length:' + Object.keys(this.preferences).length);
+            // console.log(Object.keys(preferences).length > 0);
             //d.updateProps(this, preferences);
         }
         else {
             let options = d.getData(this.content, this.prefAttr);
-            d.l(options);
+            console.log(options);
             if (options !== null) {
-                d.l('parsing preferences : ' + options);
+                console.log('parsing preferences : ' + options);
                 this.preferences = d.IsJson(options) ? JSON.parse(options) : d.conf[options];
             }
         }
@@ -46,13 +46,13 @@ class DsynrUIIElement {
     }
     setParent() {
         d.lfn('setParent');
-        d.l(this.parent);
+        console.log(this.parent);
         if (this.parent === undefined) {
             // @ts-ignore
             this.parent = 'parent';
         }
         if (typeof this.parent === 'string') {
-            d.l(this.parent);
+            console.log(this.parent);
             if (this.parent == 'parent') {
                 this.parent = this.content.parentElement;
             }
@@ -60,14 +60,14 @@ class DsynrUIIElement {
                 this.parent = d.getElementById(this.parent);
             }
         }
-        d.l(this.parent);
+        console.log(this.parent);
     }
     setDefaults(reset = false) {
         d.lfn('setDefaults super ');
         this.animate = d.addProp(this, 'animate', true, reset);
-        this.animateClass = d.addProp(this, 'animateClass', 'animated', reset);
-        this.animateInClass = d.addProp(this, 'animateInClass', d.concatStr([this.animateClass, 'fadeIn']), reset);
-        this.animateOutClass = d.addProp(this, 'animateOutClass', d.concatStr([this.animateClass, 'fadeOut']), reset);
+        this.animateClass = d.addProp(this, 'animateClass', d.conf.ani.prefix, reset);
+        this.animateInClass = d.addProp(this, 'animateInClass', d.concatStr([this.animateClass, d.conf.ani.styles.fadeIn]), reset);
+        this.animateOutClass = d.addProp(this, 'animateOutClass', d.concatStr([this.animateClass, d.conf.ani.styles.slideOutUp]), reset);
         this.animateAttentionClass = d.addProp(this, 'animateOutClass', d.concatStr([this.animateClass, 'heartBeat']), reset);
     }
     addListeners() {
@@ -121,9 +121,9 @@ class DsynrModal extends DsynrUIIElement {
         this.overlayClass = d.addProp(this, 'overlayClass', 'o50 bg-dark', reset);
         this.parentSizingClass = d.addProp(this, 'sizingClass', 'wmax hmax', reset);
         this.windowSizingClass = d.addProp(this, 'windowSizingClass', 'vw vh', reset);
-        this.underlayClass = d.addProp(this, 'underlayClass', d.concatStr([positionClass, alignmentClass, this.parentSizingClass, 'z1', 'dsynrModalUnderlay']), reset);
-        this.instanceClass = d.addProp(this, 'instanceClass', d.concatStr([positionClass, 'z2 o0 rounded nooverflow']), reset);
-        this.instanceRootClass = d.addProp(this, 'instanceRootClass', d.concatStr([positionClass, alignmentClass, this.parentSizingClass, 'z3 o0 d-none']), reset);
+        this.underlayClass = d.addProp(this, 'underlayClass', d.concatStr([positionClass, alignmentClass, this.parentSizingClass, 'dsynrModalUnderlay']), reset);
+        this.instanceClass = d.addProp(this, 'instanceClass', d.concatStr([positionClass, 'o0 rounded nooverflow', 'dsynrModalContentRoot']), reset);
+        this.instanceRootClass = d.addProp(this, 'instanceRootClass', d.concatStr([positionClass, alignmentClass, this.parentSizingClass, 'o0 d-none', 'dsynrModal']), reset);
         this.trigger = d.addProp(this, 'trigger', 'auto', reset);
         this.onModalDestroy = d.addProp(this, 'onModalDestroy', () => {
             this.hide(this.autoDestroy);
@@ -134,14 +134,14 @@ class DsynrModal extends DsynrUIIElement {
         let self = this;
         d.addClass(this.content, 'd-none');
         if (this.trigger != 'auto') {
-            d.l('setting trigger to : ' + this.trigger);
+            console.log('setting trigger to : ' + this.trigger);
             d.addListener(this.trigger, 'click', function () {
                 self.show();
             });
-            d.l('Modal Trigger READY!');
+            console.log('Modal Trigger READY!');
         }
         else {
-            d.l('Triggering Automatically...');
+            console.log('Triggering Automatically...');
             this.show();
         }
     }
@@ -156,21 +156,24 @@ class DsynrModal extends DsynrUIIElement {
             d.addClass(this.content, 'o0');
             d.removeClass(this.content, 'd-none');
             if (this.parent === undefined) {
-                d.l('parent unavailable, adding modal to body');
+                console.log('parent unavailable, adding modal to body');
                 this.parent = document.body;
             }
             this.instanceRoot = d.addDiv(this.setName('root', this.content.id), this.instanceRootClass, this.parent);
+            d.setHighestZindex(this.instanceRoot);
+            this.instance = d.addDiv(this.setName('modal', this.parent.id), this.instanceClass, this.instanceRoot);
+            this.instance.style.zIndex = (parseInt(this.instanceRoot.style.zIndex) - 1).toString();
             if (this.disableUnderlay) {
                 // this.resizeRoot();
                 if (this.useOverlay) {
                     this.underlayClass = d.concatStr([this.underlayClass, this.overlayClass]);
                 }
                 this.underlay = d.addDiv(this.setName('underlay', this.content.id), this.underlayClass, this.instanceRoot);
+                this.underlay.style.zIndex = (parseInt(this.instance.style.zIndex) - 1).toString();
             }
             else {
                 d.removeClass(this.instanceRoot, this.parentSizingClass);
             }
-            this.instance = d.addDiv(this.setName('modal', this.parent.id), this.instanceClass, this.instanceRoot);
             this.addListeners();
             //update to detect parent (parent) resizing opposed to just window
             this.instance.appendChild(this.content);
@@ -180,7 +183,7 @@ class DsynrModal extends DsynrUIIElement {
             d.removeClass(this.instanceRoot, 'd-none');
             d.removeClass(this.instance, 'o0');
             d.removeClass(this.content, 'o0');
-            d.l(this.parent.id);
+            console.log(this.parent.id);
             if (this.respectBounds) {
                 if (this.content.clientHeight > this.parent.clientHeight) {
                     this.instance.style.height = d.getCssDimension(this.parent.clientHeight - 50);
@@ -193,7 +196,7 @@ class DsynrModal extends DsynrUIIElement {
             }
             if (this.adoptParent && (this.content.clientHeight > this.parent.clientHeight || this.content.clientWidth > this.parent.clientWidth)) {
                 d.lfn('adoptParent');
-                d.l('parent cannot accommodate child, adopting body as parent!');
+                console.log('parent cannot accommodate child, adopting body as parent!');
                 this.parent = document.body;
                 this.parent.append(this.instanceRoot);
                 this.resizeRoot();
@@ -210,21 +213,28 @@ class DsynrModal extends DsynrUIIElement {
     animateDisplay(getAttention = false) {
         d.lfn('animateDisplay');
         if (this.displayTogether) {
+            console.log('displayTogether...');
             if (this.animate && this.animateUnderlay) {
+                console.log('this.animate && this.animateUnderlay....');
                 if (getAttention) {
+                    console.log('getAttention..');
                     d.removeClass(this.instanceRoot, this.animateInClass);
                     d.addClass(this.instanceRoot, this.animateAttentionClass);
                     d.removeClass(this.instance, this.modalAnimateInClass);
                     d.addClass(this.instance, this.modalAnimateAttentionClass);
                 }
                 else {
-                    d.addClass(this.instanceRoot, this.animateInClass);
-                    d.addClass(this.instance, this.modalAnimateInClass);
+                    console.log('NOT getAttention..');
+                    d.addClass(this.instanceRoot, this.animateClass + d.conf.ani.styles.fadeIn);
+                    d.addClass(this.instance, this.animateClass + d.conf.ani.styles.fadeIn);
+                    // d.removeClass(this.instanceRoot, 'o0');
+                    // d.removeClass(this.instance, 'o0');
                 }
             }
             else {
                 if (getAttention) {
                     //@todo
+                    console.log('getting Attention.....');
                 }
                 else {
                     d.removeClass(this.instanceRoot, 'o0');
@@ -234,6 +244,7 @@ class DsynrModal extends DsynrUIIElement {
         }
         else {
             //@todo animate one after other
+            console.log('animate one after other...');
         }
     }
     hide(destroy = this.autoDestroy) {
@@ -243,7 +254,7 @@ class DsynrModal extends DsynrUIIElement {
             d.addClass(this.instanceRoot, this.modalAnimateOutClass);
         }
         if (destroy) {
-            d.l('TODO ONANIMATIONEND LISTENER...');
+            console.log('TODO ONANIMATIONEND LISTENER...');
             this.destroy();
         }
         DsynrModal.activeInstance = false;
@@ -273,7 +284,7 @@ class DsynrModal extends DsynrUIIElement {
         d.lfn('addListeners');
         let ths = this;
         if (this.animate) {
-            d.l('enabling animation');
+            console.log('enabling animation');
             this.instance.addEventListener(d.transitionEvent, ths.modalHidden);
             // this.instance.addEventListener(d.transitionEvent, ths.modalHidden);
         }
@@ -283,11 +294,11 @@ class DsynrModal extends DsynrUIIElement {
             }
         });
         d.addListener(this.instanceRoot.id, 'click', function (ev) {
-            d.l(ev.target);
+            console.log(ev.target);
             // @ts-ignore
-            d.l(ev.target.offsetParent);
+            console.log(ev.target.offsetParent);
             // @ts-ignore
-            d.l(ev.target.classList.value);
+            console.log(ev.target.classList.value);
             // @ts-ignore
             if (ev.target.classList.value == ths.underlayClass) {
                 ths.onModalDestroy();
@@ -366,7 +377,7 @@ class DsynrSelect extends DsynrUIIElement {
         this.options = this.content.options;
         this.option = this.options[this.options.selectedIndex];
         this.setTrigger();
-        d.l('Select Trigger READY!');
+        console.log('Select Trigger READY!');
     }
     show() {
         d.lfn('show triggered via : ' + this.trigger.id);
@@ -377,11 +388,10 @@ class DsynrSelect extends DsynrUIIElement {
             this.instance = d.addDiv(this.setName('', this.content.id), this.instanceClass);
             this.instance.tabIndex = 0;
             this.instance.style.outline = 'none';
-            let self = this;
-            d.makeArray(this.options).forEach(function (o, index) {
-                self.addESOption(o, index);
-            });
             let ths = this;
+            d.makeArray(this.options).forEach(function (o, index) {
+                ths.addESOption(o, index);
+            });
             this.modalPref = d.mergeObjs(this.preferences, {
                 'trigger': 'auto', 'parent': this.parent, 'adoptParent': this.adoptParent, 'onModalDestroy': () => {
                     ths.destroy();
@@ -411,7 +421,7 @@ class DsynrSelect extends DsynrUIIElement {
         d.lfn('addESOption');
         let oid = d.concatStr([this.optionPrefix, this.content.id, i], '-');
         let ocls;
-        d.l(this.esPrevOpt);
+        console.log(this.esPrevOpt);
         ocls = (i == this.content.selectedIndex) ? d.concatStr([this.optCls, this.optClsActive]) : ocls = this.optCls;
         let eso = d.addDiv(oid, ocls, this.instance);
         eso.tabIndex = i;
@@ -422,14 +432,14 @@ class DsynrSelect extends DsynrUIIElement {
         let oe = d.getElementById(oid);
         oe.textContent = o.text;
         d.setData(oe, 'index', o.index.toString());
-        let self = this;
+        let ths = this;
         d.addListener(oe.id, 'click', function () {
             d.lclk(oe.id);
-            self.update(oe);
+            ths.update(oe);
         });
         d.addListener(oe.id, 'keydown', function (ev) {
             if (ev.key == 'Enter') {
-                self.update(oe);
+                ths.update(oe);
             }
         });
     }
@@ -437,10 +447,10 @@ class DsynrSelect extends DsynrUIIElement {
         d.lfn('addTrigger');
         this.trigger = d.addDiv(this.setName('btn', this.content.id), this.triggerCls, this.content.parentElement);
         d.addText(this.option.text, this.trigger);
-        let self = this;
+        let ths = this;
         d.addListener(this.trigger.id, 'click', function (ev) {
             ev.preventDefault();
-            self.show();
+            ths.show();
         });
         d.hide(this.content);
     }
@@ -448,7 +458,7 @@ class DsynrSelect extends DsynrUIIElement {
         d.lfn('d.addListeners...');
         let ths = this;
         d.addListener(this.instance.id, 'focus', ev => {
-            d.l('focused!');
+            console.log('focused!');
         });
         d.addListener(this.instance.id, 'keydown', function (evnt) {
             switch (evnt.key) {
@@ -500,15 +510,22 @@ class Dsynr {
             domain: document.baseURI,
             defaultParent: document.body,
             ani: {
-                prefix: 'animate__animated animate__',
+                superfix: 'animate__animated',
+                prefix: 'animate__',
                 speed: {
                     faster: 'animate__faster',
                     default: '',
                 },
                 styles: {
+                    zoomIn: 'zoomIn',
                     fadeIn: 'fadeIn',
+                    fadeInUp: 'fadeInUp',
                     slideInDown: 'slideInDown',
+                    slideInUp: 'slideInUp',
+                    slideInLeft: 'slideInLeft',
+                    slideInRight: 'slideInRight',
                     slideOutUp: 'slideOutUp',
+                    heartBeat: 'heartBeat',
                 }
             },
         };
@@ -530,6 +547,7 @@ class Dsynr {
     }
     defaultConf() {
         this.lfn('defaultConf');
+        this.conf.ani.prefix = this.conf.ani.superfix + ' ' + this.conf.ani.prefix;
         this.conf.ani.speed.default = this.conf.ani.speed.faster;
     }
     docReady(fn) {
@@ -633,7 +651,7 @@ class Dsynr {
             if (propSet.hasOwnProperty(prop)) {
                 obj[prop] = propSet[prop];
             }
-            this.l(prop + ':' + obj[prop]);
+            console.log(prop + ':' + obj[prop]);
         }
     }
     mergeObjs(main, sub) {
@@ -644,7 +662,7 @@ class Dsynr {
     }
     hasInstance(objList, obj) {
         this.lfn('hasInstance');
-        this.l(objList);
+        console.log(objList);
         let hasIt = false;
         objList.forEach((o, i) => {
             if (o === obj) {
@@ -652,7 +670,7 @@ class Dsynr {
                 return;
             }
         });
-        this.l(hasIt);
+        console.log(hasIt);
         return hasIt;
     }
     getRandColour() {
@@ -729,18 +747,20 @@ class Dsynr {
     addText(txt = '', root) {
         root.appendChild(document.createTextNode(txt));
     }
-    getElementsBySelector(selector) {
-        return document.querySelectorAll(selector);
+    getFirstElement(list) {
+        return list[0];
     }
-    getElementsByTag(tagName) {
-        return document.querySelectorAll(tagName);
+    getElementsBySelector(selector, parent = document.body, getFirst = false) {
+        let list = parent.querySelectorAll(selector);
+        return getFirst ? this.getFirstElement(list) : list;
     }
-    /**
-     *
-     * @param className
-     */
-    getElementsByClass(className) {
-        return document.getElementsByClassName(className);
+    getElementsByTag(tagName, parent = document.body, getFirst = false) {
+        let list = parent.querySelectorAll(tagName);
+        return getFirst ? this.getFirstElement(list) : list;
+    }
+    getElementsByClass(className, parent = document.body, getFirst = false) {
+        let list = parent.getElementsByClassName(className);
+        return getFirst ? this.getFirstElement(list) : list;
     }
     getElementById(elementID) {
         return window[elementID];
@@ -752,10 +772,9 @@ class Dsynr {
         document.head.appendChild(js);
     }
     animateIn() {
-        this.makeArray(this.getElementsByClass('animated')).forEach((e) => {
-            if (this.getData(e, 'ani') !== null && this.getData(e, 'ani') != null && this.isInViewportSlightly(e)) {
-                e.classList.remove('o0');
-                e.classList.add(e.dataset.ani);
+        this.makeArray(this.getElementsByClass(d.conf.ani.superfix)).forEach((e) => {
+            if (this.isInViewportSlightly(e)) {
+                this.removeClass(e, 'o0');
             }
         });
     }
@@ -773,19 +792,18 @@ class Dsynr {
             }
         }
     }
-    addListener(eID, event, fn) {
-        if (this.getElementById(eID) !== undefined) {
-            this.getElementById(eID).addEventListener(event, fn);
+    addListener(el, ev, fn) {
+        this._event(el, ev, fn);
+    }
+    removeListener(el, ev, fn) {
+        this._event(el, ev, fn, false);
+    }
+    toggleClass(e, remove, add) {
+        if (typeof e === "object") {
+            e = e.target;
         }
-    }
-    removeListener(eID, event, fn) {
-        this.getElementById(eID).removeEventListener(event, fn);
-    }
-    addEvent(e, listener, fn) {
-        this.makeArray(e).forEach((el) => {
-            el.addEventListener(listener, fn);
-            this.l(el);
-        });
+        this.removeClass(e, remove);
+        this.addClass(e, add);
     }
     centereStage(e) {
         let dimensions = this.getDimensions(e);
@@ -817,67 +835,98 @@ class Dsynr {
     serialize(obj) {
         return Object.keys(obj).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(obj[k])}`).join('&');
     }
-    ajax(url, saveAs = false, data = false, add2dom = true, parent = document.body, method = 'GET') {
+    ajax(url, saveAs = false, data = false, add2dom = true, parent = document.body, enableDsynrSelect = false, method = 'GET') {
         this.lfn('ajax ' + url);
         this.curReq = new XMLHttpRequest();
         if (this.curReq) {
             this.curReq.open(method, url, true);
-            this.setHeaders(method == 'POST');
+            this._setHeaders(method == 'POST');
             this.curReq.send(this.serialize(data));
             let ths = this;
             this.curReq.addEventListener('readystatechange', function () {
-                return ths.stateChanged(ths, saveAs, add2dom, parent);
+                return ths._stateChanged(ths, saveAs, add2dom, parent, enableDsynrSelect);
             });
         }
         else {
-            this.failed();
+            this._failed();
         }
     }
-    setHeaders(isPost = false) {
+    _failed() {
+        console.log('Cannot create an XMLHTTP instance');
+        return false;
+    }
+    _event(el, ev, fn, add = true) {
+        let ths = this;
+        function _(e) {
+            if (add) {
+                e.addEventListener(ev, fn);
+            }
+            else {
+                e.removeEventListener(ev, fn);
+            }
+        }
+        if (typeof el === "string" && this.getElementById(el) !== undefined) {
+            _(ths.getElementById(el));
+        }
+        else {
+            if (el.length === undefined) {
+                _(el);
+            }
+            else {
+                ths.makeArray(el).forEach((e) => {
+                    _(e);
+                });
+            }
+        }
+    }
+    _setHeaders(isPost = false) {
         if (isPost) {
             this.curReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         }
         this.curReq.setRequestHeader('Cache-Control', 'no-cache');
         this.curReq.setRequestHeader('Powered-by', 'Dsynr.com');
     }
-    stateChanged(ths, saveAs, add2dom, parent = document.body) {
-        this.lfn('stateChanged');
+    _stateChanged(ths, saveAs, add2dom, parent = document.body, enableDsynrSelect = false) {
+        this.lfn('_stateChanged');
         let req = ths.curReq;
         if (req.readyState === XMLHttpRequest.DONE) {
             if (req.status === 200) {
-                return ths.succeeded(saveAs, add2dom, parent);
+                return ths._succeeded(saveAs, add2dom, parent, enableDsynrSelect);
             }
             else {
-                this.l('Not ready yet :: ' + req.status + ' / ' + req.readyState);
+                console.log('Not ready yet :: ' + req.status + ' / ' + req.readyState);
             }
         }
         else {
-            this.l(req);
+            console.log(req);
         }
     }
-    failed() {
-        this.l('Cannot create an XMLHTTP instance');
-        return false;
-    }
-    succeeded(saveAs, add2dom, parent = document.body) {
-        this.lfn('succeeded');
+    _succeeded(saveAs, add2dom, parent = document.body, enableDsynrSelect = false) {
+        this.lfn('_succeeded!');
         this.totalRequestDatasets++;
         if (typeof saveAs === 'string') {
-            this.l('Saving to dataset; Reference key: ' + saveAs);
+            console.log('Saving to dataset; Reference key: ' + saveAs);
             // this.requestDataset[saveAs] = this.htmlToElements(this.curReq.response);
             this.requestDataset[saveAs] = this.curReq.response;
         }
-        add2dom ? this.addFetchedData(this.curReq.response, parent) : false;
+        add2dom ? this.addFetchedData(this.curReq.response, parent, enableDsynrSelect) : false;
         return this.curReq.response;
     }
-    addFetchedData(requestResponse, parent = document.body) {
+    _showFetchedData(fdp) {
+        this.lfn('_showFetchedData');
+        this.removeClass(fdp, 'd-none');
+        new DsynrModal(fdp);
+    }
+    addFetchedData(requestResponse, parent = document.body, enableDsynrSelect = false) {
+        d.lfn('addFetchedData..');
         let fdp = this.addDiv('dsynrFetchedData-' + this.totalRequestDatasets, 'd-none', parent);
         let ths = this;
         this.addListener(fdp.id, 'reqDataReady', function () {
-            ths.showFetchedData(fdp);
+            ths._showFetchedData(fdp);
         });
         fdp.innerHTML = requestResponse;
-        // DsynrSelect.auto();
+        console.log('enableDsynrSelect:' + enableDsynrSelect);
+        enableDsynrSelect ? DsynrSelect.auto() : null;
         let fetchedScriptTags = fdp.getElementsByTagName('script');
         for (let i = 0; i < fetchedScriptTags.length; ++i) {
             let scriptSRC = fetchedScriptTags[i].getAttribute('src');
@@ -887,11 +936,6 @@ class Dsynr {
             }
         }
         fdp.dispatchEvent(this.reqDataReady);
-    }
-    showFetchedData(fdp) {
-        this.lfn('showFetchedData');
-        this.removeClass(fdp, 'd-none');
-        new DsynrModal(fdp);
     }
     getPageScripts(dsynrUtil) {
         function _(parentNode) {
@@ -924,16 +968,31 @@ class Dsynr {
             });
         }
     }
+    setHighestZindex(el) {
+        let highestZindex = this.getHighestZindex();
+        let delta = 3;
+        highestZindex = highestZindex == undefined ? delta : highestZindex + delta;
+        el.style.zIndex = highestZindex;
+    }
+    getHighestZindex(el = document.body) {
+        return Array.from(el.querySelectorAll('*'))
+            .map(a => parseFloat(window.getComputedStyle(a).zIndex))
+            .filter(a => !isNaN(a))
+            .sort((n1, n2) => {
+            return n1 - n2;
+        })
+            .pop();
+    }
     /**
      * Log to the console
      * @param data
      * @param isFormData
      */
-    l(data, isFormData = false) {
+    xxxl(data, isFormData = false) {
         if (isFormData) {
-            this.l('Logging FormData:');
+            console.log('Logging FormData:');
             for (let key of data.entries()) {
-                this.l(key[0] + ' : ' + key[1]);
+                console.log(key[0] + ' : ' + key[1]);
             }
         }
         else {
@@ -945,15 +1004,46 @@ class Dsynr {
      * @param functionName
      */
     lfn(functionName) {
-        this.l(' {} ' + functionName);
+        console.log(' {} ' + functionName);
     }
     /**
      * Log click
      * @param element
      */
     lclk(element) {
-        this.l('* click ' + element);
+        console.log('* click ' + element);
     }
 }
 let d = new Dsynr();
 //# sourceMappingURL=Dsynr.js.map
+class DsynrWp {
+    constructor() {
+        this.conf = {
+            formURL: 'form/',
+        };
+    }
+    ready() {
+        d.lfn('DsynrUtilWp');
+        d.getPageScripts(d);
+    }
+    getForm(formName, parent = d.conf.defaultParent, enableDsynrSelect = false) {
+        d.lfn('getForm');
+        d.lfn('form parent::' + parent);
+        if (d.requestDataset[formName] != undefined) {
+            console.log(formName + ' Previously loaded / Reinstantiating from memory...');
+            d.addFetchedData(d.requestDataset[formName], parent, enableDsynrSelect);
+        }
+        else {
+            d.ajax(d.conf.domain + this.conf.formURL + formName + '?min', formName, false, true, parent, enableDsynrSelect);
+        }
+    }
+    ajax(params = {}, parent = d.conf.defaultParent) {
+        d.lfn('ajax / ' + name);
+        let formData = d.mergeObjs({ action: 'dw_ajax' }, params);
+        console.log(formData);
+        // @ts-ignore
+        d.ajax(ajxRequest.ajaxurl, false, formData, true, parent, 'POST');
+    }
+}
+let dw = new DsynrWp();
+//# sourceMappingURL=DsynrWp.js.map

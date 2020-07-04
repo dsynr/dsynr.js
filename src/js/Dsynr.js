@@ -4,15 +4,22 @@ class Dsynr {
             domain: document.baseURI,
             defaultParent: document.body,
             ani: {
-                prefix: 'animate__animated animate__',
+                superfix: 'animate__animated',
+                prefix: 'animate__',
                 speed: {
                     faster: 'animate__faster',
                     default: '',
                 },
                 styles: {
+                    zoomIn: 'zoomIn',
                     fadeIn: 'fadeIn',
+                    fadeInUp: 'fadeInUp',
                     slideInDown: 'slideInDown',
+                    slideInUp: 'slideInUp',
+                    slideInLeft: 'slideInLeft',
+                    slideInRight: 'slideInRight',
                     slideOutUp: 'slideOutUp',
+                    heartBeat: 'heartBeat',
                 }
             },
         };
@@ -34,6 +41,7 @@ class Dsynr {
     }
     defaultConf() {
         this.lfn('defaultConf');
+        this.conf.ani.prefix = this.conf.ani.superfix + ' ' + this.conf.ani.prefix;
         this.conf.ani.speed.default = this.conf.ani.speed.faster;
     }
     docReady(fn) {
@@ -137,7 +145,7 @@ class Dsynr {
             if (propSet.hasOwnProperty(prop)) {
                 obj[prop] = propSet[prop];
             }
-            this.l(prop + ':' + obj[prop]);
+            console.log(prop + ':' + obj[prop]);
         }
     }
     mergeObjs(main, sub) {
@@ -148,7 +156,7 @@ class Dsynr {
     }
     hasInstance(objList, obj) {
         this.lfn('hasInstance');
-        this.l(objList);
+        console.log(objList);
         let hasIt = false;
         objList.forEach((o, i) => {
             if (o === obj) {
@@ -156,7 +164,7 @@ class Dsynr {
                 return;
             }
         });
-        this.l(hasIt);
+        console.log(hasIt);
         return hasIt;
     }
     getRandColour() {
@@ -233,18 +241,20 @@ class Dsynr {
     addText(txt = '', root) {
         root.appendChild(document.createTextNode(txt));
     }
-    getElementsBySelector(selector) {
-        return document.querySelectorAll(selector);
+    getFirstElement(list) {
+        return list[0];
     }
-    getElementsByTag(tagName) {
-        return document.querySelectorAll(tagName);
+    getElementsBySelector(selector, parent = document.body, getFirst = false) {
+        let list = parent.querySelectorAll(selector);
+        return getFirst ? this.getFirstElement(list) : list;
     }
-    /**
-     *
-     * @param className
-     */
-    getElementsByClass(className) {
-        return document.getElementsByClassName(className);
+    getElementsByTag(tagName, parent = document.body, getFirst = false) {
+        let list = parent.querySelectorAll(tagName);
+        return getFirst ? this.getFirstElement(list) : list;
+    }
+    getElementsByClass(className, parent = document.body, getFirst = false) {
+        let list = parent.getElementsByClassName(className);
+        return getFirst ? this.getFirstElement(list) : list;
     }
     getElementById(elementID) {
         return window[elementID];
@@ -256,10 +266,9 @@ class Dsynr {
         document.head.appendChild(js);
     }
     animateIn() {
-        this.makeArray(this.getElementsByClass('animated')).forEach((e) => {
-            if (this.getData(e, 'ani') !== null && this.getData(e, 'ani') != null && this.isInViewportSlightly(e)) {
-                e.classList.remove('o0');
-                e.classList.add(e.dataset.ani);
+        this.makeArray(this.getElementsByClass(d.conf.ani.superfix)).forEach((e) => {
+            if (this.isInViewportSlightly(e)) {
+                this.removeClass(e, 'o0');
             }
         });
     }
@@ -277,19 +286,18 @@ class Dsynr {
             }
         }
     }
-    addListener(eID, event, fn) {
-        if (this.getElementById(eID) !== undefined) {
-            this.getElementById(eID).addEventListener(event, fn);
+    addListener(el, ev, fn) {
+        this._event(el, ev, fn);
+    }
+    removeListener(el, ev, fn) {
+        this._event(el, ev, fn, false);
+    }
+    toggleClass(e, remove, add) {
+        if (typeof e === "object") {
+            e = e.target;
         }
-    }
-    removeListener(eID, event, fn) {
-        this.getElementById(eID).removeEventListener(event, fn);
-    }
-    addEvent(e, listener, fn) {
-        this.makeArray(e).forEach((el) => {
-            el.addEventListener(listener, fn);
-            this.l(el);
-        });
+        this.removeClass(e, remove);
+        this.addClass(e, add);
     }
     centereStage(e) {
         let dimensions = this.getDimensions(e);
@@ -321,67 +329,98 @@ class Dsynr {
     serialize(obj) {
         return Object.keys(obj).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(obj[k])}`).join('&');
     }
-    ajax(url, saveAs = false, data = false, add2dom = true, parent = document.body, method = 'GET') {
+    ajax(url, saveAs = false, data = false, add2dom = true, parent = document.body, enableDsynrSelect = false, method = 'GET') {
         this.lfn('ajax ' + url);
         this.curReq = new XMLHttpRequest();
         if (this.curReq) {
             this.curReq.open(method, url, true);
-            this.setHeaders(method == 'POST');
+            this._setHeaders(method == 'POST');
             this.curReq.send(this.serialize(data));
             let ths = this;
             this.curReq.addEventListener('readystatechange', function () {
-                return ths.stateChanged(ths, saveAs, add2dom, parent);
+                return ths._stateChanged(ths, saveAs, add2dom, parent, enableDsynrSelect);
             });
         }
         else {
-            this.failed();
+            this._failed();
         }
     }
-    setHeaders(isPost = false) {
+    _failed() {
+        console.log('Cannot create an XMLHTTP instance');
+        return false;
+    }
+    _event(el, ev, fn, add = true) {
+        let ths = this;
+        function _(e) {
+            if (add) {
+                e.addEventListener(ev, fn);
+            }
+            else {
+                e.removeEventListener(ev, fn);
+            }
+        }
+        if (typeof el === "string" && this.getElementById(el) !== undefined) {
+            _(ths.getElementById(el));
+        }
+        else {
+            if (el.length === undefined) {
+                _(el);
+            }
+            else {
+                ths.makeArray(el).forEach((e) => {
+                    _(e);
+                });
+            }
+        }
+    }
+    _setHeaders(isPost = false) {
         if (isPost) {
             this.curReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         }
         this.curReq.setRequestHeader('Cache-Control', 'no-cache');
         this.curReq.setRequestHeader('Powered-by', 'Dsynr.com');
     }
-    stateChanged(ths, saveAs, add2dom, parent = document.body) {
-        this.lfn('stateChanged');
+    _stateChanged(ths, saveAs, add2dom, parent = document.body, enableDsynrSelect = false) {
+        this.lfn('_stateChanged');
         let req = ths.curReq;
         if (req.readyState === XMLHttpRequest.DONE) {
             if (req.status === 200) {
-                return ths.succeeded(saveAs, add2dom, parent);
+                return ths._succeeded(saveAs, add2dom, parent, enableDsynrSelect);
             }
             else {
-                this.l('Not ready yet :: ' + req.status + ' / ' + req.readyState);
+                console.log('Not ready yet :: ' + req.status + ' / ' + req.readyState);
             }
         }
         else {
-            this.l(req);
+            console.log(req);
         }
     }
-    failed() {
-        this.l('Cannot create an XMLHTTP instance');
-        return false;
-    }
-    succeeded(saveAs, add2dom, parent = document.body) {
-        this.lfn('succeeded');
+    _succeeded(saveAs, add2dom, parent = document.body, enableDsynrSelect = false) {
+        this.lfn('_succeeded!');
         this.totalRequestDatasets++;
         if (typeof saveAs === 'string') {
-            this.l('Saving to dataset; Reference key: ' + saveAs);
+            console.log('Saving to dataset; Reference key: ' + saveAs);
             // this.requestDataset[saveAs] = this.htmlToElements(this.curReq.response);
             this.requestDataset[saveAs] = this.curReq.response;
         }
-        add2dom ? this.addFetchedData(this.curReq.response, parent) : false;
+        add2dom ? this.addFetchedData(this.curReq.response, parent, enableDsynrSelect) : false;
         return this.curReq.response;
     }
-    addFetchedData(requestResponse, parent = document.body) {
+    _showFetchedData(fdp) {
+        this.lfn('_showFetchedData');
+        this.removeClass(fdp, 'd-none');
+        new DsynrModal(fdp);
+    }
+    addFetchedData(requestResponse, parent = document.body, enableDsynrSelect = false) {
+        d.lfn('addFetchedData..');
         let fdp = this.addDiv('dsynrFetchedData-' + this.totalRequestDatasets, 'd-none', parent);
         let ths = this;
         this.addListener(fdp.id, 'reqDataReady', function () {
-            ths.showFetchedData(fdp);
+            ths._showFetchedData(fdp);
         });
         fdp.innerHTML = requestResponse;
-        // DsynrSelect.auto();
+        console.log('enableDsynrSelect:' + enableDsynrSelect);
+        enableDsynrSelect ? DsynrSelect.auto() : null;
         let fetchedScriptTags = fdp.getElementsByTagName('script');
         for (let i = 0; i < fetchedScriptTags.length; ++i) {
             let scriptSRC = fetchedScriptTags[i].getAttribute('src');
@@ -391,11 +430,6 @@ class Dsynr {
             }
         }
         fdp.dispatchEvent(this.reqDataReady);
-    }
-    showFetchedData(fdp) {
-        this.lfn('showFetchedData');
-        this.removeClass(fdp, 'd-none');
-        new DsynrModal(fdp);
     }
     getPageScripts(dsynrUtil) {
         function _(parentNode) {
@@ -428,16 +462,31 @@ class Dsynr {
             });
         }
     }
+    setHighestZindex(el) {
+        let highestZindex = this.getHighestZindex();
+        let delta = 3;
+        highestZindex = highestZindex == undefined ? delta : highestZindex + delta;
+        el.style.zIndex = highestZindex;
+    }
+    getHighestZindex(el = document.body) {
+        return Array.from(el.querySelectorAll('*'))
+            .map(a => parseFloat(window.getComputedStyle(a).zIndex))
+            .filter(a => !isNaN(a))
+            .sort((n1, n2) => {
+            return n1 - n2;
+        })
+            .pop();
+    }
     /**
      * Log to the console
      * @param data
      * @param isFormData
      */
-    l(data, isFormData = false) {
+    xxxl(data, isFormData = false) {
         if (isFormData) {
-            this.l('Logging FormData:');
+            console.log('Logging FormData:');
             for (let key of data.entries()) {
-                this.l(key[0] + ' : ' + key[1]);
+                console.log(key[0] + ' : ' + key[1]);
             }
         }
         else {
@@ -449,14 +498,14 @@ class Dsynr {
      * @param functionName
      */
     lfn(functionName) {
-        this.l(' {} ' + functionName);
+        console.log(' {} ' + functionName);
     }
     /**
      * Log click
      * @param element
      */
     lclk(element) {
-        this.l('* click ' + element);
+        console.log('* click ' + element);
     }
 }
 let d = new Dsynr();

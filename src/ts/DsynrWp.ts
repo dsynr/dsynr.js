@@ -8,20 +8,23 @@ class DsynrWp {
         d.getPageScripts(d);
     }
 
-    getForm(formName: string, parent: HTMLElement = d.conf.defaultParent): void {
+    getForm(formName: string, parent: HTMLElement = d.conf.defaultParent, enableDsynrSelect: boolean = false): void {
         d.lfn('getForm');
+
+        d.lfn('form parent::' + parent);
+
         if (d.requestDataset[formName] != undefined) {
-            d.l(formName + ' Previously loaded / Reinstantiating from memory...');
-            d.addFetchedData(d.requestDataset[formName], parent);
+            console.log(formName + ' Previously loaded / Reinstantiating from memory...');
+            d.addFetchedData(d.requestDataset[formName], parent, enableDsynrSelect);
         } else {
-            d.ajax(d.conf.domain + this.conf.formURL + formName + '?min', formName);
+            d.ajax(d.conf.domain + this.conf.formURL + formName + '?min', formName, false, true, parent, enableDsynrSelect);
         }
     }
 
     ajax(params = {}, parent: HTMLElement = d.conf.defaultParent): void {
         d.lfn('ajax / ' + name);
         let formData: object = d.mergeObjs({action: 'dw_ajax'}, params);
-        d.l(formData);
+        console.log(formData);
         // @ts-ignore
         d.ajax(ajxRequest.ajaxurl, false, formData, true, parent, 'POST');
     }
