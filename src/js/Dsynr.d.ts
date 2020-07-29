@@ -10,14 +10,16 @@ declare class Dsynr {
                 default: string;
             };
             styles: {
-                zoomIn: string;
                 fadeIn: string;
                 fadeInUp: string;
+                fadeInLeft: string;
+                fadeInRight: string;
                 slideInDown: string;
                 slideInUp: string;
                 slideInLeft: string;
                 slideInRight: string;
                 slideOutUp: string;
+                zoomIn: string;
                 heartBeat: string;
             };
         };

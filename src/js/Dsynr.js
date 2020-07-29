@@ -11,14 +11,16 @@ class Dsynr {
                     default: '',
                 },
                 styles: {
-                    zoomIn: 'zoomIn',
                     fadeIn: 'fadeIn',
                     fadeInUp: 'fadeInUp',
+                    fadeInLeft: 'fadeInLeft',
+                    fadeInRight: 'fadeInRight',
                     slideInDown: 'slideInDown',
                     slideInUp: 'slideInUp',
                     slideInLeft: 'slideInLeft',
                     slideInRight: 'slideInRight',
                     slideOutUp: 'slideOutUp',
+                    zoomIn: 'zoomIn',
                     heartBeat: 'heartBeat',
                 }
             },
@@ -41,7 +43,7 @@ class Dsynr {
     }
     defaultConf() {
         this.lfn('defaultConf');
-        this.conf.ani.prefix = this.conf.ani.superfix + ' ' + this.conf.ani.prefix;
+        // this.conf.ani.prefix = this.conf.ani.superfix + ' ' + this.conf.ani.prefix;
         this.conf.ani.speed.default = this.conf.ani.speed.faster;
     }
     docReady(fn) {
@@ -455,10 +457,11 @@ class Dsynr {
         return ' ' + this.conf.ani.prefix + styleName;
     }
     autoPrefixAniClasses(speed = this.conf.ani.speed.default) {
-        for (const style in this.conf.ani.styles) {
-            this.makeArray(this.getElementsByClass(style)).forEach((e) => {
-                this.removeClass(e, style);
-                this.addClass(e, this.conf.ani.prefix + style + ' ' + speed);
+        for (const aniStyle in this.conf.ani.styles) {
+            let as = this.getAniClass(aniStyle);
+            this.makeArray(this.getElementsByClass(aniStyle)).forEach((e) => {
+                this.removeClass(e, aniStyle);
+                e.classList.add(this.conf.ani.superfix, this.conf.ani.prefix + aniStyle, speed);
             });
         }
     }

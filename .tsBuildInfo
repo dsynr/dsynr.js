@@ -66,8 +66,8 @@
         "signature": "3e0a459888f32b42138d5a39f706ff2d55d500ab1031e0988b5568b0f67c2303"
       },
       "./src/ts/dsynr.ts": {
-        "version": "7cf1cba1396bfbc3af7707578c5acbd91094149049330e7b7da0c98f6238698f",
-        "signature": "10a81af19ad03c3894a99dc8a464fb7355a41a8d9de0c06fc46816bb0e693fba"
+        "version": "503a5eb8b6785252ea44596635d5cdb8c7f1df4090540044303dfe5dadb87afa",
+        "signature": "060c54ea4b7dc3d6b1d67c09fe495cdac28249eaa8e473797649f61e12ea9b2c"
       },
       "./src/ts/dsynrwp.ts": {
         "version": "d20f17f2869620c8e0177604db20db120f824d93472d313f70477232187896e4",
@@ -142,14 +142,14 @@
       "../../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.reflect.d.ts",
       "../../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.symbol.d.ts",
       "../../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts",
-      "./src/ts/dsynr.ts",
+      "./src/ts/dsynrwp.ts",
       "./src/ts/classes/dsynruiielement.ts",
       "./src/ts/components/dsynrcarousel.ts",
       "./src/ts/components/dsynrmodal.ts",
       "./src/ts/components/dsynrselect.ts",
       "./src/ts/interfaces/dsynrsite.ts",
       "./src/ts/interfaces/dsynrui.ts",
-      "./src/ts/dsynrwp.ts"
+      "./src/ts/dsynr.ts"
     ]
   },
   "version": "3.8.3"
