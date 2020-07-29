@@ -1057,22 +1057,22 @@ let d = new Dsynr();
 class DsynrWp {
     constructor() {
         this.conf = {
-            formURL: 'form/',
+            loadURL: 'load/',
         };
     }
     ready() {
         d.lfn('DsynrUtilWp');
         d.getPageScripts(d);
     }
-    getForm(formName, parent = d.conf.defaultParent, enableDsynrSelect = false) {
+    load(loaderName, parent = d.conf.defaultParent, enableDsynrSelect = false) {
         d.lfn('getForm');
         d.lfn('form parent::' + parent);
-        if (d.requestDataset[formName] != undefined) {
-            console.log(formName + ' Previously loaded / Reinstantiating from memory...');
-            d.addFetchedData(d.requestDataset[formName], parent, enableDsynrSelect);
+        if (d.requestDataset[loaderName] != undefined) {
+            console.log(loaderName + ' Previously loaded / Reinstantiating from memory...');
+            d.addFetchedData(d.requestDataset[loaderName], parent, enableDsynrSelect);
         }
         else {
-            d.ajax(d.conf.domain + this.conf.loadURL + formName + '?min', formName, false, true, parent, enableDsynrSelect);
+            d.ajax(d.conf.domain + this.conf.loadURL + loaderName + '?min', loaderName, false, true, parent, enableDsynrSelect);
         }
     }
     ajax(params = {}, parent = d.conf.defaultParent) {

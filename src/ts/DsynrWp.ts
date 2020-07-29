@@ -1,6 +1,6 @@
 class DsynrWp {
     conf = {
-        loadURL: 'form/',
+        loadURL: 'load/',
     }
 
     ready(): void {

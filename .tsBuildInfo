@@ -70,8 +70,8 @@
         "signature": "10a81af19ad03c3894a99dc8a464fb7355a41a8d9de0c06fc46816bb0e693fba"
       },
       "./src/ts/dsynrwp.ts": {
-        "version": "03550814a7f56c98e89f95a062d051a7edc10fc9147a3b0770fe26c5f1eacf1e",
-        "signature": "9d957d9253eed833bdf0aed872810686e8f180e5683028354004a2cf07390bb2"
+        "version": "d20f17f2869620c8e0177604db20db120f824d93472d313f70477232187896e4",
+        "signature": "7f623fe08d24749f9e3704b5fb1fc3c1ff73f2cfbaa840a2402605267a6c298d"
       },
       "./src/ts/classes/dsynruiielement.ts": {
         "version": "047d8190dca0dba05fa21be6ad3b0bff32a9196ada35ad4020a40c13b10cddf7",
@@ -96,30 +96,6 @@
       "./src/ts/interfaces/dsynrui.ts": {
         "version": "d1a5aab6bc5fb900ffcfd1ea1b715b57ee3107cc7a99c94abdefc38787c94151",
         "signature": "4d413cfd2038643323ffb0d741866955e2156f150f42edc94bb411d2e7ef573d"
-      },
-      "../../node_modules/@types/jquery/jquerystatic.d.ts": {
-        "version": "2a19c7dd007f71b9db87dba915e20d894dbdac8aa8fab5d1c3083a61f2316a5c",
-        "signature": "2a19c7dd007f71b9db87dba915e20d894dbdac8aa8fab5d1c3083a61f2316a5c"
-      },
-      "../../node_modules/@types/jquery/jquery.d.ts": {
-        "version": "3ea0e1446b84ad60e76c41d5ab06d923b929043f885e28321520ed18aa70cddb",
-        "signature": "3ea0e1446b84ad60e76c41d5ab06d923b929043f885e28321520ed18aa70cddb"
-      },
-      "../../node_modules/@types/jquery/misc.d.ts": {
-        "version": "b3907b2c4c8ccd6100c20a4691a9509df2867e5346154358eab40f8e037271bc",
-        "signature": "b3907b2c4c8ccd6100c20a4691a9509df2867e5346154358eab40f8e037271bc"
-      },
-      "../../node_modules/@types/jquery/legacy.d.ts": {
-        "version": "8c4a3355af2c490a8af67c4ec304e970424a15ef648a3c3fbb3ee6634461e2cc",
-        "signature": "8c4a3355af2c490a8af67c4ec304e970424a15ef648a3c3fbb3ee6634461e2cc"
-      },
-      "../../node_modules/@types/sizzle/index.d.ts": {
-        "version": "7ddac8a4ba398441cfd6d8a69380401378f122ee8cc2d848e6e32f4db2b6c876",
-        "signature": "7ddac8a4ba398441cfd6d8a69380401378f122ee8cc2d848e6e32f4db2b6c876"
-      },
-      "../../node_modules/@types/jquery/index.d.ts": {
-        "version": "2f7f24e566d3029aa802876b4452ae7d8a4ae21a44cefe4767c3986e06b69fc4",
-        "signature": "2f7f24e566d3029aa802876b4452ae7d8a4ae21a44cefe4767c3986e06b69fc4"
       }
     },
     "options": {
@@ -146,24 +122,9 @@
       ],
       "./src/ts/components/dsynrmodal.ts": [
         "./src/ts/dsynr.ts"
-      ],
-      "../../node_modules/@types/jquery/index.d.ts": [
-        "../../node_modules/@types/jquery/jquerystatic.d.ts",
-        "../../node_modules/@types/jquery/jquery.d.ts",
-        "../../node_modules/@types/jquery/misc.d.ts",
-        "../../node_modules/@types/jquery/legacy.d.ts",
-        "../../node_modules/@types/sizzle/index.d.ts"
       ]
     },
-    "exportedModulesMap": {
-      "../../node_modules/@types/jquery/index.d.ts": [
-        "../../node_modules/@types/jquery/jquerystatic.d.ts",
-        "../../node_modules/@types/jquery/jquery.d.ts",
-        "../../node_modules/@types/jquery/misc.d.ts",
-        "../../node_modules/@types/jquery/legacy.d.ts",
-        "../../node_modules/@types/sizzle/index.d.ts"
-      ]
-    },
+    "exportedModulesMap": {},
     "semanticDiagnosticsPerFile": [
       "../../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es6.d.ts",
       "../../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es5.d.ts",
@@ -181,20 +142,14 @@
       "../../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.reflect.d.ts",
       "../../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.symbol.d.ts",
       "../../../../appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts",
-      "./src/ts/components/dsynrcarousel.ts",
       "./src/ts/dsynr.ts",
-      "./src/ts/dsynrwp.ts",
       "./src/ts/classes/dsynruiielement.ts",
+      "./src/ts/components/dsynrcarousel.ts",
       "./src/ts/components/dsynrmodal.ts",
       "./src/ts/components/dsynrselect.ts",
       "./src/ts/interfaces/dsynrsite.ts",
       "./src/ts/interfaces/dsynrui.ts",
-      "../../node_modules/@types/jquery/jquerystatic.d.ts",
-      "../../node_modules/@types/jquery/jquery.d.ts",
-      "../../node_modules/@types/jquery/misc.d.ts",
-      "../../node_modules/@types/jquery/legacy.d.ts",
-      "../../node_modules/@types/sizzle/index.d.ts",
-      "../../node_modules/@types/jquery/index.d.ts"
+      "./src/ts/dsynrwp.ts"
     ]
   },
   "version": "3.8.3"

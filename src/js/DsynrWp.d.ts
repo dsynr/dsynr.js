@@ -1,9 +1,9 @@
 declare class DsynrWp {
     conf: {
-        formURL: string;
+        loadURL: string;
     };
     ready(): void;
-    getForm(formName: string, parent?: HTMLElement, enableDsynrSelect?: boolean): void;
+    load(loaderName: string, parent?: HTMLElement, enableDsynrSelect?: boolean): void;
     ajax(params?: {}, parent?: HTMLElement): void;
 }
 declare let dw: DsynrWp;
