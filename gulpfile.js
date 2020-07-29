@@ -83,5 +83,5 @@ function pushToLive() {
 
 }
 
-exports.default = series(concatJS, compileCSS);
+exports.default = series(concatJS);
 // exports.default = series(concatJS, concatWPJS, compileCSS);

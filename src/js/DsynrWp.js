@@ -16,7 +16,7 @@ class DsynrWp {
             d.addFetchedData(d.requestDataset[formName], parent, enableDsynrSelect);
         }
         else {
-            d.ajax(d.conf.domain + this.conf.formURL + formName + '?min', formName, false, true, parent, enableDsynrSelect);
+            d.ajax(d.conf.domain + this.conf.loadURL + formName + '?min', formName, false, true, parent, enableDsynrSelect);
         }
     }
     ajax(params = {}, parent = d.conf.defaultParent) {
